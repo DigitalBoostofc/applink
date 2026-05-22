@@ -1,0 +1,177 @@
+/* ============================================================
+   APPlink — Design Tokens · DUAS IDENTIDADES
+   [data-brand="applink"] -> "NeonSpace": maximalista / neobrutalista
+   [data-brand="appex"]   -> módulo white-label AppexCRM (minimalista)
+   [data-mode]            -> dark | light  (afeta só o tema appex)
+   Trocar identidade = trocar tokens. As telas (DOM) não mudam.
+   ============================================================ */
+
+:root {
+  --success: #16A34A;
+  --danger:  #EF4444;
+  --warning: #F59E0B;
+  --h-input: 38px;
+  --h-btn: 38px;
+  --h-row: 52px;
+}
+
+/* ============================================================
+   IDENTIDADE 1 — APPlink avulso · "NeonSpace"
+   Maximalista/neobrutalista: gradiente, bordas pretas, sombras hard.
+   ============================================================ */
+[data-brand="applink"] {
+  /* tipografia */
+  --font-display: 'Cabinet Grotesk', 'Satoshi', sans-serif;
+  --font-ui:      'Satoshi', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+  --display-style: italic;          /* headers em itálico black */
+  --display-weight: 900;
+  --display-tracking: -0.03em;
+
+  /* fundo: gradiente fixo NeonSpace */
+  --canvas: linear-gradient(135deg,#7C3AED 0%,#DB2777 50%,#F59E0B 100%);
+  --canvas-fixed: scroll;
+  --sidebar: #18181B;             /* zinc-900 */
+  --topbar:  #18181B;
+  --surface: #FFFFFF;             /* cards brancos */
+  --surface-2: #FAFAFA;
+  --surface-hover: #F4F4F5;
+  --surface-raised: #FFFFFF;
+
+  /* glass */
+  --glass-bg: rgba(255,255,255,0.12);
+  --glass-bd: rgba(255,255,255,0.25);
+  --glass-blur: 16px;
+
+  /* tinta */
+  --ink-1: #18181B;
+  --ink-2: #3F3F46;
+  --ink-3: #71717A;
+  --ink-on-dark:   #FAFAFA;
+  --ink-on-dark-2: #A1A1AA;
+
+  /* bordas neobrutalistas */
+  --bd-c: #000000;
+  --bd-w: 4px;          /* containers */
+  --bd-w-sm: 2px;       /* itens menores */
+  --edge: #000000;
+  --edge-strong: #000000;
+
+  /* raios (soft-neobrutalism) */
+  --r-pill: 999px;
+  --r-input: 10px;
+  --r-btn: 10px;
+  --r-card: 16px;
+  --r-lg: 20px;
+
+  /* sombras HARD (offset sólido) */
+  --sh-btn:       4px 4px 0 #000;
+  --sh-btn-hover: 0 0 0 #000;
+  --sh-card:      6px 6px 0 #000;
+  --sh-card-lg:   10px 10px 0 #000;
+  --sh-pop:       8px 8px 0 rgba(0,0,0,0.85);
+  --shadow-sm: var(--sh-btn);
+  --shadow-md: var(--sh-card);
+  --shadow-lg: var(--sh-card-lg);
+  --shadow-xl: var(--sh-pop);
+
+  /* accent: neon lime (primária) + neon pink (secundária) */
+  --accent:        #BEF264;
+  --accent-hover:  #A3E635;
+  --accent-2:      #F472B6;
+  --on-accent:     #000000;
+  --accent-soft:   #BEF264;
+  --accent-grad:   linear-gradient(135deg,#BEF264 0%,#A3E635 100%);
+  --accent-ink:    #18181B;
+
+  /* status (sobre cards brancos) */
+  --success-soft: #DCFCE7;
+  --danger-soft:  #FEE2E2;
+  --warning-soft: #FEF9C3;
+
+  /* movimento: bouncy */
+  --ease: cubic-bezier(0.175,0.885,0.32,1.275);
+  --ease-soft: cubic-bezier(0.16,1,0.3,1);
+  --focus-ring: 0 0 0 3px #BEF264, 4px 4px 0 #000;
+
+  --brand-name: 'APPlink';
+}
+
+/* ============================================================
+   IDENTIDADE 2 — Módulo AppexCRM (minimalista, white-label)
+   ============================================================ */
+[data-brand="appex"] {
+  --font-display: 'Inter', system-ui, sans-serif;
+  --font-ui:      'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+  --display-style: normal;
+  --display-weight: 600;
+  --display-tracking: -0.02em;
+
+  --canvas-fixed: scroll;
+  --glass-bg: var(--surface);
+  --glass-bd: var(--edge);
+  --glass-blur: 0px;
+
+  --bd-c: var(--edge);
+  --bd-w: 1px;
+  --bd-w-sm: 1px;
+
+  --r-pill: 20px;
+  --r-input: 8px;
+  --r-btn: 6px;
+  --r-card: 12px;
+  --r-lg: 16px;
+
+  /* accent roxo Stripe (AppexCRM) */
+  --accent-50:#EEEEFF;--accent-100:#D8D8FF;--accent-200:#B8B7FF;--accent-300:#9996FF;
+  --accent-400:#7A77FF;--accent-500:#635BFF;--accent-600:#4B44E8;--accent-700:#3830C5;
+  --accent-800:#2820A0;--accent-900:#1A1480;
+  --accent: #635BFF;
+  --accent-hover: #4B44E8;
+  --accent-2: #635BFF;
+  --on-accent: #FFFFFF;
+  --accent-grad: linear-gradient(135deg,#635BFF 0%,#4B44E8 100%);
+
+  --ease: cubic-bezier(0.16,1,0.3,1);
+  --ease-soft: cubic-bezier(0.16,1,0.3,1);
+
+  --display-weight: 600;
+  --ink-on-dark: #F5F5F7;
+  --ink-on-dark-2: #86868B;
+}
+
+[data-brand="appex"][data-mode="dark"] {
+  --canvas:#0C0C0F;--sidebar:#111113;--topbar:#161618;--surface:#161618;
+  --surface-2:#1D1D20;--surface-hover:#1D1D20;--surface-raised:#1D1D20;
+  --edge:rgba(255,255,255,0.06);--edge-strong:rgba(255,255,255,0.10);
+  --ink-1:#F5F5F7;--ink-2:#86868B;--ink-3:#48484E;
+  --accent-soft:color-mix(in srgb,var(--accent) 16%,transparent);
+  --success-soft:color-mix(in srgb,var(--success) 16%,transparent);
+  --danger-soft:color-mix(in srgb,var(--danger) 18%,transparent);
+  --warning-soft:color-mix(in srgb,var(--warning) 18%,transparent);
+  --sh-btn:var(--shadow-sm);--sh-card:var(--shadow-md);
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md:0 1px 4px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.05);
+  --shadow-lg:0 4px 20px rgba(0,0,0,0.45),0 0 0 1px rgba(255,255,255,0.05);
+  --shadow-xl:0 8px 40px rgba(0,0,0,0.55),0 0 0 1px rgba(255,255,255,0.06);
+  --sh-btn-hover:var(--shadow-sm);
+  --focus-ring:0 0 0 3px color-mix(in srgb,var(--accent) 28%,transparent);
+}
+[data-brand="appex"][data-mode="light"] {
+  --canvas:#F6F9FC;--sidebar:#FFFFFF;--topbar:#FFFFFF;--surface:#FFFFFF;
+  --surface-2:#F6F9FC;--surface-hover:#F6F9FC;--surface-raised:#FFFFFF;
+  --edge:rgba(0,0,0,0.08);--edge-strong:rgba(0,0,0,0.14);
+  --ink-1:#0F172A;--ink-2:#425466;--ink-3:#8898AA;
+  --accent-soft:color-mix(in srgb,var(--accent) 10%,transparent);
+  --success-soft:color-mix(in srgb,var(--success) 12%,transparent);
+  --danger-soft:color-mix(in srgb,var(--danger) 10%,transparent);
+  --warning-soft:color-mix(in srgb,var(--warning) 12%,transparent);
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md:0 1px 3px rgba(0,0,0,0.08),0 0 0 1px rgba(0,0,0,0.04);
+  --shadow-lg:0 4px 16px rgba(0,0,0,0.10),0 0 0 1px rgba(0,0,0,0.04);
+  --shadow-xl:0 8px 32px rgba(0,0,0,0.12),0 0 0 1px rgba(0,0,0,0.05);
+  --sh-btn:var(--shadow-sm);--sh-card:var(--shadow-md);--sh-btn-hover:var(--shadow-sm);
+  --focus-ring:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent);
+}
+[data-brand="appex"] { --ink-on-dark:#F5F5F7; }

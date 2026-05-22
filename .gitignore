@@ -1,0 +1,28 @@
+# Outros projetos no mesmo workspace local
+/aios-core/
+/xquads-squads/
+
+# Config local do Claude / MCP / Overclock
+/.claude/
+/.mcp.json
+/.playwright-mcp/
+/.overclock-app/
+
+# Artefatos temporários
+/switchy-create.md
+/v*.jpeg
+/rev*.jpeg
+/ref-*.jpeg
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Node (caso ferramentas auxiliares apareçam)
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log

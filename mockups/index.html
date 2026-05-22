@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APPlink — Mockups</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/ui.css">
+<style>
+  .wrap{max-width:1100px;margin:0 auto;padding:48px 28px 140px}
+  .head-mark{width:60px;height:60px;border-radius:15px;background:var(--accent-grad);
+    display:grid;place-items:center;border:var(--bd-w-sm) solid var(--bd-c);box-shadow:var(--sh-btn)}
+  .head-mark svg{width:30px;height:30px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+  .scard{display:flex;flex-direction:column;gap:10px;padding:18px;cursor:pointer;
+    background:var(--surface);border:var(--bd-w) solid var(--bd-c);
+    border-radius:var(--r-card);box-shadow:var(--sh-card);transition:.16s var(--ease);
+    color:var(--ink-1)}
+  .scard:hover{transform:translate(-3px,-3px);box-shadow:10px 10px 0 #000}
+  [data-brand="appex"] .scard{border-width:1px;border-color:var(--edge);box-shadow:var(--shadow-md)}
+  [data-brand="appex"] .scard:hover{transform:none;box-shadow:var(--shadow-lg);border-color:var(--accent)}
+  .scard .n{font-family:var(--font-mono);font-size:12px;color:var(--ink-3);font-weight:600}
+  .scard .t{font-family:var(--font-display);font-weight:900;font-style:italic;
+    font-size:16px;letter-spacing:-.02em}
+  [data-brand="appex"] .scard .t{font-weight:600;font-style:normal}
+  .scard .d{font-size:12.5px;color:var(--ink-3);line-height:1.45}
+  .grp-label{font-family:var(--font-display);font-weight:900;font-style:italic;
+    font-size:13px;text-transform:uppercase;letter-spacing:.04em;
+    margin:34px 0 4px;color:var(--ink-on-dark);opacity:.9}
+  [data-brand="appex"] .grp-label{font-weight:700;font-style:normal;color:var(--ink-1)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="row gap-16">
+    <div class="head-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+      </svg>
+    </div>
+    <div>
+      <div class="page-title" style="font-size:26px;color:var(--ink-on-dark)"><span data-brand-name>APPlink</span> — Mockups</div>
+      <div class="page-sub" style="color:var(--ink-on-dark-2)">Protótipo navegável. Use o seletor no canto inferior direito para alternar entre a identidade do produto avulso (NeonSpace) e o tema do módulo AppexCRM.</div>
+    </div>
+  </div>
+
+  <div class="grp-label">Fundação</div>
+  <div class="grid">
+    <a class="scard" href="00-design-system.html"><span class="n">00</span><span class="t">Sistema de Design</span><span class="d">Tokens, cores, tipografia e componentes nos 2 temas.</span></a>
+  </div>
+
+  <div class="grp-label">Núcleo — Links</div>
+  <div class="grid">
+    <a class="scard" href="01-dashboard-links.html"><span class="n">01</span><span class="t">Painel de Links</span><span class="d">Lista de links, pastas, filtros, ações e métricas.</span></a>
+    <a class="scard" href="02-criar-link.html"><span class="n">02</span><span class="t">Criar / Editar Link</span><span class="d">Form com tipos de link, pixels, UTMs e opções avançadas.</span></a>
+    <a class="scard" href="03-analytics-link.html"><span class="n">03</span><span class="t">Analytics do Link</span><span class="d">KPIs, gráfico de cliques, países, dispositivos, pixels.</span></a>
+    <a class="scard" href="10-qrcode.html"><span class="n">10</span><span class="t">QR Code</span><span class="d">Builder de QR dinâmico e branded.</span></a>
+  </div>
+
+  <div class="grp-label">Link-in-bio — Smartpages</div>
+  <div class="grid">
+    <a class="scard" href="06-smartpages.html"><span class="n">06</span><span class="t">Smartpages</span><span class="d">Dashboard das mini landing pages.</span></a>
+    <a class="scard" href="07-editor-smartpage.html"><span class="n">07</span><span class="t">Editor de Smartpage</span><span class="d">Builder de blocos drag &amp; drop.</span></a>
+    <a class="scard" href="08-leads-smartpage.html"><span class="n">08</span><span class="t">Leads da Smartpage</span><span class="d">Captura de leads + analytics da página.</span></a>
+  </div>
+
+  <div class="grp-label">Crescimento</div>
+  <div class="grid">
+    <a class="scard" href="11-pixels.html"><span class="n">11</span><span class="t">Pixels</span><span class="d">Pixels de retargeting conectados.</span></a>
+    <a class="scard" href="12-audiencias.html"><span class="n">12</span><span class="t">Audiências</span><span class="d">Audiências de retargeting a partir dos links.</span></a>
+  </div>
+
+  <div class="grp-label">Configuração</div>
+  <div class="grid">
+    <a class="scard" href="13-dominios.html"><span class="n">13</span><span class="t">Domínios</span><span class="d">Domínios customizados e DNS.</span></a>
+    <a class="scard" href="14-integracoes.html"><span class="n">14</span><span class="t">Integrações</span><span class="d">Zapier, Make, Webhook e API.</span></a>
+    <a class="scard" href="15-equipe.html"><span class="n">15</span><span class="t">Equipe &amp; Workspaces</span><span class="d">Membros, papéis e workspaces.</span></a>
+    <a class="scard" href="16-billing.html"><span class="n">16</span><span class="t">Planos &amp; Cobrança</span><span class="d">Planos, uso de cliques e faturas.</span></a>
+    <a class="scard" href="09-settings.html"><span class="n">09</span><span class="t">Configurações</span><span class="d">Perfil, conta, privacidade (LGPD).</span></a>
+  </div>
+
+  <div class="grp-label">Autenticação</div>
+  <div class="grid">
+    <a class="scard" href="04-login.html"><span class="n">04</span><span class="t">Login</span><span class="d">Entrada — conta própria ou via AppexCRM.</span></a>
+    <a class="scard" href="05-signup.html"><span class="n">05</span><span class="t">Cadastro</span><span class="d">Criação de conta — 7 dias grátis.</span></a>
+  </div>
+
+  <div class="grp-label">Módulo</div>
+  <div class="grid">
+    <a class="scard" href="17-modulo-crm.html"><span class="n">17</span><span class="t">Módulo no AppexCRM</span><span class="d">APPlink embarcado no CRM, leads direto no funil.</span></a>
+  </div>
+
+</div>
+<script src="assets/theme.js"></script>
+</body>
+</html>

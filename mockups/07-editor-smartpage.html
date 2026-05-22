@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APPlink — Editor de Smartpage</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/ui.css">
+<style>
+  .ed{display:flex;flex-direction:column;height:100vh}
+  .ed-bar{height:60px;flex-shrink:0;background:var(--topbar);
+    border-bottom:var(--bd-w) solid var(--bd-c);display:flex;align-items:center;
+    gap:14px;padding:0 18px;color:var(--ink-on-dark)}
+  [data-brand="appex"] .ed-bar{color:var(--ink-1)}
+  .ed-body{flex:1;display:flex;min-height:0}
+  .ed-left{width:280px;flex-shrink:0;background:var(--surface);
+    border-right:var(--bd-w) solid var(--bd-c);overflow-y:auto}
+  [data-brand="appex"] .ed-left,[data-brand="appex"] .ed-right{border-color:var(--edge)}
+  .ed-canvas{flex:1;display:grid;place-items:center;overflow-y:auto;padding:30px}
+  .ed-right{width:300px;flex-shrink:0;background:var(--surface);
+    border-left:var(--bd-w) solid var(--bd-c);overflow-y:auto}
+  .blocks{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px}
+  .blk{display:flex;flex-direction:column;align-items:center;gap:6px;padding:13px 6px;
+    border:var(--bd-w-sm) solid var(--bd-c);border-radius:var(--r-btn);cursor:grab;
+    font-size:11px;font-weight:700;background:var(--surface)}
+  [data-brand="appex"] .blk{border-color:var(--edge-strong);font-weight:500}
+  .blk:hover{background:var(--accent);color:var(--on-accent)}
+  .blk svg{width:18px;height:18px}
+  /* phone */
+  .phone{width:300px;border:var(--bd-w) solid var(--bd-c);border-radius:30px;
+    background:#fff;padding:14px;box-shadow:var(--sh-card-lg)}
+  [data-brand="appex"] .phone{border-width:8px;box-shadow:var(--shadow-xl)}
+  .ph-bg{background:linear-gradient(160deg,#7C3AED,#DB2777);border-radius:18px;
+    padding:20px 14px;display:flex;flex-direction:column;gap:10px;align-items:center}
+  .ph-av{width:64px;height:64px;border-radius:50%;background:#fff;border:2px solid #000}
+  .ph-name{color:#fff;font-weight:800;font-size:15px}
+  .ph-bio{color:rgba(255,255,255,.85);font-size:11px;text-align:center}
+  .ph-btn{width:100%;background:#BEF264;color:#000;border:2px solid #000;border-radius:10px;
+    padding:10px;text-align:center;font-weight:800;font-size:12px;box-shadow:3px 3px 0 #000}
+  .ph-btn.sel{outline:3px dashed var(--accent-2);outline-offset:3px}
+  .ph-social{display:flex;gap:8px}
+  .ph-social div{width:30px;height:30px;border-radius:8px;background:#fff;border:2px solid #000}
+  .secrow{padding:13px 14px;border-bottom:var(--bd-w-sm) solid var(--bd-c)}
+  [data-brand="appex"] .secrow{border-color:var(--edge)}
+</style>
+</head>
+<body>
+<div class="ed">
+
+  <!-- topbar -->
+  <div class="ed-bar">
+    <a class="btn-icon" href="06-smartpages.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></a>
+    <div class="col"><span class="page-sub">Smartpages</span><b>Bio da Maria</b></div>
+    <div class="tabs" style="border:0;margin-left:18px">
+      <div class="tab active">Design</div>
+      <div class="tab">Compartilhar</div>
+      <div class="tab">Analytics</div>
+      <a class="tab" href="08-leads-smartpage.html" style="text-decoration:none">Leads</a>
+    </div>
+    <div class="spacer grow"></div>
+    <span class="badge badge-success"><span class="dot"></span> Salvo</span>
+    <button class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/></svg> Visualizar</button>
+    <button class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg> Publicar</button>
+  </div>
+
+  <div class="ed-body">
+
+    <!-- left: blocos -->
+    <aside class="ed-left">
+      <div class="tabs" style="padding:0 14px">
+        <div class="tab">Tema</div><div class="tab active">Blocos</div><div class="tab">Config</div>
+      </div>
+      <div style="padding:12px 14px 0"><span class="eyebrow">Arraste para a página</span></div>
+      <div class="blocks">
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="8" rx="3"/></svg>Botão</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Texto</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 14l5-4 4 3 4-4 5 5"/></svg>Card</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="5" width="12" height="14" rx="2"/><path d="M3 8v8M21 8v8"/></svg>Carrossel</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg>Contador</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>Vídeo</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>Áudio</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 16 0v1"/></svg>Avatar</div>
+        <div class="blk" style="background:var(--accent);color:var(--on-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>Form</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 2a14 14 0 0 1 0 20 14 14 0 0 1 0-20z"/></svg>Social</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9a3 3 0 1 1 4 3l-1 1v1M12 17h.01"/></svg>Q&amp;A</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Mapa</div>
+      </div>
+    </aside>
+
+    <!-- center: preview -->
+    <div class="ed-canvas">
+      <div class="phone">
+        <div class="ph-bg">
+          <div class="ph-av"></div>
+          <div class="ph-name">Maria Silva</div>
+          <div class="ph-bio">Nutricionista · longevidade & ciência. Pega tudo aqui 👇</div>
+          <div class="ph-social"><div></div><div></div><div></div></div>
+          <div class="ph-btn">🎧 Ouvir o podcast</div>
+          <div class="ph-btn sel">✦ Baixar o ebook grátis</div>
+          <div class="ph-btn">📅 Agendar mentoria</div>
+          <div class="ph-btn" style="background:#fff">🛒 Cupom de parceiros</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- right: editar bloco -->
+    <aside class="ed-right">
+      <div class="secrow row between">
+        <b>Bloco · Botão</b>
+        <div class="row gap-4">
+          <span class="btn-icon" title="Esconder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>
+          <span class="btn-icon" title="Duplicar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+          <span class="btn-icon" title="Excluir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></span>
+        </div>
+      </div>
+      <div class="secrow col gap-12">
+        <div class="field"><label class="label">Texto do botão</label>
+          <input class="input" value="✦ Baixar o ebook grátis"></div>
+        <div class="field"><label class="label">Link de destino</label>
+          <input class="input" value="plnk.to/fibras-ebook"></div>
+      </div>
+      <div class="secrow col gap-12">
+        <div class="row between"><span class="label">Aparência customizada</span><span class="toggle on"></span></div>
+        <div class="field"><label class="label">Estilo do botão</label>
+          <div class="segmented"><div class="active">Sólido</div><div>Contorno</div><div>Suave</div></div></div>
+      </div>
+      <div class="secrow col gap-12">
+        <div class="row between"><span class="label">Animação (pulsar)</span><span class="toggle on"></span></div>
+        <div class="row between"><span class="label">Agendar exibição</span><span class="toggle"></span></div>
+      </div>
+      <div class="secrow col gap-10">
+        <span class="label">Capturar clique como evento</span>
+        <div class="row gap-8"><span class="checkbox on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span style="font-size:12.5px">Registrar conversão no analytics</span></div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+<script src="assets/theme.js"></script>
+</body>
+</html>

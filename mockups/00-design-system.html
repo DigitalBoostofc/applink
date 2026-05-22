@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APPlink — Sistema de Design</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/ui.css">
+<style>
+  .ds { max-width: 1080px; margin: 0 auto; padding: 40px 28px 120px; }
+  .ds section { margin-top: 48px; }
+  .ds h2 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .ds .hint { font-size: 13px; color: var(--ink-3); margin-bottom: 18px; }
+  .swatch { border-radius: 10px; border: 1px solid var(--edge); overflow: hidden; }
+  .swatch .chip-c { height: 56px; }
+  .swatch .meta { padding: 7px 9px; font-size: 11px; }
+  .swatch .meta b { display: block; font-weight: 600; }
+  .grid-c { display: grid; grid-template-columns: repeat(5,1fr); gap: 10px; }
+  .specimen { display: flex; align-items: baseline; gap: 14px; padding: 9px 0;
+    border-bottom: 1px solid var(--edge); }
+  .specimen .tag { font-size: 11px; color: var(--ink-3); width: 120px; flex-shrink:0;
+    font-family: var(--font-mono); }
+  .panel { background: var(--surface); border: 1px solid var(--edge);
+    border-radius: var(--r-card); padding: 22px; box-shadow: var(--shadow-md); }
+  .hero { display:flex; gap:20px; align-items:center; }
+  .hero .big-mark { width:64px;height:64px;border-radius:16px;background:var(--accent-grad);
+    display:grid;place-items:center; box-shadow:0 6px 22px color-mix(in srgb,var(--accent) 40%,transparent);}
+  .hero .big-mark svg { width:32px;height:32px; }
+  /* texto da doc legível sobre o gradiente NeonSpace
+     (só os títulos/hints soltos na página — dentro de .panel fica escuro) */
+  [data-brand="applink"] .ds section > h2,
+  [data-brand="applink"] .ds .hero .page-title { color:#fff; }
+  [data-brand="applink"] .ds section > .hint,
+  [data-brand="applink"] .ds .hero .page-sub { color:rgba(255,255,255,.85); }
+</style>
+</head>
+<body>
+<div class="ds">
+
+  <div class="hero">
+    <div class="big-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+      </svg>
+    </div>
+    <div>
+      <div class="page-title" style="font-size:22px">Sistema de Design — <span data-brand-name>APPlink</span></div>
+      <div class="page-sub">Estética e componentes. Use o seletor no canto inferior direito para alternar entre a identidade do produto avulso e o tema do módulo AppexCRM.</div>
+    </div>
+  </div>
+
+  <section>
+    <h2>Estratégia de marca — uma estrutura, dois temas</h2>
+    <p class="hint">As telas são desenhadas uma única vez sobre tokens. Trocar <code>data-brand</code> troca a identidade inteira sem mexer no layout — é assim que o produto é vendido avulso E embarcado no AppexCRM (white-label, inclusive por cliente).</p>
+    <div class="panel" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div>
+        <div class="eyebrow">APPlink avulso</div>
+        <p class="hint" style="margin:6px 0 12px">Identidade <b>NeonSpace</b> — maximalista/neobrutalista: gradiente vibrante, bordas pretas, sombras hard, neon lime + pink.</p>
+        <div class="row gap-8">
+          <span class="badge badge-accent"><span class="dot"></span> accent</span>
+          <span class="badge badge-success">sucesso</span>
+          <span class="badge badge-warning">aviso</span>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow">Módulo AppexCRM</div>
+        <p class="hint" style="margin:6px 0 12px">Herda a identidade do CRM: roxo <code>#635BFF</code>, Inter, dark-first. Parece um módulo nativo.</p>
+        <button class="btn btn-primary">Botão no tema ativo</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Cores — accent</h2>
+    <p class="hint">Cores de marca do tema ativo. No APPlink: neon lime + neon pink.</p>
+    <div class="grid-c">
+      <div class="swatch"><div class="chip-c" style="background:var(--accent)"></div><div class="meta"><b>accent</b>primária</div></div>
+      <div class="swatch"><div class="chip-c" style="background:var(--accent-hover)"></div><div class="meta"><b>accent-hover</b></div></div>
+      <div class="swatch"><div class="chip-c" style="background:var(--accent-2)"></div><div class="meta"><b>accent-2</b>secundária</div></div>
+      <div class="swatch"><div class="chip-c" style="background:var(--accent-grad)"></div><div class="meta"><b>accent-grad</b></div></div>
+      <div class="swatch"><div class="chip-c" style="background:var(--on-accent)"></div><div class="meta"><b>on-accent</b></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Cores — superfícies e status</h2>
+    <div class="grid-c">
+      <div class="swatch"><div class="chip-c" style="background:var(--canvas)"></div><div class="meta"><b>canvas</b></div></div>
+      <div class="swatch"><div class="chip-c" style="background:var(--surface)"></div><div class="meta"><b>surface</b></div></div>
+      <div class="swatch"><div class="chip-c" style="background:var(--surface-hover)"></div><div class="meta"><b>hover</b></div></div>
+      <div class="swatch"><div class="chip-c" style="background:var(--ink-1)"></div><div class="meta"><b>ink-1</b>texto</div></div>
+      <div class="swatch"><div class="chip-c" style="background:var(--ink-3)"></div><div class="meta"><b>ink-3</b>fraco</div></div>
+      <div class="swatch"><div class="chip-c" style="background:var(--success)"></div><div class="meta"><b>success</b></div></div>
+      <div class="swatch"><div class="chip-c" style="background:var(--danger)"></div><div class="meta"><b>danger</b></div></div>
+      <div class="swatch"><div class="chip-c" style="background:var(--warning)"></div><div class="meta"><b>warning</b></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tipografia</h2>
+    <p class="hint">Inter para interface · JetBrains Mono para números/métricas. Títulos com tracking negativo.</p>
+    <div class="panel">
+      <div class="specimen"><span class="tag">page-title 18/600</span><span class="page-title">Painel de links</span></div>
+      <div class="specimen"><span class="tag">section 13/600</span><span class="section-title">Opções avançadas</span></div>
+      <div class="specimen"><span class="tag">body 14/400</span><span>Texto padrão da interface, em português natural.</span></div>
+      <div class="specimen"><span class="tag">mono 20/500</span><span class="mono" style="font-size:20px">19.652</span></div>
+      <div class="specimen" style="border:0"><span class="tag">eyebrow 11/600</span><span class="eyebrow">Retargeting</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Botões</h2>
+    <div class="panel row gap-12" style="flex-wrap:wrap">
+      <button class="btn btn-primary">Criar link</button>
+      <button class="btn btn-secondary">Secundário</button>
+      <button class="btn btn-ghost">Ghost</button>
+      <button class="btn btn-danger">Excluir</button>
+      <button class="btn btn-primary btn-sm">Pequeno</button>
+      <button class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Campos e controles</h2>
+    <div class="panel" style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+      <div class="field"><label class="label">URL de destino</label>
+        <input class="input" placeholder="https://seusite.com/pagina"></div>
+      <div class="field"><label class="label">Domínio + slug</label>
+        <div class="input-group"><span class="addon">plnk.to/</span><input class="input" placeholder="promo"></div></div>
+      <div class="field"><label class="label">Descrição</label>
+        <textarea class="textarea" placeholder="Texto do preview..."></textarea></div>
+      <div class="col gap-12">
+        <div class="row gap-8"><span class="toggle on"></span><span>Deep linking ativado</span></div>
+        <div class="row gap-8"><span class="toggle"></span><span>Proteção por senha</span></div>
+        <div class="row gap-8"><span class="checkbox on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><span>Capturar leads no CRM</span></div>
+        <div class="segmented" style="width:fit-content"><div class="active">País</div><div>Cidade</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Badges e chips</h2>
+    <div class="panel row gap-8" style="flex-wrap:wrap">
+      <span class="badge badge-accent">Smart link</span>
+      <span class="badge badge-success"><span class="dot"></span> Ativo</span>
+      <span class="badge badge-warning">Trial</span>
+      <span class="badge badge-danger">Expirado</span>
+      <span class="badge badge-neutral">Rascunho</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Últimos 30 dias</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Cartões de métrica (KPI)</h2>
+    <div class="kpi-row" style="grid-template-columns:repeat(3,1fr)">
+      <div class="kpi"><div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
+        <div><div class="kpi-label">Cliques</div><div class="kpi-value">19.652</div><div class="kpi-delta up">▲ 12,4%</div></div></div>
+      <div class="kpi"><div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 7a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg></div>
+        <div><div class="kpi-label">Visitantes únicos</div><div class="kpi-value">14.207</div><div class="kpi-delta up">▲ 8,1%</div></div></div>
+      <div class="kpi"><div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <div><div class="kpi-label">Conversões</div><div class="kpi-value">1.038</div><div class="kpi-delta down">▼ 2,3%</div></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tabela</h2>
+    <div class="card">
+      <table class="table">
+        <thead><tr><th>Título</th><th>Cliques</th><th>Status</th><th>Criado</th></tr></thead>
+        <tbody>
+          <tr><td>Promo de inverno</td><td class="num">3.412</td><td><span class="badge badge-success"><span class="dot"></span> Ativo</span></td><td class="muted">12 mai 2026</td></tr>
+          <tr><td>Episódio 128 — podcast</td><td class="num">139</td><td><span class="badge badge-success"><span class="dot"></span> Ativo</span></td><td class="muted">02 jan 2026</td></tr>
+          <tr><td>Cupom afiliado</td><td class="num">191</td><td><span class="badge badge-warning">Expira em 3d</span></td><td class="muted">30 jun 2025</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Abas</h2>
+    <div class="tabs">
+      <div class="tab active">Visão geral</div>
+      <div class="tab">Países</div>
+      <div class="tab">Dispositivos</div>
+      <div class="tab">Pixels</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Raios, sombras e movimento</h2>
+    <div class="panel col gap-8">
+      <div class="row gap-12"><code>--r-input 8px</code><code>--r-btn 6px</code><code>--r-card 12px</code><code>--r-pill 20px</code></div>
+      <p class="hint" style="margin:0">Sombras estilo Stripe (blur suave + ring de 1px). Transições de 120–220ms com easing out-expo. Micro-interações discretas — nada de bounce.</p>
+    </div>
+  </section>
+
+</div>
+<script src="assets/theme.js"></script>
+</body>
+</html>

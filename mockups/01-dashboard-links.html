@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APPlink — Painel de Links</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/ui.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+        </svg>
+      </div>
+      <span class="logo-name" data-brand-name>APPlink</span>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Principal</div>
+      <a class="nav-item active" href="01-dashboard-links.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        Links <span class="count">40</span>
+      </a>
+      <a class="nav-item" href="06-smartpages.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        Smartpages
+      </a>
+      <a class="nav-item" href="10-qrcode.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM21 14v7M14 21h7"/></svg>
+        QR Codes
+      </a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Crescimento</div>
+      <a class="nav-item" href="11-pixels.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg>
+        Pixels
+      </a>
+      <a class="nav-item" href="12-audiencias.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+        Audiências
+      </a>
+      <a class="nav-item" href="03-analytics-link.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg>
+        Analytics
+      </a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Configuração</div>
+      <a class="nav-item" href="13-dominios.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
+        Domínios
+      </a>
+      <a class="nav-item" href="14-integracoes.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6M6 21v-6M6 9a3 3 0 0 0 0 6M18 3v12M18 21v-2M18 15a3 3 0 0 0 0-6"/></svg>
+        Integrações
+      </a>
+      <a class="nav-item" href="15-equipe.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Equipe
+      </a>
+    </div>
+
+    <div class="grow"></div>
+    <div class="nav-item" style="background:rgba(255,255,255,.05)">
+      <div class="avatar" style="width:24px;height:24px;font-size:10px">IF</div>
+      Maria Silva
+      <svg style="margin-left:auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"/></svg>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <div class="main">
+
+    <header class="topbar">
+      <div class="col">
+        <div class="page-title">Links</div>
+      </div>
+      <div class="spacer"></div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <input placeholder="Buscar link por título, domínio...">
+      </div>
+      <button class="btn btn-secondary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Importar
+      </button>
+      <a class="btn btn-primary" href="02-criar-link.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
+        Criar link
+      </a>
+    </header>
+
+    <main class="content">
+
+      <!-- quick create -->
+      <div class="card card-pad row gap-12" style="margin-bottom:18px">
+        <div class="col grow gap-4">
+          <div class="section-title">Encurtar agora</div>
+          <div class="page-sub">Cole uma URL longa e transforme em um smart link rastreável.</div>
+        </div>
+        <div class="input-group" style="width:420px">
+          <span class="addon">https://</span>
+          <input class="input" placeholder="seusite.com/pagina-de-destino">
+        </div>
+        <a class="btn btn-primary btn-lg" href="02-criar-link.html">
+          Encurtar
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- kpi strip -->
+      <div class="kpi-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:18px">
+        <div class="kpi"><div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
+          <div><div class="kpi-label">Cliques no mês</div><div class="kpi-value">48.219</div><div class="kpi-delta up">▲ 12,4%</div></div></div>
+        <div class="kpi"><div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg></div>
+          <div><div class="kpi-label">Visitantes únicos</div><div class="kpi-value">31.804</div><div class="kpi-delta up">▲ 8,1%</div></div></div>
+        <div class="kpi"><div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+          <div><div class="kpi-label">Links ativos</div><div class="kpi-value">40</div></div></div>
+        <div class="kpi"><div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div><div class="kpi-label">Leads capturados</div><div class="kpi-value">1.038</div><div class="kpi-delta up">▲ 5,6%</div></div></div>
+      </div>
+
+      <!-- folders -->
+      <div class="row gap-8 wrap" style="margin-bottom:14px">
+        <span class="chip" style="background:var(--accent);color:var(--on-accent);font-weight:800">📁 Todos os links</span>
+        <span class="chip">Campanhas</span>
+        <span class="chip">Podcast</span>
+        <span class="chip">Afiliados</span>
+        <span class="chip">Loja Demo</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg> Nova pasta</span>
+      </div>
+
+      <!-- table card -->
+      <div class="card">
+        <div class="card-head">
+          <span class="section-title">40 links</span>
+          <div class="spacer grow"></div>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Últimos 30 dias</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12H4M16 6l-2-2H4v16h16V8z"/></svg> Tag</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/></svg> Domínio</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Colunas</span>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width:34px"><span class="checkbox"></span></th>
+              <th>Título</th><th>Cliques</th><th>Pixels</th><th>Link curto</th><th>Criado</th><th style="width:130px">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="checkbox"></span></td>
+              <td><div class="row gap-8"><div class="thumb"></div><div class="col"><b>Promo de inverno — landing</b><span class="faint" style="font-size:12px">campanhas</span></div></div></td>
+              <td class="num">3.412</td>
+              <td><span class="badge badge-accent">Meta</span></td>
+              <td class="mono" style="font-size:12.5px">plnk.to/inverno</td>
+              <td class="muted">12 mai 2026</td>
+              <td>
+                <div class="row gap-4">
+                  <span class="btn-icon" title="Analytics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></span>
+                  <span class="btn-icon" title="Copiar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+                  <span class="btn-icon" title="QR"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg></span>
+                  <span class="btn-icon" title="Mais"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="checkbox"></span></td>
+              <td><div class="row gap-8"><div class="thumb"></div><div class="col"><b>Episódio 128 — exemplo</b><span class="faint" style="font-size:12px">podcast</span></div></div></td>
+              <td class="num">139</td>
+              <td><span class="badge badge-neutral">—</span></td>
+              <td class="mono" style="font-size:12.5px">plnk.to/ep128</td>
+              <td class="muted">02 jan 2026</td>
+              <td>
+                <div class="row gap-4">
+                  <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></span>
+                  <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+                  <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg></span>
+                  <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="checkbox"></span></td>
+              <td><div class="row gap-8"><div class="thumb"></div><div class="col"><b>Cupom afiliado — Parceiro</b><span class="faint" style="font-size:12px">afiliados</span></div></div></td>
+              <td class="num">191</td>
+              <td><span class="badge badge-accent">Meta</span> <span class="badge badge-accent">TikTok</span></td>
+              <td class="mono" style="font-size:12.5px">plnk.to/bhava</td>
+              <td class="muted">30 jun 2025</td>
+              <td>
+                <div class="row gap-4">
+                  <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></span>
+                  <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+                  <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg></span>
+                  <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="checkbox"></span></td>
+              <td><div class="row gap-8"><div class="thumb"></div><div class="col"><b>Fale no WhatsApp — atendimento</b><span class="faint" style="font-size:12px">campanhas · link de WhatsApp</span></div></div></td>
+              <td class="num">2.087</td>
+              <td><span class="badge badge-accent">Meta</span></td>
+              <td class="mono" style="font-size:12.5px">plnk.to/zap</td>
+              <td class="muted">22 mai 2026</td>
+              <td>
+                <div class="row gap-4">
+                  <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></span>
+                  <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+                  <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg></span>
+                  <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="checkbox"></span></td>
+              <td><div class="row gap-8"><div class="thumb"></div><div class="col"><b>Ebook Saúde — captura</b><span class="faint" style="font-size:12px">campanhas</span></div></div></td>
+              <td class="num">78</td>
+              <td><span class="badge badge-neutral">—</span></td>
+              <td class="mono" style="font-size:12.5px">plnk.to/fibras</td>
+              <td class="muted">13 nov 2025</td>
+              <td>
+                <div class="row gap-4">
+                  <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></span>
+                  <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+                  <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg></span>
+                  <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row between" style="padding:14px 18px">
+          <span class="page-sub">Mostrando 1–5 de 40</span>
+          <div class="row gap-8">
+            <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></span>
+            <span class="page-sub">Página 1 de 8</span>
+            <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="assets/theme.js"></script>
+</body>
+</html>

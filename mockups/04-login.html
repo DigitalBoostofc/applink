@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APPlink — Entrar</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/ui.css">
+<style>
+  .auth{min-height:100vh;display:grid;place-items:center;padding:40px 20px}
+  .auth-card{width:400px;max-width:100%;padding:32px}
+  .auth-mark{width:52px;height:52px;border-radius:13px;background:var(--accent-grad);
+    display:grid;place-items:center;border:var(--bd-w-sm) solid var(--bd-c);box-shadow:var(--sh-btn)}
+  .auth-mark svg{width:26px;height:26px}
+  .auth h1{font-size:24px;margin-top:18px}
+  .auth .sub{font-size:13px;color:var(--ink-3);margin-top:4px}
+  .or{display:flex;align-items:center;gap:12px;color:var(--ink-3);font-size:12px;font-weight:700;margin:18px 0}
+  .or::before,.or::after{content:"";flex:1;height:var(--bd-w-sm);background:var(--bd-c)}
+  [data-brand="appex"] .or::before,[data-brand="appex"] .or::after{background:var(--edge);height:1px}
+</style>
+</head>
+<body>
+<div class="auth">
+  <div class="card auth-card col">
+    <div class="auth-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+      </svg>
+    </div>
+    <h1 class="page-title">Entrar no <span data-brand-name>APPlink</span></h1>
+    <div class="sub">Gerencie seus smart links e smartpages.</div>
+
+    <div class="col gap-12 mt-24">
+      <div class="field"><label class="label">E-mail</label>
+        <input class="input" type="email" placeholder="voce@empresa.com" value="maria@cliente-exemplo.com"></div>
+      <div class="field">
+        <div class="row between"><label class="label">Senha</label>
+          <a style="font-size:12px;font-weight:700;color:var(--accent-2)">Esqueci a senha</a></div>
+        <input class="input" type="password" placeholder="••••••••" value="senhasegura">
+      </div>
+      <div class="row gap-8"><span class="checkbox on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <span style="font-size:13px">Manter conectado</span></div>
+      <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center">Entrar</button>
+    </div>
+
+    <div class="or">ou</div>
+    <button class="btn btn-secondary btn-lg" style="width:100%;justify-content:center">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>
+      Entrar com a conta AppexCRM
+    </button>
+    <div class="sub" style="text-align:center;margin-top:10px">Já usa o AppexCRM? Sua conta funciona aqui — identidade unificada.</div>
+
+    <div class="divider mt-24"></div>
+    <div class="sub" style="text-align:center;margin-top:16px">
+      Novo por aqui? <a href="05-signup.html" style="color:var(--accent-2);font-weight:700">Criar conta grátis</a>
+    </div>
+  </div>
+</div>
+<script src="assets/theme.js"></script>
+</body>
+</html>

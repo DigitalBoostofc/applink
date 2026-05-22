@@ -1,0 +1,339 @@
+/* ============================================================
+   APPlink — Biblioteca de componentes (mockups)
+   Funciona nos 2 temas. Base dirigida por tokens +
+   overrides [data-brand="applink"] para o que muda de estrutura.
+   ============================================================ */
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{min-height:100%}
+body{
+  font-family:var(--font-ui);
+  background:var(--canvas);
+  background-attachment:var(--canvas-fixed);
+  color:var(--ink-1);
+  font-size:14px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+.muted{color:var(--ink-2)}
+.faint{color:var(--ink-3)}
+
+/* ---------- tipografia ---------- */
+.page-title{
+  font-family:var(--font-display);font-weight:var(--display-weight);
+  font-style:var(--display-style);letter-spacing:var(--display-tracking);
+  font-size:22px;color:var(--ink-1);
+}
+.page-sub{font-size:13px;color:var(--ink-3)}
+.section-title{
+  font-family:var(--font-display);font-weight:var(--display-weight);
+  font-style:var(--display-style);font-size:14px;letter-spacing:var(--display-tracking);
+}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--ink-3)}
+h1,h2,h3{font-family:var(--font-display);letter-spacing:var(--display-tracking)}
+
+/* itálico black só no APPlink */
+[data-brand="applink"] .page-title,
+[data-brand="applink"] .section-title,
+[data-brand="applink"] h1,
+[data-brand="applink"] h2{font-style:italic;font-weight:900}
+
+/* ---------- app shell ---------- */
+.app{display:flex;min-height:100vh}
+.sidebar{
+  width:236px;flex-shrink:0;background:var(--sidebar);
+  border-right:var(--bd-w) solid var(--bd-c);
+  display:flex;flex-direction:column;padding:14px 12px;gap:3px;
+}
+.main{flex:1;display:flex;flex-direction:column;min-width:0}
+.content{padding:24px 28px;flex:1}
+
+/* logo */
+.logo{display:flex;align-items:center;gap:10px;height:54px;padding:0 6px}
+.logo-mark{
+  width:34px;height:34px;border-radius:9px;background:var(--accent-grad);
+  display:grid;place-items:center;flex-shrink:0;
+  border:var(--bd-w-sm) solid var(--bd-c);box-shadow:var(--sh-btn);
+}
+.logo-mark svg{width:18px;height:18px}
+.logo-name{font-family:var(--font-display);font-weight:var(--display-weight);
+  font-style:var(--display-style);font-size:16px;color:var(--ink-on-dark);
+  letter-spacing:var(--display-tracking)}
+[data-brand="applink"] .logo-name{font-weight:900;font-style:italic}
+
+/* nav */
+.nav-group{margin-top:16px}
+.nav-label{font-size:10px;font-weight:700;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--ink-on-dark-2);padding:6px 10px}
+.nav-item{
+  display:flex;align-items:center;gap:11px;padding:10px 11px;
+  border-radius:var(--r-btn);color:var(--ink-on-dark-2);font-size:13px;
+  font-weight:600;cursor:pointer;transition:.14s var(--ease);
+}
+.nav-item svg{width:17px;height:17px;flex-shrink:0}
+.nav-item:hover{background:rgba(255,255,255,0.07);color:var(--ink-on-dark)}
+.nav-item.active{background:var(--accent);color:var(--accent-ink,#fff)}
+.nav-item .count{margin-left:auto;font-size:11px;opacity:.7}
+[data-brand="applink"] .nav-item.active{
+  border:var(--bd-w-sm) solid #000;font-weight:800;color:#000}
+
+/* topbar */
+.topbar{
+  height:64px;flex-shrink:0;background:var(--topbar);
+  border-bottom:var(--bd-w) solid var(--bd-c);
+  display:flex;align-items:center;gap:14px;padding:0 22px;
+}
+.topbar .spacer{flex:1}
+[data-brand="appex"] .topbar{color:var(--ink-1)}
+[data-brand="applink"] .topbar{color:var(--ink-on-dark)}
+
+/* ---------- botões ---------- */
+.btn{
+  height:var(--h-btn);padding:0 16px;border-radius:var(--r-btn);
+  font-family:var(--font-ui);font-size:13px;font-weight:700;
+  display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+  border:var(--bd-w-sm) solid transparent;transition:.14s var(--ease);
+  white-space:nowrap;
+}
+.btn svg{width:16px;height:16px}
+.btn-primary{background:var(--accent);color:var(--on-accent)}
+.btn-secondary{background:var(--surface);color:var(--ink-1)}
+.btn-ghost{background:transparent;color:var(--ink-2);border-color:transparent}
+.btn-danger{background:var(--danger);color:#fff}
+.btn-sm{height:30px;padding:0 11px;font-size:12px}
+.btn-lg{height:46px;padding:0 22px;font-size:14px}
+
+.btn-icon{width:34px;height:34px;padding:0;justify-content:center;
+  display:inline-flex;align-items:center;cursor:pointer;color:var(--ink-2);
+  background:transparent;border:var(--bd-w-sm) solid transparent;
+  border-radius:var(--r-btn);transition:.14s var(--ease)}
+.btn-icon svg{width:17px;height:17px}
+.btn-icon:hover{background:var(--surface-hover);color:var(--ink-1)}
+
+/* tema appex: botões suaves */
+[data-brand="appex"] .btn-primary:hover{background:var(--accent-hover)}
+[data-brand="appex"] .btn-secondary{border-color:var(--edge-strong);box-shadow:var(--shadow-sm)}
+[data-brand="appex"] .btn-secondary:hover{background:var(--surface-hover)}
+[data-brand="appex"] .btn-ghost:hover{background:var(--surface-hover);color:var(--ink-1)}
+[data-brand="appex"] .btn{font-weight:500}
+
+/* tema applink: neobrutalismo — borda preta + sombra hard + translate no hover */
+[data-brand="applink"] .btn-primary,
+[data-brand="applink"] .btn-secondary,
+[data-brand="applink"] .btn-danger{
+  border-color:#000;box-shadow:var(--sh-btn);
+}
+[data-brand="applink"] .btn-primary:hover,
+[data-brand="applink"] .btn-secondary:hover,
+[data-brand="applink"] .btn-danger:hover{
+  transform:translate(3px,3px);box-shadow:var(--sh-btn-hover);
+}
+[data-brand="applink"] .btn-ghost{color:var(--ink-2)}
+[data-brand="applink"] .btn-ghost:hover{background:var(--surface-hover)}
+[data-brand="applink"] .btn-icon:hover{
+  background:var(--accent);color:#000;border-color:#000}
+
+/* ---------- inputs ---------- */
+.field{display:flex;flex-direction:column;gap:6px}
+.label{font-size:12px;font-weight:700;color:var(--ink-2)}
+[data-brand="appex"] .label{font-weight:500}
+.input,.select,.textarea{
+  height:var(--h-input);background:var(--surface);color:var(--ink-1);
+  border:var(--bd-w-sm) solid var(--bd-c);border-radius:var(--r-input);
+  padding:0 12px;font-family:var(--font-ui);font-size:13.5px;width:100%;
+  transition:.14s var(--ease);
+}
+[data-brand="appex"] .input,[data-brand="appex"] .select,[data-brand="appex"] .textarea{
+  border-color:var(--edge-strong)}
+.textarea{height:auto;padding:10px 12px;resize:vertical;min-height:78px}
+.input:focus,.select:focus,.textarea:focus{
+  outline:none;border-color:var(--accent);box-shadow:var(--focus-ring)}
+.input::placeholder,.textarea::placeholder{color:var(--ink-3)}
+.input-group{display:flex;align-items:stretch}
+.input-group .addon{display:flex;align-items:center;padding:0 12px;font-size:13px;
+  color:var(--ink-3);background:var(--surface-hover);
+  border:var(--bd-w-sm) solid var(--bd-c)}
+[data-brand="appex"] .input-group .addon{border-color:var(--edge-strong)}
+.input-group .addon:first-child{border-radius:var(--r-input) 0 0 var(--r-input);border-right:0}
+.input-group .input{border-radius:0 var(--r-input) var(--r-input) 0}
+
+/* toggle */
+.toggle{width:40px;height:22px;border-radius:999px;background:var(--surface-hover);
+  border:var(--bd-w-sm) solid var(--bd-c);position:relative;cursor:pointer;
+  flex-shrink:0;transition:.16s var(--ease)}
+[data-brand="appex"] .toggle{border-color:var(--edge-strong)}
+.toggle::after{content:"";position:absolute;width:14px;height:14px;border-radius:50%;
+  background:#000;top:2px;left:2px;transition:.16s var(--ease)}
+[data-brand="appex"] .toggle::after{background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.toggle.on{background:var(--accent)}
+.toggle.on::after{left:20px}
+
+/* checkbox */
+.checkbox{width:18px;height:18px;border-radius:5px;
+  border:var(--bd-w-sm) solid var(--bd-c);display:inline-grid;place-items:center;
+  cursor:pointer;flex-shrink:0;background:var(--surface)}
+[data-brand="appex"] .checkbox{border-color:var(--edge-strong)}
+.checkbox.on{background:var(--accent)}
+.checkbox.on svg{width:12px;height:12px;color:var(--on-accent)}
+
+/* ---------- cards ---------- */
+.card{background:var(--surface);border:var(--bd-w) solid var(--bd-c);
+  border-radius:var(--r-card);box-shadow:var(--sh-card)}
+[data-brand="appex"] .card{border-width:1px;border-color:var(--edge);box-shadow:var(--shadow-md)}
+.card-pad{padding:20px}
+.card-head{padding:16px 20px;border-bottom:var(--bd-w-sm) solid var(--bd-c);
+  display:flex;align-items:center;gap:10px}
+[data-brand="appex"] .card-head{border-color:var(--edge)}
+
+/* glass panel */
+.glass{background:var(--glass-bg);border:var(--bd-w-sm) solid var(--glass-bd);
+  border-radius:var(--r-card);backdrop-filter:blur(var(--glass-blur));
+  -webkit-backdrop-filter:blur(var(--glass-blur))}
+[data-brand="appex"] .glass{box-shadow:var(--shadow-md)}
+
+/* ---------- kpi ---------- */
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.kpi{background:var(--surface);border:var(--bd-w) solid var(--bd-c);
+  border-radius:var(--r-card);padding:16px;display:flex;gap:13px;
+  align-items:center;box-shadow:var(--sh-card)}
+[data-brand="appex"] .kpi{border-width:1px;border-color:var(--edge);box-shadow:var(--shadow-sm)}
+.kpi-ic{width:42px;height:42px;border-radius:10px;flex-shrink:0;
+  display:grid;place-items:center;background:var(--accent);color:var(--on-accent);
+  border:var(--bd-w-sm) solid var(--bd-c)}
+[data-brand="appex"] .kpi-ic{background:var(--accent-soft);color:var(--accent);border:0}
+.kpi-ic svg{width:20px;height:20px}
+.kpi-label{font-size:12px;color:var(--ink-3);font-weight:600}
+.kpi-value{font-family:var(--font-mono);font-size:23px;font-weight:700;
+  color:var(--ink-1);letter-spacing:-0.02em}
+.kpi-delta{font-size:11px;font-weight:700}
+.kpi-delta.up{color:var(--success)}
+.kpi-delta.down{color:var(--danger)}
+
+/* ---------- badges ---------- */
+.badge{font-size:11px;font-weight:700;letter-spacing:0.01em;padding:3px 10px;
+  border-radius:var(--r-pill);display:inline-flex;align-items:center;gap:5px;
+  border:var(--bd-w-sm) solid var(--bd-c)}
+[data-brand="appex"] .badge{border:0;font-weight:500}
+.badge-accent{background:var(--accent);color:var(--on-accent)}
+.badge-success{background:var(--success-soft);color:var(--success)}
+.badge-danger{background:var(--danger-soft);color:var(--danger)}
+.badge-warning{background:var(--warning-soft);color:#92660A}
+.badge-neutral{background:var(--surface-hover);color:var(--ink-2)}
+[data-brand="appex"] .badge-accent{background:var(--accent-soft);color:var(--accent)}
+[data-brand="appex"] .badge-warning{color:var(--warning)}
+.dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+
+/* ---------- tabela ---------- */
+.table{width:100%;border-collapse:collapse}
+.table th{text-align:left;font-size:11px;font-weight:800;letter-spacing:0.05em;
+  text-transform:uppercase;color:var(--ink-3);padding:11px 13px;
+  border-bottom:var(--bd-w-sm) solid var(--bd-c)}
+[data-brand="appex"] .table th{border-color:var(--edge);font-weight:600}
+.table td{padding:0 13px;height:var(--h-row);font-size:13px;
+  border-bottom:var(--bd-w-sm) solid var(--bd-c);color:var(--ink-1)}
+[data-brand="appex"] .table td{border-color:var(--edge)}
+.table tr:last-child td{border-bottom:0}
+.table tr:hover td{background:var(--surface-hover)}
+.table .num{font-family:var(--font-mono);font-weight:600}
+
+/* ---------- tabs ---------- */
+.tabs{display:flex;gap:4px;border-bottom:var(--bd-w-sm) solid var(--bd-c)}
+[data-brand="appex"] .tabs{border-color:var(--edge)}
+.tab{padding:10px 14px;font-size:13px;font-weight:700;color:var(--ink-2);
+  cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px}
+[data-brand="appex"] .tab{font-weight:500;border-bottom-width:2px}
+.tab:hover{color:var(--ink-1)}
+.tab.active{color:var(--accent-ink,var(--accent));border-bottom-color:var(--accent)}
+[data-brand="appex"] .tab.active{color:var(--accent)}
+
+/* chips de filtro */
+.chip{height:34px;padding:0 11px;border-radius:var(--r-btn);
+  border:var(--bd-w-sm) solid var(--bd-c);background:var(--surface);
+  display:inline-flex;align-items:center;gap:6px;font-size:12.5px;
+  font-weight:600;color:var(--ink-2);cursor:pointer}
+[data-brand="appex"] .chip{border-color:var(--edge-strong);font-weight:400}
+.chip:hover{background:var(--surface-hover)}
+.chip svg{width:14px;height:14px}
+
+/* segmented */
+.segmented{display:inline-flex;background:var(--surface-hover);
+  border:var(--bd-w-sm) solid var(--bd-c);border-radius:var(--r-btn);padding:3px}
+[data-brand="appex"] .segmented{border-color:var(--edge)}
+.segmented div{padding:5px 12px;font-size:12px;font-weight:600;border-radius:6px;
+  cursor:pointer;color:var(--ink-2)}
+.segmented div.active{background:var(--accent);color:var(--on-accent)}
+[data-brand="appex"] .segmented div.active{background:var(--surface);color:var(--ink-1);box-shadow:var(--shadow-sm)}
+
+/* search */
+.search{display:flex;align-items:center;gap:8px;height:var(--h-input);
+  background:var(--surface);border:var(--bd-w-sm) solid var(--bd-c);
+  border-radius:var(--r-input);padding:0 12px;color:var(--ink-3)}
+[data-brand="appex"] .search{border-color:var(--edge-strong)}
+.search input{border:0;background:transparent;color:var(--ink-1);
+  font-family:var(--font-ui);font-size:13.5px;outline:none;width:220px}
+.search svg{width:16px;height:16px}
+
+/* bar / progress */
+.bar{height:8px;border-radius:999px;background:var(--surface-hover);
+  border:var(--bd-w-sm) solid var(--bd-c);overflow:hidden}
+[data-brand="appex"] .bar{border:0;height:6px}
+.bar>span{display:block;height:100%;background:var(--accent)}
+
+/* banner */
+.banner{border-radius:var(--r-input);padding:12px 15px;font-size:13px;
+  display:flex;gap:10px;align-items:center;font-weight:600;
+  border:var(--bd-w-sm) solid var(--bd-c)}
+[data-brand="appex"] .banner{border:0;font-weight:400}
+.banner-accent{background:var(--accent);color:var(--on-accent)}
+.banner-warning{background:var(--warning-soft);color:#92660A}
+[data-brand="appex"] .banner-accent{background:var(--accent-soft);color:var(--accent)}
+
+/* empty state */
+.empty{text-align:center;padding:44px 20px;color:var(--ink-3)}
+.empty svg{width:34px;height:34px;margin-bottom:8px}
+
+/* sticky note (NeonSpace) */
+.note{background:#FEF08A;border:2px solid #000;border-radius:8px;padding:14px;
+  transform:rotate(-3deg);box-shadow:8px 8px 0 rgba(0,0,0,0.18);transition:.18s var(--ease)}
+.note:hover{transform:rotate(0) scale(1.04)}
+[data-brand="appex"] .note{transform:none;background:var(--surface);
+  border:1px solid var(--edge);box-shadow:var(--shadow-md);color:var(--ink-1)}
+
+/* avatar / thumb */
+.avatar{width:30px;height:30px;border-radius:50%;background:var(--accent);
+  color:var(--on-accent);display:grid;place-items:center;font-size:12px;
+  font-weight:800;flex-shrink:0;border:var(--bd-w-sm) solid var(--bd-c)}
+[data-brand="appex"] .avatar{background:var(--accent-soft);color:var(--accent);border:0;font-weight:600}
+.thumb{width:38px;height:38px;border-radius:8px;background:var(--surface-hover);
+  border:var(--bd-w-sm) solid var(--bd-c);flex-shrink:0}
+[data-brand="appex"] .thumb{border-color:var(--edge)}
+
+/* utilidades */
+.divider{height:var(--bd-w-sm);background:var(--bd-c)}
+[data-brand="appex"] .divider{height:1px;background:var(--edge)}
+.row{display:flex;align-items:center;gap:10px}
+.col{display:flex;flex-direction:column}
+.grow{flex:1}
+.wrap{flex-wrap:wrap}
+.gap-4{gap:4px}.gap-8{gap:8px}.gap-12{gap:12px}.gap-16{gap:16px}.gap-20{gap:20px}.gap-24{gap:24px}
+.mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}
+.mt-20{margin-top:20px}.mt-24{margin-top:24px}.mt-32{margin-top:32px}
+.center{align-items:center}.between{justify-content:space-between}
+.tag-rot{display:inline-block;transform:rotate(-2deg)}
+[data-brand="appex"] .tag-rot{transform:none}
+
+/* ---- APPlink/NeonSpace: contraste de texto sobre gradiente/chrome escuro ---- */
+[data-brand="applink"] .topbar .page-title{color:var(--ink-on-dark)}
+[data-brand="applink"] .content{color:#FAFAFA}
+[data-brand="applink"] .card,
+[data-brand="applink"] .kpi,
+[data-brand="applink"] .glass,
+[data-brand="applink"] .note{color:var(--ink-1)}
+[data-brand="applink"] .content > .section-title,
+[data-brand="applink"] .content > .col > .section-title{color:#fff}
+[data-brand="applink"] .tab{color:rgba(255,255,255,.72)}
+[data-brand="applink"] .tab:hover{color:#fff}
+[data-brand="applink"] .tab.active{color:#fff}

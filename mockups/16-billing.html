@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APPlink — Planos &amp; Cobrança</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/ui.css">
+<style>.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .plan-price{font-family:var(--font-display);font-weight:900;font-style:italic;font-size:30px}
+  [data-brand="appex"] .plan-price{font-style:normal;font-weight:700}
+  .plan ul{list-style:none;display:flex;flex-direction:column;gap:7px;font-size:12.5px}
+  .plan li{display:flex;gap:7px;align-items:center}
+  .plan li svg{width:14px;height:14px;color:var(--success);flex-shrink:0}
+  .plan.on{outline:var(--bd-w) solid var(--accent)}</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="logo"><div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div><span class="logo-name" data-brand-name>APPlink</span></div>
+    <div class="nav-group"><div class="nav-label">Principal</div>
+      <a class="nav-item" href="01-dashboard-links.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Links</a>
+      <a class="nav-item" href="06-smartpages.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Smartpages</a>
+      <a class="nav-item" href="10-qrcode.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg> QR Codes</a></div>
+    <div class="nav-group"><div class="nav-label">Crescimento</div>
+      <a class="nav-item" href="11-pixels.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg> Pixels</a>
+      <a class="nav-item" href="12-audiencias.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg> Audiências</a>
+      <a class="nav-item" href="03-analytics-link.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg> Analytics</a></div>
+    <div class="nav-group"><div class="nav-label">Configuração</div>
+      <a class="nav-item" href="13-dominios.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg> Domínios</a>
+      <a class="nav-item" href="14-integracoes.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6M6 21v-6M6 9a3 3 0 0 0 0 6M18 3v12M18 15a3 3 0 0 0 0-6"/></svg> Integrações</a>
+      <a class="nav-item" href="15-equipe.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg> Equipe</a></div>
+    <div class="grow"></div>
+    <a class="nav-item active" href="16-billing.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Planos</a>
+    <div class="nav-item" style="background:rgba(255,255,255,.05)"><div class="avatar" style="width:24px;height:24px;font-size:10px">IF</div> Maria Silva</div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar"><div class="page-title">Planos &amp; Cobrança</div></header>
+    <main class="content col gap-18">
+
+      <div class="card card-pad col gap-10">
+        <div class="row between">
+          <div class="col"><span class="eyebrow">Plano atual</span><b style="font-size:16px">Pro · R$ 89/mês</b></div>
+          <button class="btn btn-secondary">Gerenciar pagamento</button>
+        </div>
+        <div class="divider"></div>
+        <div class="row between"><span class="label">Uso de cliques no mês</span><span class="mono">32.480 / 50.000</span></div>
+        <div class="bar"><span style="width:65%"></span></div>
+        <span class="faint" style="font-size:12px">Renova em 12 jun 2026. Ao atingir o limite, os links continuam redirecionando — sem tracking até a renovação.</span>
+      </div>
+
+      <div class="plans">
+        <div class="card card-pad plan col gap-12">
+          <div class="col"><span class="eyebrow">Starter</span><span class="plan-price">R$ 39<span style="font-size:13px">/mês</span></span></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 10.000 cliques/mês</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 2 domínios · 2 smartpages</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 1 membro</li>
+          </ul>
+          <button class="btn btn-secondary" style="justify-content:center">Fazer downgrade</button>
+        </div>
+        <div class="card card-pad plan on col gap-12">
+          <div class="row between"><span class="eyebrow">Pro</span><span class="badge badge-accent">Atual</span></div>
+          <span class="plan-price">R$ 89<span style="font-size:13px">/mês</span></span>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 50.000 cliques/mês</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 5 domínios · 10 smartpages</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 10 membros · pixels ilimitados</li>
+          </ul>
+          <button class="btn btn-primary" style="justify-content:center">Plano ativo</button>
+        </div>
+        <div class="card card-pad plan col gap-12">
+          <div class="col"><span class="eyebrow">Business</span><span class="plan-price">R$ 199<span style="font-size:13px">/mês</span></span></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 150.000 cliques/mês</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 15 domínios · smartpages ilimitadas</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 15 membros · API + white-label</li>
+          </ul>
+          <button class="btn btn-secondary" style="justify-content:center">Fazer upgrade</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="section-title">Faturas</span></div>
+        <table class="table">
+          <thead><tr><th>Período</th><th>Valor</th><th>Status</th><th>Fatura</th></tr></thead>
+          <tbody>
+            <tr><td>Mai 2026</td><td class="num">R$ 89,00</td><td><span class="badge badge-success">Paga</span></td><td><a style="color:var(--accent-2);font-weight:700">Baixar PDF</a></td></tr>
+            <tr><td>Abr 2026</td><td class="num">R$ 89,00</td><td><span class="badge badge-success">Paga</span></td><td><a style="color:var(--accent-2);font-weight:700">Baixar PDF</a></td></tr>
+            <tr><td>Mar 2026</td><td class="num">R$ 89,00</td><td><span class="badge badge-success">Paga</span></td><td><a style="color:var(--accent-2);font-weight:700">Baixar PDF</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="assets/theme.js"></script>
+</body>
+</html>

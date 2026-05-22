@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APPlink — Integrações</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/ui.css">
+<style>.int-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .int-ic{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;
+    background:var(--accent);color:var(--on-accent);border:var(--bd-w-sm) solid var(--bd-c);flex-shrink:0}
+  [data-brand="appex"] .int-ic{background:var(--accent-soft);color:var(--accent);border:0}
+  .int-ic svg{width:20px;height:20px}</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="logo"><div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div><span class="logo-name" data-brand-name>APPlink</span></div>
+    <div class="nav-group"><div class="nav-label">Principal</div>
+      <a class="nav-item" href="01-dashboard-links.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Links</a>
+      <a class="nav-item" href="06-smartpages.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Smartpages</a>
+      <a class="nav-item" href="10-qrcode.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg> QR Codes</a></div>
+    <div class="nav-group"><div class="nav-label">Crescimento</div>
+      <a class="nav-item" href="11-pixels.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg> Pixels</a>
+      <a class="nav-item" href="12-audiencias.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg> Audiências</a>
+      <a class="nav-item" href="03-analytics-link.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg> Analytics</a></div>
+    <div class="nav-group"><div class="nav-label">Configuração</div>
+      <a class="nav-item" href="13-dominios.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg> Domínios</a>
+      <a class="nav-item active" href="14-integracoes.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6M6 21v-6M6 9a3 3 0 0 0 0 6M18 3v12M18 15a3 3 0 0 0 0-6"/></svg> Integrações</a>
+      <a class="nav-item" href="15-equipe.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg> Equipe</a></div>
+    <div class="grow"></div>
+    <div class="nav-item" style="background:rgba(255,255,255,.05)"><div class="avatar" style="width:24px;height:24px;font-size:10px">IF</div> Maria Silva</div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar"><div class="page-title">Integrações</div></header>
+    <main class="content col gap-18">
+      <div class="banner banner-accent">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+        Conectado ao AppexCRM — leads e eventos de clique fluem direto para o funil. Identidade unificada (SSO).
+      </div>
+
+      <div class="int-grid">
+        <div class="card card-pad row gap-12">
+          <div class="int-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
+          <div class="col grow"><b>Zapier</b><span class="faint" style="font-size:12px">Criar/atualizar links e disparar ações de formulário.</span></div>
+          <span class="badge badge-success"><span class="dot"></span> Conectado</span>
+        </div>
+        <div class="card card-pad row gap-12">
+          <div class="int-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 6h6a3 3 0 0 1 3 3v6"/></svg></div>
+          <div class="col grow"><b>Make</b><span class="faint" style="font-size:12px">Automação visual de cenários com seus links.</span></div>
+          <button class="btn btn-secondary btn-sm">Conectar</button>
+        </div>
+        <div class="card card-pad row gap-12">
+          <div class="int-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0zM12 7v10M7 12h10"/></svg></div>
+          <div class="col grow"><b>Pabbly</b><span class="faint" style="font-size:12px">Workflows de criação de links e webhook de forms.</span></div>
+          <button class="btn btn-secondary btn-sm">Conectar</button>
+        </div>
+        <div class="card card-pad row gap-12">
+          <div class="int-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-6l-2 3h-4l-2-3H2M5.5 5h13l3 7v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-6z"/></svg></div>
+          <div class="col grow"><b>Webhook</b><span class="faint" style="font-size:12px">Dispara um POST quando um formulário é enviado.</span></div>
+          <span class="badge badge-success"><span class="dot"></span> Conectado</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="section-title">API REST</span></div>
+        <div class="card-pad col gap-12">
+          <span class="page-sub">Crie e gerencie links programaticamente. Limite: 1.500 links/dia.</span>
+          <div class="field"><label class="label">Sua API Key</label>
+            <div class="input-group">
+              <input class="input mono" value="apk_live_8f2a••••••••••••••••3c91" readonly>
+              <span class="addon" style="border-radius:0 var(--r-input) var(--r-input) 0;border-left:0;cursor:pointer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+            </div>
+          </div>
+          <div class="row gap-8">
+            <button class="btn btn-secondary">Gerar nova chave</button>
+            <button class="btn btn-ghost">Ver documentação</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="assets/theme.js"></script>
+</body>
+</html>
