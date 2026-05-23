@@ -550,8 +550,8 @@
   </div>
 </div>
 
-<!-- G03: Modal Bulk Import — visível por default (estado capturado) -->
-<div class="v3modal-overlay" id="bulk-import-modal" style="display:flex">
+<!-- G03: Modal Bulk Import — escondido por default, abre via filter-chip "Importar" -->
+<div class="v3modal-overlay" id="bulk-import-modal" style="display:none">
   <div class="v3modal">
     <div class="v3modal-hdr">
       <div>
@@ -801,7 +801,7 @@ https://affiliates.parceiro.com/cupom?ref=maria</textarea>
       const l = chip.textContent.trim();
       if (l.includes('Importar')){
         const m = document.getElementById('bulk-import-modal');
-        if (m) m.style.display = '';
+        if (m) m.style.display = 'flex';
         toast('Abrindo importação');
       } else { chip.classList.toggle('on'); toast('Filtro: '+l); }
     });
