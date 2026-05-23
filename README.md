@@ -20,6 +20,7 @@ docs/
   mapeamento-frontend.md     Mapeamento das telas/funcionalidades
   naming-applink.md          Processo de naming (em aberto)
   acessibilidade-audit.md    Auditoria WCAG 2.1 AA + fixes aplicados
+  plano-implementacao.md     Plano técnico: arquitetura, stack, fases, equipe
 ```
 
 ## Identidades
