@@ -538,24 +538,243 @@
   </div>
 </div>
 
+<style>
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);
+    padding:14px 22px;border-radius:14px;background:#141414;border:1px solid rgba(255,255,255,0.08);
+    box-shadow:6px 6px 18px rgba(0,0,0,0.55),0 0 22px rgba(191,255,0,0.18);
+    color:#fff;font-family:'Satoshi',sans-serif;font-size:14px;font-weight:600;
+    display:flex;align-items:center;gap:12px;z-index:9999;opacity:0;pointer-events:none;
+    transition:.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .toast .dot{width:8px;height:8px;border-radius:50%;background:#BFFF00;box-shadow:0 0 12px rgba(191,255,0,0.7)}
+  .toast.warn .dot{background:#FFD466;box-shadow:0 0 12px rgba(255,212,102,0.7)}
+  .toast.danger .dot{background:#FF7777;box-shadow:0 0 12px rgba(255,119,119,0.7)}
+  .qr-big{transition:.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+  .qr-big.flash{transform:scale(1.04)}
+  .tpl-thumb.tpl-active{outline:2px solid #BFFF00;outline-offset:3px}
+</style>
+
+<div class="toast" id="toast"><span class="dot"></span><span id="toast-msg">Mensagem</span></div>
+
 <script>
-  document.querySelectorAll('.opt').forEach(function(o){
-    o.closest('.opt-grid').addEventListener('click', function(e){
-      var el = e.target.closest('.opt');
-      if (!el) return;
-      o.closest('.opt-grid').querySelectorAll('.opt').forEach(function(x){ x.classList.remove('on'); });
-      el.classList.add('on');
+(function(){
+  const $ = (s,r=document) => r.querySelector(s);
+  const $$ = (s,r=document) => Array.from(r.querySelectorAll(s));
+  const toastEl = $('#toast'), toastMsg = $('#toast-msg');
+  let toastTimer;
+
+  function toast(msg, type='ok'){
+    clearTimeout(toastTimer);
+    toastMsg.textContent = msg;
+    toastEl.className = 'toast show ' + (type === 'ok' ? '' : type);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2400);
+  }
+
+  // ─── Estado atual do QR ───
+  const state = {
+    url: 'plnk.to/promo-inverno',
+    shape: 'square',         // square · rounded · circle · diamond
+    eyes: 'square',
+    fg: '#0A0A0A',
+    bg: '#FFFFFF',
+    logo: true,
+    margin: true,
+    hires: false
+  };
+
+  // Paleta de cores swatches → CSS color
+  const SW_COLORS = {
+    'sw-flat-black': '#0A0A0A',
+    'sw-purple': '#A78BFA',
+    'sw-cyan': '#00F0FF',
+    'sw-pink': '#FF6B9D',
+    'sw-grad': 'gradient',  // tratado especial
+    'sw-white': '#FFFFFF',
+    'sw-lime': '#F2FFD0',
+    'sw-yellow': '#FFF3D6'
+  };
+
+  const SHAPE_RADIUS = {square: 0, rounded: 1.5, circle: 3, diamond: 0};
+
+  function applyQR(){
+    const qr = $('.qr-big svg');
+    if (!qr) return;
+    // Update foreground (rects + paths fill/stroke)
+    const fg = state.fg === 'gradient' ? 'url(#qr-grad)' : state.fg;
+    qr.style.color = fg;
+    qr.querySelectorAll('rect, path').forEach(el => {
+      if (el.getAttribute('fill') && el.getAttribute('fill') !== 'none') el.setAttribute('fill', fg);
+      el.setAttribute('stroke', fg === 'url(#qr-grad)' ? '#0A0A0A' : fg);
+    });
+    // Ensure gradient def exists if needed
+    if (state.fg === 'gradient' && !qr.querySelector('#qr-grad')){
+      const ns = 'http://www.w3.org/2000/svg';
+      const defs = document.createElementNS(ns, 'defs');
+      defs.innerHTML = '<linearGradient id="qr-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#BFFF00"/><stop offset="100%" stop-color="#FF7777"/></linearGradient>';
+      qr.insertBefore(defs, qr.firstChild);
+      qr.querySelectorAll('rect[fill]').forEach(el => el.setAttribute('fill', 'url(#qr-grad)'));
+    }
+    // Update background (parent .qr-big)
+    const qrWrap = $('.qr-big');
+    if (qrWrap) qrWrap.style.background = state.bg;
+    // Update shape (border-radius das rects)
+    const r = SHAPE_RADIUS[state.shape];
+    qr.querySelectorAll('rect').forEach(el => {
+      if (parseFloat(el.getAttribute('width')) >= 4) el.setAttribute('rx', r);
+    });
+    // Flash animation
+    qrWrap?.classList.add('flash');
+    setTimeout(() => qrWrap?.classList.remove('flash'), 300);
+    // Update URL text below preview
+    const urlText = qrWrap?.parentElement.querySelector('p[style*="JetBrains"]');
+    if (urlText) urlText.textContent = state.url;
+  }
+
+  // ─── 1. URL SELECT ───
+  const linkSelect = $('select');
+  if (linkSelect){
+    linkSelect.addEventListener('change', e => {
+      state.url = e.target.value.split(' ')[0];
+      applyQR();
+      toast('QR atualizado: ' + state.url);
+    });
+  }
+
+  // ─── 2. STYLE OPTIONS (.opt) ───
+  $$('.opt-grid').forEach((grid, gIdx) => {
+    const opts = grid.querySelectorAll('.opt');
+    const groupName = gIdx === 0 ? 'shape' : 'eyes';
+    const shapeNames = ['square', 'rounded', 'circle', 'diamond'];
+    opts.forEach((opt, i) => {
+      opt.style.cursor = 'pointer';
+      opt.addEventListener('click', () => {
+        opts.forEach(o => o.classList.remove('on'));
+        opt.classList.add('on');
+        state[groupName] = shapeNames[i] || 'square';
+        applyQR();
+      });
     });
   });
-  document.querySelectorAll('.tg').forEach(function(t){
-    t.addEventListener('click', function(){ t.classList.toggle('on'); });
-  });
-  document.querySelectorAll('.sw').forEach(function(sw){
-    sw.addEventListener('click', function(){
-      sw.closest('.color-swatches').querySelectorAll('.sw').forEach(function(s){ s.classList.remove('on'); });
-      sw.classList.add('on');
+
+  // ─── 3. COLOR SWATCHES ───
+  $$('.color-swatches').forEach((grp, gIdx) => {
+    const isForeground = gIdx === 0;
+    grp.querySelectorAll('.sw').forEach(sw => {
+      sw.style.cursor = 'pointer';
+      sw.addEventListener('click', () => {
+        grp.querySelectorAll('.sw').forEach(s => s.classList.remove('on'));
+        sw.classList.add('on');
+        // Extract color from class
+        const cls = Array.from(sw.classList).find(c => c.startsWith('sw-') && c !== 'sw');
+        const color = SW_COLORS[cls] || '#0A0A0A';
+        if (isForeground) state.fg = color;
+        else state.bg = color;
+        applyQR();
+        toast((isForeground ? 'Cor dos módulos: ' : 'Cor de fundo: ') + (sw.title || cls));
+      });
     });
   });
+
+  // ─── 4. TOGGLES (.tg) ───
+  $$('.tg').forEach(tg => {
+    tg.style.cursor = 'pointer';
+    tg.addEventListener('click', () => {
+      tg.classList.toggle('on');
+      // Map toggles to state by parent .tg-row label
+      const row = tg.closest('.tg-row');
+      const lbl = row?.querySelector('.lbl')?.textContent.toLowerCase() || '';
+      const on = tg.classList.contains('on');
+      if (lbl.includes('logo')){ state.logo = on; toast('Logo central ' + (on ? 'ativado' : 'desativado')); }
+      else if (lbl.includes('margem')){ state.margin = on; toast('Margem de silêncio ' + (on ? 'ativada' : 'desativada')); }
+      else if (lbl.includes('resolução') || lbl.includes('dpi')){ state.hires = on; toast('Alta resolução ' + (on ? 'ON' : 'OFF')); }
+    });
+  });
+
+  // ─── 5. DOWNLOAD BUTTONS (PNG/SVG/PDF) ───
+  function downloadSVG(){
+    const qr = $('.qr-big svg');
+    if (!qr) return;
+    const clone = qr.cloneNode(true);
+    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    // Embed background
+    const ns = 'http://www.w3.org/2000/svg';
+    const rect = document.createElementNS(ns, 'rect');
+    rect.setAttribute('x', '0'); rect.setAttribute('y', '0');
+    rect.setAttribute('width', '24'); rect.setAttribute('height', '24');
+    rect.setAttribute('fill', state.bg);
+    clone.insertBefore(rect, clone.firstChild);
+    const blob = new Blob([new XMLSerializer().serializeToString(clone)], {type:'image/svg+xml'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = (state.url.replace(/[^a-z0-9]/gi,'-')) + '.svg';
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  $$('.dl-btn').forEach(btn => {
+    btn.style.cursor = 'pointer';
+    btn.addEventListener('click', () => {
+      const fmt = btn.textContent.trim();
+      if (fmt === 'SVG'){
+        downloadSVG();
+        toast('SVG baixado · ' + state.url);
+      } else {
+        toast('Gerando ' + fmt + ' · ' + state.url + ' (mock)', 'warn');
+      }
+    });
+  });
+
+  // ─── 6. TEMPLATES SALVOS ───
+  const templates = [
+    {name:'Clássico', shape:'square', eyes:'square', fg:'#0A0A0A', bg:'#FFFFFF'},
+    {name:'Arredondado', shape:'rounded', eyes:'rounded', fg:'#FF7777', bg:'#FFFFFF'}
+  ];
+  $$('.tpl-thumb').forEach((tpl, i) => {
+    tpl.style.cursor = 'pointer';
+    tpl.addEventListener('click', () => {
+      $$('.tpl-thumb').forEach(t => t.classList.remove('tpl-active'));
+      if (tpl.textContent.trim() === '+'){
+        const name = prompt('Nome do template:');
+        if (name){
+          toast('Template "'+name+'" salvo com config atual');
+        }
+        return;
+      }
+      tpl.classList.add('tpl-active');
+      const t = templates[i];
+      if (t){
+        Object.assign(state, t);
+        // Sync UI: select first .opt of each grid that matches, first .sw, etc.
+        applyQR();
+        toast('Template "'+t.name+'" aplicado');
+      }
+    });
+  });
+
+  // ─── 7. TOP BUTTONS (Salvar template + Baixar QR Code) ───
+  $$('.btn-ghost, .btn-cta').forEach(btn => {
+    btn.style.cursor = 'pointer';
+    btn.addEventListener('click', e => {
+      const t = btn.textContent.trim();
+      if (t.toLowerCase().includes('salvar') && t.toLowerCase().includes('template')){
+        e.preventDefault();
+        const name = prompt('Nome do template:');
+        if (name) toast('Template "'+name+'" salvo');
+      } else if (t.toLowerCase().includes('baixar') && t.toLowerCase().includes('qr')){
+        e.preventDefault();
+        downloadSVG();
+        toast('QR Code SVG baixado');
+      } else if (t.toLowerCase().includes('salvar rascunho')){
+        e.preventDefault();
+        toast('Rascunho salvo · ' + new Date().toLocaleTimeString('pt-BR'));
+      }
+    });
+  });
+
+  // Estado inicial: dispara um applyQR para sincronizar
+  setTimeout(applyQR, 50);
+})();
 </script>
 </body>
 </html>
