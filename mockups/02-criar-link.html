@@ -29,6 +29,21 @@
   [data-brand="appex"] .typegrid .tt{border-color:var(--edge-strong);font-weight:500}
   .typegrid .tt.on{background:var(--accent);color:var(--on-accent)}
   .typegrid .tt svg{width:18px;height:18px}
+
+  /* ---- G04: exclusividade mútua de roteamentos ---- */
+  .adv-row--locked{opacity:0.5;pointer-events:none}
+  .adv-row--locked .toggle{background:var(--surface-hover) !important;cursor:not-allowed}
+  .conflict-banner{padding:10px 14px;margin:0 0 0;
+    background:rgba(239,68,68,0.08);border-top:1px solid rgba(239,68,68,0.2);
+    border-bottom:1px solid rgba(239,68,68,0.2);
+    display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--ink-2);line-height:1.5}
+  .conflict-banner svg{color:#EF4444;flex-shrink:0;margin-top:1px}
+  .conflict-badge{display:inline-flex;align-items:center;gap:4px;
+    background:rgba(239,68,68,0.15);color:#EF4444;border:1px solid rgba(239,68,68,0.3);
+    border-radius:var(--r-pill);font-size:10px;font-weight:800;padding:2px 8px;
+    letter-spacing:0.04em;text-transform:uppercase;white-space:nowrap}
+  .adv-row--active-route .adv-ic{background:var(--accent-soft);border-color:var(--accent)}
+  .adv-row--active-route b{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -167,15 +182,40 @@
               <div class="adv-row"><span class="adv-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12s3-7 9-7 9 7 9 7-3 7-9 7-9-7-9-7zM1 1l22 22"/></svg></span>
                 <div class="col grow"><b>Mascarar link (cloaking)</b><span class="faint" style="font-size:12px">Esconde o destino real · exige domínio próprio</span></div>
                 <span class="toggle"></span></div>
-              <div class="adv-row"><span class="adv-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></span>
-                <div class="col grow"><b>A/B Rotator</b><span class="faint" style="font-size:12px">Vários destinos divididos por porcentagem</span></div>
-                <span class="toggle on"></span></div>
-              <div class="adv-row"><span class="adv-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg></span>
-                <div class="col grow"><b>Geolocalização</b><span class="faint" style="font-size:12px">Destino por país do visitante</span></div>
-                <span class="toggle"></span></div>
-              <div class="adv-row"><span class="adv-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></span>
-                <div class="col grow"><b>Dispositivos &amp; SO</b><span class="faint" style="font-size:12px">Destino por aparelho ou sistema</span></div>
-                <span class="toggle"></span></div>
+              <!-- A/B Rotator — ATIVO (roteamento exclusivo ativo) -->
+              <div class="adv-row adv-row--active-route"><span class="adv-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></span>
+                <div class="col grow">
+                  <div class="row gap-8"><b>A/B Rotator</b><span class="badge badge-accent" style="font-size:10px;padding:1px 7px">ATIVO</span></div>
+                  <span class="faint" style="font-size:12px">Vários destinos divididos por porcentagem · 3 variantes configuradas</span>
+                </div>
+                <span class="toggle on"></span>
+              </div>
+
+              <!-- Banner: exclusividade mútua -->
+              <div class="conflict-banner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/></svg>
+                <span><b style="color:#EF4444">Só 1 roteamento condicional por vez.</b> O A/B Rotator está ativo — Geolocalização e Dispositivos estão bloqueados. Desative o A/B Rotator para usar os outros modos.</span>
+              </div>
+
+              <!-- Geolocalização — BLOQUEADA por conflito -->
+              <div class="adv-row adv-row--locked">
+                <span class="adv-ic" style="background:var(--surface-hover);border-color:var(--bd-c)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg></span>
+                <div class="col grow">
+                  <div class="row gap-8"><b>Geolocalização</b><span class="conflict-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M18 6L6 18M6 6l12 12"/></svg>Conflito</span></div>
+                  <span class="faint" style="font-size:12px">Pause o A/B Rotator para ativar este roteamento</span>
+                </div>
+                <span class="toggle" style="opacity:0.3;cursor:not-allowed"></span>
+              </div>
+
+              <!-- Dispositivos & SO — BLOQUEADO por conflito -->
+              <div class="adv-row adv-row--locked">
+                <span class="adv-ic" style="background:var(--surface-hover);border-color:var(--bd-c)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></span>
+                <div class="col grow">
+                  <div class="row gap-8"><b>Dispositivos &amp; SO</b><span class="conflict-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M18 6L6 18M6 6l12 12"/></svg>Conflito</span></div>
+                  <span class="faint" style="font-size:12px">Pause o A/B Rotator para ativar este roteamento</span>
+                </div>
+                <span class="toggle" style="opacity:0.3;cursor:not-allowed"></span>
+              </div>
               <div class="adv-row"><span class="adv-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
                 <div class="col grow"><b>Expiração &amp; limite de cliques</b><span class="faint" style="font-size:12px">Redireciona após data ou nº de cliques</span></div>
                 <span class="toggle"></span></div>
@@ -213,6 +253,10 @@
             <div class="banner banner-accent" style="font-size:12px">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>
               2 pixels e roteamento A/B ativos neste link.
+            </div>
+            <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.22);border-radius:8px;padding:9px 12px;font-size:11.5px;color:var(--ink-2);display:flex;gap:8px;align-items:flex-start">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/></svg>
+              <span><b style="color:#EF4444">Roteamento exclusivo ativo.</b> Geo e Dispositivo estão bloqueados pelo A/B Rotator.</span>
             </div>
           </div>
           <div class="card card-pad col gap-8">

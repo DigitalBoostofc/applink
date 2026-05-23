@@ -45,6 +45,9 @@
   .ph-social div{width:30px;height:30px;border-radius:8px;background:#fff;border:2px solid #000}
   .secrow{padding:13px 14px;border-bottom:var(--bd-w-sm) solid var(--bd-c)}
   [data-brand="appex"] .secrow{border-color:var(--edge)}
+  .blk-sec{grid-column:1/-1;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-3,rgba(255,255,255,.35));padding:8px 2px 2px;margin-top:4px}
+  .blk-sec:first-child{margin-top:0;padding-top:2px}
 </style>
 </head>
 <body>
@@ -73,20 +76,50 @@
       <div class="tabs" style="padding:0 14px">
         <div class="tab">Tema</div><div class="tab active">Blocos</div><div class="tab">Config</div>
       </div>
-      <div style="padding:12px 14px 0"><span class="eyebrow">Arraste para a página</span></div>
+      <div style="padding:12px 14px 4px"><span class="eyebrow">Arraste para a página</span></div>
       <div class="blocks">
+
+        <!-- ── Conteúdo ── -->
+        <div class="blk-sec">Conteúdo</div>
         <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="8" rx="3"/></svg>Botão</div>
         <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Texto</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 16 0v1"/></svg>Avatar</div>
         <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 14l5-4 4 3 4-4 5 5"/></svg>Card</div>
         <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="5" width="12" height="14" rx="2"/><path d="M3 8v8M21 8v8"/></svg>Carrossel</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg>Contador</div>
+
+        <!-- ── Mídia ── -->
+        <div class="blk-sec">Mídia</div>
         <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>Vídeo</div>
         <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>Áudio</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 16 0v1"/></svg>Avatar</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M21 12h-3M12 21v-3M3 12h3"/></svg>Música</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1" fill="currentColor"/></svg>RSS</div>
+
+        <!-- ── Interativos ── -->
+        <div class="blk-sec">Interativos</div>
         <div class="blk" style="background:var(--accent);color:var(--on-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>Form</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 2a14 14 0 0 1 0 20 14 14 0 0 1 0-20z"/></svg>Social</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg>Contador</div>
         <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9a3 3 0 1 1 4 3l-1 1v1M12 17h.01"/></svg>Q&amp;A</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Calendário</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></svg>Messenger</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2"/><path d="M14 11h4M14 14h2"/></svg>vCard</div>
+
+        <!-- ── Social & Contato ── -->
+        <div class="blk-sec">Social &amp; Contato</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 2a14 14 0 0 1 0 20 14 14 0 0 1 0-20z"/></svg>Social</div>
         <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Mapa</div>
+
+        <!-- ── Lojas ── -->
+        <div class="blk-sec">Lojas</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shopify</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3L4 8v8l8 5 8-5V8z"/><path d="M4 8l8 5 8-5M12 13v8"/></svg>Magento</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 9h20M9 21V9"/></svg>WordPress</div>
+
+        <!-- ── Layout ── -->
+        <div class="blk-sec">Layout</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M9 9l-3 3 3 3M15 9l3 3-3 3"/></svg>Iframe</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7l4-4 4 4M8 17l4 4 4-4M12 3v18"/></svg>Espaço</div>
+        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="6" y1="7" x2="18" y2="7" stroke-dasharray="3 2"/><line x1="6" y1="17" x2="18" y2="17" stroke-dasharray="3 2"/></svg>Divisor</div>
+
       </div>
     </aside>
 

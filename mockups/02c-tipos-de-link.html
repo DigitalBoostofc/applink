@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AppLink — Tipos de Link</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Syne:ital,wght@0,700;0,800;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/ui.css">
+<style>
+  /* ---- layout de 2 colunas ---- */
+  .tipos-layout{display:grid;grid-template-columns:282px 1fr;gap:20px;align-items:start}
+
+  /* ---- sidebar de tipos (sticky) ---- */
+  .tipo-nav{position:sticky;top:20px;background:var(--surface);
+    border:var(--bd-w) solid var(--bd-c);border-radius:var(--r-card);
+    box-shadow:var(--sh-card);overflow:hidden}
+  .tipo-nav-head{padding:13px 16px;border-bottom:var(--bd-w-sm) solid var(--bd-c);
+    display:flex;align-items:center;justify-content:space-between}
+  .tipo-tab{display:flex;align-items:center;gap:9px;padding:10px 16px;cursor:pointer;
+    border-bottom:var(--bd-w-sm) solid var(--bd-c);transition:.13s var(--ease);
+    color:var(--ink-2);font-size:12.5px;font-weight:600;position:relative}
+  .tipo-tab:last-child{border-bottom:0}
+  .tipo-tab:hover{background:var(--surface-hover);color:var(--ink-1)}
+  .tipo-tab.on{background:var(--accent);color:#0D0D0D;font-weight:800}
+  .tipo-tab-ic{width:26px;height:26px;border-radius:6px;display:grid;place-items:center;
+    background:var(--surface-hover);border:var(--bd-w-sm) solid var(--bd-c);flex-shrink:0}
+  .tipo-tab.on .tipo-tab-ic{background:rgba(0,0,0,0.18);border-color:rgba(0,0,0,0.2);color:#0D0D0D}
+  .tipo-tab-ic svg{width:13px;height:13px}
+  .tipo-tab-name{flex:1;line-height:1.3}
+  .tipo-tab-sub{font-size:10.5px;color:var(--ink-3);font-weight:400;display:block;margin-top:1px}
+  .tipo-tab.on .tipo-tab-sub{color:rgba(0,0,0,0.55)}
+  .tipo-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-left:auto}
+  .tipo-dot-ok{background:#16A34A}
+  .tipo-dot-pend{background:var(--ink-3)}
+  .tipo-tab.on .tipo-dot-ok{background:#0D0D0D}
+
+  /* ---- seções de form (right panel) ---- */
+  .form-section{background:var(--surface);border:var(--bd-w) solid var(--bd-c);
+    border-radius:var(--r-card);box-shadow:var(--sh-card);overflow:hidden}
+  .form-section-head{padding:16px 20px;border-bottom:var(--bd-w-sm) solid var(--bd-c);
+    display:flex;align-items:flex-start;gap:12px}
+  .form-section-num{width:30px;height:30px;border-radius:7px;background:var(--accent);
+    color:#0D0D0D;display:grid;place-items:center;font-weight:900;font-size:13px;
+    flex-shrink:0;border:1px solid #000}
+  .form-section-head.pending .form-section-num{background:var(--surface-hover);
+    color:var(--ink-3);border-color:var(--bd-c)}
+  .form-section-body{padding:20px}
+  .form-base-note{background:var(--accent-soft);border:1px solid rgba(191,255,0,0.22);
+    border-radius:8px;padding:10px 13px;font-size:12px;color:var(--ink-2);
+    display:flex;gap:9px;align-items:flex-start;line-height:1.5}
+  .form-base-note b{color:var(--accent)}
+
+  /* ---- grade de opções de roteamento (Smart Link) ---- */
+  .route-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+  .route-card{background:var(--surface-hover);border:var(--bd-w-sm) solid var(--bd-c);
+    border-radius:8px;padding:11px 12px;display:flex;align-items:center;gap:8px;
+    font-size:12px;font-weight:600;color:var(--ink-2)}
+  .route-card.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink-1)}
+  .route-card.on .route-card-dot{background:var(--accent)}
+  .route-card-dot{width:7px;height:7px;border-radius:50%;background:var(--ink-3);flex-shrink:0}
+  .route-card svg{width:13px;height:13px;flex-shrink:0}
+
+  /* ---- tabela A/B Rotator ---- */
+  .ab-table{width:100%;border-collapse:collapse}
+  .ab-table th{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--ink-3);padding:8px 12px;border-bottom:var(--bd-w-sm) solid var(--bd-c);text-align:left}
+  .ab-table td{padding:10px 12px;border-bottom:var(--bd-w-sm) solid var(--bd-c);font-size:13px}
+  .ab-table tr:last-child td{border-bottom:0}
+  .ab-dest{display:flex;align-items:center;gap:7px}
+  .ab-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+  .ab-url{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-2)}
+  .ab-pct{font-family:var(--font-mono);font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap}
+  .ab-bar{height:5px;border-radius:3px;background:var(--surface-hover);overflow:hidden;
+    border:var(--bd-w-sm) solid var(--bd-c);width:80px}
+  .ab-bar span{display:block;height:100%}
+  .total-row{display:flex;align-items:center;gap:10px;padding:10px 12px;
+    background:var(--surface-hover);border-radius:8px}
+  .total-label{font-size:12px;font-weight:700;color:var(--ink-3)}
+  .total-value{font-family:var(--font-mono);font-weight:800;color:#16A34A;font-size:15px}
+  .total-bar{flex:1;height:5px;border-radius:3px;background:var(--surface);
+    overflow:hidden;border:var(--bd-w-sm) solid var(--bd-c)}
+  .total-bar span{display:block;height:100%;background:#16A34A}
+
+  /* ---- tabela Roteamento por País ---- */
+  .geo-table{width:100%;border-collapse:collapse}
+  .geo-table th{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--ink-3);padding:8px 12px;border-bottom:var(--bd-w-sm) solid var(--bd-c);text-align:left}
+  .geo-table td{padding:10px 12px;border-bottom:var(--bd-w-sm) solid var(--bd-c);font-size:13px;
+    vertical-align:middle}
+  .geo-table tr:last-child td{border-bottom:0}
+  .geo-flag{font-size:20px;line-height:1;margin-right:6px}
+  .geo-country{font-weight:600;color:var(--ink-1)}
+  .geo-url{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-2)}
+  .geo-fallback td{background:rgba(191,255,0,0.04)}
+  .geo-fallback .geo-country{color:var(--accent)}
+
+  /* ---- exclusivity note ---- */
+  .excl-note{background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.22);
+    border-radius:8px;padding:10px 13px;font-size:12px;color:var(--ink-2);
+    display:flex;gap:9px;align-items:flex-start;line-height:1.5}
+  .excl-note b{color:#EF4444}
+  .excl-note svg{width:14px;height:14px;color:#EF4444;flex-shrink:0;margin-top:1px}
+
+  /* ---- 9 tipos condensados (grid 3x3) ---- */
+  .preview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .ptype{background:var(--surface);border:var(--bd-w) solid var(--bd-c);
+    border-radius:var(--r-card);box-shadow:var(--sh-card);padding:16px;
+    display:flex;flex-direction:column;gap:9px}
+  .ptype-head{display:flex;align-items:center;gap:9px}
+  .ptype-ic{width:30px;height:30px;border-radius:7px;background:var(--surface-hover);
+    border:var(--bd-w-sm) solid var(--bd-c);display:grid;place-items:center;flex-shrink:0}
+  .ptype-ic svg{width:14px;height:14px;color:var(--ink-2)}
+  .ptype-title{font-size:12.5px;font-weight:700;color:var(--ink-1)}
+  .ptype-desc{font-size:11px;color:var(--ink-3);line-height:1.45}
+  .ptype-mock-field{background:var(--surface-hover);border:var(--bd-w-sm) solid var(--bd-c);
+    border-radius:6px;padding:6px 10px;font-size:11.5px;color:var(--ink-3);
+    font-style:italic;font-family:var(--font-mono)}
+  .ptype-mock-row{display:flex;align-items:center;gap:6px;padding:4px 0;
+    border-bottom:var(--bd-w-sm) solid var(--bd-c);font-size:11.5px;color:var(--ink-2)}
+  .ptype-mock-row:last-child{border-bottom:0}
+  .ptype-mock-label{font-size:10.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+
+  /* divider com label */
+  .section-divider{display:flex;align-items:center;gap:14px;padding:4px 0}
+  .section-divider::before,.section-divider::after{content:"";flex:1;height:1px;background:var(--bd-c)}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-mark"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter" stroke-linecap="square"><rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2"/></svg></div>
+      <span class="logo-name">AppLink</span>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">Principal</div>
+      <a class="nav-item active" href="01-dashboard-links.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Links</a>
+      <a class="nav-item" href="06-smartpages.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Smartpages</a>
+      <a class="nav-item" href="10-qrcode.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg> QR Codes</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">Crescimento</div>
+      <a class="nav-item" href="11-pixels.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg> Pixels</a>
+      <a class="nav-item" href="12-audiencias.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg> Audiências</a>
+      <a class="nav-item" href="03-analytics-link.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg> Analytics</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">Configuração</div>
+      <a class="nav-item" href="13-dominios.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg> Domínios</a>
+      <a class="nav-item" href="14-integracoes.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6M6 21v-6M6 9a3 3 0 0 0 0 6M18 3v12M18 15a3 3 0 0 0 0-6"/></svg> Integrações</a>
+      <a class="nav-item" href="15-equipe.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg> Equipe</a>
+    </div>
+    <div class="grow"></div>
+    <div class="nav-item" style="background:rgba(255,255,255,.05)"><div class="avatar" style="width:24px;height:24px;font-size:10px">IF</div> Maria Silva</div>
+  </aside>
+
+  <div class="main">
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <a class="btn-icon" href="02-criar-link.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></a>
+      <div class="col">
+        <div class="page-sub">Links / Criar / Tipos de Link</div>
+        <div class="page-title" style="font-size:18px">Tipos de Link — Spec</div>
+      </div>
+      <div class="spacer"></div>
+      <span class="badge badge-accent" style="font-size:11px">12 tipos · 3 especificados</span>
+      <a class="btn btn-secondary" href="02-criar-link.html">← Voltar ao form</a>
+    </header>
+
+    <main class="content">
+      <div class="tipos-layout">
+
+        <!-- ===================== SIDEBAR: 12 TIPOS ===================== -->
+        <div class="tipo-nav">
+          <div class="tipo-nav-head">
+            <span class="eyebrow">12 Tipos</span>
+            <span class="badge badge-success" style="font-size:10px;padding:2px 8px">3 especificados</span>
+          </div>
+
+          <!-- 1 Smart Link — ACTIVE -->
+          <div class="tipo-tab on">
+            <div class="tipo-tab-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+            <div class="tipo-tab-name">Smart Link<span class="tipo-tab-sub">URL customizável + roteamento</span></div>
+            <div class="tipo-dot tipo-dot-ok"></div>
+          </div>
+
+          <!-- 2 Redirect simples -->
+          <div class="tipo-tab">
+            <div class="tipo-tab-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+            <div class="tipo-tab-name">Redirect simples<span class="tipo-tab-sub">Encurtamento direto</span></div>
+            <div class="tipo-dot tipo-dot-pend"></div>
+          </div>
+
+          <!-- 3 Deep link -->
+          <div class="tipo-tab">
+            <div class="tipo-tab-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="3"/><circle cx="12" cy="17" r="1"/></svg></div>
+            <div class="tipo-tab-name">Deep link (mobile)<span class="tipo-tab-sub">Abre app nativo +150 apps</span></div>
+            <div class="tipo-dot tipo-dot-pend"></div>
+          </div>
+
+          <!-- 4 Roteamento por país — DOCUMENTED -->
+          <div class="tipo-tab" style="background:rgba(22,163,74,0.06)">
+            <div class="tipo-tab-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg></div>
+            <div class="tipo-tab-name">Roteamento por País<span class="tipo-tab-sub">Destino por geolocalização</span></div>
+            <div class="tipo-dot tipo-dot-ok"></div>
+          </div>
+
+          <!-- 5 Roteamento por dispositivo -->
+          <div class="tipo-tab">
+            <div class="tipo-tab-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div>
+            <div class="tipo-tab-name">Roteamento por Dispositivo<span class="tipo-tab-sub">PC / Mobile / Tablet</span></div>
+            <div class="tipo-dot tipo-dot-pend"></div>
+          </div>
+
+          <!-- 6 Roteamento por idioma -->
+          <div class="tipo-tab">
+            <div class="tipo-tab-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <div class="tipo-tab-name">Roteamento por Idioma<span class="tipo-tab-sub">pt-BR / en-US / es</span></div>
+            <div class="tipo-dot tipo-dot-pend"></div>
+          </div>
+
+          <!-- 7 A/B Rotator — DOCUMENTED -->
+          <div class="tipo-tab" style="background:rgba(22,163,74,0.06)">
+            <div class="tipo-tab-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></div>
+            <div class="tipo-tab-name">A/B Rotator<span class="tipo-tab-sub">Split testing por %</span></div>
+            <div class="tipo-dot tipo-dot-ok"></div>
+          </div>
+
+          <!-- 8 Link com expiração -->
+          <div class="tipo-tab">
+            <div class="tipo-tab-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+            <div class="tipo-tab-name">Link com Expiração<span class="tipo-tab-sub">Redireciona após data/cliques</span></div>
+            <div class="tipo-dot tipo-dot-pend"></div>
+          </div>
+
+          <!-- 9 Link protegido por senha -->
+          <div class="tipo-tab">
+            <div class="tipo-tab-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <div class="tipo-tab-name">Protegido por Senha<span class="tipo-tab-sub">Tela de senha para o visitante</span></div>
+            <div class="tipo-dot tipo-dot-pend"></div>
+          </div>
+
+          <!-- 10 Link com pixel -->
+          <div class="tipo-tab">
+            <div class="tipo-tab-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg></div>
+            <div class="tipo-tab-name">Link com Pixel<span class="tipo-tab-sub">Retargeting automatizado</span></div>
+            <div class="tipo-dot tipo-dot-pend"></div>
+          </div>
+
+          <!-- 11 Link com captura de email -->
+          <div class="tipo-tab">
+            <div class="tipo-tab-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4zM4 7l8 6 8-6"/></svg></div>
+            <div class="tipo-tab-name">Captura de E-mail<span class="tipo-tab-sub">Modal antes do redirect</span></div>
+            <div class="tipo-dot tipo-dot-pend"></div>
+          </div>
+
+          <!-- 12 Link WhatsApp/CTA -->
+          <div class="tipo-tab">
+            <div class="tipo-tab-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-12 7.6L3 21l1.9-6A8.4 8.4 0 1 1 21 11.5z"/></svg></div>
+            <div class="tipo-tab-name">WhatsApp / CTA<span class="tipo-tab-sub">Abre chat com msg pré-preenchida</span></div>
+            <div class="tipo-dot tipo-dot-pend"></div>
+          </div>
+        </div>
+
+        <!-- ===================== PAINEL DIREITO ===================== -->
+        <div class="col gap-20">
+
+          <!-- NOTA DE ESTRUTURA COMUM -->
+          <div class="form-base-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15" style="flex-shrink:0;margin-top:1px;color:var(--accent)"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+            <span><b>Estrutura comum a todos os 12 tipos:</b> Preview social (OG), Pixels de retargeting, Tags UTM, Domínio &amp; slug — aparecem idênticos após o bloco de input específico de cada tipo. Só o bloco do topo muda.</span>
+          </div>
+
+          <!-- ============================================================
+               TIPO 1 — SMART LINK (EXPANDED, ATIVO)
+               ============================================================ -->
+          <div class="form-section">
+            <div class="form-section-head">
+              <div class="form-section-num">1</div>
+              <div class="col gap-3 grow">
+                <div class="row gap-8">
+                  <span class="section-title">Smart Link</span>
+                  <span class="badge badge-accent" style="font-size:10px;padding:2px 8px">ATIVO</span>
+                </div>
+                <span class="page-sub">URL customizável com preview social, pixels, UTMs e roteamento condicional completo. Tipo mais versátil — base de todos os outros.</span>
+              </div>
+            </div>
+            <div class="form-section-body col gap-16">
+
+              <!-- Campo principal: URL -->
+              <div class="field">
+                <label class="label">URL de destino</label>
+                <div class="input-group">
+                  <span class="addon">https://</span>
+                  <input class="input" value="cliente-exemplo.com/promo-inverno" style="border-radius:0 var(--r-input) var(--r-input) 0">
+                </div>
+              </div>
+
+              <!-- Roteamento condicional: grade visual -->
+              <div class="col gap-10">
+                <div class="row between">
+                  <label class="label">Roteamento condicional</label>
+                  <span class="faint" style="font-size:11px">Só 1 ativo por vez</span>
+                </div>
+                <div class="route-grid">
+                  <div class="route-card on">
+                    <div class="route-card-dot"></div>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+                    A/B Rotator
+                  </div>
+                  <div class="route-card">
+                    <div class="route-card-dot"></div>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
+                    Geolocalização
+                  </div>
+                  <div class="route-card">
+                    <div class="route-card-dot"></div>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>
+                    Dispositivo
+                  </div>
+                  <div class="route-card">
+                    <div class="route-card-dot"></div>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    Idioma
+                  </div>
+                  <div class="route-card">
+                    <div class="route-card-dot"></div>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                    Expiração
+                  </div>
+                  <div class="route-card">
+                    <div class="route-card-dot"></div>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>
+                    Limite cliques
+                  </div>
+                </div>
+              </div>
+
+              <!-- Opções adicionais (não-exclusivas) -->
+              <div class="col gap-8">
+                <label class="label">Outras opções</label>
+                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+                  <div class="route-card" style="font-size:11.5px">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="6" y="2" width="12" height="20" rx="3"/><circle cx="12" cy="17" r="1"/></svg>
+                    Deep linking (+150 apps)
+                  </div>
+                  <div class="route-card" style="font-size:11.5px">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M3 12s3-7 9-7 9 7 9 7-3 7-9 7-9-7-9-7zM1 1l22 22"/></svg>
+                    Cloaking (exige domínio próprio)
+                  </div>
+                  <div class="route-card" style="font-size:11.5px">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    Senha de acesso
+                  </div>
+                  <div class="route-card" style="font-size:11.5px">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M9 12l2 2 4-4M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z"/></svg>
+                    Popup LGPD/GDPR
+                  </div>
+                </div>
+              </div>
+
+              <!-- Nota de base comum -->
+              <div style="padding:12px;background:var(--surface-hover);border-radius:8px;font-size:12px;color:var(--ink-3)">
+                <b style="color:var(--ink-2)">Seções fixas abaixo do bloco de roteamento:</b> Preview social (OG) · Pixels de retargeting · Tags UTM · Domínio &amp; slug · QR Code preview
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               TIPO 7 — A/B ROTATOR (EXPANDED)
+               ============================================================ -->
+          <div class="form-section">
+            <div class="form-section-head">
+              <div class="form-section-num" style="background:#FFD400;border-color:#000">7</div>
+              <div class="col gap-3 grow">
+                <div class="row gap-8">
+                  <span class="section-title">A/B Rotator</span>
+                  <span class="badge" style="background:rgba(255,212,0,0.15);color:#FFD400;border:1px solid rgba(255,212,0,0.3);font-size:10px;padding:2px 8px">SPLIT TESTING</span>
+                </div>
+                <span class="page-sub">Distribui o tráfego entre múltiplos destinos com percentuais definidos. Total deve somar 100%.</span>
+              </div>
+            </div>
+            <div class="form-section-body col gap-16">
+
+              <div class="excl-note">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/></svg>
+                <span><b>Exclusivo:</b> ao ativar o A/B Rotator, os modos Geolocalização, Dispositivo e Idioma ficam bloqueados. Só 1 roteamento condicional pode estar ativo por vez.</span>
+              </div>
+
+              <!-- Destino principal -->
+              <div class="field">
+                <label class="label">Destino principal (Variante A)</label>
+                <div class="input-group">
+                  <span class="addon" style="min-width:56px;justify-content:center;background:rgba(191,255,0,0.15);color:var(--accent);font-weight:700">100%</span>
+                  <input class="input" value="cliente-exemplo.com/lp-verao" style="border-radius:0 var(--r-input) var(--r-input) 0">
+                </div>
+              </div>
+
+              <!-- Tabela de destinos -->
+              <div class="col gap-10">
+                <label class="label">Distribuição de tráfego</label>
+                <div style="border:var(--bd-w-sm) solid var(--bd-c);border-radius:var(--r-input);overflow:hidden">
+                  <table class="ab-table">
+                    <thead>
+                      <tr>
+                        <th>Variante</th>
+                        <th>URL de destino</th>
+                        <th>% Tráfego</th>
+                        <th style="width:100px">Distribuição</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><div class="ab-dest"><div class="ab-dot" style="background:#BFFF00"></div><b>A</b> <span class="faint" style="font-size:11px">Principal</span></div></td>
+                        <td><span class="ab-url">cliente-exemplo.com/lp-verao</span></td>
+                        <td><span class="ab-pct">50%</span></td>
+                        <td><div class="ab-bar"><span style="width:50%;background:#BFFF00"></span></div></td>
+                      </tr>
+                      <tr>
+                        <td><div class="ab-dest"><div class="ab-dot" style="background:#FF7777"></div><b>B</b></div></td>
+                        <td><span class="ab-url">cliente-exemplo.com/lp-verao-v2</span></td>
+                        <td><span class="ab-pct">30%</span></td>
+                        <td><div class="ab-bar"><span style="width:30%;background:#FF7777"></span></div></td>
+                      </tr>
+                      <tr>
+                        <td><div class="ab-dest"><div class="ab-dot" style="background:#FFD400"></div><b>C</b></div></td>
+                        <td><span class="ab-url">cliente-exemplo.com/lp-verao-v3</span></td>
+                        <td><span class="ab-pct">20%</span></td>
+                        <td><div class="ab-bar"><span style="width:20%;background:#FFD400"></span></div></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Total bar -->
+                <div class="total-row">
+                  <span class="total-label">Total</span>
+                  <div class="total-bar"><span></span></div>
+                  <span class="total-value">100% ✓</span>
+                </div>
+              </div>
+
+              <button class="btn btn-secondary btn-sm" style="align-self:flex-start">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="14" height="14"><path d="M12 5v14M5 12h14"/></svg>
+                Adicionar destino
+              </button>
+
+              <div style="padding:12px;background:var(--surface-hover);border-radius:8px;font-size:12px;color:var(--ink-3)">
+                <b style="color:var(--ink-2)">Comportamento:</b> A cada clique, o sistema sorteia o destino conforme os percentuais. O destino A é sempre o "principal" e pode ter o % ajustado. Mínimo de 2 destinos, máximo de 10.
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               TIPO 4 — ROTEAMENTO POR PAÍS (EXPANDED)
+               ============================================================ -->
+          <div class="form-section">
+            <div class="form-section-head">
+              <div class="form-section-num" style="background:#FF7777;border-color:#000;color:#fff">4</div>
+              <div class="col gap-3 grow">
+                <div class="row gap-8">
+                  <span class="section-title">Roteamento por País</span>
+                  <span class="badge" style="background:rgba(255,119,119,0.15);color:#FF7777;border:1px solid rgba(255,119,119,0.3);font-size:10px;padding:2px 8px">GEOLOCALIZAÇÃO</span>
+                </div>
+                <span class="page-sub">Redireciona para URLs diferentes conforme o país de origem do visitante. Detectado via IP.</span>
+              </div>
+            </div>
+            <div class="form-section-body col gap-16">
+
+              <div class="excl-note">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/></svg>
+                <span><b>Exclusivo:</b> ao ativar Geolocalização, os modos A/B Rotator, Dispositivo e Idioma ficam bloqueados.</span>
+              </div>
+
+              <!-- Regras por país -->
+              <div class="col gap-10">
+                <label class="label">Regras de redirecionamento por país</label>
+                <div style="border:var(--bd-w-sm) solid var(--bd-c);border-radius:var(--r-input);overflow:hidden">
+                  <table class="geo-table">
+                    <thead>
+                      <tr>
+                        <th style="width:200px">País</th>
+                        <th>URL de destino</th>
+                        <th style="width:60px"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span class="geo-flag">🇧🇷</span><span class="geo-country">Brasil</span></td>
+                        <td><span class="geo-url">br.cliente-exemplo.com/promo-verao</span></td>
+                        <td><button class="btn-icon" style="width:26px;height:26px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button></td>
+                      </tr>
+                      <tr>
+                        <td><span class="geo-flag">🇵🇹</span><span class="geo-country">Portugal</span></td>
+                        <td><span class="geo-url">pt.cliente-exemplo.com/promo-verao</span></td>
+                        <td><button class="btn-icon" style="width:26px;height:26px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button></td>
+                      </tr>
+                      <tr>
+                        <td><span class="geo-flag">🇺🇸</span><span class="geo-country">Estados Unidos</span></td>
+                        <td><span class="geo-url">us.cliente-exemplo.com/promo-summer</span></td>
+                        <td><button class="btn-icon" style="width:26px;height:26px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button></td>
+                      </tr>
+                      <tr>
+                        <td><span class="geo-flag">🇪🇸</span><span class="geo-country">Espanha</span></td>
+                        <td><span class="geo-url">es.cliente-exemplo.com/promo-verano</span></td>
+                        <td><button class="btn-icon" style="width:26px;height:26px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button></td>
+                      </tr>
+                      <tr class="geo-fallback">
+                        <td><span class="geo-flag">🌐</span><span class="geo-country">Outros países <span class="faint" style="font-size:11px">(fallback)</span></span></td>
+                        <td><span class="geo-url">cliente-exemplo.com/promo-verao</span></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <button class="btn btn-secondary btn-sm" style="align-self:flex-start">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="14" height="14"><path d="M12 5v14M5 12h14"/></svg>
+                Adicionar regra de país
+              </button>
+
+              <div style="padding:12px;background:var(--surface-hover);border-radius:8px;font-size:12px;color:var(--ink-3)">
+                <b style="color:var(--ink-2)">País via IP:</b> detecção automática por geolocalização de IP (MaxMind GeoIP ou similar). O registro "Outros países" é obrigatório como fallback e não pode ser removido. Lista suporta ~250 países (ISO 3166-1).
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               OUTROS 9 TIPOS — PREVIEW CONDENSADO
+               ============================================================ -->
+          <div class="section-divider">
+            <span class="eyebrow" style="white-space:nowrap;color:var(--ink-3)">Outros 9 tipos — campos específicos</span>
+          </div>
+          <div class="preview-grid">
+
+            <!-- Redirect simples -->
+            <div class="ptype">
+              <div class="ptype-head">
+                <div class="ptype-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                <div>
+                  <div class="ptype-title">Redirect simples</div>
+                  <div class="ptype-desc">URL → redirect direto. Sem opções de roteamento.</div>
+                </div>
+              </div>
+              <div class="ptype-mock-label">Bloco específico</div>
+              <div class="ptype-mock-field">https://seusite.com/pagina</div>
+              <div class="ptype-desc" style="font-size:10.5px">Sem roteamento condicional. Base comum: OG, pixels, UTMs, slug.</div>
+            </div>
+
+            <!-- Deep link -->
+            <div class="ptype">
+              <div class="ptype-head">
+                <div class="ptype-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="3"/><circle cx="12" cy="17" r="1"/></svg></div>
+                <div>
+                  <div class="ptype-title">Deep link (mobile)</div>
+                  <div class="ptype-desc">Abre app nativo. +150 apps suportados.</div>
+                </div>
+              </div>
+              <div class="ptype-mock-label">Bloco específico</div>
+              <div class="ptype-mock-field">URL web de destino</div>
+              <div style="background:var(--surface-hover);border:var(--bd-w-sm) solid var(--bd-c);border-radius:6px;padding:8px 10px;font-size:11.5px;display:flex;align-items:center;gap:6px">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="6" y="2" width="12" height="20" rx="3"/></svg>
+                <span class="faint">Selecionar app (Instagram, TikTok, Spotify…)</span>
+              </div>
+            </div>
+
+            <!-- Roteamento por dispositivo -->
+            <div class="ptype">
+              <div class="ptype-head">
+                <div class="ptype-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div>
+                <div>
+                  <div class="ptype-title">Roteamento por Dispositivo</div>
+                  <div class="ptype-desc">PC / Mobile / Tablet → destinos diferentes.</div>
+                </div>
+              </div>
+              <div class="ptype-mock-label">Bloco específico</div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div class="ptype-mock-row"><span>🖥️</span><span style="flex:1">PC</span><span class="faint" style="font-size:11px">→ site.com/desktop</span></div>
+                <div class="ptype-mock-row"><span>📱</span><span style="flex:1">Mobile</span><span class="faint" style="font-size:11px">→ site.com/mobile</span></div>
+                <div class="ptype-mock-row"><span>📟</span><span style="flex:1">Tablet</span><span class="faint" style="font-size:11px">→ site.com/tablet</span></div>
+              </div>
+            </div>
+
+            <!-- Roteamento por idioma -->
+            <div class="ptype">
+              <div class="ptype-head">
+                <div class="ptype-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                <div>
+                  <div class="ptype-title">Roteamento por Idioma</div>
+                  <div class="ptype-desc">Detecta língua do browser do visitante.</div>
+                </div>
+              </div>
+              <div class="ptype-mock-label">Bloco específico</div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div class="ptype-mock-row"><span>🇧🇷</span><span style="flex:1">pt-BR</span><span class="faint" style="font-size:11px">→ site.com/pt</span></div>
+                <div class="ptype-mock-row"><span>🇺🇸</span><span style="flex:1">en-US</span><span class="faint" style="font-size:11px">→ site.com/en</span></div>
+                <div class="ptype-mock-row"><span>🌐</span><span style="flex:1">Outros</span><span class="faint" style="font-size:11px">→ site.com</span></div>
+              </div>
+            </div>
+
+            <!-- Link com expiração -->
+            <div class="ptype">
+              <div class="ptype-head">
+                <div class="ptype-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+                <div>
+                  <div class="ptype-title">Link com Expiração</div>
+                  <div class="ptype-desc">Redireciona para URL alternativa após data ou nº de cliques.</div>
+                </div>
+              </div>
+              <div class="ptype-mock-label">Bloco específico</div>
+              <div class="ptype-mock-field">📅 Data/hora de expiração + timezone</div>
+              <div class="ptype-mock-field">🔗 URL alternativa após expirar</div>
+              <div class="ptype-mock-field">🖱️ Limite de cliques (opcional)</div>
+            </div>
+
+            <!-- Link protegido por senha -->
+            <div class="ptype">
+              <div class="ptype-head">
+                <div class="ptype-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+                <div>
+                  <div class="ptype-title">Protegido por Senha</div>
+                  <div class="ptype-desc">Visitante vê tela de entrada antes do redirect.</div>
+                </div>
+              </div>
+              <div class="ptype-mock-label">Bloco específico</div>
+              <div class="ptype-mock-field">🔑 Senha de acesso (define o criador)</div>
+              <div class="ptype-desc" style="font-size:10.5px">Tela exibida ao visitante: logo + campo de senha. Logo personalizável em planos pagos.</div>
+            </div>
+
+            <!-- Link com pixel -->
+            <div class="ptype">
+              <div class="ptype-head">
+                <div class="ptype-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg></div>
+                <div>
+                  <div class="ptype-title">Link com Pixel</div>
+                  <div class="ptype-desc">Retargeting automático em todo clique.</div>
+                </div>
+              </div>
+              <div class="ptype-mock-label">Bloco específico</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                <span class="badge badge-accent" style="font-size:10px">Meta · 8417…2031</span>
+                <span class="badge badge-accent" style="font-size:10px">TikTok · CL9F…</span>
+              </div>
+              <div class="ptype-desc" style="font-size:10.5px">13 plataformas suportadas. Pixel dispara antes do redirect. Popup LGPD opcional.</div>
+            </div>
+
+            <!-- Link com captura de email -->
+            <div class="ptype">
+              <div class="ptype-head">
+                <div class="ptype-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4zM4 7l8 6 8-6"/></svg></div>
+                <div>
+                  <div class="ptype-title">Captura de E-mail</div>
+                  <div class="ptype-desc">Modal de captura antes do redirect. Lead vai ao CRM.</div>
+                </div>
+              </div>
+              <div class="ptype-mock-label">Bloco específico</div>
+              <div class="ptype-mock-field">📝 Título do modal</div>
+              <div class="ptype-mock-field">✉️ Placeholder do campo de e-mail</div>
+              <div class="ptype-mock-field">🔗 Integração CRM / webhook</div>
+            </div>
+
+            <!-- Link WhatsApp/CTA -->
+            <div class="ptype">
+              <div class="ptype-head">
+                <div class="ptype-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-12 7.6L3 21l1.9-6A8.4 8.4 0 1 1 21 11.5z"/></svg></div>
+                <div>
+                  <div class="ptype-title">WhatsApp / CTA</div>
+                  <div class="ptype-desc">Abre WhatsApp com número e mensagem pré-preenchida.</div>
+                </div>
+              </div>
+              <div class="ptype-mock-label">Bloco específico</div>
+              <div class="ptype-mock-field">📞 +55 11 9 0000-0000</div>
+              <div class="ptype-mock-field">💬 Olá! Vi seu link e quero saber mais…</div>
+              <div class="ptype-desc" style="font-size:10.5px">Favicon auto-preenchido com ícone do WhatsApp. Título default "Connect on WhatsApp".</div>
+            </div>
+
+          </div><!-- /preview-grid -->
+
+        </div><!-- /col (painel direito) -->
+
+      </div><!-- /tipos-layout -->
+    </main>
+  </div>
+</div>
+<script src="assets/theme.js"></script>
+</body>
+</html>
