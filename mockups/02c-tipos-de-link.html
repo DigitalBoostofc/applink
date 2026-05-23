@@ -63,7 +63,7 @@
 
   /* ── type tiles nav (left panel) ── */
   .type-nav{position:sticky;top:100px;background:#141414;border:1px solid rgba(255,255,255,0.04);
-    border-radius:24px;overflow:hidden;
+    border-radius:28px;overflow:hidden;
     box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
   .type-nav-hdr{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,0.05);
     display:flex;align-items:center;justify-content:space-between}
@@ -74,7 +74,7 @@
 
   /* tile */
   .ttile{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;
-    border-bottom:1px solid rgba(255,255,255,0.04);transition:.25s cubic-bezier(0.34,1.56,0.64,1)}
+    border-bottom:1px solid rgba(255,255,255,0.04);transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
   .ttile:last-child{border-bottom:0}
   .ttile:hover{background:rgba(255,255,255,0.025)}
   .ttile.on{background:linear-gradient(90deg,rgba(191,255,0,0.1),rgba(191,255,0,0));
@@ -108,7 +108,7 @@
   .base-note b{color:#BFFF00}
 
   /* form section card */
-  .form-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:24px;
+  .form-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;
     overflow:hidden;box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
   .form-card-hdr{padding:16px 22px;border-bottom:1px solid rgba(255,255,255,0.05);
     display:flex;align-items:flex-start;gap:14px}
@@ -225,8 +225,8 @@
     font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;text-transform:uppercase;
     letter-spacing:0.15em;color:#94A3B8;display:inline-flex;align-items:center;gap:7px;
     box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
-    transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
-  .btn-sec-sm:hover{color:#BFFF00}
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .btn-sec-sm:hover{color:#BFFF00;transform:scale(1.03)}
   .btn-sec-sm svg{width:13px;height:13px}
 
   /* ── section divider ── */
@@ -256,6 +256,18 @@
     border-bottom:1px solid rgba(255,255,255,0.04);font-family:'Satoshi',sans-serif;
     font-size:11px;color:#5A5A60}
   .ptype-row:last-child{border-bottom:0}
+
+  /* ── HERO ── */
+  .eyebrow-cap{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:#BFFF00;margin-bottom:8px}
+  .v3h1{font-family:'General Sans',sans-serif;font-weight:600;font-size:36px;line-height:1;letter-spacing:-0.03em;color:#fff;margin-bottom:6px}
+  .v3h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .v3sub{font-family:'Satoshi',sans-serif;font-size:13px;color:#94A3B8;line-height:1.6;margin-bottom:24px}
+
+  /* ── CARD HDR HELP ── */
+  .card-hdr-help{font-family:'Satoshi',sans-serif;font-size:11px;font-weight:700;color:#BFFF00;opacity:0.55;text-decoration:none;cursor:help;
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1);flex-shrink:0;letter-spacing:0.04em;
+    border-bottom:1px dotted rgba(191,255,0,0.35);line-height:1.2;padding-bottom:1px}
+  .card-hdr-help:hover{opacity:1;border-bottom-color:rgba(191,255,0,0.7)}
 </style>
 </head>
 <body>
@@ -358,6 +370,14 @@
     </header>
 
     <main class="v3content">
+
+      <!-- Page hero -->
+      <div style="margin-bottom:28px">
+        <div class="eyebrow-cap">▮ Engine de configuração</div>
+        <h1 class="v3h1">Tipos de <em>link.</em></h1>
+        <p class="v3sub">12 tipos de redirecionamento — do encurtador simples ao roteamento condicional avançado.</p>
+      </div>
+
       <div class="tipos-layout">
 
         <!-- ══ LEFT: 12 TYPE TILES ══ -->
@@ -365,6 +385,7 @@
           <div class="type-nav-hdr">
             <span class="type-nav-ttl">12 tipos</span>
             <span class="type-nav-badge">3 especificados</span>
+            <a class="card-hdr-help" style="margin-left:6px">(help)</a>
           </div>
 
           <!-- 1 Smart Link — ACTIVE -->
@@ -507,6 +528,7 @@
                 <div class="form-title-row">
                   <span class="form-title">Smart Link</span>
                   <span class="form-badge badge-lime">ATIVO</span>
+                  <a class="card-hdr-help">(help)</a>
                 </div>
                 <div class="form-sub">URL customizável com preview social, pixels, UTMs e roteamento condicional completo. Tipo mais versátil — base de todos os outros.</div>
               </div>
@@ -527,6 +549,7 @@
                 <div class="flbl">
                   Roteamento condicional
                   <span class="flbl-hint">Só 1 ativo por vez</span>
+                  <a class="card-hdr-help" style="margin-left:auto">(help)</a>
                 </div>
                 <div class="route-grid">
                   <div class="rcrd on">
@@ -602,6 +625,7 @@
                 <div class="form-title-row">
                   <span class="form-title">A/B Rotator</span>
                   <span class="form-badge badge-yellow">SPLIT TESTING</span>
+                  <a class="card-hdr-help">(help)</a>
                 </div>
                 <div class="form-sub">Distribui o tráfego entre múltiplos destinos com percentuais definidos. Total deve somar 100%.</div>
               </div>
@@ -624,7 +648,7 @@
 
               <!-- Tabela de distribuição de tráfego -->
               <div class="fld">
-                <div class="flbl">Distribuição de tráfego</div>
+                <div class="flbl" style="justify-content:space-between">Distribuição de tráfego <a class="card-hdr-help">(help)</a></div>
                 <div class="ab-wrap">
                   <table class="ab-table">
                     <thead>
@@ -702,6 +726,7 @@
                 <div class="form-title-row">
                   <span class="form-title">Roteamento por País</span>
                   <span class="form-badge badge-coral">GEOLOCALIZAÇÃO</span>
+                  <a class="card-hdr-help">(help)</a>
                 </div>
                 <div class="form-sub">Redireciona para URLs diferentes conforme o país de origem do visitante. Detectado via IP.</div>
               </div>
@@ -715,7 +740,7 @@
 
               <!-- Regras por país -->
               <div class="fld">
-                <div class="flbl">Regras de redirecionamento por país</div>
+                <div class="flbl" style="justify-content:space-between">Regras de redirecionamento por país <a class="card-hdr-help">(help)</a></div>
                 <div class="geo-wrap">
                   <table class="geo-table">
                     <thead>

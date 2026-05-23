@@ -69,22 +69,34 @@
     font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.2em;
     cursor:pointer;border:0;display:inline-flex;align-items:center;gap:8px;
     box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 22px rgba(191,255,0,0.3);transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
-  .btn-cta:hover{transform:scale(1.04)} .btn-cta svg{width:15px;height:15px}
+  .btn-cta:hover{transform:scale(1.03);box-shadow:4px 4px 12px rgba(0,0,0,0.5),0 0 32px rgba(191,255,0,0.4)}
+  .btn-cta svg{width:15px;height:15px}
 
-  /* ── CONTENT LAYOUT ── */
-  .v3content{padding:32px;display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start}
+  /* ── CONTENT LAYOUT — 50/50 ── */
+  .v3content{padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
 
   .eyebrow-cap{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:#BFFF00;margin-bottom:10px}
   .v3h1{font-family:'General Sans',sans-serif;font-weight:600;font-size:40px;line-height:1;letter-spacing:-0.03em;color:#fff;margin-top:6px}
   .v3h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .v3sub{font-family:'Satoshi',sans-serif;font-size:13.5px;color:#94A3B8;line-height:1.6;max-width:520px;margin-top:8px}
+  .v3sub{font-family:'Satoshi',sans-serif;font-size:14px;color:#94A3B8;line-height:1.6;max-width:50ch;margin-top:8px}
 
-  /* ── CARD NEUMÓRFICO ── */
+  /* ── CARD HDR HELP (Switchy-parity) ── */
+  .card-hdr-help{font-family:'Satoshi',sans-serif;font-size:11px;font-weight:700;color:#BFFF00;opacity:0.55;text-decoration:none;cursor:help;
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1);flex-shrink:0;letter-spacing:0.04em;
+    border-bottom:1px dotted rgba(191,255,0,0.35);line-height:1.2;padding-bottom:1px}
+  .card-hdr-help:hover{opacity:1;border-bottom-color:rgba(191,255,0,0.7)}
+
+  /* ── CARD BASE ── */
   .v3card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;padding:24px;
     box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);margin-bottom:18px}
-  .card-ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:15px;color:#fff;letter-spacing:-0.01em;margin-bottom:16px}
-  .card-ttl-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:10px}
-  .card-ttl-row .desc{font-family:'Satoshi',sans-serif;font-size:11px;color:#94A3B8;font-weight:600;text-transform:uppercase;letter-spacing:0.12em}
+
+  /* ── CARD HEADER (Switchy-parity) ── */
+  .card-hdr{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+  .card-hdr-icon{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex-shrink:0;
+    background:rgba(191,255,0,0.1);color:#BFFF00;
+    box-shadow:inset 2px 2px 5px rgba(0,0,0,0.45)}
+  .card-hdr-icon svg{width:15px;height:15px}
+  .card-hdr-title{font-family:'General Sans',sans-serif;font-weight:600;font-size:14px;color:#fff;letter-spacing:-0.01em;flex:1}
 
   /* ── FLOATING LABEL ── */
   .fl{position:relative;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:14px;
@@ -104,25 +116,29 @@
   .fl-note{font-family:'Satoshi',sans-serif;font-size:11px;color:#5A5A60;font-weight:600;margin-top:10px;
     text-transform:uppercase;letter-spacing:0.12em}
 
-  /* ── OPT GRID (shapes/eyes) ── */
-  .opt-ttl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.25em;color:#94A3B8;margin:20px 0 10px}
+  /* ── OPT-TTL (section label + help) ── */
+  .opt-ttl{display:flex;align-items:center;gap:8px;
+    font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.25em;color:#94A3B8;margin:20px 0 10px}
   .opt-ttl:first-child{margin-top:0}
+
+  /* ── OPT GRID (shapes/eyes) ── */
   .opt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
   .opt{height:72px;border-radius:14px;background:#1A1A1A;display:grid;place-items:center;cursor:pointer;
     box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
     transition:.35s cubic-bezier(0.34,1.56,0.64,1);color:#5A5A60;border:1px solid transparent}
   .opt svg{width:26px;height:26px}
-  .opt:hover{color:#fff;transform:scale(1.04)}
+  .opt:hover{color:#fff;transform:scale(1.05)}
   .opt.on{background:linear-gradient(135deg,rgba(191,255,0,0.15),rgba(255,119,119,0.1));
     color:#BFFF00;border-color:rgba(191,255,0,0.35);
     box-shadow:3px 3px 10px rgba(0,0,0,0.5),0 0 18px rgba(191,255,0,0.2)}
 
-  /* ── COLOR SWATCHES ── */
-  .color-group{display:flex;flex-direction:column;gap:8px;flex:1}
-  .color-label{font-family:'Satoshi',sans-serif;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.22em;color:#94A3B8}
+  /* ── COLOR SECTION ── */
+  .color-section-lbl{display:flex;align-items:center;gap:8px;
+    font-family:'Satoshi',sans-serif;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.22em;color:#94A3B8;margin-bottom:10px}
   .color-swatches{display:flex;gap:8px;flex-wrap:wrap}
   .sw{width:32px;height:32px;border-radius:50%;cursor:pointer;border:2px solid transparent;
-    transition:.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:2px 2px 6px rgba(0,0,0,0.5)}
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1);box-shadow:2px 2px 6px rgba(0,0,0,0.5)}
+  .sw:hover{transform:scale(1.12)}
   .sw.on{border-color:#BFFF00;box-shadow:2px 2px 6px rgba(0,0,0,0.5),0 0 10px rgba(191,255,0,0.4);transform:scale(1.15)}
   .sw-grad{background:linear-gradient(135deg,#BFFF00,#FF7777)}
   .sw-flat-black{background:#0A0A0A;border:2px solid rgba(255,255,255,0.15)}
@@ -133,10 +149,11 @@
   .sw-lime{background:#BEF264}
   .sw-yellow{background:#FEF08A}
 
-  /* ── SPRING TOGGLE ── */
+  /* ── TOGGLE ROW ── */
   .tg-row{display:flex;align-items:flex-start;justify-content:space-between;padding:14px 0;
     border-bottom:1px solid rgba(255,255,255,0.04)}
   .tg-row:last-child{border-bottom:0}
+  .tg-row .lbl-wrap{display:flex;align-items:center;gap:8px}
   .tg-row .lbl{font-family:'Satoshi',sans-serif;font-weight:700;font-size:13px;color:#fff}
   .tg-row .desc{font-family:'Satoshi',sans-serif;font-size:11px;color:#94A3B8;margin-top:3px;max-width:200px}
   .tg{width:44px;height:24px;background:#2D2D38;border-radius:999px;position:relative;cursor:pointer;flex-shrink:0;
@@ -147,29 +164,28 @@
   .tg.on{background:linear-gradient(135deg,#BFFF00,#FF7777);box-shadow:0 0 15px rgba(191,255,0,0.4)}
   .tg.on::after{transform:scale(1.1);left:23px}
 
-  /* ── QR PREVIEW ── */
+  /* ── QR PREVIEW (sticky column) ── */
   .preview-wrap{position:sticky;top:96px}
   .qr-big{width:220px;height:220px;background:#fff;border-radius:20px;display:grid;place-items:center;margin:0 auto 18px;
     box-shadow:6px 6px 16px rgba(0,0,0,0.55),-2px -2px 6px rgba(255,255,255,0.025),0 0 28px rgba(191,255,0,0.2)}
-  .eyebrow-cap{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:#BFFF00;margin-bottom:16px}
   .dl-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:6px}
   .dl-btn{padding:12px 0;border-radius:12px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;
     text-transform:uppercase;letter-spacing:0.18em;cursor:pointer;border:0;display:grid;place-items:center;
     transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
   .dl-btn.primary{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;
     box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 18px rgba(191,255,0,0.3)}
-  .dl-btn.primary:hover{transform:scale(1.05)}
+  .dl-btn.primary:hover{transform:scale(1.05);box-shadow:4px 4px 12px rgba(0,0,0,0.5),0 0 28px rgba(191,255,0,0.45)}
   .dl-btn.sec{background:#1A1A1A;color:#94A3B8;
     box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025)}
-  .dl-btn.sec:hover{color:#fff;transform:scale(1.03)}
+  .dl-btn.sec:hover{color:#fff;transform:scale(1.04)}
 
   /* ── TEMPLATES SALVOS ── */
   .tpl-grid{display:flex;gap:10px;flex-wrap:wrap}
   .tpl-thumb{width:52px;height:52px;border-radius:12px;background:#1A1A1A;cursor:pointer;
     box-shadow:inset 2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);
     display:grid;place-items:center;color:#5A5A60;font-family:'Satoshi',sans-serif;font-size:18px;font-weight:700;
-    transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
-  .tpl-thumb:hover{color:#BFFF00;transform:scale(1.06)}
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .tpl-thumb:hover{color:#BFFF00;transform:scale(1.08)}
 
   /* ── STICKY SAVE FOOTER ── */
   .save-foot{position:fixed;left:256px;right:0;bottom:0;z-index:20;
@@ -292,17 +308,21 @@
 
     <main class="v3content">
 
-      <!-- COLUNA ESQUERDA: CONFIGURAÇÕES -->
+      <!-- ══ COLUNA ESQUERDA: CONFIGURAÇÕES ══ -->
       <div>
         <div class="eyebrow-cap">▮ Editor de QR Code</div>
         <h1 class="v3h1">QR Code <em>dinâmico.</em></h1>
         <p class="v3sub" style="margin-bottom:28px">Personalize estilo, cores e logo. Troque o destino depois sem reimprimir — o QR continua válido.</p>
 
-        <!-- LINK DE DESTINO -->
+        <!-- CARD: LINK DE DESTINO -->
         <div class="v3card">
-          <div class="card-ttl-row">
-            <span class="card-ttl">Link de destino</span>
-            <span class="desc">QR dinâmico</span>
+          <div class="card-hdr">
+            <div class="card-hdr-icon" style="background:rgba(0,240,255,0.1);color:#00F0FF">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            </div>
+            <span class="card-hdr-title">Link de destino</span>
+            <span style="font-family:'Satoshi',sans-serif;font-weight:800;font-size:9px;text-transform:uppercase;letter-spacing:0.18em;color:#10B981;background:rgba(16,185,129,0.15);padding:3px 9px;border-radius:999px">QR dinâmico</span>
+            <a class="card-hdr-help" href="#">(help)</a>
           </div>
           <div class="fl filled">
             <select>
@@ -315,11 +335,20 @@
           <p class="fl-note">QR dinâmico — troque o destino a qualquer momento sem reimprimir.</p>
         </div>
 
-        <!-- FORMA DOS MÓDULOS -->
+        <!-- CARD: ESTILO VISUAL -->
         <div class="v3card">
-          <div class="card-ttl">Estilo visual</div>
+          <div class="card-hdr">
+            <div class="card-hdr-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <span class="card-hdr-title">Estilo visual</span>
+            <a class="card-hdr-help" href="#">(help)</a>
+          </div>
 
-          <div class="opt-ttl">Forma dos módulos</div>
+          <div class="opt-ttl">
+            Forma dos módulos
+            <a class="card-hdr-help" href="#">(help)</a>
+          </div>
           <div class="opt-grid">
             <div class="opt on">
               <svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16"/></svg>
@@ -335,7 +364,10 @@
             </div>
           </div>
 
-          <div class="opt-ttl">Estilo dos olhos (finder pattern)</div>
+          <div class="opt-ttl" style="margin-top:20px">
+            Eyes &amp; Dots (finder pattern)
+            <a class="card-hdr-help" href="#">(help)</a>
+          </div>
           <div class="opt-grid">
             <div class="opt on">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><rect x="5" y="5" width="14" height="14"/></svg>
@@ -352,12 +384,21 @@
           </div>
         </div>
 
-        <!-- CORES -->
+        <!-- CARD: CORES -->
         <div class="v3card">
-          <div class="card-ttl">Cores</div>
+          <div class="card-hdr">
+            <div class="card-hdr-icon" style="background:rgba(167,139,250,0.14);color:#A78BFA">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 9 9"/></svg>
+            </div>
+            <span class="card-hdr-title">Padrão de cor</span>
+            <a class="card-hdr-help" href="#">(help)</a>
+          </div>
           <div style="display:flex;gap:24px;flex-wrap:wrap">
-            <div class="color-group">
-              <div class="color-label" style="margin-bottom:10px">Módulos (foreground)</div>
+            <div style="flex:1">
+              <div class="color-section-lbl">
+                Módulos (foreground)
+                <a class="card-hdr-help" href="#" style="margin-left:2px">(help)</a>
+              </div>
               <div class="color-swatches">
                 <div class="sw sw-flat-black on" title="Preto"></div>
                 <div class="sw sw-purple" title="Roxo"></div>
@@ -366,8 +407,8 @@
                 <div class="sw sw-grad" title="Gradiente lime→coral"></div>
               </div>
             </div>
-            <div class="color-group">
-              <div class="color-label" style="margin-bottom:10px">Fundo (background)</div>
+            <div style="flex:1">
+              <div class="color-section-lbl">Fundo (background)</div>
               <div class="color-swatches">
                 <div class="sw sw-white on" title="Branco"></div>
                 <div class="sw sw-lime" title="Lime claro"></div>
@@ -377,12 +418,21 @@
           </div>
         </div>
 
-        <!-- OPÇÕES ADICIONAIS -->
+        <!-- CARD: OPÇÕES -->
         <div class="v3card">
-          <div class="card-ttl">Opções</div>
+          <div class="card-hdr">
+            <div class="card-hdr-icon" style="background:rgba(255,212,0,0.12);color:#FFD400">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1A1.6 1.6 0 0 0 6.8 19l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H3a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 4.2 6.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
+            </div>
+            <span class="card-hdr-title">Opções</span>
+            <a class="card-hdr-help" href="#">(help)</a>
+          </div>
           <div class="tg-row">
             <div>
-              <div class="lbl">Logo no centro</div>
+              <div class="lbl-wrap">
+                <div class="lbl">Logo central</div>
+                <a class="card-hdr-help" href="#" style="margin-left:4px">(help)</a>
+              </div>
               <div class="desc">Insere sua marca no miolo do QR Code</div>
             </div>
             <div class="tg on"></div>
@@ -403,13 +453,19 @@
           </div>
         </div>
       </div>
+      <!-- /COLUNA ESQUERDA -->
 
-      <!-- COLUNA DIREITA: PREVIEW + DOWNLOAD -->
+      <!-- ══ COLUNA DIREITA: PREVIEW STICKY ══ -->
       <div class="preview-wrap">
 
         <!-- PREVIEW CARD -->
         <div class="v3card">
-          <div class="eyebrow-cap">▮ Pré-visualização ao vivo</div>
+          <div class="card-hdr" style="margin-bottom:16px">
+            <div class="card-hdr-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg>
+            </div>
+            <span class="card-hdr-title">Pré-visualização ao vivo</span>
+          </div>
           <div class="qr-big">
             <svg width="170" height="170" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="1.4">
               <rect x="3" y="3" width="7" height="7"/>
@@ -433,8 +489,11 @@
 
         <!-- TEMPLATES SALVOS -->
         <div class="v3card">
-          <div class="card-ttl-row" style="margin-bottom:14px">
-            <span class="card-ttl" style="margin-bottom:0">Templates salvos</span>
+          <div class="card-hdr" style="margin-bottom:14px">
+            <div class="card-hdr-icon" style="background:rgba(148,163,184,0.08);color:#94A3B8">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v14a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
+            </div>
+            <span class="card-hdr-title">Templates salvos</span>
           </div>
           <div class="tpl-grid">
             <div class="tpl-thumb" title="Template clássico" style="background:linear-gradient(135deg,rgba(191,255,0,0.12),rgba(191,255,0,0))"></div>
@@ -458,6 +517,8 @@
         </div>
 
       </div>
+      <!-- /COLUNA DIREITA -->
+
     </main>
   </div>
 </div>
@@ -488,6 +549,12 @@
   });
   document.querySelectorAll('.tg').forEach(function(t){
     t.addEventListener('click', function(){ t.classList.toggle('on'); });
+  });
+  document.querySelectorAll('.sw').forEach(function(sw){
+    sw.addEventListener('click', function(){
+      sw.closest('.color-swatches').querySelectorAll('.sw').forEach(function(s){ s.classList.remove('on'); });
+      sw.classList.add('on');
+    });
   });
 </script>
 </body>

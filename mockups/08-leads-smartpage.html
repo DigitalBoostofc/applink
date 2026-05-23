@@ -14,7 +14,7 @@
 body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi',sans-serif;min-height:100vh}
 a{text-decoration:none;color:inherit}
 
-/* ── SIDEBAR V3 (idêntica) ── */
+/* ── SIDEBAR V3 ── */
 .shell{display:flex;min-height:100vh}
 .v3sb{width:256px;flex-shrink:0;background:#050505;border-right:1px solid rgba(255,255,255,0.05);
   display:flex;flex-direction:column;padding:20px 16px;gap:4px;position:sticky;top:0;height:100vh;overflow-y:auto}
@@ -51,7 +51,7 @@ a{text-decoration:none;color:inherit}
 .crumb svg{width:12px;height:12px;color:#5A5A60}
 .hdr-back{width:38px;height:38px;border-radius:11px;background:#1A1A1A;color:#94A3B8;display:grid;place-items:center;cursor:pointer;flex-shrink:0;
   box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
-  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
 .hdr-back:hover{color:#BFFF00;transform:scale(1.08)}
 .hdr-back svg{width:16px;height:16px}
 .hdr-spacer{flex:1}
@@ -59,16 +59,25 @@ a{text-decoration:none;color:inherit}
   font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:0.15em;
   cursor:pointer;display:inline-flex;align-items:center;gap:8px;
   box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
-  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
-.btn-sec:hover{color:#fff}
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.btn-sec:hover{color:#fff;transform:scale(1.03)}
 .btn-sec svg{width:14px;height:14px}
 .btn-lime{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;border:0;padding:10px 20px;border-radius:12px;
   font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:0.18em;
   cursor:pointer;display:inline-flex;align-items:center;gap:8px;
   box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 20px rgba(191,255,0,0.28);
-  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
-.btn-lime:hover{transform:scale(1.04)}
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.btn-lime:hover{transform:scale(1.03);box-shadow:4px 4px 12px rgba(0,0,0,0.5),0 0 30px rgba(191,255,0,0.38)}
 .btn-lime svg{width:14px;height:14px}
+
+/* ── CARD HDR HELP + SEC ROWS ── */
+.card-hdr-help{font-family:'Satoshi',sans-serif;font-size:11px;font-weight:700;color:#BFFF00;opacity:0.55;text-decoration:none;cursor:help;
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1);flex-shrink:0;letter-spacing:0.04em;
+  border-bottom:1px dotted rgba(191,255,0,0.35);line-height:1.2;padding-bottom:1px}
+.card-hdr-help:hover{opacity:1;border-bottom-color:rgba(191,255,0,0.7)}
+.sec-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.sec-lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:#5A5A60}
+.sec-lbl::before{content:"▮ ";color:#BFFF00}
 
 /* ── CONTENT ── */
 .v3content{padding:32px 32px 80px}
@@ -82,7 +91,7 @@ a{text-decoration:none;color:inherit}
   box-shadow:inset 2px 2px 6px rgba(0,0,0,0.55),inset -1px -1px 3px rgba(255,255,255,0.025)}
 .pg-tab{padding:10px 20px;border-radius:10px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;
   text-transform:uppercase;letter-spacing:0.15em;color:#5A5A60;cursor:pointer;
-  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
 .pg-tab:hover{color:#94A3B8}
 .pg-tab.on{background:#1A1A1A;color:#fff;
   box-shadow:2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025)}
@@ -119,7 +128,8 @@ a{text-decoration:none;color:inherit}
 /* ── TABLE CARD V3 ── */
 .v3tc{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;overflow:hidden;
   box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
-.tc-head{display:flex;align-items:center;padding:18px 24px;gap:14px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.tc-head{display:flex;align-items:center;padding:18px 24px;gap:14px;border-bottom:1px solid rgba(255,255,255,0.05);
+  position:sticky;top:80px;z-index:5;background:#141414}
 .tc-head .ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:17px;color:#fff;letter-spacing:-0.02em}
 .tc-head .ttl span{font-family:'Satoshi',sans-serif;font-weight:700;font-size:12px;color:#5A5A60;margin-left:8px;
   text-transform:uppercase;letter-spacing:0.1em}
@@ -128,8 +138,8 @@ a{text-decoration:none;color:inherit}
   font-family:'Satoshi',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;cursor:pointer;
   display:inline-flex;align-items:center;gap:6px;
   box-shadow:2px 2px 5px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);
-  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
-.filter-chip:hover{color:#BFFF00}
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.filter-chip:hover{color:#BFFF00;transform:scale(1.03)}
 .filter-chip svg{width:12px;height:12px}
 .filter-chip.on{background:rgba(191,255,0,0.1);color:#BFFF00;border:1px solid rgba(191,255,0,0.25)}
 
@@ -146,10 +156,21 @@ a{text-decoration:none;color:inherit}
 
 /* lead row */
 .lead-row{display:flex;align-items:center;gap:10px}
-.lead-av{width:32px;height:32px;border-radius:10px;background:#1A1A1A;color:#BFFF00;display:grid;place-items:center;
-  font-family:'General Sans',sans-serif;font-weight:700;font-size:11px;flex-shrink:0;
-  box-shadow:inset 2px 2px 5px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025)}
+.lead-av{width:32px;height:32px;border-radius:10px;
+  background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+  display:grid;place-items:center;font-family:'General Sans',sans-serif;font-weight:700;font-size:11px;flex-shrink:0;
+  box-shadow:2px 2px 6px rgba(0,0,0,0.4),0 0 10px rgba(191,255,0,0.15)}
 .lead-name{font-family:'Satoshi',sans-serif;font-weight:700;font-size:13.5px;color:#fff}
+
+/* action buttons */
+.row-acts{display:flex;gap:5px;align-items:center}
+.act-btn{width:28px;height:28px;border-radius:8px;background:#1A1A1A;border:0;color:#94A3B8;
+  display:grid;place-items:center;cursor:pointer;
+  box-shadow:2px 2px 5px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.act-btn:hover{color:#BFFF00;transform:scale(1.12)}
+.act-btn.act-del:hover{color:#FF7777}
+.act-btn svg{width:12px;height:12px}
 
 /* badges de status */
 .badge-src{display:inline-flex;align-items:center;background:rgba(148,163,184,0.1);color:#94A3B8;
@@ -173,7 +194,7 @@ a{text-decoration:none;color:inherit}
   letter-spacing:0.15em;color:#5A5A60}
 .pag{display:flex;align-items:center;gap:8px}
 .pag-btn{width:32px;height:32px;border-radius:9px;background:#1A1A1A;color:#94A3B8;display:grid;place-items:center;cursor:pointer;
-  box-shadow:2px 2px 5px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+  box-shadow:2px 2px 5px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
 .pag-btn:hover{color:#BFFF00;transform:scale(1.08)}
 .pag-btn svg{width:13px;height:13px}
 .pag-info{font-family:'JetBrains Mono',monospace;font-size:11px;color:#5A5A60;font-weight:600}
@@ -308,6 +329,12 @@ a{text-decoration:none;color:inherit}
         <div class="pg-tab">Analytics por bloco</div>
       </div>
 
+      <!-- Section: KPI metrics -->
+      <div class="sec-row">
+        <span class="sec-lbl">Métricas de conversão</span>
+        <a class="card-hdr-help">(help)</a>
+      </div>
+
       <!-- KPI Stats -->
       <div class="stats">
         <div class="stat">
@@ -360,6 +387,7 @@ a{text-decoration:none;color:inherit}
       <div class="v3tc">
         <div class="tc-head">
           <span class="ttl">Leads <span>formulário "Baixar ebook"</span></span>
+          <a class="card-hdr-help" style="margin-left:4px">(help)</a>
           <div class="ml">
             <button class="filter-chip on">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -368,6 +396,10 @@ a{text-decoration:none;color:inherit}
             <button class="filter-chip">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 6h16M4 12h10M4 18h6"/></svg>
               Origem
+            </button>
+            <button class="filter-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              Smartpage
             </button>
             <button class="filter-chip">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
@@ -385,6 +417,7 @@ a{text-decoration:none;color:inherit}
               <th>Origem</th>
               <th>Data</th>
               <th>CRM</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -400,11 +433,18 @@ a{text-decoration:none;color:inherit}
               <td><span class="badge-src ig">Instagram</span></td>
               <td><span style="color:#5A5A60;font-family:'JetBrains Mono',monospace;font-size:12px">22 mai 2026</span></td>
               <td><span class="badge-crm-ok"><span class="d"></span>Sincronizado</span></td>
+              <td>
+                <div class="row-acts">
+                  <button class="act-btn" title="Ver detalhes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                  <button class="act-btn" title="Exportar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+                  <button class="act-btn act-del" title="Deletar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg></button>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>
                 <div class="lead-row">
-                  <div class="lead-av">RS</div>
+                  <div class="lead-av" style="background:linear-gradient(135deg,#00F0FF,#A78BFA)">RS</div>
                   <span class="lead-name">Rafael Souza</span>
                 </div>
               </td>
@@ -413,11 +453,18 @@ a{text-decoration:none;color:inherit}
               <td><span class="badge-src wa">WhatsApp</span></td>
               <td><span style="color:#5A5A60;font-family:'JetBrains Mono',monospace;font-size:12px">22 mai 2026</span></td>
               <td><span class="badge-crm-ok"><span class="d"></span>Sincronizado</span></td>
+              <td>
+                <div class="row-acts">
+                  <button class="act-btn" title="Ver detalhes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                  <button class="act-btn" title="Exportar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+                  <button class="act-btn act-del" title="Deletar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg></button>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>
                 <div class="lead-row">
-                  <div class="lead-av">JP</div>
+                  <div class="lead-av" style="background:linear-gradient(135deg,#FFD400,#FF7777)">JP</div>
                   <span class="lead-name">Juliana Prado</span>
                 </div>
               </td>
@@ -426,11 +473,18 @@ a{text-decoration:none;color:inherit}
               <td><span class="badge-src di">Direto</span></td>
               <td><span style="color:#5A5A60;font-family:'JetBrains Mono',monospace;font-size:12px">21 mai 2026</span></td>
               <td><span class="badge-crm-ok"><span class="d"></span>Sincronizado</span></td>
+              <td>
+                <div class="row-acts">
+                  <button class="act-btn" title="Ver detalhes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                  <button class="act-btn" title="Exportar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+                  <button class="act-btn act-del" title="Deletar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg></button>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>
                 <div class="lead-row">
-                  <div class="lead-av">LF</div>
+                  <div class="lead-av" style="background:linear-gradient(135deg,#A78BFA,#00F0FF)">LF</div>
                   <span class="lead-name">Lucas Ferreira</span>
                 </div>
               </td>
@@ -439,11 +493,18 @@ a{text-decoration:none;color:inherit}
               <td><span class="badge-src ig">Instagram</span></td>
               <td><span style="color:#5A5A60;font-family:'JetBrains Mono',monospace;font-size:12px">21 mai 2026</span></td>
               <td><span class="badge-crm-pend">Enviando…</span></td>
+              <td>
+                <div class="row-acts">
+                  <button class="act-btn" title="Ver detalhes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                  <button class="act-btn" title="Exportar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+                  <button class="act-btn act-del" title="Deletar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg></button>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>
                 <div class="lead-row">
-                  <div class="lead-av">AC</div>
+                  <div class="lead-av" style="background:linear-gradient(135deg,#FF7777,#BFFF00)">AC</div>
                   <span class="lead-name">Ana Carvalho</span>
                 </div>
               </td>
@@ -452,11 +513,18 @@ a{text-decoration:none;color:inherit}
               <td><span class="badge-src ig">Instagram</span></td>
               <td><span style="color:#5A5A60;font-family:'JetBrains Mono',monospace;font-size:12px">20 mai 2026</span></td>
               <td><span class="badge-crm-ok"><span class="d"></span>Sincronizado</span></td>
+              <td>
+                <div class="row-acts">
+                  <button class="act-btn" title="Ver detalhes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                  <button class="act-btn" title="Exportar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+                  <button class="act-btn act-del" title="Deletar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg></button>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>
                 <div class="lead-row">
-                  <div class="lead-av">FO</div>
+                  <div class="lead-av" style="background:linear-gradient(135deg,#00F0FF,#BFFF00)">FO</div>
                   <span class="lead-name">Felipe Oliveira</span>
                 </div>
               </td>
@@ -465,6 +533,13 @@ a{text-decoration:none;color:inherit}
               <td><span class="badge-src di">Direto</span></td>
               <td><span style="color:#5A5A60;font-family:'JetBrains Mono',monospace;font-size:12px">19 mai 2026</span></td>
               <td><span class="badge-crm-ok"><span class="d"></span>Sincronizado</span></td>
+              <td>
+                <div class="row-acts">
+                  <button class="act-btn" title="Ver detalhes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                  <button class="act-btn" title="Exportar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+                  <button class="act-btn act-del" title="Deletar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg></button>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>

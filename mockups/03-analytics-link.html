@@ -70,14 +70,21 @@
     font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.2em;
     cursor:pointer;border:0;display:inline-flex;align-items:center;gap:8px;
     box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 22px rgba(191,255,0,0.3);transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
-  .btn-cta:hover{transform:scale(1.04)} .btn-cta svg{width:15px;height:15px}
+  .btn-cta:hover{transform:scale(1.03);box-shadow:4px 4px 12px rgba(0,0,0,0.5),0 0 32px rgba(191,255,0,0.4)}
+  .btn-cta svg{width:15px;height:15px}
 
   /* ── CONTENT ── */
   .v3content{padding:32px 32px 80px;display:flex;flex-direction:column;gap:24px}
   .eyebrow-cap{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:#BFFF00;margin-bottom:10px}
   .v3h1{font-family:'General Sans',sans-serif;font-weight:600;font-size:40px;line-height:1;letter-spacing:-0.03em;color:#fff;margin-top:6px}
   .v3h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .v3sub{font-family:'Satoshi',sans-serif;font-size:13.5px;color:#94A3B8;line-height:1.6;max-width:560px;margin-top:8px}
+  .v3sub{font-family:'Satoshi',sans-serif;font-size:14px;color:#94A3B8;line-height:1.6;max-width:55ch;margin-top:8px}
+
+  /* ── CARD HDR HELP (Switchy-parity) ── */
+  .card-hdr-help{font-family:'Satoshi',sans-serif;font-size:11px;font-weight:700;color:#BFFF00;opacity:0.55;text-decoration:none;cursor:help;
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1);flex-shrink:0;letter-spacing:0.04em;
+    border-bottom:1px dotted rgba(191,255,0,0.35);line-height:1.2;padding-bottom:1px}
+  .card-hdr-help:hover{opacity:1;border-bottom-color:rgba(191,255,0,0.7)}
 
   /* ── LINK INFO CARD ── */
   .v3card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;padding:24px;
@@ -88,15 +95,17 @@
   .link-thumb svg{width:20px;height:20px}
   .link-info .slug{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;color:#fff}
   .link-info .dest{font-family:'Satoshi',sans-serif;font-size:11px;color:#94A3B8;margin-top:3px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em}
-  .link-acts{margin-left:auto;display:flex;gap:8px}
+  .link-acts{margin-left:auto;display:flex;gap:8px;align-items:center}
   .act-btn{width:38px;height:38px;border-radius:10px;background:#1A1A1A;color:#94A3B8;display:grid;place-items:center;cursor:pointer;
-    box-shadow:2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+    box-shadow:2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
   .act-btn:hover{color:#BFFF00;transform:scale(1.1)} .act-btn svg{width:15px;height:15px}
 
-  /* ── KPI GRID ── */
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+  /* ── KPI GRID — 4 colunas ── */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
   .stat{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;padding:24px 24px 20px;position:relative;
-    box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
+    box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .stat:hover{border-color:rgba(255,255,255,0.08);transform:translateY(-2px)}
   .stat .lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.25em;color:#94A3B8}
   .stat .val{font-family:'General Sans',sans-serif;font-weight:600;font-size:34px;line-height:1;letter-spacing:-0.03em;color:#fff;margin-top:14px}
   .stat .dlt{font-family:'JetBrains Mono',monospace;font-size:11px;color:#10B981;margin-top:10px;font-weight:600}
@@ -123,7 +132,7 @@
     box-shadow:inset 3px 3px 6px rgba(0,0,0,0.5)}
   .seg div{padding:7px 14px;border-radius:8px;font-family:'Satoshi',sans-serif;font-size:10.5px;font-weight:700;
     text-transform:uppercase;letter-spacing:0.15em;color:#94A3B8;cursor:pointer;
-    transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
   .seg div.on{background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
     box-shadow:2px 2px 6px rgba(0,0,0,0.4),0 0 12px rgba(191,255,0,0.3)}
   .chart-wrap{height:200px;display:flex;align-items:flex-end;gap:6px;padding:0 4px}
@@ -135,20 +144,29 @@
   .chart-axis{display:flex;justify-content:space-between;padding:0 4px;margin-top:8px;
     font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5A5A60}
 
-  /* ── PANELS GRID ── */
+  /* ── PANELS GEO (60/40) ── */
+  .panels-geo{display:grid;grid-template-columns:3fr 2fr;gap:18px;align-items:start}
+
+  /* ── PANELS GRID (1fr 1fr) ── */
   .panels{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+
+  /* ── PANEL TITLE ── */
   .panel-ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:14px;color:#fff;
-    letter-spacing:-0.01em;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:8px}
-  .panel-ttl .seg-sm{display:flex;gap:2px;background:#1A1A1A;border-radius:8px;padding:3px;box-shadow:inset 2px 2px 4px rgba(0,0,0,0.5)}
+    letter-spacing:-0.01em;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+  .panel-ttl .seg-sm{display:flex;gap:2px;background:#1A1A1A;border-radius:8px;padding:3px;box-shadow:inset 2px 2px 4px rgba(0,0,0,0.5);margin-left:auto}
   .seg-sm div{padding:5px 10px;border-radius:6px;font-family:'Satoshi',sans-serif;font-size:9.5px;font-weight:700;
     text-transform:uppercase;letter-spacing:0.12em;color:#5A5A60;cursor:pointer;transition:.25s}
   .seg-sm div.on{background:#BFFF00;color:#0A0A0A}
 
   /* ── MAP PLACEHOLDER ── */
-  .map-ph{height:120px;border-radius:14px;background:#1A1A1A;display:grid;place-items:center;
+  .map-ph{border-radius:14px;background:#1A1A1A;display:grid;place-items:center;
     box-shadow:inset 4px 4px 8px rgba(0,0,0,0.55),inset -2px -2px 6px rgba(255,255,255,0.025);
     color:#5A5A60;font-family:'Satoshi',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;
-    margin-bottom:14px}
+    margin-bottom:16px}
+
+  /* ── DONUT ── */
+  .donut-wrap{display:flex;justify-content:center;align-items:center;margin-bottom:16px}
+  .donut-ring{position:relative;width:130px;height:130px}
 
   /* ── V3 TABLE (mini panels) ── */
   .v3tbl{width:100%;border-collapse:collapse}
@@ -171,16 +189,22 @@
   .v3pill.coral{background:rgba(255,119,119,0.15);color:#FF7777}
   .v3pill.neutral{background:rgba(148,163,184,0.12);color:#94A3B8}
 
-  /* ── PIXEL CARD ── */
-  .pixel-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;
-    border-bottom:1px solid rgba(255,255,255,0.04)}
-  .pixel-row:last-of-type{border-bottom:0;margin-bottom:14px}
-  .pixel-row .mono{font-family:'JetBrains Mono',monospace;font-size:12px;color:#94A3B8;font-weight:500}
+  /* ── PIXEL ATTRIBUTION CARD ── */
+  .pix-attr-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+  .pix-attr-item{background:#1A1A1A;border-radius:18px;padding:18px 20px;
+    box-shadow:inset 3px 3px 8px rgba(0,0,0,0.5),inset -2px -2px 5px rgba(255,255,255,0.02)}
+  .pix-attr-item .plat{font-family:'Satoshi',sans-serif;font-weight:800;font-size:9.5px;text-transform:uppercase;letter-spacing:0.2em;color:#94A3B8;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+  .pix-attr-item .count{font-family:'General Sans',sans-serif;font-weight:600;font-size:26px;letter-spacing:-0.02em;color:#fff}
+  .pix-attr-item .count-lbl{font-family:'Satoshi',sans-serif;font-size:11px;color:#5A5A60;margin-top:2px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em}
+  .pix-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .pix-dot.meta{background:#4B8EF8;box-shadow:0 0 6px rgba(75,142,248,0.5)}
+  .pix-dot.tiktok{background:#FF5C8D;box-shadow:0 0 6px rgba(255,92,141,0.5)}
+
   .btn-sec{display:inline-flex;align-items:center;gap:8px;background:#1A1A1A;color:#94A3B8;
     padding:10px 16px;border-radius:12px;font-family:'Satoshi',sans-serif;font-weight:700;font-size:10.5px;
     text-transform:uppercase;letter-spacing:0.15em;cursor:pointer;border:0;
     box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
-    transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
   .btn-sec:hover{color:#BFFF00;transform:scale(1.03)} .btn-sec svg{width:13px;height:13px}
 </style>
 </head>
@@ -331,9 +355,12 @@
         </div>
       </div>
 
-      <!-- KPI GRID -->
+      <!-- KPI GRID — 4 colunas -->
       <svg width="0" height="0"><defs>
         <linearGradient id="kpi-g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#BFFF00"/><stop offset="100%" stop-color="#FF7777"/>
+        </linearGradient>
+        <linearGradient id="dnt-g" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stop-color="#BFFF00"/><stop offset="100%" stop-color="#FF7777"/>
         </linearGradient>
       </defs></svg>
@@ -364,12 +391,6 @@
           <div class="dlt">→ instagram.com lidera</div>
         </div>
         <div class="stat">
-          <div class="ic ic-cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8"/></svg></div>
-          <div class="lbl">Dispositivos</div>
-          <div class="val">3</div>
-          <div class="dlt">→ mobile 98% do tráfego</div>
-        </div>
-        <div class="stat">
           <div class="ring">
             <svg width="60" height="60" viewBox="0 0 60 60">
               <circle class="bg" cx="30" cy="30" r="27"/>
@@ -377,7 +398,7 @@
             </svg>
             <span class="pct">19</span>
           </div>
-          <div class="lbl">Países</div>
+          <div class="lbl">Países alcançados</div>
           <div class="val">19</div>
           <div class="dlt">→ Brasil 69% do tráfego</div>
         </div>
@@ -386,7 +407,10 @@
       <!-- CHART CARD -->
       <div class="v3card chart-card">
         <div class="card-top">
-          <div class="card-ttl">Cliques no tempo</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="card-ttl">Cliques no tempo</div>
+            <a class="card-hdr-help" href="#">(help)</a>
+          </div>
           <div class="seg">
             <div>Dia</div><div class="on">Semana</div><div>Mês</div>
           </div>
@@ -410,16 +434,17 @@
         </div>
       </div>
 
-      <!-- PANELS GRID -->
-      <div class="panels">
+      <!-- GEO ROW: mapa (60%) + donut dispositivos (40%) -->
+      <div class="panels-geo">
 
-        <!-- PAÍSES -->
+        <!-- PAÍSES — 60% -->
         <div class="v3card">
           <div class="panel-ttl">
             Países
+            <a class="card-hdr-help" href="#">(help)</a>
             <div class="seg-sm"><div class="on">País</div><div>Cidade</div></div>
           </div>
-          <div class="map-ph">mapa-múndi · em breve</div>
+          <div class="map-ph" style="height:160px">mapa-múndi · em breve</div>
           <table class="v3tbl">
             <thead><tr><th>País</th><th>Visitas</th><th>Únicos</th><th style="min-width:100px">%</th></tr></thead>
             <tbody>
@@ -441,41 +466,78 @@
                 <td class="mono">901</td>
                 <td><div class="pct-row"><div class="pct-track"><div class="pct-fill" style="width:11%"></div></div><span class="pct-num">11%</span></div></td>
               </tr>
+              <tr>
+                <td style="color:#5A5A60">Outros (16)</td>
+                <td class="mono">1.120</td>
+                <td class="mono">906</td>
+                <td><div class="pct-row"><div class="pct-track"><div class="pct-fill" style="width:9%"></div></div><span class="pct-num">9%</span></div></td>
+              </tr>
             </tbody>
           </table>
         </div>
 
-        <!-- DISPOSITIVOS -->
+        <!-- DISPOSITIVOS — 40% com donut -->
         <div class="v3card">
-          <div class="panel-ttl">Tipo de dispositivo</div>
+          <div class="panel-ttl">
+            Dispositivos
+            <a class="card-hdr-help" href="#">(help)</a>
+          </div>
+          <div class="donut-wrap">
+            <div class="donut-ring">
+              <svg width="130" height="130" viewBox="0 0 130 130">
+                <defs>
+                  <linearGradient id="dnt-g2" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#BFFF00"/>
+                    <stop offset="100%" stop-color="#FF7777"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="65" cy="65" r="48" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="18"/>
+                <circle cx="65" cy="65" r="48" fill="none" stroke="url(#dnt-g2)" stroke-width="18"
+                  stroke-dasharray="301.6" stroke-dashoffset="6.1" stroke-linecap="round"
+                  transform="rotate(-90 65 65)" style="filter:drop-shadow(0 0 10px rgba(191,255,0,0.45))"/>
+              </svg>
+              <div style="position:absolute;inset:0;display:grid;place-items:center;text-align:center">
+                <div>
+                  <div style="font-family:'General Sans',sans-serif;font-weight:600;font-size:22px;color:#fff;letter-spacing:-0.02em">98%</div>
+                  <div style="font-family:'Satoshi',sans-serif;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.18em;color:#94A3B8;margin-top:2px">mobile</div>
+                </div>
+              </div>
+            </div>
+          </div>
           <table class="v3tbl">
-            <thead><tr><th>Dispositivo</th><th>Visitas</th><th>Únicos</th><th style="min-width:100px">%</th></tr></thead>
+            <thead><tr><th>Dispositivo</th><th>Visitas</th><th style="min-width:80px">%</th></tr></thead>
             <tbody>
               <tr>
                 <td>Celular</td>
                 <td class="mono">12.169</td>
-                <td class="mono">9.020</td>
                 <td><div class="pct-row"><div class="pct-track"><div class="pct-fill" style="width:98%"></div></div><span class="pct-num">98%</span></div></td>
               </tr>
               <tr>
                 <td>Tablet</td>
                 <td class="mono">161</td>
-                <td class="mono">120</td>
                 <td><div class="pct-row"><div class="pct-track"><div class="pct-fill" style="width:1%"></div></div><span class="pct-num">1%</span></div></td>
               </tr>
               <tr>
                 <td>Computador</td>
                 <td class="mono">88</td>
-                <td class="mono">67</td>
                 <td><div class="pct-row"><div class="pct-track"><div class="pct-fill" style="width:1%"></div></div><span class="pct-num">1%</span></div></td>
               </tr>
             </tbody>
           </table>
         </div>
 
+      </div>
+      <!-- /GEO ROW -->
+
+      <!-- PANELS GRID 1fr 1fr -->
+      <div class="panels">
+
         <!-- REFERRERS -->
         <div class="v3card">
-          <div class="panel-ttl">Referrers</div>
+          <div class="panel-ttl">
+            Referrers
+            <a class="card-hdr-help" href="#">(help)</a>
+          </div>
           <table class="v3tbl">
             <thead><tr><th>Origem</th><th>Visitas</th><th style="min-width:120px">%</th></tr></thead>
             <tbody>
@@ -500,7 +562,10 @@
 
         <!-- SISTEMA OPERACIONAL -->
         <div class="v3card">
-          <div class="panel-ttl">Sistema operacional</div>
+          <div class="panel-ttl">
+            Sistema operacional
+            <a class="card-hdr-help" href="#">(help)</a>
+          </div>
           <table class="v3tbl">
             <thead><tr><th>SO</th><th>Visitas</th><th style="min-width:120px">%</th></tr></thead>
             <tbody>
@@ -525,7 +590,10 @@
 
         <!-- UTMs -->
         <div class="v3card">
-          <div class="panel-ttl">Tags UTM</div>
+          <div class="panel-ttl">
+            Tags UTM
+            <a class="card-hdr-help" href="#">(help)</a>
+          </div>
           <table class="v3tbl">
             <thead><tr><th>Campanha</th><th>Visitas</th><th style="min-width:120px">%</th></tr></thead>
             <tbody>
@@ -543,24 +611,69 @@
           </table>
         </div>
 
-        <!-- PIXELS DE RETARGETING -->
+        <!-- DEEP LINK / BROWSER -->
         <div class="v3card">
-          <div class="panel-ttl">Pixels de retargeting</div>
-          <div class="pixel-row">
-            <span class="v3pill">Meta</span>
-            <span class="mono" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#94A3B8">9.207 pessoas pixeladas</span>
+          <div class="panel-ttl">
+            Browsers &amp; Apps
+            <a class="card-hdr-help" href="#">(help)</a>
           </div>
-          <div class="pixel-row">
-            <span class="v3pill coral">TikTok</span>
-            <span class="mono" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#94A3B8">9.207 pessoas pixeladas</span>
+          <table class="v3tbl">
+            <thead><tr><th>Browser</th><th>Visitas</th><th style="min-width:120px">%</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Instagram In-App</td>
+                <td class="mono">10.441</td>
+                <td><div class="pct-row"><div class="pct-track"><div class="pct-fill" style="width:84%"></div></div><span class="pct-num">84%</span></div></td>
+              </tr>
+              <tr>
+                <td>Safari</td>
+                <td class="mono">1.242</td>
+                <td><div class="pct-row"><div class="pct-track"><div class="pct-fill" style="width:10%"></div></div><span class="pct-num">10%</span></div></td>
+              </tr>
+              <tr>
+                <td>Chrome</td>
+                <td class="mono">735</td>
+                <td><div class="pct-row"><div class="pct-track"><div class="pct-fill" style="width:6%"></div></div><span class="pct-num">6%</span></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <!-- /PANELS GRID -->
+
+      <!-- PIXELS ATTRIBUTION — full-width card -->
+      <div class="v3card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:30px;height:30px;border-radius:8px;background:rgba(255,119,119,0.12);color:#FF7777;display:grid;place-items:center;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.45)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+            </div>
+            <span style="font-family:'General Sans',sans-serif;font-weight:600;font-size:14px;color:#fff;letter-spacing:-0.01em">Pixels de retargeting</span>
+            <a class="card-hdr-help" href="#">(help)</a>
           </div>
           <a class="btn-sec" href="12-audiencias.html">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
             Ver audiências
           </a>
         </div>
-
+        <div class="pix-attr-grid">
+          <div class="pix-attr-item">
+            <div class="plat"><span class="pix-dot meta"></span> Meta Pixel</div>
+            <div class="count">9.207</div>
+            <div class="count-lbl">pessoas pixeladas</div>
+          </div>
+          <div class="pix-attr-item">
+            <div class="plat"><span class="pix-dot tiktok"></span> TikTok Pixel</div>
+            <div class="count">9.207</div>
+            <div class="count-lbl">pessoas pixeladas</div>
+          </div>
+        </div>
+        <p style="font-family:'Satoshi',sans-serif;font-size:11.5px;color:#5A5A60;line-height:1.5">
+          Esses visitantes foram adicionados automaticamente às suas audiências customizadas em cada plataforma. Atualizações em tempo real.
+        </p>
       </div>
+
     </main>
   </div>
 </div>

@@ -6,11 +6,11 @@
 <title>AppLink — Equipe &amp; Workspaces</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://api.fontshare.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/tokens.css">
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi',sans-serif}
   .shell{display:flex;min-height:100vh}
 
@@ -39,14 +39,14 @@
   .v3sb .user .pl{font-family:'Satoshi',sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:#94A3B8;font-weight:700}
 
   /* ── main ── */
-  .v3main{flex:1;min-width:0}
+  .v3main{flex:1;min-width:0;overflow-x:hidden}
   .v3hdr{position:sticky;top:0;z-index:10;height:80px;background:rgba(10,10,10,0.82);
     backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.04);
     display:flex;align-items:center;padding:0 32px;gap:24px}
   .crumb{display:flex;align-items:center;gap:10px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
     text-transform:uppercase;letter-spacing:0.18em;color:#94A3B8}
   .crumb b{color:#fff}.crumb svg{width:12px;height:12px;color:#5A5A60}
-  .v3hdr .icons{display:flex;gap:8px;margin-left:auto}
+  .v3hdr .hdr-right{display:flex;gap:8px;margin-left:auto;align-items:center}
   .v3hdr .ib{width:42px;height:42px;border-radius:12px;background:#1A1A1A;color:#94A3B8;display:grid;place-items:center;cursor:pointer;
     box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
     transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
@@ -68,8 +68,22 @@
     letter-spacing:-0.03em;color:#fff}
   .v3h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);
     -webkit-background-clip:text;background-clip:text;color:transparent}
-  .v3sub{font-family:'Satoshi',sans-serif;font-size:14px;color:#94A3B8;line-height:1.6;max-width:540px;margin-top:10px}
+  .v3sub{font-family:'Satoshi',sans-serif;font-size:14px;color:#94A3B8;line-height:1.6;margin-top:10px}
   .ttl-row{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px;gap:32px;flex-wrap:wrap}
+
+  /* ── card-hdr-help ── */
+  .card-hdr-help{font-family:'Satoshi',sans-serif;font-size:11px;font-weight:700;color:#BFFF00;opacity:0.55;
+    text-decoration:none;cursor:help;border-bottom:1px dotted rgba(191,255,0,0.4);padding-bottom:1px;
+    margin-left:6px;letter-spacing:0.04em;line-height:1.2;
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .card-hdr-help:hover{opacity:1;border-bottom-color:#BFFF00}
+
+  /* ── card-hdr pattern ── */
+  .card-hdr{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+  .card-hdr-icon{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex-shrink:0;
+    background:rgba(191,255,0,0.1);color:#BFFF00;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.45)}
+  .card-hdr-icon svg{width:15px;height:15px}
+  .card-hdr-title{font-family:'General Sans',sans-serif;font-weight:600;font-size:14px;color:#fff;letter-spacing:-0.01em;flex:1}
 
   /* ── pills ── */
   .v3pill{display:inline-block;background:rgba(191,255,0,0.12);color:#BFFF00;padding:4px 10px;border-radius:999px;
@@ -82,16 +96,17 @@
   .v3pill.dim{background:rgba(90,90,96,0.18);color:#5A5A60}
 
   /* ── workspace cards ── */
-  .ws-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:32px}
-  .ws-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:24px;padding:22px;
+  .ws-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:32px}
+  .ws-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;padding:22px;
     box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);
     display:flex;flex-direction:column;gap:14px;position:relative;transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .ws-card:hover{transform:translateY(-2px);box-shadow:8px 8px 20px rgba(0,0,0,0.6),-4px -4px 12px rgba(255,255,255,0.03)}
   .ws-card.active{border-color:rgba(191,255,0,0.2);
     box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025),0 0 32px rgba(191,255,0,0.07)}
   .ws-card.add{background:#0F0F0F;border-style:dashed;border-color:rgba(255,255,255,0.07);
     box-shadow:inset 4px 4px 10px rgba(0,0,0,0.4);cursor:pointer;
-    justify-content:center;align-items:center;min-height:140px}
-  .ws-card.add:hover{border-color:rgba(191,255,0,0.2)}
+    justify-content:center;align-items:center;min-height:160px}
+  .ws-card.add:hover{border-color:rgba(191,255,0,0.2);transform:translateY(-2px)}
   .ws-badge{position:absolute;top:18px;right:18px}
   .ws-mark{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#BFFF00,#FF7777);
     display:grid;place-items:center;box-shadow:3px 3px 8px rgba(0,0,0,0.5),0 0 16px rgba(191,255,0,0.18)}
@@ -106,6 +121,20 @@
   .ws-stat .val{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:#fff;display:block}
   .ws-stat .lbl{font-family:'Satoshi',sans-serif;font-size:9px;text-transform:uppercase;
     letter-spacing:0.2em;color:#5A5A60;font-weight:800;display:block;margin-top:2px}
+  .ws-footer{border-top:1px solid rgba(255,255,255,0.05);padding-top:14px;
+    display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .ws-footer-label{font-family:'Satoshi',sans-serif;font-size:10px;color:#5A5A60;
+    text-transform:uppercase;letter-spacing:0.14em;font-weight:700}
+  .ws-btn{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;border:0;
+    padding:8px 16px;border-radius:10px;cursor:pointer;
+    font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+    text-transform:uppercase;letter-spacing:0.18em;
+    box-shadow:3px 3px 8px rgba(0,0,0,0.4),0 0 14px rgba(191,255,0,0.22);
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .ws-btn:hover{transform:scale(1.05)}
+  .ws-btn.sec{background:#1A1A1A;color:#94A3B8;
+    box-shadow:2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025)}
+  .ws-btn.sec:hover{color:#fff}
   .add-inner{text-align:center}
   .add-icon{width:40px;height:40px;border-radius:12px;background:#1A1A1A;display:grid;place-items:center;
     margin:0 auto 12px;box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025)}
@@ -116,7 +145,7 @@
   .v3table-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;
     overflow:hidden;box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);
     margin-bottom:24px}
-  .v3table-head{display:flex;align-items:center;padding:20px 26px;gap:14px;
+  .v3table-head{display:flex;align-items:center;padding:20px 26px;gap:10px;
     border-bottom:1px solid rgba(255,255,255,0.05)}
   .v3table-head .ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:18px;
     color:#fff;letter-spacing:-0.02em}
@@ -133,7 +162,7 @@
 
   /* member info */
   .minfo{display:flex;align-items:center;gap:12px}
-  .mav{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  .mav{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;
     font-family:'Satoshi',sans-serif;font-weight:800;font-size:13px;color:#0A0A0A;flex-shrink:0;
     box-shadow:2px 2px 6px rgba(0,0,0,0.4)}
   .mav.g1{background:linear-gradient(135deg,#BFFF00,#FF7777)}
@@ -143,22 +172,25 @@
     box-shadow:inset 2px 2px 6px rgba(0,0,0,0.5);border:1px dashed rgba(255,255,255,0.09)}
   .mname{font-family:'Satoshi',sans-serif;font-weight:700;font-size:13px;color:#fff;display:block}
   .memail{font-family:'JetBrains Mono',monospace;font-size:11px;color:#5A5A60;display:block;margin-top:2px}
+  .mlast{font-family:'Satoshi',sans-serif;font-size:11.5px;color:#5A5A60}
+  .mlast.online{color:#10B981}
 
   /* actions */
   .v3acts{display:flex;gap:6px;justify-content:flex-end}
   .v3acts .a{width:34px;height:34px;border-radius:10px;background:#1A1A1A;color:#94A3B8;
     display:grid;place-items:center;cursor:pointer;
     box-shadow:2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);
-    transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
   .v3acts .a:hover{color:#BFFF00;transform:scale(1.1)}
   .v3acts .a svg{width:15px;height:15px}
 
   /* ── permissions matrix ── */
-  .perm-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:24px;
+  .perm-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;
     padding:26px;box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);
     margin-bottom:24px}
+  .perm-hdr{display:flex;align-items:center;margin-bottom:20px;gap:10px}
   .perm-ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:18px;color:#fff;
-    letter-spacing:-0.02em;margin-bottom:20px}
+    letter-spacing:-0.02em;flex:1}
   .perm-grid{display:grid;grid-template-columns:1fr repeat(4,88px);gap:0}
   .phdr{font-family:'Satoshi',sans-serif;font-weight:800;font-size:9.5px;text-transform:uppercase;
     letter-spacing:0.18em;text-align:center;padding:10px 4px;
@@ -177,7 +209,7 @@
   .v3overlay{position:fixed;inset:0;background:rgba(0,0,0,0.78);backdrop-filter:blur(6px);
     -webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;
     z-index:1000;padding:40px 20px}
-  .v3modal{width:520px;max-width:100%;background:#141414;border:1px solid rgba(255,255,255,0.05);
+  .v3modal{width:560px;max-width:100%;background:#141414;border:1px solid rgba(255,255,255,0.05);
     border-radius:28px;
     box-shadow:16px 16px 40px rgba(0,0,0,0.7),-8px -8px 20px rgba(255,255,255,0.025),0 0 60px rgba(191,255,0,0.08)}
   .v3modal-hdr{padding:24px 28px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
@@ -187,7 +219,7 @@
   .v3modal-close{width:38px;height:38px;border-radius:10px;background:#1A1A1A;color:#94A3B8;border:0;
     cursor:pointer;display:grid;place-items:center;flex-shrink:0;
     box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
-    transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
   .v3modal-close:hover{color:#FF7777;transform:rotate(90deg)}
   .v3modal-close svg{width:16px;height:16px}
   .v3modal-body{padding:22px 28px}
@@ -208,12 +240,12 @@
   .fl:focus-within{border-color:rgba(191,255,0,0.5)}
 
   /* role tiles */
-  .role-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px}
+  .role-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
   .role-tile{background:#1A1A1A;border:1px solid rgba(255,255,255,0.05);border-radius:12px;
     padding:14px 10px;text-align:center;cursor:pointer;
-    transition:.3s cubic-bezier(0.34,1.56,0.64,1);
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1);
     box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025)}
-  .role-tile:hover{border-color:rgba(191,255,0,0.25);color:#fff}
+  .role-tile:hover{border-color:rgba(191,255,0,0.25);color:#fff;transform:translateY(-1px)}
   .role-tile.on{background:rgba(191,255,0,0.07);border-color:rgba(191,255,0,0.4);
     box-shadow:3px 3px 8px rgba(0,0,0,0.5),0 0 16px rgba(191,255,0,0.12)}
   .role-tile svg{width:15px;height:15px;color:#5A5A60;display:block;margin:0 auto}
@@ -224,19 +256,39 @@
   .rdesc{font-family:'Satoshi',sans-serif;font-size:9.5px;color:#5A5A60;display:block;
     margin-top:4px;line-height:1.4}
 
+  /* role help panel */
+  .role-help{background:#0F0F0F;border:1px solid rgba(255,255,255,0.04);border-radius:14px;
+    padding:14px 16px;margin-bottom:18px}
+  .role-help-ttl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:9px;text-transform:uppercase;
+    letter-spacing:0.28em;color:#5A5A60;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+  .role-help-ttl::before{content:"▮";color:#BFFF00}
+  .role-help-row{display:flex;align-items:baseline;gap:8px;padding:5px 0;
+    border-bottom:1px solid rgba(255,255,255,0.04);font-family:'Satoshi',sans-serif;font-size:11.5px;color:#94A3B8;line-height:1.5}
+  .role-help-row:last-child{border-bottom:0}
+  .role-help-row b{font-weight:800;flex-shrink:0}
+
+  /* granular perms checkbox */
+  .perms-check{display:flex;align-items:center;gap:10px;padding:12px 14px;
+    background:#1A1A1A;border:1px solid rgba(255,255,255,0.05);border-radius:12px;
+    font-family:'Satoshi',sans-serif;font-size:12.5px;color:#94A3B8;cursor:pointer;
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .perms-check:hover{border-color:rgba(191,255,0,0.2);color:#fff}
+  .pchk{width:18px;height:18px;border-radius:5px;border:1.5px solid rgba(255,255,255,0.1);
+    display:grid;place-items:center;flex-shrink:0;transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+
   .v3modal-foot{padding:16px 28px 24px;display:flex;gap:12px;align-items:center;justify-content:flex-end;
     border-top:1px solid rgba(255,255,255,0.05)}
   .btn-cancel{background:#1A1A1A;color:#94A3B8;border:0;padding:11px 20px;border-radius:12px;cursor:pointer;
     font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;text-transform:uppercase;
     letter-spacing:0.18em;box-shadow:2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);
-    transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
   .btn-cancel:hover{color:#fff}
   .btn-invite{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;border:0;
     padding:12px 24px;border-radius:12px;cursor:pointer;
     font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;text-transform:uppercase;
     letter-spacing:0.2em;display:inline-flex;align-items:center;gap:8px;
     box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 22px rgba(191,255,0,0.3);
-    transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
   .btn-invite:hover{transform:scale(1.04)}
   .btn-invite svg{width:13px;height:13px}
 
@@ -337,15 +389,15 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
         <b>Equipe &amp; Workspaces</b>
       </div>
-      <div class="icons">
+      <div class="hdr-right">
         <div class="ib">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg>
         </div>
+        <button class="btn-cta" onclick="document.getElementById('invite-modal').style.display='flex'">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 5v14M5 12h14"/></svg>
+          Convidar membro
+        </button>
       </div>
-      <button class="btn-cta" onclick="document.getElementById('invite-modal').style.display='flex'">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 5v14M5 12h14"/></svg>
-        Convidar membro
-      </button>
     </header>
 
     <main class="v3content">
@@ -356,6 +408,15 @@
           <h1 class="v3h1">Equipe &amp; <em>workspaces.</em></h1>
           <p class="v3sub">Gerencie membros, papéis e workspaces multi-tenant. Cada workspace tem links, domínios, pixels e cobrança totalmente independentes.</p>
         </div>
+      </div>
+
+      <!-- ── Workspace section header ── -->
+      <div class="card-hdr" style="margin-bottom:20px">
+        <div class="card-hdr-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </div>
+        <span class="card-hdr-title">Workspaces</span>
+        <a class="card-hdr-help" title="Cada workspace é isolado: links, pixels, domínios e billing são independentes. Você pode ser Owner em um e convidado em outro simultaneamente.">(help)</a>
       </div>
 
       <!-- Workspace cards -->
@@ -378,6 +439,10 @@
             <div class="ws-stat"><span class="val">5</span><span class="lbl">Domínios</span></div>
             <div class="ws-stat"><span class="val">8</span><span class="lbl">Smartpages</span></div>
           </div>
+          <div class="ws-footer">
+            <span class="ws-footer-label">Workspace atual</span>
+            <button class="ws-btn">Gerenciar →</button>
+          </div>
         </div>
 
         <div class="ws-card">
@@ -395,6 +460,10 @@
             <div class="ws-stat"><span class="val">128</span><span class="lbl">Links</span></div>
             <div class="ws-stat"><span class="val">12</span><span class="lbl">Membros</span></div>
             <div class="ws-stat"><span class="val">15</span><span class="lbl">Domínios</span></div>
+          </div>
+          <div class="ws-footer">
+            <span class="ws-footer-label">Papel: Editor</span>
+            <button class="ws-btn sec">Acessar →</button>
           </div>
         </div>
 
@@ -415,19 +484,28 @@
         Cada workspace tem links, domínios, pixels e cobrança próprios e independentes. Membros convidados só têm acesso ao workspace em que foram adicionados.
       </div>
 
+      <!-- ── Members section header ── -->
+      <div class="card-hdr" style="margin-bottom:0">
+        <div class="card-hdr-icon" style="background:rgba(255,119,119,0.1);color:#FF7777">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+        </div>
+        <span class="card-hdr-title">Membros</span>
+        <a class="card-hdr-help" title="Gerencie quem tem acesso a este workspace. O papel define quais ações cada pessoa pode realizar. Você pode alterar o papel a qualquer momento.">(help)</a>
+      </div>
+
       <!-- Members table -->
-      <div class="v3table-card">
+      <div class="v3table-card" style="margin-top:12px">
         <div class="v3table-head">
-          <span class="ttl">Membros</span>
+          <span class="ttl">Membros do workspace</span>
+          <a class="card-hdr-help" style="margin-left:0" title="Contagem de membros ativos + convites pendentes contra o limite do seu plano.">(help)</a>
           <span class="cap">4 de 10 · Plano Pro</span>
         </div>
         <table class="v3table">
           <thead>
             <tr>
               <th>Membro</th>
-              <th>E-mail</th>
               <th>Papel</th>
-              <th>Status</th>
+              <th>Último acesso</th>
               <th style="text-align:right">Ações</th>
             </tr>
           </thead>
@@ -436,24 +514,28 @@
               <td>
                 <div class="minfo">
                   <div class="mav g1">MS</div>
-                  <span class="mname">Maria Silva</span>
+                  <div>
+                    <span class="mname">Maria Silva</span>
+                    <span class="memail">maria@cliente-exemplo.com</span>
+                  </div>
                 </div>
               </td>
-              <td><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#94A3B8">maria@cliente-exemplo.com</span></td>
               <td><span class="v3pill">Owner</span></td>
-              <td><span class="v3pill success">● Ativa</span></td>
+              <td><span class="mlast online">● Agora</span></td>
               <td><div class="v3acts"><span class="a" style="opacity:.3;cursor:default"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></span></div></td>
             </tr>
             <tr>
               <td>
                 <div class="minfo">
                   <div class="mav g2">CM</div>
-                  <span class="mname">Carla Mendes</span>
+                  <div>
+                    <span class="mname">Carla Mendes</span>
+                    <span class="memail">carla@cliente-exemplo.com</span>
+                  </div>
                 </div>
               </td>
-              <td><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#94A3B8">carla@cliente-exemplo.com</span></td>
               <td><span class="v3pill yellow">Admin</span></td>
-              <td><span class="v3pill success">● Ativa</span></td>
+              <td><span class="mlast">2h atrás</span></td>
               <td><div class="v3acts">
                 <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg></span>
                 <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></span>
@@ -463,12 +545,14 @@
               <td>
                 <div class="minfo">
                   <div class="mav g3">PR</div>
-                  <span class="mname">Pedro Ramos</span>
+                  <div>
+                    <span class="mname">Pedro Ramos</span>
+                    <span class="memail">pedro@agenciaboost.com</span>
+                  </div>
                 </div>
               </td>
-              <td><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#94A3B8">pedro@agenciaboost.com</span></td>
               <td><span class="v3pill neutral">Editor</span></td>
-              <td><span class="v3pill success">● Ativo</span></td>
+              <td><span class="mlast">Ontem</span></td>
               <td><div class="v3acts">
                 <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg></span>
                 <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></span>
@@ -484,9 +568,8 @@
                   </div>
                 </div>
               </td>
-              <td><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#5A5A60">social@cliente-exemplo.com</span></td>
               <td><span class="v3pill dim">Viewer</span></td>
-              <td><span class="v3pill warn">⏳ Pendente</span></td>
+              <td><span class="v3pill warn" style="font-size:9px">⏳ Aguardando</span></td>
               <td><div class="v3acts">
                 <span class="a" style="color:#FF7777"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></span>
               </div></td>
@@ -497,7 +580,10 @@
 
       <!-- Permissions matrix -->
       <div class="perm-card">
-        <div class="perm-ttl">Permissões granulares</div>
+        <div class="perm-hdr">
+          <div class="perm-ttl">Permissões granulares</div>
+          <a class="card-hdr-help" style="margin-left:0" title="Cada papel tem permissões pré-definidas. Membros Custom permitem configuração granular por módulo.">(help)</a>
+        </div>
         <div class="perm-grid">
           <div></div>
           <div class="phdr"><span class="v3pill" style="font-size:9px">Owner</span></div>
@@ -542,11 +628,11 @@
 </div>
 
 <!-- ── INVITE MODAL ── -->
-<div class="v3overlay" id="invite-modal" style="display:flex">
+<div class="v3overlay" id="invite-modal" style="display:none">
   <div class="v3modal">
     <div class="v3modal-hdr">
       <div>
-        <h3>Convidar membro</h3>
+        <h3>Convidar membro <a class="card-hdr-help" style="vertical-align:middle" title="O convidado recebe um e-mail com link de acesso. Você pode alterar o papel ou revogar o acesso a qualquer momento.">(help)</a></h3>
         <p>O convidado recebe um e-mail com link de acesso. Você pode alterar o papel a qualquer momento.</p>
       </div>
       <button class="v3modal-close" onclick="document.getElementById('invite-modal').style.display='none'">
@@ -558,8 +644,13 @@
         <input placeholder=" " value="social@cliente-exemplo.com">
         <label>E-mail do convidado</label>
       </div>
-      <div style="font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;
-        letter-spacing:0.3em;color:#BFFF00;margin-bottom:12px">▮ Papel no workspace</div>
+
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:12px">
+        <div style="font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;
+          letter-spacing:0.3em;color:#BFFF00">▮ Papel no workspace</div>
+        <a class="card-hdr-help" style="margin-left:0" title="O papel determina quais ações o membro pode realizar. Confira o painel de permissões granulares abaixo.">(help)</a>
+      </div>
+
       <div class="role-grid">
         <div class="role-tile">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
@@ -582,6 +673,23 @@
           <span class="rdesc">Define manualmente</span>
         </div>
       </div>
+
+      <!-- Role help panel -->
+      <div class="role-help">
+        <div class="role-help-ttl">Sobre os papéis</div>
+        <div class="role-help-row"><b style="color:#FFD400;min-width:52px">Admin</b> Acesso total ao workspace — links, pixels, domínios e membros. Não vê billing.</div>
+        <div class="role-help-row"><b style="color:#94A3B8;min-width:52px">Editor</b> Cria e edita links e smartpages. Não gerencia membros nem domínios.</div>
+        <div class="role-help-row"><b style="color:#5A5A60;min-width:52px">Viewer</b> Visualiza links e analytics. Nenhuma ação de edição. Ideal para clientes.</div>
+        <div class="role-help-row"><b style="color:#A78BFA;min-width:52px">Custom</b> Você define granularmente quais módulos e ações este membro acessa.</div>
+      </div>
+
+      <!-- Granular perms checkbox -->
+      <label class="perms-check">
+        <div class="pchk">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#5A5A60" stroke-width="3" width="11" height="11"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        Habilitar permissões granulares para este membro
+      </label>
     </div>
     <div class="v3modal-foot">
       <button class="btn-cancel" onclick="document.getElementById('invite-modal').style.display='none'">Cancelar</button>
@@ -593,5 +701,13 @@
   </div>
 </div>
 
+<script>
+  document.querySelectorAll('.role-tile').forEach(function(tile){
+    tile.addEventListener('click', function(){
+      document.querySelectorAll('.role-tile').forEach(function(t){ t.classList.remove('on'); });
+      tile.classList.add('on');
+    });
+  });
+</script>
 </body>
 </html>

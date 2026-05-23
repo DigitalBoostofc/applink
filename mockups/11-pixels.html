@@ -67,7 +67,7 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
 .v3h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);
   -webkit-background-clip:text;background-clip:text;color:transparent}
 .v3sub{font-family:'Satoshi',sans-serif;font-size:13.5px;color:#94A3B8;
-  line-height:1.6;max-width:540px;margin-top:8px;margin-bottom:28px}
+  line-height:1.6;margin-top:8px;margin-bottom:28px}
 
 /* info banner */
 .info-banner{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;
@@ -83,8 +83,14 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
   display:flex;align-items:center;gap:10px;margin-bottom:16px}
 .sec-lbl::before{content:"▮";color:#BFFF00}
 
+/* ── CARD HDR HELP ── */
+.card-hdr-help{font-family:'Satoshi',sans-serif;font-size:11px;font-weight:700;color:#BFFF00;opacity:0.55;text-decoration:none;cursor:help;
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1);flex-shrink:0;letter-spacing:0.04em;
+  border-bottom:1px dotted rgba(191,255,0,0.35);line-height:1.2;padding-bottom:1px}
+.card-hdr-help:hover{opacity:1;border-bottom-color:rgba(191,255,0,0.7)}
+
 /* ── PIXEL ACCORDION CARD ── */
-.px-acc{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:24px;
+.px-acc{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;
   box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);
   overflow:hidden;transition:.35s cubic-bezier(0.34,1.56,0.64,1);margin-bottom:12px}
 .px-acc.active{box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025),0 0 28px rgba(191,255,0,0.1)}
@@ -320,6 +326,7 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
             <div class="name">Meta (Facebook / Instagram)</div>
             <div class="pid">ID 841723…2031 · Pixel + CAPI</div>
           </div>
+          <a class="card-hdr-help" style="margin-right:6px">(help)</a>
           <div class="px-right">
             <div class="ev-count"><b>1.243</b> eventos/7d</div>
             <span class="stat-badge lime"><span class="pdot green"></span> Ativo</span>
@@ -364,6 +371,7 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
             <div class="name">TikTok</div>
             <div class="pid">ID CL9F…AA77 · Pixel + Events API</div>
           </div>
+          <a class="card-hdr-help" style="margin-right:6px">(help)</a>
           <div class="px-right">
             <div class="ev-count"><b>892</b> eventos/7d</div>
             <span class="stat-badge lime"><span class="pdot green"></span> Ativo</span>
@@ -402,6 +410,7 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
             <div class="name">Google Ads</div>
             <div class="pid">AW-118…920 · Conversion tracking</div>
           </div>
+          <a class="card-hdr-help" style="margin-right:6px">(help)</a>
           <div class="px-right">
             <div class="ev-count"><b>456</b> eventos/7d</div>
             <span class="stat-badge lime"><span class="pdot green"></span> Ativo</span>
@@ -439,6 +448,7 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
             <div class="name">LinkedIn Insight Tag</div>
             <div class="pid">ID LL2F…33B1 · Verificação pendente</div>
           </div>
+          <a class="card-hdr-help" style="margin-right:6px">(help)</a>
           <div class="px-right">
             <div class="ev-count"><b>0</b> eventos/7d</div>
             <span class="stat-badge yellow"><span class="pdot yellow"></span> Pendente</span>
@@ -475,6 +485,7 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
             <div class="name">Pinterest Tag</div>
             <div class="pid">ID 2819…F3A2 · API key expirada</div>
           </div>
+          <a class="card-hdr-help" style="margin-right:6px">(help)</a>
           <div class="px-right">
             <div class="ev-count"><b>0</b> eventos/7d</div>
             <span class="stat-badge coral"><span class="pdot coral"></span> Erro</span>

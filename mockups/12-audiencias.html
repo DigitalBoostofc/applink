@@ -63,19 +63,21 @@
     font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.2em;
     cursor:pointer;border:0;display:inline-flex;align-items:center;gap:8px;
     box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 22px rgba(191,255,0,0.3);transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
-  .btn-cta:hover{transform:scale(1.04)} .btn-cta svg{width:16px;height:16px}
+  .btn-cta:hover{transform:scale(1.03);box-shadow:4px 4px 12px rgba(0,0,0,0.5),0 0 32px rgba(191,255,0,0.4)}
+  .btn-cta svg{width:16px;height:16px}
 
   /* ── CONTENT ── */
   .v3content{padding:32px 32px 80px;display:flex;flex-direction:column;gap:24px}
   .eyebrow-cap{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:#BFFF00;margin-bottom:10px}
   .v3h1{font-family:'General Sans',sans-serif;font-weight:600;font-size:40px;line-height:1;letter-spacing:-0.03em;color:#fff;margin-top:6px}
   .v3h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .v3sub{font-family:'Satoshi',sans-serif;font-size:13.5px;color:#94A3B8;line-height:1.6;max-width:580px;margin-top:8px}
+  .v3sub{font-family:'Satoshi',sans-serif;font-size:14px;color:#94A3B8;line-height:1.6;max-width:55ch;margin-top:8px}
 
-  /* ── CARD ── */
-  .v3card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;
-    box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);overflow:hidden}
-  .v3card-pad{padding:24px}
+  /* ── CARD HDR HELP (Switchy-parity) ── */
+  .card-hdr-help{font-family:'Satoshi',sans-serif;font-size:11px;font-weight:700;color:#BFFF00;opacity:0.55;text-decoration:none;cursor:help;
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1);flex-shrink:0;letter-spacing:0.04em;
+    border-bottom:1px dotted rgba(191,255,0,0.35);line-height:1.2;padding-bottom:1px}
+  .card-hdr-help:hover{opacity:1;border-bottom-color:rgba(191,255,0,0.7)}
 
   /* ── INFO BANNER ── */
   .info-banner{background:linear-gradient(135deg,rgba(191,255,0,0.06),rgba(255,119,119,0.04));
@@ -88,23 +90,44 @@
   .info-banner .txt{font-family:'Satoshi',sans-serif;font-size:13px;color:#E2E8F0;line-height:1.6}
   .info-banner .txt b{color:#BFFF00;font-weight:700}
 
-  /* ── TABLE CARD ── */
-  .tbl-head{display:flex;align-items:center;justify-content:space-between;padding:20px 26px;
-    border-bottom:1px solid rgba(255,255,255,0.05)}
-  .tbl-ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:17px;color:#fff;letter-spacing:-0.02em}
-  .tbl-ttl .count{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;font-weight:600;margin-left:8px}
+  /* ── SECTION HEADER ── */
+  .section-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:12px}
+  .section-hdr-left{display:flex;align-items:center;gap:10px}
+  .section-hdr-icon{width:34px;height:34px;border-radius:10px;background:rgba(191,255,0,0.1);color:#BFFF00;
+    display:grid;place-items:center;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.45);flex-shrink:0}
+  .section-hdr-icon svg{width:16px;height:16px}
+  .section-hdr-title{font-family:'General Sans',sans-serif;font-weight:600;font-size:17px;color:#fff;letter-spacing:-0.02em}
+  .section-hdr-count{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;font-weight:600;margin-left:4px}
+  .section-hdr-right{display:flex;align-items:center;gap:8px}
 
-  .v3table{width:100%;border-collapse:collapse}
-  .v3table th{font-family:'Satoshi',sans-serif;text-align:left;font-size:10px;font-weight:800;letter-spacing:0.18em;
-    text-transform:uppercase;color:#94A3B8;padding:14px 26px;border-bottom:1px solid rgba(255,255,255,0.05);background:#0F0F0F}
-  .v3table td{padding:18px 26px;font-family:'Satoshi',sans-serif;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.04);color:#E2E8F0}
-  .v3table tr:last-child td{border-bottom:0}
-  .v3table tr:hover td{background:rgba(255,255,255,0.015);cursor:default}
-  .v3table .num{font-family:'JetBrains Mono',monospace;font-weight:600;color:#fff}
-  .v3table .muted{color:#94A3B8;font-size:12px}
-  .v3table .aud-name{font-weight:700;color:#fff;font-size:14px}
+  /* ── AUDIENCE ACCORDION (neumórfico) ── */
+  .aud-acc{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:24px;
+    box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);
+    overflow:hidden;transition:.35s cubic-bezier(0.34,1.56,0.64,1);margin-bottom:12px}
+  .aud-acc:hover{border-color:rgba(255,255,255,0.07)}
+  .aud-acc.open{border-color:rgba(191,255,0,0.12);
+    box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025),0 0 32px rgba(191,255,0,0.1)}
 
-  /* ── PLATFORM PILL ── */
+  .aud-acc-h{display:flex;align-items:center;gap:14px;padding:20px 24px;cursor:pointer;
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+
+  .aud-icon{width:46px;height:46px;border-radius:13px;flex-shrink:0;display:grid;place-items:center;
+    box-shadow:inset 2px 2px 6px rgba(0,0,0,0.45),inset -1px -1px 3px rgba(255,255,255,0.02)}
+  .aud-icon svg{width:22px;height:22px}
+  .aud-icon.lime{background:rgba(191,255,0,0.12);color:#BFFF00}
+  .aud-icon.coral{background:rgba(255,119,119,0.16);color:#FF7777}
+  .aud-icon.cyan{background:rgba(0,240,255,0.1);color:#00F0FF}
+
+  .aud-info{flex:1;min-width:0}
+  .aud-info .name{font-family:'General Sans',sans-serif;font-weight:600;font-size:15px;color:#fff;letter-spacing:-0.01em}
+  .aud-info .desc{font-family:'Satoshi',sans-serif;font-size:11px;color:#94A3B8;margin-top:2px;line-height:1.4}
+
+  .aud-meta{display:flex;align-items:center;gap:10px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+  .aud-size-block{text-align:right}
+  .aud-size-num{font-family:'General Sans',sans-serif;font-weight:600;font-size:18px;color:#fff;letter-spacing:-0.02em}
+  .aud-size-lbl{font-family:'Satoshi',sans-serif;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#5A5A60}
+
+  /* ── PLATFORM BADGES ── */
   .plt{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:999px;
     font-family:'Satoshi',sans-serif;font-weight:800;font-size:9.5px;text-transform:uppercase;letter-spacing:0.12em}
   .plt-meta{background:rgba(24,119,242,0.14);color:#4B8EF8}
@@ -112,42 +135,71 @@
   .plt-google{background:rgba(234,67,53,0.12);color:#EA4335}
   .plt svg{width:10px;height:10px}
 
+  /* ── SYNC BADGE ── */
+  .sync-badge{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#10B981;font-weight:600}
+  .sync-dot{width:7px;height:7px;border-radius:50%;background:#10B981;box-shadow:0 0 6px rgba(16,185,129,0.6);flex-shrink:0}
+
+  /* ── CHEVRON ── */
+  .aud-chev{width:34px;height:34px;border-radius:9px;background:#1A1A1A;color:#94A3B8;display:grid;place-items:center;
+    box-shadow:2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1);flex-shrink:0}
+  .aud-acc.open .aud-chev{transform:rotate(180deg);color:#BFFF00}
+
   /* ── ACTION BUTTONS ── */
-  .v3acts{display:flex;gap:6px;justify-content:flex-end}
+  .aud-acts{display:flex;gap:6px;flex-shrink:0}
   .act-btn{width:34px;height:34px;border-radius:10px;background:#1A1A1A;color:#94A3B8;display:grid;place-items:center;cursor:pointer;
     box-shadow:2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);
-    transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
   .act-btn:hover{color:#BFFF00;transform:scale(1.1)} .act-btn svg{width:14px;height:14px}
   .act-btn.danger:hover{color:#FF7777}
-  .tbl-foot{padding:16px 26px;display:flex;align-items:center;justify-content:space-between;
-    border-top:1px solid rgba(255,255,255,0.04);
-    font-family:'Satoshi',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:#5A5A60}
 
-  /* ── SYNC STATUS ── */
-  .sync-badge{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#10B981;font-weight:600}
-  .sync-dot{width:7px;height:7px;border-radius:50%;background:#10B981;box-shadow:0 0 6px rgba(16,185,129,0.6)}
+  /* ── ACCORDION BODY (spring animation) ── */
+  .aud-acc-body{display:grid;grid-template-rows:0fr;transition:.45s cubic-bezier(0.34,1.56,0.64,1)}
+  .aud-acc.open .aud-acc-body{grid-template-rows:1fr}
+  .aud-acc-body > div{overflow:hidden;padding:0 24px}
+  .aud-acc.open .aud-acc-body > div{padding:0 24px 22px;border-top:1px solid rgba(255,255,255,0.05);padding-top:18px}
+
+  /* ── BODY CONTENT ── */
+  .aud-body-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .aud-section-lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:9.5px;text-transform:uppercase;
+    letter-spacing:0.22em;color:#5A5A60;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+  .aud-section-lbl::before{content:"▮";color:#BFFF00;font-size:8px}
+
+  .rule-tags{display:flex;flex-wrap:wrap;gap:6px}
+  .rule-tag{display:inline-flex;align-items:center;gap:5px;background:#1A1A1A;padding:6px 12px;border-radius:999px;
+    font-family:'Satoshi',sans-serif;font-size:11px;font-weight:700;color:#E2E8F0;
+    box-shadow:2px 2px 5px rgba(0,0,0,0.4),-1px -1px 3px rgba(255,255,255,0.02)}
+  .rule-tag svg{width:10px;height:10px;color:#BFFF00;flex-shrink:0}
+
+  .est-block{background:#1A1A1A;border-radius:16px;padding:16px 18px;
+    box-shadow:inset 3px 3px 8px rgba(0,0,0,0.5),inset -2px -2px 5px rgba(255,255,255,0.02);
+    margin-bottom:14px}
+  .est-block .num{font-family:'General Sans',sans-serif;font-weight:600;font-size:28px;letter-spacing:-0.02em;color:#fff}
+  .est-block .lbl{font-family:'Satoshi',sans-serif;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.18em;color:#94A3B8;margin-top:2px}
+  .est-block .dlt{font-family:'JetBrains Mono',monospace;font-size:11px;color:#10B981;margin-top:8px;font-weight:600}
+
+  .plt-list{display:flex;flex-wrap:wrap;gap:6px}
+
+  /* ── LIST FOOTER ── */
+  .list-foot{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:18px;
+    padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+    box-shadow:inset 3px 3px 8px rgba(0,0,0,0.4)}
+  .list-foot-lbl{font-family:'Satoshi',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:#5A5A60}
 
   /* ── HOW IT WORKS ── */
   .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   .step-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:24px;padding:24px;
     box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);
-    display:flex;flex-direction:column;gap:12px}
+    display:flex;flex-direction:column;gap:12px;transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .step-card:hover{border-color:rgba(255,255,255,0.08);transform:translateY(-2px)}
   .step-num{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#BFFF00,#FF7777);
     color:#0A0A0A;display:grid;place-items:center;font-family:'General Sans',sans-serif;
     font-weight:700;font-size:16px;box-shadow:3px 3px 8px rgba(0,0,0,0.5),0 0 14px rgba(191,255,0,0.3)}
   .step-card .step-ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:15px;color:#fff;letter-spacing:-0.01em}
   .step-card .step-desc{font-family:'Satoshi',sans-serif;font-size:12.5px;color:#94A3B8;line-height:1.6}
-  .step-card .step-icon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;
+  .step-icon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;
     box-shadow:inset 2px 2px 6px rgba(0,0,0,0.4)}
-  .step-card .step-icon svg{width:20px;height:20px}
-
-  /* ── EMPTY STATE ── */
-  .empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 32px;gap:14px;text-align:center}
-  .empty-icon{width:64px;height:64px;border-radius:20px;background:rgba(191,255,0,0.06);
-    border:2px dashed rgba(191,255,0,0.2);display:grid;place-items:center;color:rgba(191,255,0,0.4)}
-  .empty-icon svg{width:28px;height:28px}
-  .empty-ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:17px;color:#fff}
-  .empty-sub{font-family:'Satoshi',sans-serif;font-size:13px;color:#94A3B8;max-width:320px;line-height:1.6}
+  .step-icon svg{width:20px;height:20px}
 </style>
 </head>
 <body>
@@ -244,8 +296,6 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
         <input placeholder="Buscar audiência...">
       </div>
-      <div class="v3hdr ib" style="position:static;height:auto;background:transparent;border:none;box-shadow:none;padding:0">
-      </div>
       <button class="btn-cta">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 5v14M5 12h14"/></svg>
         Criar audiência
@@ -258,7 +308,7 @@
       <div>
         <div class="eyebrow-cap">▮ Crescimento · Retargeting</div>
         <h1 class="v3h1">Audiências de <em>retargeting.</em></h1>
-        <p class="v3sub">Agrupe quem clicou nos seus links e exporte como público customizado para anunciar no Meta, Google e TikTok. Cada clique vira uma oportunidade de reconversão.</p>
+        <p class="v3sub">Agrupe quem clicou nos seus links e exporte como público customizado para Meta, Google e TikTok. Cada clique vira uma oportunidade de reconversão.</p>
       </div>
 
       <!-- INFO BANNER -->
@@ -273,117 +323,236 @@
         </div>
       </div>
 
-      <!-- TABLE DE AUDIÊNCIAS -->
-      <div class="v3card">
-        <div class="tbl-head">
-          <div class="tbl-ttl">
-            Suas audiências
-            <span class="tbl-ttl count">3 ativas</span>
+      <!-- LISTA DE AUDIÊNCIAS -->
+      <div>
+        <div class="section-hdr">
+          <div class="section-hdr-left">
+            <div class="section-hdr-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+            </div>
+            <div>
+              <span class="section-hdr-title">Suas audiências</span>
+              <span class="section-hdr-count">3 ativas</span>
+            </div>
+            <a class="card-hdr-help" href="#">(help)</a>
+          </div>
+          <div class="section-hdr-right">
+            <span style="font-family:'Satoshi',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:#5A5A60">Sinc. automática a cada 6h</span>
           </div>
         </div>
 
-        <table class="v3table">
-          <thead>
-            <tr>
-              <th>Audiência</th>
-              <th>Plataforma</th>
-              <th>Pessoas</th>
-              <th>Links incluídos</th>
-              <th>Sincronização</th>
-              <th style="text-align:right">Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div class="aud-name">Cliques — Promo inverno</div>
-                <div class="muted" style="margin-top:3px;font-size:11px">Todos que clicaram em links da campanha</div>
-              </td>
-              <td><span class="plt plt-meta">
+        <!-- AUDIÊNCIA 1: Promo Inverno (aberta) -->
+        <div class="aud-acc open" id="acc-1">
+          <div class="aud-acc-h">
+            <div class="aud-icon lime">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>
+            </div>
+            <div class="aud-info">
+              <div class="name">Cliques — Promo inverno</div>
+              <div class="desc">Todos que clicaram em links da campanha · 3 links</div>
+            </div>
+            <div class="aud-meta">
+              <span class="plt plt-meta">
                 <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02z"/></svg>
                 Meta
-              </span></td>
-              <td class="num">9.207</td>
-              <td class="muted">3 links</td>
-              <td><span class="sync-badge"><span class="sync-dot"></span>há 2h</span></td>
-              <td>
-                <div class="v3acts">
-                  <div class="act-btn" title="Editar audiência">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
-                  </div>
-                  <div class="act-btn" title="Sincronizar agora">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8h16v-8M12 3v13M7 8l5-5 5 5"/></svg>
-                  </div>
-                  <div class="act-btn danger" title="Excluir audiência">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+              </span>
+              <div class="aud-size-block">
+                <div class="aud-size-num">9.207</div>
+                <div class="aud-size-lbl">pessoas</div>
+              </div>
+              <span class="sync-badge"><span class="sync-dot"></span>há 2h</span>
+            </div>
+            <div class="aud-acts">
+              <div class="act-btn" title="Editar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+              </div>
+              <div class="act-btn" title="Sincronizar agora">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8h16v-8M12 3v13M7 8l5-5 5 5"/></svg>
+              </div>
+              <div class="act-btn danger" title="Excluir">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+              </div>
+            </div>
+            <div class="aud-chev">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+          <div class="aud-acc-body">
+            <div>
+              <div class="aud-body-grid">
+                <div>
+                  <div class="aud-section-lbl">Regras de inclusão</div>
+                  <div class="rule-tags">
+                    <span class="rule-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Visitou o link</span>
+                    <span class="rule-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Últimos 30 dias</span>
+                    <span class="rule-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/></svg>Brasil</span>
+                    <span class="rule-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>utm=promo_inverno</span>
                   </div>
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="aud-name">Engajou com podcast</div>
-                <div class="muted" style="margin-top:3px;font-size:11px">Ouvintes que clicaram em episódios</div>
-              </td>
-              <td><span class="plt plt-tiktok">
+                <div>
+                  <div class="aud-section-lbl">Estimativa de tamanho</div>
+                  <div class="est-block">
+                    <div class="num">9.207</div>
+                    <div class="lbl">pessoas no público</div>
+                    <div class="dlt">▲ +12% vs semana anterior</div>
+                  </div>
+                  <div class="aud-section-lbl">Plataformas sincronizadas</div>
+                  <div class="plt-list">
+                    <span class="plt plt-meta">
+                      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02z"/></svg>
+                      Meta Ads
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AUDIÊNCIA 2: Podcast -->
+        <div class="aud-acc" id="acc-2">
+          <div class="aud-acc-h">
+            <div class="aud-icon coral">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13M6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 19a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+            </div>
+            <div class="aud-info">
+              <div class="name">Engajou com podcast</div>
+              <div class="desc">Ouvintes que clicaram em episódios · 5 links</div>
+            </div>
+            <div class="aud-meta">
+              <span class="plt plt-tiktok">
                 <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.22 8.22 0 004.82 1.56V6.79a4.85 4.85 0 01-1.05-.1z"/></svg>
                 TikTok
-              </span></td>
-              <td class="num">3.481</td>
-              <td class="muted">5 links</td>
-              <td><span class="sync-badge"><span class="sync-dot"></span>há 1d</span></td>
-              <td>
-                <div class="v3acts">
-                  <div class="act-btn" title="Editar audiência">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
-                  </div>
-                  <div class="act-btn" title="Sincronizar agora">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8h16v-8M12 3v13M7 8l5-5 5 5"/></svg>
-                  </div>
-                  <div class="act-btn danger" title="Excluir audiência">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+              </span>
+              <div class="aud-size-block">
+                <div class="aud-size-num">3.481</div>
+                <div class="aud-size-lbl">pessoas</div>
+              </div>
+              <span class="sync-badge"><span class="sync-dot"></span>há 1d</span>
+            </div>
+            <div class="aud-acts">
+              <div class="act-btn" title="Editar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+              </div>
+              <div class="act-btn" title="Sincronizar agora">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8h16v-8M12 3v13M7 8l5-5 5 5"/></svg>
+              </div>
+              <div class="act-btn danger" title="Excluir">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+              </div>
+            </div>
+            <div class="aud-chev">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+          <div class="aud-acc-body">
+            <div>
+              <div class="aud-body-grid">
+                <div>
+                  <div class="aud-section-lbl">Regras de inclusão</div>
+                  <div class="rule-tags">
+                    <span class="rule-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/></svg>Clicou em episódio</span>
+                    <span class="rule-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Últimos 90 dias</span>
+                    <span class="rule-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>Mínimo 2 cliques</span>
                   </div>
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="aud-name">Visitou bio link</div>
-                <div class="muted" style="margin-top:3px;font-size:11px">Tráfego da smartpage de perfil</div>
-              </td>
-              <td><span class="plt plt-google">
+                <div>
+                  <div class="aud-section-lbl">Estimativa de tamanho</div>
+                  <div class="est-block">
+                    <div class="num">3.481</div>
+                    <div class="lbl">pessoas no público</div>
+                    <div class="dlt">▲ +5% vs semana anterior</div>
+                  </div>
+                  <div class="aud-section-lbl">Plataformas sincronizadas</div>
+                  <div class="plt-list">
+                    <span class="plt plt-tiktok">
+                      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.22 8.22 0 004.82 1.56V6.79a4.85 4.85 0 01-1.05-.1z"/></svg>
+                      TikTok Ads
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AUDIÊNCIA 3: Bio Link -->
+        <div class="aud-acc" id="acc-3">
+          <div class="aud-acc-h">
+            <div class="aud-icon cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+            </div>
+            <div class="aud-info">
+              <div class="name">Visitou bio link</div>
+              <div class="desc">Tráfego da smartpage de perfil · 1 smartpage</div>
+            </div>
+            <div class="aud-meta">
+              <span class="plt plt-google">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
                 Google Ads
-              </span></td>
-              <td class="num">14.207</td>
-              <td class="muted">1 smartpage</td>
-              <td><span class="sync-badge"><span class="sync-dot"></span>há 3h</span></td>
-              <td>
-                <div class="v3acts">
-                  <div class="act-btn" title="Editar audiência">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
-                  </div>
-                  <div class="act-btn" title="Sincronizar agora">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8h16v-8M12 3v13M7 8l5-5 5 5"/></svg>
-                  </div>
-                  <div class="act-btn danger" title="Excluir audiência">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+              </span>
+              <div class="aud-size-block">
+                <div class="aud-size-num">14.207</div>
+                <div class="aud-size-lbl">pessoas</div>
+              </div>
+              <span class="sync-badge"><span class="sync-dot"></span>há 3h</span>
+            </div>
+            <div class="aud-acts">
+              <div class="act-btn" title="Editar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+              </div>
+              <div class="act-btn" title="Sincronizar agora">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8h16v-8M12 3v13M7 8l5-5 5 5"/></svg>
+              </div>
+              <div class="act-btn danger" title="Excluir">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+              </div>
+            </div>
+            <div class="aud-chev">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+          <div class="aud-acc-body">
+            <div>
+              <div class="aud-body-grid">
+                <div>
+                  <div class="aud-section-lbl">Regras de inclusão</div>
+                  <div class="rule-tags">
+                    <span class="rule-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Visitou smartpage</span>
+                    <span class="rule-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Últimos 60 dias</span>
+                    <span class="rule-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/></svg>Qualquer país</span>
                   </div>
                 </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                <div>
+                  <div class="aud-section-lbl">Estimativa de tamanho</div>
+                  <div class="est-block">
+                    <div class="num">14.207</div>
+                    <div class="lbl">pessoas no público</div>
+                    <div class="dlt">▲ +22% vs semana anterior</div>
+                  </div>
+                  <div class="aud-section-lbl">Plataformas sincronizadas</div>
+                  <div class="plt-list">
+                    <span class="plt plt-google">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                      Google Ads
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <div class="tbl-foot">
-          <span>3 audiências · 26.895 pessoas no total</span>
-          <span>Sincronização automática a cada 6h</span>
+        <!-- RODAPÉ DA LISTA -->
+        <div class="list-foot">
+          <span class="list-foot-lbl">3 audiências · 26.895 pessoas no total</span>
+          <span class="list-foot-lbl">Próxima sinc. automática em ~4h</span>
         </div>
       </div>
 
       <!-- COMO FUNCIONA -->
       <div>
-        <div class="eyebrow-cap" style="margin-bottom:18px">▮ Como funciona o retargeting</div>
+        <div class="eyebrow-cap" style="margin-bottom:18px">▮ Como funciona o retargeting <a class="card-hdr-help" href="#" style="font-size:10px;vertical-align:middle">(help)</a></div>
         <div class="steps-grid">
 
           <div class="step-card">
@@ -405,7 +574,7 @@
               </div>
             </div>
             <div class="step-ttl">Crie a audiência</div>
-            <div class="step-desc">Agrupe links por tema ou campanha numa audiência. Define regras como "visitou pelo menos 2x" ou "veio do Brasil" para segmentação cirúrgica.</div>
+            <div class="step-desc">Agrupe links por tema ou campanha numa audiência. Defina regras como "visitou pelo menos 2x" ou "veio do Brasil" para segmentação cirúrgica.</div>
           </div>
 
           <div class="step-card">
@@ -425,5 +594,14 @@
     </main>
   </div>
 </div>
+
+<script>
+  document.querySelectorAll('.aud-acc').forEach(function(acc){
+    acc.querySelector('.aud-acc-h').addEventListener('click', function(e){
+      if (e.target.closest('.act-btn')) return;
+      acc.classList.toggle('open');
+    });
+  });
+</script>
 </body>
 </html>

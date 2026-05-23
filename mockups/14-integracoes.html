@@ -47,6 +47,12 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
   background:rgba(10,10,10,0.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
   border-bottom:1px solid rgba(255,255,255,0.04);
   display:flex;align-items:center;padding:0 32px;gap:24px}
+.ib{width:42px;height:42px;border-radius:12px;background:#1A1A1A;color:#94A3B8;
+  display:grid;place-items:center;cursor:pointer;text-decoration:none;flex-shrink:0;
+  box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.ib:hover{color:#BFFF00;transform:scale(1.06)}
+.ib svg{width:17px;height:17px}
 .crumb{display:flex;align-items:center;gap:10px;font-family:'Satoshi',sans-serif;
   font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:#94A3B8}
 .crumb b{color:#fff}.crumb svg{width:12px;height:12px;color:#5A5A60}
@@ -60,7 +66,25 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
 .v3h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);
   -webkit-background-clip:text;background-clip:text;color:transparent}
 .v3sub{font-family:'Satoshi',sans-serif;font-size:13.5px;color:#94A3B8;
-  line-height:1.6;max-width:540px;margin-top:8px;margin-bottom:32px}
+  line-height:1.6;margin-top:8px;margin-bottom:24px}
+
+/* ── CARD HEADER HELP ── */
+.card-hdr-help{font-family:'Satoshi',sans-serif;font-size:11px;color:#BFFF00;opacity:0.55;
+  text-decoration:none;cursor:help;border-bottom:1px dotted rgba(191,255,0,0.4);padding-bottom:1px;
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1);font-weight:700;letter-spacing:0.04em}
+.card-hdr-help:hover{opacity:1;border-bottom-color:#BFFF00}
+
+/* ── CATEGORY TABS ── */
+.cat-tabs{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:28px}
+.cat-tab{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:12px;
+  border:1px solid transparent;cursor:pointer;font-family:'Satoshi',sans-serif;font-weight:800;
+  font-size:11px;text-transform:uppercase;letter-spacing:0.15em;background:#1A1A1A;color:#94A3B8;
+  box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.cat-tab:hover{color:#fff;transform:scale(1.04)}
+.cat-tab.active{background:rgba(191,255,0,0.1);color:#BFFF00;border-color:rgba(191,255,0,0.2);
+  box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025),0 0 16px rgba(191,255,0,0.12)}
+
 .sec-lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
   text-transform:uppercase;letter-spacing:0.3em;color:#94A3B8;
   display:flex;align-items:center;gap:10px;margin-bottom:16px;margin-top:32px}
@@ -70,7 +94,7 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
 /* AppexCRM featured banner */
 .appex-banner{display:flex;align-items:center;gap:18px;padding:20px 24px;
   background:rgba(191,255,0,0.06);border:1px solid rgba(191,255,0,0.22);
-  border-radius:20px;margin-bottom:28px;
+  border-radius:28px;margin-bottom:28px;
   box-shadow:inset 2px 2px 6px rgba(0,0,0,0.4),0 0 30px rgba(191,255,0,0.08)}
 .appex-ic{width:52px;height:52px;border-radius:14px;flex-shrink:0;
   background:linear-gradient(135deg,#BFFF00,#FF7777);display:grid;place-items:center;
@@ -102,21 +126,21 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
 .int-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 
 /* base card */
-.int-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:20px;
+.int-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;
   padding:22px 20px;display:flex;flex-direction:column;align-items:flex-start;gap:0;
   cursor:pointer;position:relative;
   box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);
   transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
-.int-card:hover{transform:translateY(-3px) scale(1.01);
-  box-shadow:8px 8px 20px rgba(0,0,0,0.65),-4px -4px 12px rgba(255,255,255,0.03)}
+.int-card:hover{transform:scale(1.04);
+  box-shadow:8px 8px 22px rgba(0,0,0,0.65),-4px -4px 12px rgba(255,255,255,0.03)}
 .int-card.installed{border-color:rgba(16,185,129,0.18)}
-.int-card.installed:hover{box-shadow:8px 8px 20px rgba(0,0,0,0.65),-4px -4px 12px rgba(255,255,255,0.03),0 0 20px rgba(16,185,129,0.1)}
+.int-card.installed:hover{box-shadow:8px 8px 22px rgba(0,0,0,0.65),-4px -4px 12px rgba(255,255,255,0.03),0 0 22px rgba(16,185,129,0.12)}
 
 /* AppexCRM special card */
 .int-card.appex-card{border:1px solid rgba(191,255,0,0.28);
   background:linear-gradient(135deg,rgba(191,255,0,0.06) 0%,#141414 60%);
   box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025),0 0 28px rgba(191,255,0,0.15)}
-.int-card.appex-card:hover{box-shadow:8px 8px 20px rgba(0,0,0,0.65),-4px -4px 12px rgba(255,255,255,0.03),0 0 40px rgba(191,255,0,0.25)}
+.int-card.appex-card:hover{transform:scale(1.04);box-shadow:8px 8px 22px rgba(0,0,0,0.65),-4px -4px 12px rgba(255,255,255,0.03),0 0 44px rgba(191,255,0,0.25)}
 
 /* card icon */
 .int-ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;
@@ -126,7 +150,7 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
 
 /* card text */
 .int-name{font-family:'General Sans',sans-serif;font-weight:600;font-size:14px;color:#fff;
-  letter-spacing:-0.01em}
+  letter-spacing:-0.01em;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .int-desc{font-family:'Satoshi',sans-serif;font-size:11.5px;color:#5A5A60;
   margin-top:5px;line-height:1.5;flex:1}
 
@@ -146,7 +170,7 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
   font-weight:800;font-size:9px;text-transform:uppercase;letter-spacing:0.2em}
 
 /* ── API KEY SECTION ── */
-.api-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:24px;
+.api-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;
   overflow:hidden;margin-top:32px;
   box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
 .api-head{padding:22px 26px;border-bottom:1px solid rgba(255,255,255,0.04);
@@ -336,6 +360,9 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
   <!-- MAIN -->
   <div class="v3main">
     <header class="v3hdr">
+      <a class="ib" href="09-settings.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg>
+      </a>
       <div class="crumb">
         <span>Configuração</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
@@ -348,8 +375,36 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
       <h1 class="v3h1">Conecte seu <em>ecossistema.</em></h1>
       <p class="v3sub">Automatize fluxos com Zapier e Make, receba notificações em Slack e Telegram, sincronize leads com seu CRM — tudo parte do mesmo funil.</p>
 
+      <!-- Category tabs -->
+      <div class="cat-tabs">
+        <button class="cat-tab active" data-cat="all">
+          Todas
+          <a class="card-hdr-help" onclick="return false" title="Exibe todas as integrações disponíveis e instaladas.">(help)</a>
+        </button>
+        <button class="cat-tab" data-cat="automacao">
+          Automação
+          <a class="card-hdr-help" onclick="return false" title="Zapier, Make, n8n e Webhook — automatize criação de links e eventos de clique via triggers externos.">(help)</a>
+        </button>
+        <button class="cat-tab" data-cat="notificacoes">
+          Notificações
+          <a class="card-hdr-help" onclick="return false" title="Receba alertas de cliques, leads e picos de tráfego em Slack, Telegram ou Discord em tempo real.">(help)</a>
+        </button>
+        <button class="cat-tab" data-cat="crm">
+          CRMs
+          <a class="card-hdr-help" onclick="return false" title="Sincronize leads capturados em Smartpages com seu CRM favorito e dispare automações de nutrição.">(help)</a>
+        </button>
+        <button class="cat-tab" data-cat="email">
+          E-mail
+          <a class="card-hdr-help" onclick="return false" title="Conecte sua plataforma de e-mail marketing e automatize listas, segmentações e sequências de disparo.">(help)</a>
+        </button>
+        <button class="cat-tab" data-cat="webhook">
+          Webhook
+          <a class="card-hdr-help" onclick="return false" title="Envie eventos HTTP POST para qualquer endpoint ao criar links, capturar leads ou registrar cliques.">(help)</a>
+        </button>
+      </div>
+
       <!-- AppexCRM featured banner -->
-      <div class="appex-banner">
+      <div class="appex-banner" data-cat="crm">
         <div class="appex-ic">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
         </div>
@@ -368,21 +423,24 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
       </div>
 
       <!-- Section: Automação -->
-      <div class="sec-lbl" style="margin-top:0">Automação</div>
-      <div class="int-grid">
+      <div class="sec-lbl" id="lbl-automacao" style="margin-top:0">Automação</div>
+      <div class="int-grid" id="grid-automacao">
 
         <!-- Zapier — connected -->
-        <div class="int-card installed" onclick="openModal('zapier')">
+        <div class="int-card installed" data-cat="automacao" onclick="openModal('zapier')">
           <div class="int-ic" style="background:rgba(255,74,0,0.12);color:#FF4A00">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>
           </div>
-          <div class="int-name">Zapier</div>
+          <div class="int-name">
+            Zapier
+            <a class="card-hdr-help" onclick="event.stopPropagation()" title="12 Zaps ativos. Triggers: link clicado, formulário enviado. Action: criar link via Zap. Clique para configurar.">(help)</a>
+          </div>
           <div class="int-desc">Crie e atualize links via Zaps. Trigger em envio de formulário.</div>
           <span class="int-status connected"><span class="dot"></span> Conectado</span>
         </div>
 
         <!-- Make -->
-        <div class="int-card" onclick="openModal('make')">
+        <div class="int-card" data-cat="automacao" onclick="openModal('make')">
           <div class="int-ic" style="background:rgba(103,58,183,0.12);color:#7C3AED">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 6h6a3 3 0 0 1 3 3v6"/></svg>
           </div>
@@ -391,18 +449,21 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
           <span class="int-status available"><span class="dot"></span> Disponível</span>
         </div>
 
-        <!-- Webhook -->
-        <div class="int-card installed" onclick="openModal('webhook')">
+        <!-- Webhook — connected -->
+        <div class="int-card installed" data-cat="webhook automacao" onclick="openModal('webhook')">
           <div class="int-ic" style="background:rgba(191,255,0,0.1);color:#BFFF00">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-6l-2 3h-4l-2-3H2M5.5 5h13l3 7v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-6z"/></svg>
           </div>
-          <div class="int-name">Webhook</div>
+          <div class="int-name">
+            Webhook
+            <a class="card-hdr-help" onclick="event.stopPropagation()" title="POST genérico configurado para criar link, clique e envio de formulário. Endpoint ativo e recebendo eventos.">(help)</a>
+          </div>
           <div class="int-desc">POST genérico ao criar link, clique ou envio de formulário.</div>
           <span class="int-status connected"><span class="dot"></span> Conectado</span>
         </div>
 
         <!-- n8n -->
-        <div class="int-card" onclick="openModal('n8n')">
+        <div class="int-card" data-cat="automacao" onclick="openModal('n8n')">
           <div class="int-ic" style="background:rgba(234,88,12,0.12);color:#EA580C">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           </div>
@@ -413,11 +474,11 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
       </div>
 
       <!-- Section: Notificações -->
-      <div class="sec-lbl">Notificações</div>
-      <div class="int-grid">
+      <div class="sec-lbl" id="lbl-notificacoes">Notificações</div>
+      <div class="int-grid" id="grid-notificacoes">
 
         <!-- Slack -->
-        <div class="int-card" onclick="openModal('slack')">
+        <div class="int-card" data-cat="notificacoes" onclick="openModal('slack')">
           <div class="int-ic" style="background:rgba(74,21,75,0.2);color:#E01E5A">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
           </div>
@@ -427,7 +488,7 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
         </div>
 
         <!-- Telegram -->
-        <div class="int-card" onclick="openModal('telegram')">
+        <div class="int-card" data-cat="notificacoes" onclick="openModal('telegram')">
           <div class="int-ic" style="background:rgba(37,144,214,0.12);color:#2590D6">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.8 2.1L1 10l7.5 2.8L16 6l-6.3 8 7.3 3.9z"/></svg>
           </div>
@@ -437,7 +498,7 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
         </div>
 
         <!-- Discord -->
-        <div class="int-card" onclick="openModal('discord')">
+        <div class="int-card" data-cat="notificacoes" onclick="openModal('discord')">
           <div class="int-ic" style="background:rgba(88,101,242,0.12);color:#5865F2">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.3 4A15.9 15.9 0 0 0 15.2 2.5a11.6 11.6 0 0 0-.5 1A14.7 14.7 0 0 0 9.3 3.5a11.6 11.6 0 0 0-.5-1A15.9 15.9 0 0 0 3.7 4C1 8.1.2 12.1.7 16c2.2 1.6 4.3 2.5 6.3 3.2a12.9 12.9 0 0 0 1.1-1.8 10.4 10.4 0 0 1-1.7-.8l.4-.3a11.4 11.4 0 0 0 9.8 0c.1.1.3.2.4.3-.5.3-1.1.6-1.7.8a12.9 12.9 0 0 0 1.1 1.8c2-.7 4.1-1.6 6.3-3.2.5-4.6-.8-8.5-3.4-12z"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/></svg>
           </div>
@@ -448,11 +509,25 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
       </div>
 
       <!-- Section: CRM & E-mail -->
-      <div class="sec-lbl">CRM &amp; E-mail marketing</div>
-      <div class="int-grid">
+      <div class="sec-lbl" id="lbl-crm">CRM &amp; E-mail marketing</div>
+      <div class="int-grid" id="grid-crm">
+
+        <!-- AppexCRM — in grid, highlighted -->
+        <div class="int-card appex-card installed" data-cat="crm" onclick="openModal('appex')">
+          <div class="int-ic" style="background:linear-gradient(135deg,rgba(191,255,0,0.2),rgba(255,119,119,0.15));color:#BFFF00">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <span class="corner-badge">Nativo</span>
+          <div class="int-name">
+            AppexCRM
+            <a class="card-hdr-help" onclick="event.stopPropagation()" title="Integração nativa com SSO. Leads sincronizados automaticamente, eventos de clique como atividades no CRM.">(help)</a>
+          </div>
+          <div class="int-desc">SSO + sync de leads em tempo real. Identidade unificada entre produtos.</div>
+          <span class="int-status connected"><span class="dot"></span> Nativo · Ativo</span>
+        </div>
 
         <!-- RD Station -->
-        <div class="int-card" onclick="openModal('rd')">
+        <div class="int-card" data-cat="crm" onclick="openModal('rd')">
           <div class="int-ic" style="background:rgba(0,163,100,0.12);color:#00A364">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10zm0-16a6 6 0 1 0 0 12A6 6 0 0 0 12 6zm0 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/></svg>
           </div>
@@ -462,7 +537,7 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
         </div>
 
         <!-- ActiveCampaign -->
-        <div class="int-card" onclick="openModal('ac')">
+        <div class="int-card" data-cat="crm" onclick="openModal('ac')">
           <div class="int-ic" style="background:rgba(21,120,255,0.12);color:#1578FF">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
           </div>
@@ -472,17 +547,20 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
         </div>
 
         <!-- Mailchimp — connected -->
-        <div class="int-card installed" onclick="openModal('mailchimp')">
+        <div class="int-card installed" data-cat="email" onclick="openModal('mailchimp')">
           <div class="int-ic" style="background:rgba(255,226,52,0.12);color:#FFD700">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 8h16M12 4v16"/></svg>
           </div>
-          <div class="int-name">Mailchimp</div>
+          <div class="int-name">
+            Mailchimp
+            <a class="card-hdr-help" onclick="event.stopPropagation()" title="Lista sincronizada com leads de Smartpages. Automações de clique ativas. Clique para editar configurações.">(help)</a>
+          </div>
           <div class="int-desc">Sincroniza lista com leads de Smartpages e automações de clique.</div>
           <span class="int-status connected"><span class="dot"></span> Conectado</span>
         </div>
 
         <!-- HubSpot -->
-        <div class="int-card" onclick="openModal('hubspot')">
+        <div class="int-card" data-cat="crm" onclick="openModal('hubspot')">
           <div class="int-ic" style="background:rgba(255,122,0,0.12);color:#FF7A00">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.64 5.64l2.83 2.83M15.54 15.54l2.83 2.83M5.64 18.36l2.83-2.83M15.54 8.46l2.83-2.83"/></svg>
           </div>
@@ -562,7 +640,6 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
         <div><div class="lbl">Incluir metadados de UTM</div><div class="dsc">Envia parâmetros UTM junto com o payload do Zap.</div></div>
         <div class="tg"></div>
       </div>
-
       <div style="margin-top:18px">
         <div style="font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
           text-transform:uppercase;letter-spacing:0.25em;color:#94A3B8;margin-bottom:12px">
@@ -699,6 +776,45 @@ document.querySelectorAll('.v3modal-overlay').forEach(function(o){
 });
 document.querySelectorAll('.tg').forEach(function(t){
   t.addEventListener('click',function(e){e.stopPropagation();t.classList.toggle('on');});
+});
+
+/* Category tab filtering */
+document.querySelectorAll('.cat-tab').forEach(function(tab){
+  tab.addEventListener('click',function(e){
+    if(e.target.closest('.card-hdr-help'))return;
+    document.querySelectorAll('.cat-tab').forEach(function(t){t.classList.remove('active');});
+    tab.classList.add('active');
+    var cat=tab.getAttribute('data-cat');
+
+    /* Filter int-cards */
+    document.querySelectorAll('.int-card').forEach(function(card){
+      var cats=card.getAttribute('data-cat')||'';
+      card.style.display=(cat==='all'||cats.includes(cat))?'flex':'none';
+    });
+
+    /* Filter appex-banner */
+    var banner=document.querySelector('.appex-banner');
+    if(banner){
+      banner.style.display=(cat==='all'||cat==='crm')?'flex':'none';
+    }
+
+    /* Hide/show section labels + grids based on visible cards */
+    [
+      ['lbl-automacao','grid-automacao'],
+      ['lbl-notificacoes','grid-notificacoes'],
+      ['lbl-crm','grid-crm']
+    ].forEach(function(pair){
+      var lbl=document.getElementById(pair[0]);
+      var grid=document.getElementById(pair[1]);
+      if(!lbl||!grid)return;
+      var hasVisible=false;
+      grid.querySelectorAll('.int-card').forEach(function(c){
+        if(c.style.display!=='none')hasVisible=true;
+      });
+      lbl.style.display=hasVisible?'':'none';
+      grid.style.display=hasVisible?'grid':'none';
+    });
+  });
 });
 </script>
 </body>

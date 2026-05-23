@@ -67,14 +67,44 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
 .v3h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);
   -webkit-background-clip:text;background-clip:text;color:transparent}
 .v3sub{font-family:'Satoshi',sans-serif;font-size:13.5px;color:#94A3B8;
-  line-height:1.6;max-width:540px;margin-top:8px;margin-bottom:32px}
+  line-height:1.6;margin-top:8px;margin-bottom:32px}
 .sec-lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
   text-transform:uppercase;letter-spacing:0.3em;color:#94A3B8;
   display:flex;align-items:center;gap:10px;margin-bottom:16px}
 .sec-lbl::before{content:"▮";color:#BFFF00}
 
+/* ── CARD HEADER HELP ── */
+.card-hdr-help{font-family:'Satoshi',sans-serif;font-size:11px;color:#BFFF00;opacity:0.55;
+  text-decoration:none;cursor:help;border-bottom:1px dotted rgba(191,255,0,0.4);padding-bottom:1px;
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1);font-weight:700;letter-spacing:0.04em}
+.card-hdr-help:hover{opacity:1;border-bottom-color:#BFFF00}
+
+/* ── BACK BUTTON ── */
+.ib{width:42px;height:42px;border-radius:12px;background:#1A1A1A;color:#94A3B8;
+  display:grid;place-items:center;cursor:pointer;text-decoration:none;flex-shrink:0;
+  box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.ib:hover{color:#BFFF00;transform:scale(1.06)}
+.ib svg{width:17px;height:17px}
+
+/* ── BRAND BADGE ── */
+.brand-badge{display:inline-flex;align-items:center;background:linear-gradient(135deg,#BFFF00,#FF7777);
+  color:#0A0A0A;padding:3px 10px;border-radius:999px;font-family:'Satoshi',sans-serif;
+  font-weight:800;font-size:9px;text-transform:uppercase;letter-spacing:0.2em;
+  box-shadow:0 0 14px rgba(191,255,0,0.3);flex-shrink:0;line-height:1.4}
+
+/* ── GRADIENT CTA DOMAIN ── */
+.dom-cta-btn{width:100%;padding:22px 32px;border-radius:20px;border:0;cursor:pointer;
+  background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;
+  font-family:'General Sans',sans-serif;font-weight:700;font-size:16px;letter-spacing:-0.01em;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  box-shadow:6px 6px 18px rgba(0,0,0,0.5),0 0 40px rgba(191,255,0,0.3),0 0 80px rgba(191,255,0,0.12);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1);margin-bottom:12px}
+.dom-cta-btn:hover{transform:scale(1.015);box-shadow:6px 6px 20px rgba(0,0,0,0.5),0 0 55px rgba(191,255,0,0.4),0 0 100px rgba(191,255,0,0.18)}
+.dom-cta-btn svg{width:20px;height:20px}
+
 /* ── DOMAIN ACCORDION CARD ── */
-.dom-acc{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:24px;
+.dom-acc{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;
   box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);
   overflow:hidden;transition:.35s cubic-bezier(0.34,1.56,0.64,1);margin-bottom:12px}
 .dom-acc.active{box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025),0 0 28px rgba(191,255,0,0.1)}
@@ -175,7 +205,7 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
 
 /* add domain card */
 .add-dom{background:rgba(255,255,255,0.015);border:1px dashed rgba(255,255,255,0.1);
-  border-radius:24px;padding:22px 24px;display:flex;align-items:center;gap:16px;
+  border-radius:28px;padding:22px 24px;display:flex;align-items:center;gap:16px;
   cursor:pointer;transition:.35s cubic-bezier(0.34,1.56,0.64,1);margin-bottom:12px}
 .add-dom:hover{border-color:rgba(191,255,0,0.35);background:rgba(191,255,0,0.03)}
 .add-dom:hover .add-ic{color:#BFFF00;background:rgba(191,255,0,0.12)}
@@ -187,7 +217,7 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
 .add-dom .dsc{font-family:'Satoshi',sans-serif;font-size:12px;color:#5A5A60;margin-top:3px}
 
 /* how-to steps */
-.steps-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:24px;
+.steps-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;
   padding:26px;margin-top:28px;
   box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
 .steps-card .ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:17px;
@@ -285,10 +315,14 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
   <!-- MAIN -->
   <div class="v3main">
     <header class="v3hdr">
+      <a class="ib" href="09-settings.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg>
+      </a>
       <div class="crumb">
         <span>Configuração</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
         <b>Domínios customizados</b>
+        <a class="card-hdr-help" title="DNS aponta seu domínio para os servidores AppLink. Configure CNAME no painel do seu provedor — o SSL é emitido automaticamente após verificação.">(help)</a>
       </div>
       <button class="hdr-cta">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 5v14M5 12h14"/></svg>
@@ -314,6 +348,7 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
             <div class="meta">
               <span class="dom-type">Subdomínio</span>
               <span class="dom-links">28 links ativos</span>
+              <a class="card-hdr-help" title="CNAME: link → links.applink.io. SSL Let's Encrypt, renovação automática. Wildcard *.cliente-exemplo.com coberto.">(help)</a>
             </div>
           </div>
           <span class="ssl-badge ok"><span class="pdot green"></span> SSL Verificado</span>
@@ -375,6 +410,7 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
             <div class="meta">
               <span class="dom-type">Subdomínio</span>
               <span class="dom-links">0 links · configurando</span>
+              <a class="card-hdr-help" title="DNS ainda propagando — pode levar até 48h. O certificado TLS será emitido automaticamente assim que a verificação confirmar o CNAME.">(help)</a>
             </div>
           </div>
           <span class="ssl-badge warn"><span class="pdot yellow"></span> Propagando DNS</span>
@@ -417,33 +453,34 @@ body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
         </div></div>
       </div>
 
-      <!-- plnk.to — default/shared, no expand -->
-      <div class="dom-acc shared">
+      <!-- applink.io — default/brand, highlighted -->
+      <div class="dom-acc shared" style="border-color:rgba(191,255,0,0.2);box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025),0 0 26px rgba(191,255,0,0.1)">
         <div class="dom-h" style="cursor:default">
-          <div class="dom-ic shared">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <div class="dom-ic" style="background:rgba(191,255,0,0.1);color:#BFFF00">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
           </div>
           <div class="dom-info">
-            <div class="hostname" style="color:#94A3B8">plnk.to</div>
+            <div class="hostname" style="display:flex;align-items:center;gap:10px">
+              applink.io
+              <span class="brand-badge">BRAND</span>
+            </div>
             <div class="meta">
               <span class="dom-type">Domínio padrão AppLink</span>
               <span class="dom-links">12 links</span>
             </div>
           </div>
-          <span class="ssl-badge neutral">Compartilhado · TLS gerenciado</span>
+          <span class="ssl-badge ok"><span class="pdot green"></span> TLS gerenciado</span>
         </div>
       </div>
 
       <!-- Add domain CTA -->
-      <div class="add-dom">
-        <div class="add-ic">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
-        </div>
-        <div>
-          <div class="nm">Conectar outro domínio</div>
-          <div class="dsc">Apex (A record), subdomínio (CNAME) ou wildcard — SSL automático em todos</div>
-        </div>
-      </div>
+      <button class="dom-cta-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 5v14M5 12h14"/></svg>
+        Adicionar domínio
+      </button>
+      <p style="text-align:center;margin-top:-6px;margin-bottom:28px;font-family:'Satoshi',sans-serif;font-size:12px;color:#5A5A60">
+        Apex (A record), subdomínio (CNAME) ou wildcard — SSL automático em todos
+      </p>
 
       <!-- How to connect steps -->
       <div class="steps-card">

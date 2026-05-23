@@ -6,11 +6,11 @@
 <title>AppLink — Planos &amp; Cobrança</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://api.fontshare.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/tokens.css">
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi',sans-serif}
   .shell{display:flex;min-height:100vh}
 
@@ -35,18 +35,18 @@
     box-shadow:inset 2px 2px 6px rgba(0,0,0,0.5)}
   .v3sb .user .av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
     display:grid;place-items:center;font-weight:800;font-size:13px;box-shadow:2px 2px 6px rgba(0,0,0,0.4)}
-  .v3sb .user .nm{font-size:12px;font-weight:700;color:#fff}
-  .v3sb .user .pl{font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:#94A3B8;font-weight:700}
+  .v3sb .user .nm{font-family:'Satoshi',sans-serif;font-size:12px;font-weight:700;color:#fff}
+  .v3sb .user .pl{font-family:'Satoshi',sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:#94A3B8;font-weight:700}
 
   /* ── main ── */
-  .v3main{flex:1;min-width:0}
+  .v3main{flex:1;min-width:0;overflow-x:hidden}
   .v3hdr{position:sticky;top:0;z-index:10;height:80px;background:rgba(10,10,10,0.82);
     backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.04);
     display:flex;align-items:center;padding:0 32px;gap:24px}
   .crumb{display:flex;align-items:center;gap:10px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
     text-transform:uppercase;letter-spacing:0.18em;color:#94A3B8}
   .crumb b{color:#fff}.crumb svg{width:12px;height:12px;color:#5A5A60}
-  .v3hdr .icons{display:flex;gap:8px;margin-left:auto}
+  .v3hdr .hdr-right{display:flex;gap:8px;margin-left:auto;align-items:center}
   .v3hdr .ib{width:42px;height:42px;border-radius:12px;background:#1A1A1A;color:#94A3B8;display:grid;place-items:center;cursor:pointer;
     box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
     transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
@@ -60,6 +60,20 @@
   .v3hdr .btn-sec:hover{color:#fff}
   .v3hdr .btn-sec svg{width:15px;height:15px}
 
+  /* ── card-hdr-help ── */
+  .card-hdr-help{font-family:'Satoshi',sans-serif;font-size:11px;font-weight:700;color:#BFFF00;opacity:0.55;
+    text-decoration:none;cursor:help;border-bottom:1px dotted rgba(191,255,0,0.4);padding-bottom:1px;
+    margin-left:6px;letter-spacing:0.04em;line-height:1.2;
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .card-hdr-help:hover{opacity:1;border-bottom-color:#BFFF00}
+
+  /* ── card-hdr pattern ── */
+  .card-hdr{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+  .card-hdr-icon{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex-shrink:0;
+    background:rgba(191,255,0,0.1);color:#BFFF00;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.45)}
+  .card-hdr-icon svg{width:15px;height:15px}
+  .card-hdr-title{font-family:'General Sans',sans-serif;font-weight:600;font-size:14px;color:#fff;letter-spacing:-0.01em;flex:1}
+
   /* ── content ── */
   .v3content{padding:32px 32px 80px}
   .eyebrow-cap{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;
@@ -68,8 +82,7 @@
     letter-spacing:-0.03em;color:#fff}
   .v3h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);
     -webkit-background-clip:text;background-clip:text;color:transparent}
-  .v3sub{font-family:'Satoshi',sans-serif;font-size:14px;color:#94A3B8;line-height:1.6;
-    max-width:520px;margin-top:10px}
+  .v3sub{font-family:'Satoshi',sans-serif;font-size:14px;color:#94A3B8;line-height:1.6;margin-top:10px}
   .ttl-row{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px;
     gap:32px;flex-wrap:wrap}
 
@@ -80,11 +93,14 @@
   .v3pill.success{background:rgba(16,185,129,0.12);color:#10B981}
   .v3pill.warn{background:rgba(245,158,11,0.15);color:#F59E0B}
   .v3pill.neutral{background:rgba(148,163,184,0.12);color:#94A3B8}
+  .v3pill.popular{background:linear-gradient(90deg,rgba(191,255,0,0.2),rgba(255,119,119,0.2));
+    color:#BFFF00;border:1px solid rgba(191,255,0,0.3)}
 
   /* ── hero plan card ── */
   .hero-card{background:#141414;border:1px solid rgba(191,255,0,0.18);border-radius:28px;padding:28px;
     box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025),0 0 40px rgba(191,255,0,0.06);
-    display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start;margin-bottom:28px}
+    margin-bottom:28px}
+  .hero-card-inner{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start}
   .hero-ring-wrap{position:relative;width:120px;height:120px;flex-shrink:0}
   .hero-ring-wrap svg{transform:rotate(-90deg)}
   .ring-bg{stroke:rgba(255,255,255,0.06);fill:none;stroke-width:6}
@@ -104,18 +120,24 @@
   .hero-price{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:#BFFF00}
   .hero-price span{font-size:12px;color:#5A5A60}
   .hero-meta{font-family:'Satoshi',sans-serif;font-size:12px;color:#5A5A60;
-    text-transform:uppercase;letter-spacing:0.14em;font-weight:700}
-  .usage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
-  .usage-item{display:flex;flex-direction:column;gap:8px}
-  .usage-label{font-family:'Satoshi',sans-serif;font-size:10px;font-weight:800;text-transform:uppercase;
+    text-transform:uppercase;letter-spacing:0.14em;font-weight:700;margin-top:6px}
+
+  /* ── KPI mini-grid ── */
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+  .kpi-item{background:#1A1A1A;border:1px solid rgba(255,255,255,0.04);border-radius:16px;padding:16px 18px;
+    box-shadow:3px 3px 8px rgba(0,0,0,0.45),-2px -2px 5px rgba(255,255,255,0.02);
+    display:flex;flex-direction:column;gap:8px;transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .kpi-item:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.07)}
+  .kpi-label{font-family:'Satoshi',sans-serif;font-size:9.5px;font-weight:800;text-transform:uppercase;
     letter-spacing:0.18em;color:#5A5A60}
-  .usage-nums{display:flex;align-items:baseline;gap:6px;
-    font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#fff}
-  .usage-nums .mx{color:#5A5A60;font-size:11px}
-  .usage-bar{height:5px;border-radius:3px;background:rgba(255,255,255,0.06);overflow:hidden}
-  .usage-bar .fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#BFFF00,#FF7777);
+  .kpi-nums{display:flex;align-items:baseline;gap:5px;
+    font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:#fff}
+  .kpi-nums .mx{color:#5A5A60;font-size:11px}
+  .kpi-bar{height:4px;border-radius:3px;background:rgba(255,255,255,0.06);overflow:hidden}
+  .kpi-bar .fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#BFFF00,#FF7777);
     transition:.6s cubic-bezier(0.34,1.56,0.64,1)}
-  .usage-bar .fill.warn{background:linear-gradient(90deg,#FFD400,#FF7777)}
+  .kpi-bar .fill.warn{background:linear-gradient(90deg,#FFD400,#FF7777)}
+
   .hero-footer{display:flex;align-items:center;gap:14px;padding-top:6px;flex-wrap:wrap}
   .hero-footer .renew{font-family:'Satoshi',sans-serif;font-size:12px;color:#5A5A60;
     text-transform:uppercase;letter-spacing:0.14em;font-weight:700}
@@ -123,7 +145,7 @@
     font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;text-transform:uppercase;
     letter-spacing:0.18em;display:inline-flex;align-items:center;gap:8px;
     box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
-    transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
   .btn-manage:hover{color:#fff}
   .btn-manage svg{width:14px;height:14px}
   .btn-upgrade{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;border:0;
@@ -131,25 +153,26 @@
     font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;
     letter-spacing:0.18em;display:inline-flex;align-items:center;gap:8px;
     box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 22px rgba(191,255,0,0.3);
-    transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
   .btn-upgrade:hover{transform:scale(1.04)}
   .btn-upgrade svg{width:14px;height:14px}
 
   /* ── plans grid ── */
   .plans-section{margin-bottom:28px}
-  .section-hdr{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-  .section-hdr .sh-title{font-family:'General Sans',sans-serif;font-weight:600;font-size:20px;
-    color:#fff;letter-spacing:-0.02em}
   .plans-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-  .plan-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:24px;padding:22px;
+  .plan-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;padding:22px;
     box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);
     display:flex;flex-direction:column;gap:16px;transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .plan-card:hover{transform:translateY(-2px);box-shadow:8px 8px 20px rgba(0,0,0,0.6),-4px -4px 12px rgba(255,255,255,0.03)}
   .plan-card.current{border-color:rgba(191,255,0,0.25);
     box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025),0 0 36px rgba(191,255,0,0.08)}
+  .plan-card.recommended{border-color:rgba(191,255,0,0.35);
+    box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025),0 0 48px rgba(191,255,0,0.14)}
   .plan-eyebrow{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;
     letter-spacing:0.25em;color:#5A5A60}
+  .plan-name-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .plan-name{font-family:'General Sans',sans-serif;font-weight:600;font-size:18px;color:#fff;
-    letter-spacing:-0.02em;display:flex;align-items:center;gap:10px}
+    letter-spacing:-0.02em}
   .plan-price{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:#fff;
     line-height:1}
   .plan-price .per{font-size:12px;color:#5A5A60;font-weight:400}
@@ -174,7 +197,7 @@
   /* ── invoices ── */
   .v3table-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;
     overflow:hidden;box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
-  .v3table-head{display:flex;align-items:center;padding:20px 26px;gap:14px;
+  .v3table-head{display:flex;align-items:center;padding:20px 26px;gap:10px;
     border-bottom:1px solid rgba(255,255,255,0.05)}
   .v3table-head .ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:18px;
     color:#fff;letter-spacing:-0.02em}
@@ -189,8 +212,8 @@
   .v3table .num{font-family:'JetBrains Mono',monospace;font-weight:600;color:#fff}
   .dl-link{font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;
     letter-spacing:0.15em;color:#FF7777;cursor:pointer;display:inline-flex;align-items:center;gap:5px;
-    text-decoration:none;transition:.2s ease}
-  .dl-link:hover{color:#FF9999}
+    text-decoration:none;transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .dl-link:hover{color:#FF9999;transform:translateY(-1px)}
   .dl-link svg{width:13px;height:13px}
 </style>
 </head>
@@ -284,7 +307,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
         <b>Planos &amp; Cobrança</b>
       </div>
-      <div class="icons">
+      <div class="hdr-right">
         <div class="ib">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg>
         </div>
@@ -317,70 +340,86 @@
 
       <!-- Hero plan card -->
       <div class="hero-card">
-        <div>
-          <div class="hero-ring-wrap">
-            <svg width="120" height="120" viewBox="0 0 120 120">
-              <circle class="ring-bg" cx="60" cy="60" r="50"/>
-              <circle class="ring-fg" cx="60" cy="60" r="50"/>
-            </svg>
-            <div class="ring-center">
-              <span class="ring-pct">65%</span>
-              <span class="ring-sub">Uso</span>
-            </div>
+        <!-- Card header line -->
+        <div class="card-hdr" style="margin-bottom:22px">
+          <div class="card-hdr-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
           </div>
+          <span class="card-hdr-title">Plano atual</span>
+          <a class="card-hdr-help" title="O anel mostra o consumo de cliques do ciclo atual. Cliques continuam funcionando após o limite — só o tracking é pausado até a renovação.">(help)</a>
         </div>
 
-        <div class="hero-info">
+        <div class="hero-card-inner">
           <div>
-            <div class="hero-plan-row">
-              <span class="hero-plan-name">Plano Pro</span>
-              <span class="v3pill">Atual</span>
-              <span class="hero-price">R$ 89<span>/mês</span></span>
-            </div>
-            <div class="hero-meta" style="margin-top:6px">Renova em 12 jun 2026 · próxima fatura: R$ 89,00</div>
-          </div>
-
-          <div class="usage-grid">
-            <div class="usage-item">
-              <div class="usage-label">Cliques / mês</div>
-              <div class="usage-nums">32.480 <span class="mx">/ 50.000</span></div>
-              <div class="usage-bar"><div class="fill" style="width:65%"></div></div>
-            </div>
-            <div class="usage-item">
-              <div class="usage-label">Smartpages</div>
-              <div class="usage-nums">8 <span class="mx">/ 10</span></div>
-              <div class="usage-bar"><div class="fill warn" style="width:80%"></div></div>
-            </div>
-            <div class="usage-item">
-              <div class="usage-label">Domínios</div>
-              <div class="usage-nums">3 <span class="mx">/ 5</span></div>
-              <div class="usage-bar"><div class="fill" style="width:60%"></div></div>
-            </div>
-            <div class="usage-item">
-              <div class="usage-label">Membros</div>
-              <div class="usage-nums">4 <span class="mx">/ 10</span></div>
-              <div class="usage-bar"><div class="fill" style="width:40%"></div></div>
+            <div class="hero-ring-wrap">
+              <svg width="120" height="120" viewBox="0 0 120 120">
+                <circle class="ring-bg" cx="60" cy="60" r="50"/>
+                <circle class="ring-fg" cx="60" cy="60" r="50"/>
+              </svg>
+              <div class="ring-center">
+                <span class="ring-pct">65%</span>
+                <span class="ring-sub">Uso</span>
+              </div>
             </div>
           </div>
 
-          <div class="hero-footer">
-            <span class="hero-renew">Pixels ilimitados · API não inclusa no Pro</span>
-            <button class="btn-upgrade">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" width="14" height="14"><path d="M12 5v14M5 12h14"/></svg>
-              Upgrade para Business
-            </button>
-            <button class="btn-manage">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-              Gerenciar pagamento
-            </button>
+          <div class="hero-info">
+            <div>
+              <div class="hero-plan-row">
+                <span class="hero-plan-name">Plano Pro</span>
+                <span class="v3pill">Atual</span>
+                <span class="hero-price">R$ 89<span>/mês</span></span>
+              </div>
+              <div class="hero-meta">Renova em 12 jun 2026 · próxima fatura: R$ 89,00</div>
+            </div>
+
+            <!-- KPI mini-grid full-width -->
+            <div class="kpi-grid">
+              <div class="kpi-item">
+                <div class="kpi-label">Cliques / mês <a class="card-hdr-help" style="margin-left:0;font-size:10px" title="Contagem de cliques únicos no ciclo atual. Ao atingir 100%, o tracking para mas o redirecionamento continua.">(help)</a></div>
+                <div class="kpi-nums">32.480 <span class="mx">/ 50.000</span></div>
+                <div class="kpi-bar"><div class="fill" style="width:65%"></div></div>
+              </div>
+              <div class="kpi-item">
+                <div class="kpi-label">Smartpages <a class="card-hdr-help" style="margin-left:0;font-size:10px" title="Número de smartpages publicadas. Ao atingir o limite, você não pode criar novas sem fazer upgrade ou excluir existentes.">(help)</a></div>
+                <div class="kpi-nums">8 <span class="mx">/ 10</span></div>
+                <div class="kpi-bar"><div class="fill warn" style="width:80%"></div></div>
+              </div>
+              <div class="kpi-item">
+                <div class="kpi-label">Domínios <a class="card-hdr-help" style="margin-left:0;font-size:10px" title="Domínios customizados conectados ao workspace. Inclui subdomínios. O domínio padrão plnk.to é ilimitado.">(help)</a></div>
+                <div class="kpi-nums">3 <span class="mx">/ 5</span></div>
+                <div class="kpi-bar"><div class="fill" style="width:60%"></div></div>
+              </div>
+              <div class="kpi-item">
+                <div class="kpi-label">Membros <a class="card-hdr-help" style="margin-left:0;font-size:10px" title="Membros ativos no workspace, incluindo convites aceitos. Convites pendentes também contam contra o limite.">(help)</a></div>
+                <div class="kpi-nums">4 <span class="mx">/ 10</span></div>
+                <div class="kpi-bar"><div class="fill" style="width:40%"></div></div>
+              </div>
+            </div>
+
+            <div class="hero-footer">
+              <span class="renew">Pixels ilimitados · API não inclusa no Pro</span>
+              <button class="btn-upgrade">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" width="14" height="14"><path d="M12 5v14M5 12h14"/></svg>
+                Upgrade para Business
+              </button>
+              <button class="btn-manage">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+                Gerenciar pagamento
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Plans comparison grid -->
       <div class="plans-section">
-        <div class="section-hdr">
-          <span class="sh-title">Comparativo de planos</span>
+        <div class="card-hdr" style="margin-bottom:18px">
+          <div class="card-hdr-icon" style="background:rgba(167,139,250,0.12);color:#A78BFA">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <span class="card-hdr-title">Comparativo de planos</span>
+          <a class="card-hdr-help" title="Compare os planos disponíveis. O plano ativo está destacado com borda lime. O plano mais popular é indicado com badge POPULAR.">(help)</a>
         </div>
         <div class="plans-grid">
 
@@ -388,7 +427,10 @@
           <div class="plan-card">
             <div>
               <div class="plan-eyebrow">Gratuito</div>
-              <div class="plan-name">Free</div>
+              <div class="plan-name-row">
+                <span class="plan-name">Free</span>
+                <a class="card-hdr-help" style="margin-left:0" title="Plano gratuito com 500 cliques/mês. Ideal para testes. Sem pixels, sem domínio customizado.">(help)</a>
+              </div>
               <div class="plan-price"><span class="free">R$ 0</span><span class="per">/mês</span></div>
             </div>
             <div class="plan-feats">
@@ -420,7 +462,10 @@
           <div class="plan-card">
             <div>
               <div class="plan-eyebrow">Básico</div>
-              <div class="plan-name">Starter</div>
+              <div class="plan-name-row">
+                <span class="plan-name">Starter</span>
+                <a class="card-hdr-help" style="margin-left:0" title="10.000 cliques/mês com pixels básicos. Ideal para criadores e infoprodutores iniciando.">(help)</a>
+              </div>
               <div class="plan-price">R$ 39<span class="per">/mês</span></div>
             </div>
             <div class="plan-feats">
@@ -448,13 +493,14 @@
             <button class="btn-plan secondary">Fazer downgrade</button>
           </div>
 
-          <!-- Pro — ATUAL / RECOMENDADO -->
+          <!-- Pro — ATUAL -->
           <div class="plan-card current">
             <div>
               <div class="plan-eyebrow">Mais popular</div>
-              <div class="plan-name">
-                Pro
+              <div class="plan-name-row">
+                <span class="plan-name">Pro</span>
                 <span class="v3pill" style="font-size:9px">Atual</span>
+                <a class="card-hdr-help" style="margin-left:0" title="50.000 cliques/mês, 5 domínios, 10 smartpages, 10 membros, pixels ilimitados. A/B test e geo routing inclusos.">(help)</a>
               </div>
               <div class="plan-price">R$ 89<span class="per">/mês</span></div>
             </div>
@@ -483,11 +529,15 @@
             <button class="btn-plan active" disabled>Plano ativo</button>
           </div>
 
-          <!-- Business -->
-          <div class="plan-card">
+          <!-- Business — POPULAR -->
+          <div class="plan-card recommended">
             <div>
               <div class="plan-eyebrow">Agências</div>
-              <div class="plan-name">Business</div>
+              <div class="plan-name-row">
+                <span class="plan-name">Business</span>
+                <span class="v3pill popular" style="font-size:9px">POPULAR</span>
+                <a class="card-hdr-help" style="margin-left:0" title="150.000 cliques/mês, 15 domínios, smartpages ilimitadas, API REST e white-label. Ideal para agências multi-cliente.">(help)</a>
+              </div>
               <div class="plan-price">R$ 199<span class="per">/mês</span></div>
             </div>
             <div class="plan-feats">
@@ -521,7 +571,11 @@
       <!-- Invoices -->
       <div class="v3table-card">
         <div class="v3table-head">
+          <div class="card-hdr-icon" style="background:rgba(0,240,255,0.08);color:#00F0FF;flex-shrink:0">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
           <span class="ttl">Histórico de faturas</span>
+          <a class="card-hdr-help" style="margin-left:0" title="Faturas dos últimos 12 meses. Clique em PDF para baixar a nota fiscal para contabilidade.">(help)</a>
         </div>
         <table class="v3table">
           <thead>
