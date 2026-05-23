@@ -712,7 +712,7 @@ https://affiliates.parceiro.com/cupom?ref=maria</textarea>
       switch(action){
         case 'edit': location.href='02-criar-link.html'; return;
         case 'duplicate': toast('Link "'+linkName+'" duplicado'); break;
-        case 'qrcode': location.href='10-qrcode.html'; return;
+        case 'qrcode': window.openQRModal && window.openQRModal(linkName, shortUrl); break;
         case 'share': toast('Link compartilhado'); break;
         case 'pause': toast('Link "'+linkName+'" pausado', 'warn'); break;
         case 'folder': toast('Selecione a pasta de destino'); break;
@@ -846,6 +846,473 @@ https://affiliates.parceiro.com/cupom?ref=maria</textarea>
   document.addEventListener('keydown', e => { if (e.key === 'Escape') rowMenu.classList.remove('show'); });
 
   updateBulk();
+})();
+</script>
+
+<!-- ═══════════════════════════════════════════
+     QR CODE FLOATING PANEL (Switchy parity)
+     ═══════════════════════════════════════════ -->
+<style>
+  .qrm{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center}
+  .qrm.show{display:flex}
+  .qrm-bd{position:absolute;inset:0;background:rgba(0,0,0,0.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .qrm-bx{position:relative;width:min(1100px,94vw);max-height:90vh;background:#141414;border:1px solid rgba(255,255,255,0.06);border-radius:24px;
+    box-shadow:6px 6px 30px rgba(0,0,0,0.7),0 0 60px rgba(191,255,0,0.05);
+    overflow:hidden;display:grid;grid-template-columns:240px 1fr 320px;animation:qrmIn .35s cubic-bezier(0.34, 1.56, 0.64, 1)}
+  @keyframes qrmIn{from{opacity:0;transform:scale(0.94)}to{opacity:1;transform:scale(1)}}
+  .qrm-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.06);border:0;color:#94A3B8;cursor:pointer;font-size:20px;line-height:1;display:grid;place-items:center;z-index:5;transition:.25s ease}
+  .qrm-close:hover{background:rgba(255,119,119,0.15);color:#FF7777}
+  /* LEFT NAV */
+  .qrm-nav{background:#0F0F0F;padding:24px 16px;border-right:1px solid rgba(255,255,255,0.04);overflow-y:auto}
+  .qrm-nav .ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:18px;color:#fff;margin-bottom:24px;letter-spacing:-0.01em;display:flex;align-items:center;gap:8px}
+  .qrm-nav .ttl .card-hdr-help{font-size:11px}
+  .qrm-nav-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;cursor:pointer;
+    font-family:'Satoshi',sans-serif;font-weight:700;font-size:13px;color:#94A3B8;margin-bottom:4px;
+    transition:.25s cubic-bezier(0.34, 1.56, 0.64, 1)}
+  .qrm-nav-item:hover{color:#fff;background:rgba(255,255,255,0.03)}
+  .qrm-nav-item.on{background:linear-gradient(90deg,rgba(191,255,0,0.12),rgba(191,255,0,0));color:#BFFF00;
+    border-right:2px solid #BFFF00;padding-right:12px}
+  /* CENTER OPTIONS */
+  .qrm-opts{padding:28px;overflow-y:auto;max-height:90vh}
+  .qrm-sec{margin-bottom:24px}
+  .qrm-sec-ttl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:13px;color:#E5E7EB;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .qrm-sec-ttl .card-hdr-help{margin-left:auto}
+  .qrm-shape-row{display:flex;gap:10px;flex-wrap:wrap}
+  .qrm-shape{width:54px;height:54px;border-radius:14px;background:#1A1A1A;border:1px solid rgba(255,255,255,0.04);
+    box-shadow:4px 4px 10px rgba(0,0,0,0.45),-2px -2px 6px rgba(255,255,255,0.02);
+    display:grid;place-items:center;cursor:pointer;transition:.25s cubic-bezier(0.34, 1.56, 0.64, 1)}
+  .qrm-shape:hover{transform:scale(1.06);border-color:rgba(191,255,0,0.3)}
+  .qrm-shape.on{background:linear-gradient(135deg,#BFFF00,#FF7777);box-shadow:6px 6px 14px rgba(0,0,0,0.55),0 0 22px rgba(191,255,0,0.35)}
+  .qrm-shape svg{width:24px;height:24px;color:#fff}
+  .qrm-shape.on svg{color:#0A0A0A}
+  .qrm-color-row{display:flex;align-items:center;gap:12px}
+  .qrm-color-input{flex:1;display:flex;align-items:center;gap:10px;padding:10px 14px;background:#1A1A1A;border:1px solid rgba(255,255,255,0.06);border-radius:12px;
+    box-shadow:inset 3px 3px 6px rgba(0,0,0,0.5),inset -1px -1px 3px rgba(255,255,255,0.02)}
+  .qrm-color-input input[type="color"]{width:32px;height:32px;border:0;border-radius:8px;cursor:pointer;background:transparent;padding:0}
+  .qrm-color-input input[type="color"]::-webkit-color-swatch-wrapper{padding:0;border-radius:8px;overflow:hidden}
+  .qrm-color-input input[type="color"]::-webkit-color-swatch{border:0;border-radius:8px}
+  .qrm-color-input code{font-family:'JetBrains Mono',monospace;font-size:13px;color:#E5E7EB;flex:1}
+  .qrm-grad-btn{padding:10px 14px;background:#1A1A1A;border:1px solid rgba(191,255,0,0.3);border-radius:12px;color:#BFFF00;
+    font-family:'Satoshi',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display:flex;align-items:center;gap:6px}
+  .qrm-grad-btn:hover{background:rgba(191,255,0,0.08);transform:scale(1.04)}
+  .qrm-grad-btn.on{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;border-color:transparent}
+  /* RIGHT PREVIEW */
+  .qrm-prev{background:#0F0F0F;padding:24px;display:flex;flex-direction:column;border-left:1px solid rgba(255,255,255,0.04)}
+  .qrm-tools{display:flex;justify-content:flex-end;gap:8px;margin-bottom:14px}
+  .qrm-tool{width:30px;height:30px;border-radius:8px;background:#1A1A1A;border:0;color:#94A3B8;cursor:pointer;display:grid;place-items:center;
+    box-shadow:2px 2px 6px rgba(0,0,0,0.4);transition:.25s ease}
+  .qrm-tool:hover{color:#BFFF00}
+  .qrm-tool svg{width:14px;height:14px}
+  .qrm-canvas-wrap{background:#fff;border-radius:16px;padding:18px;display:grid;place-items:center;margin-bottom:14px;
+    box-shadow:6px 6px 20px rgba(0,0,0,0.55)}
+  .qrm-canvas-wrap canvas, .qrm-canvas-wrap svg{display:block;width:240px !important;height:240px !important}
+  .qrm-tip{display:flex;align-items:flex-start;gap:8px;padding:12px 14px;border-radius:10px;
+    background:rgba(191,255,0,0.05);border:1px solid rgba(191,255,0,0.12);
+    color:#BFFF00;font-family:'Satoshi',sans-serif;font-size:11.5px;line-height:1.5;font-weight:600;margin-bottom:14px}
+  .qrm-link-info{padding:10px 12px;background:rgba(255,255,255,0.025);border-radius:10px;margin-bottom:14px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:#94A3B8;text-align:center;word-break:break-all}
+  .qrm-dl{display:flex;flex-direction:column;gap:8px;margin-top:auto}
+  .qrm-dl button{padding:13px 16px;border-radius:12px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:13px;
+    text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;border:0;
+    transition:.3s cubic-bezier(0.34, 1.56, 0.64, 1)}
+  .qrm-dl .qrm-dl-svg{background:#1A1A1A;border:1px solid rgba(191,255,0,0.4);color:#BFFF00}
+  .qrm-dl .qrm-dl-svg:hover{background:rgba(191,255,0,0.08);transform:translateY(-1px)}
+  .qrm-dl .qrm-dl-png{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;box-shadow:4px 4px 12px rgba(0,0,0,0.5),0 0 22px rgba(191,255,0,0.3)}
+  .qrm-dl .qrm-dl-png:hover{transform:translateY(-2px) scale(1.02)}
+  @media(max-width:980px){.qrm-bx{grid-template-columns:1fr;max-height:96vh;overflow-y:auto}.qrm-nav{display:none}}
+</style>
+
+<div class="qrm" id="qrm">
+  <div class="qrm-bd" onclick="closeQRModal()"></div>
+  <div class="qrm-bx">
+    <button class="qrm-close" onclick="closeQRModal()">×</button>
+
+    <!-- LEFT NAV -->
+    <aside class="qrm-nav">
+      <div class="ttl">QR code <a class="card-hdr-help" href="#">(help)</a></div>
+      <div class="qrm-nav-item on" data-tab="designer">🖌️ Designer</div>
+      <div class="qrm-nav-item" data-tab="shape">💫 Shape</div>
+      <div class="qrm-nav-item" data-tab="logo">🦊 Logo</div>
+      <div class="qrm-nav-item" data-tab="templates">📸 Templates</div>
+      <div class="qrm-nav-item" data-tab="presets">💡 Pre-defined</div>
+    </aside>
+
+    <!-- CENTER OPTIONS -->
+    <main class="qrm-opts">
+      <div class="qrm-sec">
+        <div class="qrm-sec-ttl">✨ Shape style <a class="card-hdr-help" href="#">(help)</a></div>
+        <div class="qrm-shape-row" id="qrm-shape-row">
+          <div class="qrm-shape on" data-shape="square" title="Quadrado"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16"/></svg></div>
+          <div class="qrm-shape" data-shape="rounded" title="Arredondado"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="5"/></svg></div>
+          <div class="qrm-shape" data-shape="dots" title="Pontos"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg></div>
+          <div class="qrm-shape" data-shape="diamond" title="Diamante"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l9 9-9 9-9-9z"/></svg></div>
+          <div class="qrm-shape" data-shape="ribbon" title="Fita"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="9" width="18" height="6"/></svg></div>
+        </div>
+      </div>
+
+      <div class="qrm-sec">
+        <div class="qrm-sec-ttl">💢 Corner style <a class="card-hdr-help" href="#">(help)</a></div>
+        <div class="qrm-shape-row" id="qrm-corner-row">
+          <div class="qrm-shape on" data-corner="square" title="Quadrado"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><rect x="5" y="5" width="14" height="14"/></svg></div>
+          <div class="qrm-shape" data-corner="rounded" title="Arredondado"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><rect x="5" y="5" width="14" height="14" rx="5"/></svg></div>
+          <div class="qrm-shape" data-corner="circle" title="Círculo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="7"/></svg></div>
+          <div class="qrm-shape" data-corner="dot" title="Ponto"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg></div>
+        </div>
+      </div>
+
+      <div class="qrm-sec">
+        <div class="qrm-sec-ttl">🎨 Shape color <a class="card-hdr-help" href="#">(help)</a></div>
+        <div class="qrm-color-row">
+          <label class="qrm-color-input">
+            <input type="color" id="qrm-fg" value="#0A0A0A">
+            <code id="qrm-fg-hex">#0A0A0A</code>
+          </label>
+          <button class="qrm-grad-btn" id="qrm-grad" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 5v14M5 12h14"/></svg>
+            Gradiente
+          </button>
+        </div>
+      </div>
+
+      <div class="qrm-sec">
+        <div class="qrm-sec-ttl">🧱 Background color</div>
+        <div class="qrm-color-row">
+          <label class="qrm-color-input">
+            <input type="color" id="qrm-bg" value="#FFFFFF">
+            <code id="qrm-bg-hex">#FFFFFF</code>
+          </label>
+        </div>
+      </div>
+
+      <div class="qrm-sec">
+        <div class="qrm-sec-ttl">⚙️ Tamanho do QR</div>
+        <div class="qrm-color-row">
+          <label class="qrm-color-input" style="flex:0 0 auto">
+            <input type="range" id="qrm-size" min="120" max="400" value="240" style="width:160px">
+          </label>
+          <code id="qrm-size-val" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#94A3B8">240 × 240 px</code>
+        </div>
+      </div>
+    </main>
+
+    <!-- RIGHT PREVIEW -->
+    <aside class="qrm-prev">
+      <div class="qrm-tools">
+        <button class="qrm-tool" title="Undo" onclick="qrmUndo()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6.7 3L3 13"/></svg></button>
+        <button class="qrm-tool" title="Redo" onclick="qrmRedo()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 7v6h-6M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6.7 3L21 13"/></svg></button>
+        <button class="qrm-tool" title="Salvar como template" onclick="qrmSaveTemplate()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v14a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg></button>
+      </div>
+      <div class="qrm-canvas-wrap" id="qrm-canvas-wrap">
+        <canvas id="qrm-canvas" width="240" height="240"></canvas>
+      </div>
+      <div class="qrm-link-info" id="qrm-link-info">plnk.to/exemplo</div>
+      <div class="qrm-tip">
+        <span>💡</span>
+        <span>Antes de imprimir, escaneie o QR Code com seu celular pra confirmar que está legível.</span>
+      </div>
+      <div class="qrm-dl">
+        <button class="qrm-dl-svg" onclick="qrmDownload('svg')">Baixar como SVG</button>
+        <button class="qrm-dl-png" onclick="qrmDownload('png')">Baixar como PNG</button>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- QRCode library (geração de QR real, escaneável pela câmera) -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+
+<script>
+/* ─── QR CODE FLOATING MODAL · funcional ─── */
+(function(){
+  const modal = document.getElementById('qrm');
+  const canvas = document.getElementById('qrm-canvas');
+  const linkInfo = document.getElementById('qrm-link-info');
+  const fgInput = document.getElementById('qrm-fg');
+  const bgInput = document.getElementById('qrm-bg');
+  const fgHex = document.getElementById('qrm-fg-hex');
+  const bgHex = document.getElementById('qrm-bg-hex');
+  const sizeInput = document.getElementById('qrm-size');
+  const sizeVal = document.getElementById('qrm-size-val');
+  const gradBtn = document.getElementById('qrm-grad');
+
+  const state = { url: 'plnk.to/exemplo', fg: '#0A0A0A', bg: '#FFFFFF', size: 240, gradient: false, shape: 'square', corner: 'square', linkName: 'Link' };
+  let history = [], historyIdx = -1;
+
+  function pushHistory(){
+    history = history.slice(0, historyIdx+1);
+    history.push({...state});
+    historyIdx++;
+  }
+
+  function drawQR(targetCanvas, url, opts){
+    // opts: { size, fg, bg, gradient, shape }
+    if (typeof qrcode !== 'function'){
+      // Fallback: qrserver.com API render como <img>
+      const wrap = targetCanvas.parentElement;
+      if (wrap){
+        wrap.innerHTML = '<img src="https://api.qrserver.com/v1/create-qr-code/?size='+opts.size+'x'+opts.size+'&data='+encodeURIComponent(url)+'&color='+opts.fg.slice(1)+'&bgcolor='+opts.bg.slice(1)+'&qzone=2" width="'+opts.size+'" height="'+opts.size+'" alt="QR Code" style="display:block">';
+      }
+      return;
+    }
+    const qr = qrcode(0, 'H');
+    qr.addData(url);
+    qr.make();
+    const moduleCount = qr.getModuleCount();
+
+    const size = opts.size;
+    targetCanvas.width = size;
+    targetCanvas.height = size;
+    targetCanvas.style.width = size + 'px';
+    targetCanvas.style.height = size + 'px';
+
+    const ctx = targetCanvas.getContext('2d');
+    const margin = Math.floor(size * 0.04);
+    const cellSize = (size - 2 * margin) / moduleCount;
+
+    // Background
+    ctx.fillStyle = opts.bg;
+    ctx.fillRect(0, 0, size, size);
+
+    // Foreground (color or gradient)
+    let fgStyle;
+    if (opts.gradient){
+      const grad = ctx.createLinearGradient(0, 0, size, size);
+      grad.addColorStop(0, '#BFFF00');
+      grad.addColorStop(1, '#FF7777');
+      fgStyle = grad;
+    } else {
+      fgStyle = opts.fg;
+    }
+    ctx.fillStyle = fgStyle;
+
+    for (let row = 0; row < moduleCount; row++){
+      for (let col = 0; col < moduleCount; col++){
+        if (qr.isDark(row, col)){
+          const x = margin + col * cellSize;
+          const y = margin + row * cellSize;
+          if (opts.shape === 'rounded'){
+            const r = cellSize * 0.28;
+            ctx.beginPath();
+            // Polyfill manual de roundRect pra browsers antigos
+            if (typeof ctx.roundRect === 'function'){
+              ctx.roundRect(x, y, cellSize, cellSize, r);
+            } else {
+              ctx.moveTo(x+r, y); ctx.lineTo(x+cellSize-r, y); ctx.quadraticCurveTo(x+cellSize, y, x+cellSize, y+r);
+              ctx.lineTo(x+cellSize, y+cellSize-r); ctx.quadraticCurveTo(x+cellSize, y+cellSize, x+cellSize-r, y+cellSize);
+              ctx.lineTo(x+r, y+cellSize); ctx.quadraticCurveTo(x, y+cellSize, x, y+cellSize-r);
+              ctx.lineTo(x, y+r); ctx.quadraticCurveTo(x, y, x+r, y);
+            }
+            ctx.fill();
+          } else if (opts.shape === 'dots'){
+            ctx.beginPath();
+            ctx.arc(x + cellSize/2, y + cellSize/2, cellSize * 0.42, 0, 2 * Math.PI);
+            ctx.fill();
+          } else if (opts.shape === 'diamond'){
+            ctx.beginPath();
+            const cx = x + cellSize/2, cy = y + cellSize/2, half = cellSize/2;
+            ctx.moveTo(cx, cy - half);
+            ctx.lineTo(cx + half, cy);
+            ctx.lineTo(cx, cy + half);
+            ctx.lineTo(cx - half, cy);
+            ctx.closePath();
+            ctx.fill();
+          } else {
+            // square (default)
+            ctx.fillRect(x, y, cellSize, cellSize);
+          }
+        }
+      }
+    }
+  }
+
+  function render(){
+    const url = 'https://' + state.url;
+    let cv = document.getElementById('qrm-canvas');
+    if (!cv){
+      const wrap = document.getElementById('qrm-canvas-wrap');
+      wrap.innerHTML = '<canvas id="qrm-canvas"></canvas>';
+      cv = document.getElementById('qrm-canvas');
+    }
+    drawQR(cv, url, { size: state.size, fg: state.fg, bg: state.bg, gradient: state.gradient, shape: state.shape });
+  }
+
+  window.openQRModal = function(linkName, shortUrl){
+    state.linkName = linkName || 'Link';
+    state.url = shortUrl || 'plnk.to/exemplo';
+    linkInfo.textContent = state.url;
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    history = []; historyIdx = -1;
+    pushHistory();
+    render();
+  };
+  window.closeQRModal = function(){
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+  };
+
+  // ─── Shape style ───
+  document.querySelectorAll('#qrm-shape-row .qrm-shape').forEach(sh => {
+    sh.addEventListener('click', () => {
+      document.querySelectorAll('#qrm-shape-row .qrm-shape').forEach(s => s.classList.remove('on'));
+      sh.classList.add('on');
+      state.shape = sh.dataset.shape;
+      pushHistory();
+      // QRCode.js não suporta forma diferente nativamente — mock visual via CSS
+    });
+  });
+  // ─── Corner style ───
+  document.querySelectorAll('#qrm-corner-row .qrm-shape').forEach(sh => {
+    sh.addEventListener('click', () => {
+      document.querySelectorAll('#qrm-corner-row .qrm-shape').forEach(s => s.classList.remove('on'));
+      sh.classList.add('on');
+      state.corner = sh.dataset.corner;
+      pushHistory();
+    });
+  });
+
+  // ─── Color inputs ───
+  fgInput.addEventListener('input', () => {
+    state.fg = fgInput.value.toUpperCase();
+    fgHex.textContent = state.fg;
+    state.gradient = false;
+    gradBtn.classList.remove('on');
+    render();
+  });
+  fgInput.addEventListener('change', pushHistory);
+
+  bgInput.addEventListener('input', () => {
+    state.bg = bgInput.value.toUpperCase();
+    bgHex.textContent = state.bg;
+    render();
+  });
+  bgInput.addEventListener('change', pushHistory);
+
+  // ─── Gradient toggle ───
+  gradBtn.addEventListener('click', () => {
+    state.gradient = !state.gradient;
+    gradBtn.classList.toggle('on', state.gradient);
+    render();
+    pushHistory();
+  });
+
+  // ─── Size slider ───
+  sizeInput.addEventListener('input', () => {
+    state.size = parseInt(sizeInput.value, 10);
+    sizeVal.textContent = state.size + ' × ' + state.size + ' px';
+    render();
+  });
+  sizeInput.addEventListener('change', pushHistory);
+
+  // ─── Nav tabs (placeholder visual) ───
+  document.querySelectorAll('.qrm-nav-item').forEach(it => {
+    it.addEventListener('click', () => {
+      document.querySelectorAll('.qrm-nav-item').forEach(i => i.classList.remove('on'));
+      it.classList.add('on');
+    });
+  });
+
+  // ─── Undo / Redo / Save template ───
+  window.qrmUndo = function(){
+    if (historyIdx > 0){
+      historyIdx--;
+      Object.assign(state, history[historyIdx]);
+      syncUIFromState();
+      render();
+    }
+  };
+  window.qrmRedo = function(){
+    if (historyIdx < history.length - 1){
+      historyIdx++;
+      Object.assign(state, history[historyIdx]);
+      syncUIFromState();
+      render();
+    }
+  };
+  function syncUIFromState(){
+    fgInput.value = state.fg; fgHex.textContent = state.fg;
+    bgInput.value = state.bg; bgHex.textContent = state.bg;
+    sizeInput.value = state.size; sizeVal.textContent = state.size + ' × ' + state.size + ' px';
+    gradBtn.classList.toggle('on', state.gradient);
+  }
+  window.qrmSaveTemplate = function(){
+    const name = prompt('Nome do template:');
+    if (name && typeof toast === 'function') toast('Template "'+name+'" salvo');
+  };
+
+  // ─── Download (SVG / PNG reais via qrcode-generator) ───
+  function buildSVG(url, opts){
+    if (typeof qrcode !== 'function') return null;
+    const qr = qrcode(0, 'H');
+    qr.addData(url);
+    qr.make();
+    const moduleCount = qr.getModuleCount();
+    const size = opts.size || 600;
+    const margin = Math.floor(size * 0.04);
+    const cellSize = (size - 2 * margin) / moduleCount;
+
+    let defs = '';
+    let fgFill = opts.fg;
+    if (opts.gradient){
+      defs = '<defs><linearGradient id="qrgrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#BFFF00"/><stop offset="100%" stop-color="#FF7777"/></linearGradient></defs>';
+      fgFill = 'url(#qrgrad)';
+    }
+
+    let cells = '';
+    for (let row = 0; row < moduleCount; row++){
+      for (let col = 0; col < moduleCount; col++){
+        if (qr.isDark(row, col)){
+          const x = margin + col * cellSize;
+          const y = margin + row * cellSize;
+          if (opts.shape === 'rounded'){
+            cells += '<rect x="'+x+'" y="'+y+'" width="'+cellSize+'" height="'+cellSize+'" rx="'+(cellSize*0.28)+'" fill="'+fgFill+'"/>';
+          } else if (opts.shape === 'dots'){
+            cells += '<circle cx="'+(x+cellSize/2)+'" cy="'+(y+cellSize/2)+'" r="'+(cellSize*0.42)+'" fill="'+fgFill+'"/>';
+          } else if (opts.shape === 'diamond'){
+            const cx = x + cellSize/2, cy = y + cellSize/2, h = cellSize/2;
+            cells += '<polygon points="'+cx+','+(cy-h)+' '+(cx+h)+','+cy+' '+cx+','+(cy+h)+' '+(cx-h)+','+cy+'" fill="'+fgFill+'"/>';
+          } else {
+            cells += '<rect x="'+x+'" y="'+y+'" width="'+cellSize+'" height="'+cellSize+'" fill="'+fgFill+'"/>';
+          }
+        }
+      }
+    }
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'">'+defs+'<rect width="'+size+'" height="'+size+'" fill="'+opts.bg+'"/>'+cells+'</svg>';
+  }
+
+  window.qrmDownload = function(format){
+    const url = 'https://' + state.url;
+    const filename = (state.linkName || 'qr-code').replace(/[^a-z0-9]/gi, '-').toLowerCase();
+    const opts = { size: 800, fg: state.fg, bg: state.bg, gradient: state.gradient, shape: state.shape };
+
+    if (format === 'svg'){
+      const svgStr = buildSVG(url, opts);
+      if (!svgStr){ alert('Erro: biblioteca QR não carregada'); return; }
+      const blob = new Blob([svgStr], {type: 'image/svg+xml'});
+      const u = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = u; a.download = filename + '.svg';
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(u);
+      if (typeof toast === 'function') toast('QR SVG baixado · ' + state.url);
+    } else {
+      // PNG: render hi-res to off-screen canvas
+      const tmpCanvas = document.createElement('canvas');
+      drawQR(tmpCanvas, url, opts);
+      tmpCanvas.toBlob(function(blob){
+        const u = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = u; a.download = filename + '.png';
+        document.body.appendChild(a); a.click(); a.remove();
+        URL.revokeObjectURL(u);
+        if (typeof toast === 'function') toast('QR PNG baixado · ' + state.url);
+      });
+    }
+  };
+
+  // ESC fecha modal
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') window.closeQRModal(); });
 })();
 </script>
 
