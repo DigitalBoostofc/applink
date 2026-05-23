@@ -185,3 +185,96 @@
 }
 [data-brand="appex"] { --ink-on-dark:#F5F5F7; }
 
+/* ============================================================
+   IDENTIDADE 3 — V3 "Configuration Engine" (Dark Neumorphism)
+   Estrutura: shadows duplos (out+in), spring easing, uppercase tracking.
+   Paleta: V2 (lime + coral + yellow + cream + jet black).
+   ============================================================ */
+[data-brand="v3"] {
+  /* tipografia — General Sans (display) + Satoshi (body) */
+  --font-display: 'General Sans', 'Space Grotesk', sans-serif;
+  --font-ui:      'Satoshi', 'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+  --display-style: normal;
+  --display-weight: 600;
+  --display-tracking: -0.02em;
+
+  /* fundo: jet black + camadas sutis */
+  --canvas: #0A0A0A;
+  --canvas-fixed: scroll;
+  --sidebar: #050505;
+  --topbar:  #0A0A0A;
+  --surface: #141414;        /* card surface */
+  --surface-2: #1A1A1A;
+  --surface-hover: #1F1F1F;
+  --surface-raised: #161616;
+
+  /* glass */
+  --glass-bg: rgba(255,255,255,0.03);
+  --glass-bd: rgba(255,255,255,0.06);
+  --glass-blur: 18px;
+
+  /* tinta */
+  --ink-1: #F5F5F7;
+  --ink-2: #94A3B8;
+  --ink-3: #5A5A60;
+  --ink-on-dark:   #F5F5F7;
+  --ink-on-dark-2: #94A3B8;
+
+  /* bordas — quase invisíveis (a separação vem das sombras) */
+  --bd-c: rgba(255,255,255,0.04);
+  --bd-w: 1px;
+  --bd-w-sm: 1px;
+  --edge: rgba(255,255,255,0.04);
+  --edge-strong: rgba(255,255,255,0.08);
+
+  /* raios — generosos */
+  --r-pill: 999px;
+  --r-input: 14px;
+  --r-btn: 14px;
+  --r-card: 24px;
+  --r-lg: 32px;
+
+  /* sombras NEUMORPHIC — dupla camada (preta + branca sutil) */
+  --sh-card:      6px 6px 16px rgba(0,0,0,0.55), -4px -4px 10px rgba(255,255,255,0.025);
+  --sh-card-lg:   12px 12px 28px rgba(0,0,0,0.65), -6px -6px 14px rgba(255,255,255,0.03);
+  --sh-card-in:   inset 4px 4px 8px rgba(0,0,0,0.55), inset -2px -2px 6px rgba(255,255,255,0.025);
+  --sh-btn:       4px 4px 10px rgba(0,0,0,0.5), -2px -2px 6px rgba(255,255,255,0.025);
+  --sh-btn-hover: 2px 2px 6px rgba(0,0,0,0.5), -1px -1px 4px rgba(255,255,255,0.025);
+  --sh-pop:       16px 16px 40px rgba(0,0,0,0.7), -8px -8px 20px rgba(255,255,255,0.03);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md: var(--sh-card);
+  --shadow-lg: var(--sh-card-lg);
+  --shadow-xl: var(--sh-pop);
+
+  /* paleta de marca — V2 */
+  --lime-neon:   #BFFF00;
+  --coral-pink:  #FF7777;
+  --yellow-pop:  #FFD400;
+  --warm-cream:  #FFE2C0;
+  --jet-black:   #0A0A0A;
+
+  --accent:        var(--lime-neon);
+  --accent-hover:  #AEEC00;
+  --accent-2:      var(--coral-pink);
+  --accent-3:      var(--yellow-pop);
+  --accent-4:      var(--warm-cream);
+  --on-accent:     #0A0A0A;
+  --accent-soft:   rgba(191,255,0,0.12);
+  --accent-grad:   linear-gradient(135deg,#BFFF00 0%,#FF7777 100%);
+  --accent-ink:    #0A0A0A;
+  --success:       #10B981;
+
+  /* status */
+  --success-soft: rgba(16,185,129,0.18);
+  --danger-soft:  rgba(239,68,68,0.18);
+  --warning-soft: rgba(245,158,11,0.18);
+
+  /* movimento — spring tátil */
+  --ease:       cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-soft:  cubic-bezier(0.34, 1.56, 0.64, 1);
+  --focus-ring: 0 0 0 2px #0A0A0A, 0 0 0 4px #BFFF00;
+
+  --brand-name: 'AppLink';
+}
+

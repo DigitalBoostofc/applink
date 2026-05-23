@@ -25,13 +25,18 @@ docs/
 
 ## Identidades
 
-| | AppLink avulso | Módulo AppexCRM |
-|---|---|---|
-| Estilo | Dark-first premium · lime + coral + cream | Minimalista — herda a marca do CRM |
-| Accent | Lime `#BFFF00` + Coral `#FF7777` + Yellow `#FFD400` + Cream `#FFE2C0` | Roxo Stripe `#635BFF` |
-| Fundo | Jet Black `#0D0D0D` sólido | Dark `#0C0C0F` ou light `#F6F9FC` |
-| Tipografia | Space Grotesk + Inter | Inter |
-| Tagline | *"Conecte. Personalize. Acompanhe. Cresça."* | — |
+| | v2 · AppLink premium | v3 · Config Engine (neumórfico) | Módulo AppexCRM |
+|---|---|---|---|
+| Estilo | Dark premium · bordas sutis | Dark neumorphism · sombras 3D + spring physics | Minimalista — herda do CRM |
+| Accent | Lime `#BFFF00` + Coral `#FF7777` (paleta V2) | Mesma paleta V2 · usada como gradient e glow | Roxo Stripe `#635BFF` |
+| Fundo | Jet Black `#0D0D0D` | `#0A0A0A` core + camadas `#141414` / `#1A1A1A` | Dark `#0C0C0F` ou light |
+| Tipografia | Space Grotesk + Inter | **General Sans** + Satoshi · uppercase tracking 0.2–0.4em | Inter |
+| Shadow | Hard offset sutil + flat | Dual (outward escuro + inward branco sutil) + inset em inputs | Soft blur Stripe |
+| Motion | Out-expo | **Spring** `cubic-bezier(0.34, 1.56, 0.64, 1)` | Out-expo |
+| Showcase | `00-design-system.html` | `19-v3-neumorphism.html` | `17-modulo-crm.html` |
+| Tagline | *"Conecte. Personalize. Acompanhe. Cresça."* | mesma | — |
+
+As 3 identidades convivem nas 19 telas — o seletor flutuante alterna ao vivo.
 
 O seletor flutuante (canto inferior direito de cada mockup) alterna identidade e modo claro/escuro ao vivo.
 
