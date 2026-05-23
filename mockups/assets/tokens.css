@@ -92,7 +92,8 @@
   /* movimento: bouncy */
   --ease: cubic-bezier(0.175,0.885,0.32,1.275);
   --ease-soft: cubic-bezier(0.16,1,0.3,1);
-  --focus-ring: 0 0 0 3px #BEF264, 4px 4px 0 #000;
+  /* a11y: ring duplo (zinc interno + lime externo) — visível em qualquer base */
+  --focus-ring: 0 0 0 2px #18181B, 0 0 0 5px #BEF264;
 
   --brand-name: 'APPlink';
 }

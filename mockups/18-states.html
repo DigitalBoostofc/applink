@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APPlink — Estados &amp; edge cases</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/ui.css">
+<style>
+  .doc{max-width:1080px;margin:0 auto;padding:42px 28px 140px}
+  .doc h1{font-family:var(--font-display);font-style:italic;font-weight:900;letter-spacing:-.02em;font-size:30px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.45)}
+  .doc .sub{color:rgba(255,255,255,.85);font-size:13px;text-shadow:0 1px 2px rgba(0,0,0,.45)}
+  .doc section{margin-top:38px}
+  .doc h2{font-family:var(--font-display);font-style:italic;font-weight:900;font-size:18px;color:#fff;letter-spacing:-.02em;text-shadow:0 1px 2px rgba(0,0,0,.45);margin-bottom:4px}
+  .doc .hint{font-size:13px;color:rgba(255,255,255,.82);margin-bottom:14px;text-shadow:0 1px 2px rgba(0,0,0,.45)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
+  .demo{background:var(--surface);border:var(--bd-w) solid #000;border-radius:var(--r-card);
+    box-shadow:var(--sh-card);padding:18px;color:var(--ink-1);display:flex;flex-direction:column;gap:12px}
+  [data-brand="appex"] .demo{border-width:1px;border-color:var(--edge);box-shadow:var(--shadow-md)}
+  .demo .lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+  /* skeletons */
+  .sk{background:linear-gradient(90deg,var(--surface-hover) 0,#E4E4E7 50%,var(--surface-hover) 100%);
+    background-size:200% 100%;animation:shimmer 1.4s linear infinite;border-radius:6px}
+  @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+  .sk-line{height:11px;border-radius:6px;margin:6px 0}
+  /* spinner */
+  .spin{width:18px;height:18px;border:3px solid rgba(0,0,0,.15);border-top-color:#000;border-radius:50%;
+    animation:rot .8s linear infinite}
+  @keyframes rot{to{transform:rotate(360deg)}}
+  /* error input */
+  .input.is-error{border-color:var(--danger);box-shadow:0 0 0 3px color-mix(in srgb,var(--danger) 30%,transparent)}
+  .help-error{font-size:12px;color:var(--danger);font-weight:600;display:flex;gap:5px;align-items:center}
+  .help-error svg{width:13px;height:13px}
+  /* focus showcase */
+  .force-focus{box-shadow:var(--focus-ring) !important}
+  /* faux row */
+  .pix{height:38px;width:120px;background:var(--surface-hover);border-radius:6px}
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <h1>Estados &amp; edge cases</h1>
+  <p class="sub">Catálogo dos estados que todo componente precisa cobrir antes do handoff. Use o seletor no canto para alternar identidade.</p>
+
+  <!-- ===================== BOTÕES ===================== -->
+  <section>
+    <h2>Botões</h2>
+    <p class="hint">Default · hover · <b>focus visível</b> · disabled · loading. O foco usa um ring duplo (zinc + lime) que se destaca em qualquer base — WCAG 2.4.7.</p>
+    <div class="grid">
+      <div class="demo"><span class="lbl">Default</span>
+        <button class="btn btn-primary">Criar link</button>
+        <button class="btn btn-secondary">Secundário</button>
+        <button class="btn btn-danger">Excluir</button></div>
+      <div class="demo"><span class="lbl">Focus (forçado)</span>
+        <button class="btn btn-primary force-focus">Criar link</button>
+        <button class="btn btn-secondary force-focus">Secundário</button>
+        <button class="btn btn-danger force-focus">Excluir</button></div>
+      <div class="demo"><span class="lbl">Disabled</span>
+        <button class="btn btn-primary" disabled style="opacity:.45;cursor:not-allowed">Criar link</button>
+        <button class="btn btn-secondary" disabled style="opacity:.45;cursor:not-allowed">Secundário</button>
+        <button class="btn btn-danger" disabled style="opacity:.45;cursor:not-allowed">Excluir</button></div>
+      <div class="demo"><span class="lbl">Loading</span>
+        <button class="btn btn-primary"><span class="spin"></span> Salvando…</button>
+        <button class="btn btn-secondary"><span class="spin"></span> Carregando…</button></div>
+      <div class="demo"><span class="lbl">Tamanhos</span>
+        <button class="btn btn-primary btn-sm">Pequeno</button>
+        <button class="btn btn-primary">Normal</button>
+        <button class="btn btn-primary btn-lg">Grande (CTA)</button></div>
+      <div class="demo"><span class="lbl">Botão ícone</span>
+        <div class="row gap-8">
+          <button class="btn-icon" aria-label="Copiar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+          <button class="btn-icon force-focus" aria-label="Compartilhar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8h16v-8M12 3v13M7 8l5-5 5 5"/></svg></button>
+          <button class="btn-icon" disabled aria-label="Excluir" style="opacity:.4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button>
+        </div>
+        <span class="faint" style="font-size:11px">Todo <code>.btn-icon</code> precisa de <code>aria-label</code>.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INPUTS ===================== -->
+  <section>
+    <h2>Inputs &amp; formulários</h2>
+    <p class="hint">Default · preenchido · focus · erro · disabled · ajuda contextual.</p>
+    <div class="grid">
+      <div class="demo"><span class="lbl">Default &amp; preenchido</span>
+        <div class="field"><label class="label">URL de destino</label>
+          <input class="input" placeholder="https://seusite.com/pagina"></div>
+        <div class="field"><label class="label">Título</label>
+          <input class="input" value="Promo de inverno"></div></div>
+      <div class="demo"><span class="lbl">Focus</span>
+        <div class="field"><label class="label">URL</label>
+          <input class="input force-focus" value="https://promo.com"></div>
+        <div class="field"><label class="label">Slug</label>
+          <div class="input-group"><span class="addon">plnk.to/</span>
+            <input class="input" value="inverno"></div></div></div>
+      <div class="demo"><span class="lbl">Erro</span>
+        <div class="field"><label class="label">URL</label>
+          <input class="input is-error" value="não-é-url-válida">
+          <span class="help-error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg> Informe uma URL completa (com https://)</span>
+        </div>
+        <div class="field"><label class="label">Slug já em uso</label>
+          <div class="input-group"><span class="addon">plnk.to/</span>
+            <input class="input is-error" value="promo"></div>
+          <span class="help-error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg> Esse slug já existe</span></div></div>
+      <div class="demo"><span class="lbl">Disabled</span>
+        <div class="field"><label class="label">Plano</label>
+          <input class="input" value="Pro · não editável aqui" disabled style="opacity:.5;cursor:not-allowed"></div>
+        <div class="field"><label class="label">API key</label>
+          <input class="input mono" value="apk_live_****3c91" disabled style="opacity:.7"></div></div>
+      <div class="demo"><span class="lbl">Toggle</span>
+        <div class="row gap-8"><span class="toggle on" role="switch" aria-checked="true" tabindex="0"></span><span>Deep linking</span></div>
+        <div class="row gap-8"><span class="toggle" role="switch" aria-checked="false" tabindex="0"></span><span>Cloaking</span></div>
+        <div class="row gap-8"><span class="toggle on force-focus" role="switch" aria-checked="true" tabindex="0"></span><span>Foco no toggle</span></div>
+        <div class="row gap-8"><span class="toggle" role="switch" aria-checked="false" aria-disabled="true" style="opacity:.45"></span><span class="faint">Disabled</span></div></div>
+      <div class="demo"><span class="lbl">Checkbox</span>
+        <div class="row gap-8"><span class="checkbox on" role="checkbox" aria-checked="true" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><span>Capturar leads no CRM</span></div>
+        <div class="row gap-8"><span class="checkbox" role="checkbox" aria-checked="false" tabindex="0"></span><span>Aceito os termos</span></div>
+        <div class="row gap-8"><span class="checkbox force-focus" role="checkbox" aria-checked="false" tabindex="0"></span><span>Foco no checkbox</span></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== ALERTAS / BANNERS ===================== -->
+  <section>
+    <h2>Banners, alertas &amp; feedback</h2>
+    <p class="hint">Sucesso, aviso, erro, informativo. Sempre acompanhados de ícone — não dependem só da cor (WCAG 1.4.1).</p>
+    <div class="grid" style="grid-template-columns:1fr">
+      <div class="banner banner-accent" role="status"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Link criado com sucesso · plnk.to/promo-inverno</div>
+      <div class="banner banner-warning" role="alert"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg> Você atingiu 90% do seu limite de cliques deste mês.</div>
+      <div class="banner" role="alert" style="background:var(--danger-soft);color:var(--danger);border:var(--bd-w-sm) solid #000"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg> Não foi possível salvar o link. Verifique a URL e tente de novo.</div>
+      <div class="banner" role="status" style="background:var(--surface);color:var(--ink-1);border:var(--bd-w-sm) solid #000"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg> Aguardando propagação DNS · pode levar até 48h.</div>
+    </div>
+  </section>
+
+  <!-- ===================== TABELA: VAZIA / CARREGANDO / COM DADOS ===================== -->
+  <section>
+    <h2>Tabela — estados</h2>
+    <p class="hint">Carregando (skeleton) · vazio (CTA claro) · com erro de carregamento.</p>
+
+    <div class="demo" style="margin-bottom:14px"><span class="lbl">Carregando — skeleton</span>
+      <table class="table">
+        <thead><tr><th>Título</th><th>Cliques</th><th>Pixels</th><th>Link curto</th><th>Criado</th></tr></thead>
+        <tbody>
+          <tr><td><div class="sk sk-line" style="width:60%"></div></td><td><div class="sk sk-line" style="width:40px"></div></td><td><div class="sk sk-line" style="width:60px"></div></td><td><div class="sk sk-line" style="width:80%"></div></td><td><div class="sk sk-line" style="width:70px"></div></td></tr>
+          <tr><td><div class="sk sk-line" style="width:50%"></div></td><td><div class="sk sk-line" style="width:40px"></div></td><td><div class="sk sk-line" style="width:90px"></div></td><td><div class="sk sk-line" style="width:80%"></div></td><td><div class="sk sk-line" style="width:70px"></div></td></tr>
+          <tr><td><div class="sk sk-line" style="width:65%"></div></td><td><div class="sk sk-line" style="width:40px"></div></td><td><div class="sk sk-line" style="width:60px"></div></td><td><div class="sk sk-line" style="width:80%"></div></td><td><div class="sk sk-line" style="width:70px"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="demo" style="margin-bottom:14px;align-items:center"><span class="lbl" style="align-self:flex-start">Vazio · primeiro link</span>
+      <div class="empty" style="padding:40px 10px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        <div style="font-family:var(--font-display);font-weight:800;font-style:italic;font-size:18px;color:var(--ink-1);margin-top:6px">Você ainda não tem links</div>
+        <div class="faint" style="font-size:13px;margin:6px 0 14px">Crie seu primeiro smart link em 30 segundos.</div>
+        <button class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg> Criar link</button>
+      </div>
+    </div>
+
+    <div class="demo" style="align-items:center"><span class="lbl" style="align-self:flex-start">Erro ao carregar</span>
+      <div class="empty" style="padding:36px 10px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg>
+        <div style="font-family:var(--font-display);font-weight:800;font-style:italic;font-size:18px;color:var(--ink-1);margin-top:6px">Não foi possível carregar os links</div>
+        <div class="faint" style="font-size:13px;margin:6px 0 14px">Verifique sua conexão e tente novamente.</div>
+        <button class="btn btn-secondary">↻ Tentar de novo</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== KPI: CARREGANDO ===================== -->
+  <section>
+    <h2>Métricas — carregando</h2>
+    <p class="hint">Skeletons das KPIs antes dos dados chegarem.</p>
+    <div class="kpi-row" style="grid-template-columns:repeat(4,1fr)">
+      <div class="kpi"><div class="sk" style="width:38px;height:38px;border-radius:9px"></div>
+        <div style="flex:1"><div class="sk sk-line" style="width:55%"></div><div class="sk sk-line" style="width:35%;height:18px;margin-top:8px"></div></div></div>
+      <div class="kpi"><div class="sk" style="width:38px;height:38px;border-radius:9px"></div>
+        <div style="flex:1"><div class="sk sk-line" style="width:70%"></div><div class="sk sk-line" style="width:50%;height:18px;margin-top:8px"></div></div></div>
+      <div class="kpi"><div class="sk" style="width:38px;height:38px;border-radius:9px"></div>
+        <div style="flex:1"><div class="sk sk-line" style="width:60%"></div><div class="sk sk-line" style="width:30%;height:18px;margin-top:8px"></div></div></div>
+      <div class="kpi"><div class="sk" style="width:38px;height:38px;border-radius:9px"></div>
+        <div style="flex:1"><div class="sk sk-line" style="width:65%"></div><div class="sk sk-line" style="width:40%;height:18px;margin-top:8px"></div></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== ANALYTICS: SEM DADOS ===================== -->
+  <section>
+    <h2>Analytics — sem cliques ainda</h2>
+    <p class="hint">CTA orienta o usuário a compartilhar o link para começar a coletar dados.</p>
+    <div class="card card-pad" style="text-align:center;padding:50px">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--ink-3)" stroke-width="1.6" style="margin:0 auto"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg>
+      <div class="section-title" style="margin-top:8px">Nenhum clique no seu link ainda</div>
+      <div class="faint" style="font-size:13px;margin:6px 0 14px">Compartilhe o link e acompanhe os dados aqui em tempo real.</div>
+      <div class="row gap-8" style="justify-content:center">
+        <button class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar link</button>
+        <button class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8h16v-8M12 3v13M7 8l5-5 5 5"/></svg> Baixar QR</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LIMITE / GUARD-RAIL ===================== -->
+  <section>
+    <h2>Limite do plano atingido</h2>
+    <p class="hint">Quando o usuário atinge 100% do limite mensal — bloqueia a criação e oferece upgrade.</p>
+    <div class="card card-pad col gap-12">
+      <div class="row between"><div class="col"><b>Limite de cliques do mês atingido</b><span class="faint" style="font-size:12px">Seus links continuam funcionando, mas pixels e tracking estão pausados.</span></div><span class="badge" style="background:var(--danger);color:#fff;border:var(--bd-w-sm) solid #000">100%</span></div>
+      <div class="bar"><span style="width:100%;background:var(--danger)"></span></div>
+      <div class="row gap-8"><button class="btn btn-primary">Fazer upgrade</button><button class="btn btn-ghost">Ver consumo</button></div>
+    </div>
+  </section>
+
+  <!-- ===================== TYPING / WHILE TYPING ===================== -->
+  <section>
+    <h2>Inline — gerando preview</h2>
+    <p class="hint">Enquanto o sistema busca metadata da URL colada.</p>
+    <div class="card card-pad row gap-12 center">
+      <div class="sk" style="width:120px;height:64px;border-radius:8px"></div>
+      <div class="col gap-4" style="flex:1">
+        <div class="sk sk-line" style="width:70%"></div>
+        <div class="sk sk-line" style="width:90%;height:9px"></div>
+      </div>
+      <div class="row gap-6 center" style="color:var(--ink-3);font-size:12px"><span class="spin" style="border-color:rgba(0,0,0,.15);border-top-color:#000"></span> Lendo metadata…</div>
+    </div>
+  </section>
+
+  <!-- ===================== NOTAS A11Y ===================== -->
+  <section>
+    <h2>Notas de acessibilidade</h2>
+    <div class="card card-pad col gap-8" style="font-size:13.5px">
+      <div class="row gap-8"><span class="badge badge-success" style="flex-shrink:0">OK</span> Foco visível em todos os interativos (ring duplo zinc + lime).</div>
+      <div class="row gap-8"><span class="badge badge-success" style="flex-shrink:0">OK</span> Mensagens de erro acompanhadas de ícone + texto — não dependem da cor.</div>
+      <div class="row gap-8"><span class="badge badge-success" style="flex-shrink:0">OK</span> <code>prefers-reduced-motion</code>: animações zeradas.</div>
+      <div class="row gap-8"><span class="badge badge-warning" style="flex-shrink:0">TODO</span> Em implementação: <code>aria-label</code> em todo <code>.btn-icon</code>, <code>role="switch"</code>/<code>"checkbox"</code> com <code>aria-checked</code>, <code>aria-live</code> nos toasts.</div>
+      <div class="row gap-8"><span class="badge badge-warning" style="flex-shrink:0">TODO</span> Tamanho de toque mínimo 44×44px em mobile (atualmente 32-34 em desktop).</div>
+    </div>
+  </section>
+
+</div>
+<script src="assets/theme.js"></script>
+</body>
+</html>

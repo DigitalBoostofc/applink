@@ -198,6 +198,55 @@
     </div>
   </section>
 
+  <section>
+    <h2>Acessibilidade — princípios</h2>
+    <p class="hint">Resumo WCAG 2.1 AA. Detalhes na auditoria completa em <code>docs/acessibilidade-audit.md</code>.</p>
+    <div class="panel col gap-12">
+      <div class="row gap-12"><span class="badge badge-accent" style="flex-shrink:0">Contraste</span>
+        <div class="col gap-4"><b>Mínimo 4,5:1 (texto normal) · 3:1 (texto grande).</b>
+          <span class="page-sub">Textos diretos sobre o gradiente do NeonSpace usam <code>text-shadow</code> para sobreviver à faixa laranja. <b>Nunca use lime ou pink como cor de texto</b> sobre branco — ficam abaixo de 2:1.</span></div></div>
+      <div class="row gap-12"><span class="badge badge-accent" style="flex-shrink:0">Foco</span>
+        <div class="col gap-4"><b>Foco visível com <code>:focus-visible</code> + ring duplo.</b>
+          <span class="page-sub">Ring zinc interno (2px) + lime externo (3px) no NeonSpace; ring roxo translúcido no AppexCRM. Visível em qualquer base.</span></div></div>
+      <div class="row gap-12"><span class="badge badge-accent" style="flex-shrink:0">Não-cor</span>
+        <div class="col gap-4"><b>Status com ícone + texto (WCAG 1.4.1).</b>
+          <span class="page-sub">Banners, badges e mensagens de erro acompanham ícone semântico — não dependem só da cor.</span></div></div>
+      <div class="row gap-12"><span class="badge badge-accent" style="flex-shrink:0">Movimento</span>
+        <div class="col gap-4"><b><code>prefers-reduced-motion</code> respeitado.</b>
+          <span class="page-sub">Quem ativa redução de movimento no SO recebe transições zeradas — incluindo o bounce do NeonSpace.</span></div></div>
+      <div class="row gap-12"><span class="badge badge-warning" style="flex-shrink:0">TODO handoff</span>
+        <div class="col gap-4"><b>A implementação precisa adicionar:</b>
+          <span class="page-sub"><code>aria-label</code> em todo <code>.btn-icon</code> · <code>role="switch"</code>/<code>"checkbox"</code> com <code>aria-checked</code> · alvo mínimo 44×44px em mobile · <code>aria-live</code> em toasts.</span></div></div>
+      <div class="row" style="margin-top:6px"><a class="btn btn-secondary btn-sm" href="18-states.html">Ver catálogo de estados →</a></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Do &amp; Don't</h2>
+    <div class="panel" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div>
+        <div class="eyebrow" style="color:var(--success)">✓ Faça</div>
+        <ul style="margin:10px 0 0 0;padding-left:18px;font-size:13px;line-height:1.75">
+          <li>Use <code>var(--accent)</code> como <b>fundo</b> de ações primárias.</li>
+          <li>Texto pequeno sempre em superfície controlada (<code>.card</code>).</li>
+          <li>Acompanhe ícone + texto em status, badges e banners.</li>
+          <li>Alvos de toque ≥ 44×44px em mobile.</li>
+          <li>Use <code>:focus-visible</code> para o ring (não <code>:focus</code> puro).</li>
+        </ul>
+      </div>
+      <div>
+        <div class="eyebrow" style="color:var(--danger)">✗ Não faça</div>
+        <ul style="margin:10px 0 0 0;padding-left:18px;font-size:13px;line-height:1.75">
+          <li>Não use lime ou pink como cor de <b>texto</b>.</li>
+          <li>Não escreva texto cinza direto sobre o gradiente.</li>
+          <li>Não combine A/B Rotator + Geo + Devices (mutuamente exclusivos).</li>
+          <li>Não suprima foco visível por estética.</li>
+          <li>Não dependa só de cor para indicar erro/sucesso.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
 </div>
 <script src="assets/theme.js"></script>
 </body>

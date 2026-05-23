@@ -16,8 +16,10 @@ mockups/                  Protótipo navegável (HTML/CSS estático)
   BUILD-SPEC.md           Convenções de construção das telas
 
 docs/
-  analise-switchy.md      Análise funcional de referência (Switchy.io)
-  naming-applink.md       Processo de naming (em aberto)
+  analise-switchy.md         Análise funcional de referência (Switchy.io)
+  mapeamento-frontend.md     Mapeamento das telas/funcionalidades
+  naming-applink.md          Processo de naming (em aberto)
+  acessibilidade-audit.md    Auditoria WCAG 2.1 AA + fixes aplicados
 ```
 
 ## Identidades
@@ -63,6 +65,7 @@ python3 -m http.server 8000
 | 15 | Equipe & Workspaces |
 | 16 | Planos & Cobrança |
 | 17 | Módulo no AppexCRM |
+| 18 | Estados & edge cases (handoff) |
 
 ## Próximos passos
 

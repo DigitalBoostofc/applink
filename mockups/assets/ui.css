@@ -327,13 +327,49 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:var(--display-tracking)}
 
 /* ---- APPlink/NeonSpace: contraste de texto sobre gradiente/chrome escuro ---- */
 [data-brand="applink"] .topbar .page-title{color:var(--ink-on-dark)}
-[data-brand="applink"] .content{color:#FAFAFA}
+[data-brand="applink"] .content{
+  color:#FAFAFA;
+  /* a11y: sobe a legibilidade do texto direto no gradiente (laranja é baixo contraste) */
+  text-shadow:0 1px 2px rgba(0,0,0,0.45);
+}
 [data-brand="applink"] .card,
 [data-brand="applink"] .kpi,
 [data-brand="applink"] .glass,
-[data-brand="applink"] .note{color:var(--ink-1)}
+[data-brand="applink"] .note{color:var(--ink-1);text-shadow:none}
 [data-brand="applink"] .content > .section-title,
 [data-brand="applink"] .content > .col > .section-title{color:#fff}
-[data-brand="applink"] .tab{color:rgba(255,255,255,.72)}
+[data-brand="applink"] .tab{color:rgba(255,255,255,.85)}
 [data-brand="applink"] .tab:hover{color:#fff}
 [data-brand="applink"] .tab.active{color:#fff}
+
+/* ---------- a11y: foco visível e respeito ao prefers-reduced-motion ---------- */
+.btn:focus-visible,
+.btn-icon:focus-visible,
+.input:focus-visible,
+.select:focus-visible,
+.textarea:focus-visible,
+.chip:focus-visible,
+.tab:focus-visible,
+.checkbox:focus-visible,
+.toggle:focus-visible,
+a:focus-visible{
+  outline:none;
+  box-shadow:var(--focus-ring);
+}
+/* foco em botões neobrutalistas: combina o ring + a sombra hard original */
+[data-brand="applink"] .btn-primary:focus-visible,
+[data-brand="applink"] .btn-secondary:focus-visible,
+[data-brand="applink"] .btn-danger:focus-visible{
+  box-shadow:var(--focus-ring),var(--sh-btn);
+}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  [data-brand="applink"] .btn:hover{transform:none !important}
+  .scard:hover,.sp:hover,.note:hover{transform:none !important}
+}
