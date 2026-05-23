@@ -347,6 +347,184 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:var(--display-tracking)}
 [data-brand="applink"] .content > .section-title,
 [data-brand="applink"] .content > .col > .section-title{color:#fff}
 [data-brand="applink"] .tab{color:rgba(255,255,255,.65)}
+
+/* ============================================================
+   V3 — ACID GRAPHIC (Liquid Chrome / Techno-Surrealism)
+   Aplica sobre as telas existentes sem quebrar layouts.
+   ============================================================ */
+[data-brand="acid"] body{font-family:var(--font-ui)}
+[data-brand="acid"] .topbar{border-bottom-color:#1E1E1E}
+[data-brand="acid"] .sidebar{border-right-color:#1E1E1E;background:#050505}
+[data-brand="acid"] .topbar .page-title{color:var(--ink-on-dark)}
+[data-brand="acid"] .content{color:#FAFAFA}
+[data-brand="acid"] .card,
+[data-brand="acid"] .kpi,
+[data-brand="acid"] .glass{color:var(--ink-1);position:relative}
+
+/* tipografia distorcida — uppercase, italic, chromatic aberration */
+[data-brand="acid"] .page-title,
+[data-brand="acid"] .section-title,
+[data-brand="acid"] h1,
+[data-brand="acid"] h2{
+  font-family:var(--font-display);font-style:italic;font-weight:800;
+  text-transform:uppercase;letter-spacing:-0.05em;color:#fff;
+  text-shadow:-1.5px 0 #FF00FF, 1.5px 0 #00F0FF;
+}
+[data-brand="acid"] .logo-name{
+  font-family:var(--font-display);font-style:italic;font-weight:800;
+  text-transform:uppercase;letter-spacing:-0.05em;color:#fff;
+  text-shadow:-1px 0 #FF00FF, 1px 0 #00F0FF;
+}
+[data-brand="acid"] .eyebrow{color:#FF00FF;letter-spacing:0.18em}
+
+/* logo-mark com chrome gradient */
+[data-brand="acid"] .logo-mark{
+  background:linear-gradient(180deg,#FFFFFF 0%,#888888 50%,#E0E0E0 100%);
+  border:1px solid #2A2A2A;
+  box-shadow:0 0 18px rgba(204,255,0,0.35);
+}
+[data-brand="acid"] .logo-mark svg{color:#000}
+
+/* botões — chrome cilíndrico, neon glow, scale on hover */
+[data-brand="acid"] .btn{border-radius:999px;font-family:var(--font-ui);font-weight:700;
+  letter-spacing:0.02em;text-transform:uppercase;font-size:12px}
+[data-brand="acid"] .btn-primary{
+  background:var(--accent);color:#000;border:1px solid #000;
+  box-shadow:0 0 18px rgba(204,255,0,0.5);
+}
+[data-brand="acid"] .btn-primary:hover{
+  transform:scale(1.04) rotate(-1.5deg);
+  box-shadow:0 0 32px rgba(204,255,0,0.85), 0 0 18px rgba(255,0,255,0.4);
+}
+[data-brand="acid"] .btn-secondary{
+  background:linear-gradient(180deg,#FFFFFF 0%,#888888 50%,#FFFFFF 100%);
+  color:#000;border:1px solid #000;
+}
+[data-brand="acid"] .btn-secondary:hover{
+  transform:scale(1.04) rotate(1deg);
+  filter:brightness(1.1) contrast(1.1);
+}
+[data-brand="acid"] .btn-ghost{color:#CCFF00;border-radius:999px}
+[data-brand="acid"] .btn-ghost:hover{background:rgba(204,255,0,0.1);color:#fff}
+[data-brand="acid"] .btn-danger{background:#FF00FF;color:#fff;
+  box-shadow:0 0 18px rgba(255,0,255,0.55)}
+[data-brand="acid"] .btn-icon{border-radius:999px;color:#CCFF00}
+[data-brand="acid"] .btn-icon:hover{
+  background:rgba(204,255,0,0.12);color:#fff;
+  box-shadow:0 0 14px rgba(204,255,0,0.4);
+}
+
+/* cards — borda iridescente animada */
+[data-brand="acid"] .card{
+  background:rgba(10,10,10,0.85);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1.5px solid transparent;
+  background-image:
+    linear-gradient(rgba(10,10,10,0.85),rgba(10,10,10,0.85)),
+    linear-gradient(135deg,#CCFF00 0%,#FFFFFF 33%,#FF00FF 66%,#00F0FF 100%);
+  background-origin:border-box;
+  background-clip:padding-box,border-box;
+  border-radius:18px;
+  box-shadow:0 24px 60px rgba(0,0,0,0.7);
+}
+[data-brand="acid"] .kpi{
+  background:rgba(10,10,10,0.85);
+  border:1.5px solid transparent;
+  background-image:
+    linear-gradient(rgba(10,10,10,0.85),rgba(10,10,10,0.85)),
+    linear-gradient(135deg,#CCFF00,#FF00FF);
+  background-origin:border-box;background-clip:padding-box,border-box;
+  border-radius:16px;
+}
+[data-brand="acid"] .kpi-ic{
+  background:linear-gradient(135deg,#CCFF00,#00F0FF);
+  border:1px solid #000;color:#000;border-radius:14px;
+}
+
+/* inputs em pill */
+[data-brand="acid"] .input,
+[data-brand="acid"] .select,
+[data-brand="acid"] .textarea{
+  border-radius:999px;border:1px solid #2A2A2A;background:#0A0A0A;color:#FAFAFA;
+  font-family:var(--font-ui);
+}
+[data-brand="acid"] .textarea{border-radius:18px}
+[data-brand="acid"] .input:focus,
+[data-brand="acid"] .select:focus,
+[data-brand="acid"] .textarea:focus{
+  border-color:#FF00FF;box-shadow:0 0 0 3px rgba(255,0,255,0.3),0 0 18px rgba(255,0,255,0.4);
+}
+[data-brand="acid"] .input-group .addon{
+  background:linear-gradient(180deg,#FFFFFF,#888888,#FFFFFF);
+  color:#000;border:1px solid #000;border-radius:999px 0 0 999px;
+}
+[data-brand="acid"] .input-group .input{border-radius:0 999px 999px 0}
+
+/* badges */
+[data-brand="acid"] .badge{border:1px solid #000;border-radius:999px;font-weight:800;
+  text-transform:uppercase;letter-spacing:0.03em}
+[data-brand="acid"] .badge-accent{background:#CCFF00;color:#000;
+  box-shadow:0 0 12px rgba(204,255,0,0.4)}
+[data-brand="acid"] .badge-success{background:#22C55E;color:#000}
+[data-brand="acid"] .badge-warning{background:#FFD400;color:#000}
+[data-brand="acid"] .badge-danger{background:#FF00FF;color:#fff;
+  box-shadow:0 0 12px rgba(255,0,255,0.4)}
+[data-brand="acid"] .badge-neutral{background:#1A1A1A;color:#CCFF00;border-color:#2A2A2A}
+
+/* nav-item active — chrome metal */
+[data-brand="acid"] .nav-item.active{
+  background:linear-gradient(180deg,#FFFFFF,#888888,#FFFFFF);
+  color:#000;border:1px solid #000;font-weight:800;
+  text-transform:uppercase;letter-spacing:0.02em;
+  box-shadow:0 0 14px rgba(204,255,0,0.35);
+}
+[data-brand="acid"] .nav-item{font-family:var(--font-ui);text-transform:uppercase;
+  letter-spacing:0.04em;font-size:11.5px;font-weight:700}
+[data-brand="acid"] .nav-label{color:#FF00FF}
+
+/* toggle / checkbox */
+[data-brand="acid"] .toggle.on{background:#CCFF00;box-shadow:0 0 12px rgba(204,255,0,0.5)}
+[data-brand="acid"] .toggle.on::after{background:#000}
+[data-brand="acid"] .checkbox.on{background:#FF00FF;border-color:#000;
+  box-shadow:0 0 12px rgba(255,0,255,0.5)}
+
+/* chip */
+[data-brand="acid"] .chip{border-radius:999px;border-color:#2A2A2A;
+  background:#0A0A0A;color:#CCFF00;text-transform:uppercase;letter-spacing:0.04em;
+  font-size:11px;font-weight:700}
+[data-brand="acid"] .chip:hover{background:rgba(204,255,0,0.1);color:#fff;
+  border-color:#CCFF00}
+
+/* tabs */
+[data-brand="acid"] .tab{font-family:var(--font-display);font-style:italic;
+  font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;
+  color:rgba(255,255,255,.6)}
+[data-brand="acid"] .tab.active{color:#CCFF00;border-bottom-color:#CCFF00}
+[data-brand="acid"] .tabs{border-bottom-color:#2A2A2A}
+
+/* tabela */
+[data-brand="acid"] .table th{color:#FF00FF;text-transform:uppercase;
+  letter-spacing:0.1em;border-bottom-color:#1E1E1E;font-weight:800}
+[data-brand="acid"] .table td{border-bottom-color:#1E1E1E;color:#FAFAFA}
+[data-brand="acid"] .table tr:hover td{background:rgba(204,255,0,0.04)}
+
+/* banner */
+[data-brand="acid"] .banner{border:1px solid #000;border-radius:18px}
+[data-brand="acid"] .banner-accent{background:#CCFF00;color:#000;
+  box-shadow:0 0 18px rgba(204,255,0,0.4)}
+
+/* noise overlay sutil */
+[data-brand="acid"] body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:5;opacity:.06;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='1'/></svg>");
+  mix-blend-mode:overlay;
+}
+
+/* marquee helper (usado no showcase) */
+@keyframes acid-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.acid-marquee{display:flex;gap:48px;animation:acid-marquee 22s linear infinite;
+  white-space:nowrap;font-family:'Syne',sans-serif;font-style:italic;
+  font-weight:800;text-transform:uppercase;letter-spacing:-0.04em}
 [data-brand="applink"] .tab:hover{color:#fff}
 [data-brand="applink"] .tab.active{color:#fff}
 

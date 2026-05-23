@@ -25,13 +25,18 @@ docs/
 
 ## Identidades
 
-| | AppLink avulso | Módulo AppexCRM |
-|---|---|---|
-| Estilo | Dark-first premium · neon lime + coral + cream | Minimalista — herda a marca do CRM |
-| Accent | **Lime Neon `#BFFF00`** + Coral Pink `#FF7777` + Yellow `#FFD400` + Cream `#FFE2C0` | Roxo Stripe `#635BFF` |
-| Fundo | **Jet Black `#0D0D0D`** sólido | Dark `#0C0C0F` ou light `#F6F9FC` |
-| Tipografia | **Space Grotesk** (display) + Inter (UI) | Inter |
-| Tagline | *"Conecte. Personalize. Acompanhe. Cresça."* | — |
+| | v2 · AppLink premium | v3 · Acid Graphic | Módulo AppexCRM |
+|---|---|---|---|
+| Estilo | Dark premium · lime + coral + cream | Liquid chrome · acid + hyper-pink + iridescent | Minimalista — herda do CRM |
+| Accent | Lime `#BFFF00` + Coral `#FF7777` + Yellow `#FFD400` | Acid Green `#CCFF00` + Hyper Pink `#FF00FF` + Iridescent `#00F0FF` | Roxo Stripe `#635BFF` |
+| Fundo | Jet Black `#0D0D0D` sólido | Pure Black `#000` + chrome blobs flutuantes | Dark `#0C0C0F` ou light `#F6F9FC` |
+| Tipografia | Space Grotesk + Inter | **Syne** italic 800 + Plus Jakarta Sans | Inter |
+| Borda / forma | 1.5px sutil · raio 8-10px | Iridescent gradient · blob shapes | 1px sutil · raio 6-12px |
+| Vibe | Premium-tech equilibrado | Antidesign experimental "ano 2099" | Discreto, profissional |
+| Showcase | `00-design-system.html` | `19-acid-showcase.html` | `17-modulo-crm.html` |
+| Tagline | *"Conecte. Personalize. Acompanhe. Cresça."* | mesma | — |
+
+As 3 identidades convivem no mesmo conjunto de telas — o seletor flutuante no canto troca todas ao vivo. A página de comparação rápida é o `index.html`.
 
 O seletor flutuante (canto inferior direito de cada mockup) alterna identidade e modo claro/escuro ao vivo.
 

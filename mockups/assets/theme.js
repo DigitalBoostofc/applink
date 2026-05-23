@@ -1,6 +1,6 @@
 /* Seletor de tema flutuante — compartilhado por todas as telas.
-   Brand: applink (avulso) | appex (módulo white-label)
-   Mode:  dark | light
+   Brand: applink (v2 — dark premium) | acid (v3 — Acid Graphic) | appex (módulo)
+   Mode:  dark | light  (afeta só o tema appex)
    Persiste em localStorage para navegar entre telas mantendo o tema. */
 (function () {
   var root = document.documentElement;
@@ -15,10 +15,12 @@
     localStorage.setItem('ap-brand', brand);
     localStorage.setItem('ap-mode', mode);
     document.querySelectorAll('[data-brand-name]').forEach(function (el) {
-      el.textContent = brand === 'applink' ? 'AppLink' : 'AppexCRM';
+      el.textContent = brand === 'appex' ? 'AppexCRM' : 'AppLink';
     });
-    var b1 = document.getElementById('sw-applink'), b2 = document.getElementById('sw-appex');
-    if (b1) { b1.className = brand === 'applink' ? 'on' : ''; b2.className = brand === 'appex' ? 'on' : ''; }
+    ['applink','acid','appex'].forEach(function (b) {
+      var el = document.getElementById('sw-' + b);
+      if (el) el.className = brand === b ? 'on' : '';
+    });
     var m1 = document.getElementById('sw-dark'), m2 = document.getElementById('sw-light');
     if (m1) { m1.className = mode === 'dark' ? 'on' : ''; m2.className = mode === 'light' ? 'on' : ''; }
   }
@@ -27,10 +29,10 @@
     var css = '\
 .theme-sw{position:fixed;right:16px;bottom:16px;z-index:90;background:var(--surface);\
 border:1px solid var(--edge-strong);border-radius:12px;box-shadow:var(--shadow-xl);\
-padding:8px;display:flex;flex-direction:column;gap:6px;font-family:var(--font-sans)}\
+padding:8px;display:flex;flex-direction:column;gap:6px;font-family:var(--font-ui,sans-serif)}\
 .theme-sw .grp{display:flex;gap:3px;background:var(--surface-hover);border-radius:7px;padding:3px}\
 .theme-sw .grp>*{padding:5px 9px;font-size:11px;font-weight:500;border-radius:5px;\
-cursor:pointer;color:var(--ink-2);white-space:nowrap}\
+cursor:pointer;color:var(--ink-2);white-space:nowrap;text-transform:none;letter-spacing:0}\
 .theme-sw .grp>*.on{background:var(--accent);color:var(--on-accent)}\
 .theme-sw .cap{font-size:9px;letter-spacing:.08em;text-transform:uppercase;\
 color:var(--ink-3);padding:0 4px}';
@@ -40,12 +42,13 @@ color:var(--ink-3);padding:0 4px}';
     box.className = 'theme-sw';
     box.innerHTML = '\
 <div class="cap">Identidade</div>\
-<div class="grp"><div id="sw-applink">AppLink avulso</div><div id="sw-appex">Módulo CRM</div></div>\
+<div class="grp"><div id="sw-applink">v2 · AppLink</div><div id="sw-acid">v3 · Acid</div><div id="sw-appex">Módulo CRM</div></div>\
 <div class="cap">Modo</div>\
 <div class="grp"><div id="sw-dark">Escuro</div><div id="sw-light">Claro</div></div>';
     document.body.appendChild(box);
 
     document.getElementById('sw-applink').onclick = function () { brand = 'applink'; apply(); };
+    document.getElementById('sw-acid').onclick    = function () { brand = 'acid';    apply(); };
     document.getElementById('sw-appex').onclick   = function () { brand = 'appex';   apply(); };
     document.getElementById('sw-dark').onclick    = function () { mode  = 'dark';    apply(); };
     document.getElementById('sw-light').onclick   = function () { mode  = 'light';   apply(); };
