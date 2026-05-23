@@ -952,5 +952,67 @@
   </div>
 </div>
 
+<script>
+/* ─── 02c · Switching interativo entre os 12 tipos ─── */
+(function(){
+  const tiles = document.querySelectorAll('.ttile');
+  const formCards = document.querySelectorAll('.form-card');
+  const ptypeCards = document.querySelectorAll('.ptype-card');
+  const ptypeGrid = document.querySelector('.ptype-grid');
+
+  function nameOfTile(tile){ return tile.querySelector('.ttile-name')?.textContent.trim(); }
+  function nameOfFormCard(card){ return card.querySelector('.form-title')?.textContent.trim(); }
+  function nameOfPtypeCard(card){ return card.querySelector('.ptype-name')?.textContent.trim(); }
+
+  function show(name){
+    let matched = false;
+    formCards.forEach(card => {
+      const isMatch = nameOfFormCard(card) === name;
+      card.style.display = isMatch ? '' : 'none';
+      if (isMatch) matched = true;
+    });
+    ptypeCards.forEach(card => {
+      const isMatch = nameOfPtypeCard(card) === name;
+      card.style.display = isMatch ? '' : 'none';
+      if (isMatch) matched = true;
+    });
+    // Esconde a grid se nenhum ptype-card está visível
+    if (ptypeGrid){
+      const anyPtypeVisible = Array.from(ptypeCards).some(c => c.style.display !== 'none');
+      ptypeGrid.style.display = anyPtypeVisible ? '' : 'none';
+      // Quando 1 ptype-card visível: faz ele ocupar largura toda (sai do grid 3-col)
+      if (anyPtypeVisible){
+        ptypeGrid.style.gridTemplateColumns = '1fr';
+        ptypeGrid.style.maxWidth = '720px';
+      }
+    }
+    // Se nada bateu, mostra placeholder
+    if (!matched){
+      const ph = document.getElementById('type-placeholder');
+      if (ph) ph.style.display = '';
+    }
+  }
+
+  tiles.forEach(tile => {
+    tile.style.cursor = 'pointer';
+    tile.addEventListener('click', () => {
+      tiles.forEach(t => t.classList.remove('on'));
+      tile.classList.add('on');
+      show(nameOfTile(tile));
+      // Scroll-to-top do painel direito pra ver a card
+      document.querySelector('.right-col, .tipos-layout > div:last-child')?.scrollTo({top:0, behavior:'smooth'});
+      window.scrollTo({top: 0, behavior:'smooth'});
+    });
+  });
+
+  // Estado inicial: mostra só o tile com .on (Smart Link por default)
+  const initialTile = document.querySelector('.ttile.on') || tiles[0];
+  if (initialTile){
+    if (!initialTile.classList.contains('on')) initialTile.classList.add('on');
+    show(nameOfTile(initialTile));
+  }
+})();
+</script>
+
 </body>
 </html>
