@@ -58,7 +58,7 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:var(--display-tracking)}
   display:grid;place-items:center;flex-shrink:0;
   border:var(--bd-w-sm) solid var(--bd-c);box-shadow:var(--sh-btn);
 }
-.logo-mark svg{width:18px;height:18px}
+.logo-mark svg{width:18px;height:18px;color:var(--on-accent)}
 .logo-name{font-family:var(--font-display);font-weight:var(--display-weight);
   font-style:var(--display-style);font-size:16px;color:var(--ink-on-dark);
   letter-spacing:var(--display-tracking)}
