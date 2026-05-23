@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="pt-BR" data-brand="v3" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AppLink V3 — Painel de Links</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Syne:ital,wght@0,700;0,800;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/ui.css">
+<script>localStorage.setItem('ap-brand','v3');localStorage.setItem('ap-mode','dark');</script>
+<style>
+  .shell{display:flex;min-height:100vh}
+
+  /* sidebar V3 */
+  .v3sb{width:256px;flex-shrink:0;background:#050505;
+    border-right:1px solid rgba(255,255,255,0.05);
+    display:flex;flex-direction:column;padding:20px 16px;gap:4px;position:sticky;top:0;height:100vh;overflow-y:auto}
+  .v3sb .brand{display:flex;align-items:center;gap:12px;padding:8px 4px 24px}
+  .v3sb .brand-mark{width:40px;height:40px;border-radius:12px;
+    background:linear-gradient(135deg,#BFFF00,#FF7777);display:grid;place-items:center;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.55),-2px -2px 6px rgba(255,255,255,0.03),0 0 22px rgba(191,255,0,0.25)}
+  .v3sb .brand-mark svg{width:22px;height:22px;color:#0A0A0A}
+  .v3sb .brand-name{font-family:'General Sans',sans-serif;font-weight:700;font-size:17px;letter-spacing:-0.02em;color:#fff}
+  .v3sb .sec{font-size:9px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:#5A5A60;padding:14px 12px 6px}
+  .v3sb .nv{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;
+    font-family:'Satoshi',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;
+    font-size:11px;color:#94A3B8;cursor:pointer;transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .v3sb .nv svg{width:16px;height:16px;flex-shrink:0}
+  .v3sb .nv:hover{color:#fff;background:rgba(255,255,255,0.03)}
+  .v3sb .nv.on{background:linear-gradient(90deg,rgba(191,255,0,0.12) 0%,rgba(191,255,0,0) 100%);
+    color:#BFFF00;border-right:3px solid #BFFF00;border-radius:12px 0 0 12px;padding-right:9px}
+  .v3sb .nv .ct{margin-left:auto;background:rgba(255,255,255,0.06);color:#BFFF00;padding:2px 8px;border-radius:999px;font-size:9px}
+  .v3sb .user{margin-top:auto;display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;background:#0F0F0F;
+    box-shadow:inset 2px 2px 6px rgba(0,0,0,0.5)}
+  .v3sb .user .av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+    display:grid;place-items:center;font-weight:800;font-size:13px;box-shadow:2px 2px 6px rgba(0,0,0,0.4)}
+  .v3sb .user .nm{font-family:'Satoshi',sans-serif;font-size:12px;font-weight:700;color:#fff}
+  .v3sb .user .pl{font-family:'Satoshi',sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:#94A3B8;font-weight:700}
+
+  /* main */
+  .v3main{flex:1;min-width:0;padding-bottom:60px}
+  .v3hdr{position:sticky;top:0;z-index:10;height:80px;background:rgba(10,10,10,0.82);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.04);
+    display:flex;align-items:center;padding:0 32px;gap:24px}
+  .crumb{display:flex;align-items:center;gap:10px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+    text-transform:uppercase;letter-spacing:0.18em;color:#94A3B8}
+  .crumb b{color:#fff} .crumb svg{width:12px;height:12px;color:#5A5A60}
+  .v3search{margin-left:auto;width:256px;display:flex;align-items:center;gap:10px;height:42px;padding:0 16px;
+    background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);border-radius:14px;
+    box-shadow:inset 4px 4px 8px rgba(0,0,0,0.55),inset -2px -2px 6px rgba(255,255,255,0.025);
+    color:#94A3B8;transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .v3search:focus-within{width:320px;border-color:rgba(191,255,0,0.5)}
+  .v3search svg{width:14px;height:14px}
+  .v3search input{border:0;background:transparent;outline:none;color:#fff;flex:1;font-family:'Satoshi',sans-serif;font-size:13px}
+  .v3hdr .icons{display:flex;gap:8px}
+  .v3hdr .ib{width:42px;height:42px;border-radius:12px;background:#1A1A1A;color:#94A3B8;display:grid;place-items:center;cursor:pointer;
+    box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .v3hdr .ib:hover{color:#BFFF00;transform:scale(1.1) rotate(12deg)}
+  .v3hdr .ib svg{width:17px;height:17px}
+  .v3hdr .btn-cta{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;padding:12px 22px;border-radius:14px;
+    font-family:'Satoshi',sans-serif;font-weight:800;font-size:11.5px;text-transform:uppercase;letter-spacing:0.18em;
+    cursor:pointer;border:0;display:inline-flex;align-items:center;gap:8px;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 22px rgba(191,255,0,0.3);
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .v3hdr .btn-cta:hover{transform:scale(1.04)}
+  .v3hdr .btn-cta svg{width:16px;height:16px}
+
+  .v3content{padding:32px 32px 80px}
+  .ttl-row{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px;gap:32px;flex-wrap:wrap}
+  .eyebrow-cap{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:#BFFF00;margin-bottom:10px}
+  .v3h1{font-family:'General Sans',sans-serif;font-weight:600;font-size:44px;line-height:1;letter-spacing:-0.03em;color:#fff}
+  .v3h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .v3sub{font-family:'Satoshi',sans-serif;font-size:14px;color:#94A3B8;line-height:1.6;max-width:520px;margin-top:10px}
+
+  /* quick create — floating label inline */
+  .quick{margin-bottom:24px}
+  .fl-row{display:flex;gap:14px;align-items:stretch}
+  .fl{position:relative;flex:1;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:16px;
+    box-shadow:inset 4px 4px 8px rgba(0,0,0,0.55),inset -2px -2px 6px rgba(255,255,255,0.025);
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .fl input{width:100%;background:transparent;border:0;outline:none;padding:22px 20px 14px;color:#fff;
+    font-family:'Satoshi',sans-serif;font-size:14px;font-weight:500}
+  .fl label{position:absolute;top:1.1rem;left:1.4rem;color:#94A3B8;font-family:'Satoshi',sans-serif;font-size:14px;
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none}
+  .fl.filled label,.fl:focus-within label{top:-0.55rem;left:1.1rem;transform:scale(0.65);color:#BFFF00;
+    font-weight:700;text-transform:uppercase;letter-spacing:0.18em;background:#0A0A0A;padding:0 8px;border-radius:4px}
+  .fl:focus-within{border-color:rgba(191,255,0,0.5)}
+  .quick-btn{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;padding:0 28px;border:0;border-radius:16px;
+    font-family:'Satoshi',sans-serif;font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:0.3em;cursor:pointer;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 24px rgba(191,255,0,0.3);
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1);display:inline-flex;align-items:center;gap:10px}
+  .quick-btn:hover{transform:scale(1.03)}
+
+  /* KPI grid V3 — 4 cards com progress ring + pulse + ícone */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:28px 0}
+  .stat{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;padding:24px;position:relative;
+    box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
+  .stat .lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.25em;color:#94A3B8}
+  .stat .val{font-family:'General Sans',sans-serif;font-weight:600;font-size:36px;line-height:1;letter-spacing:-0.03em;color:#fff;margin-top:14px}
+  .stat .dlt{font-family:'JetBrains Mono',monospace;font-size:11px;color:#10B981;margin-top:10px;font-weight:600}
+  .stat .ic{position:absolute;top:24px;right:24px;width:48px;height:48px;border-radius:14px;
+    background:rgba(191,255,0,0.1);color:#BFFF00;display:grid;place-items:center;
+    box-shadow:inset 2px 2px 6px rgba(0,0,0,0.4)}
+  .stat .ic svg{width:22px;height:22px}
+  .ring{position:absolute;top:18px;right:18px;width:60px;height:60px}
+  .ring svg{transform:rotate(-90deg)}
+  .ring .bg{stroke:rgba(255,255,255,0.06);fill:none;stroke-width:5}
+  .ring .fg{stroke:url(#kpi-g);fill:none;stroke-width:5;stroke-linecap:round;stroke-dasharray:170;stroke-dashoffset:80;
+    filter:drop-shadow(0 0 8px rgba(191,255,0,0.5))}
+  .ring .pct{position:absolute;inset:0;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#BFFF00}
+  .pulse-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#10B981;
+    box-shadow:0 0 0 0 rgba(16,185,129,0.7);animation:pulse-glow 2s cubic-bezier(0.34,1.56,0.64,1) infinite;margin-right:8px;vertical-align:middle}
+  @keyframes pulse-glow{0%{box-shadow:0 0 0 0 rgba(16,185,129,0.7)}70%{box-shadow:0 0 0 16px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
+
+  /* folder chips */
+  .chips-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+  .v3chip{background:#1A1A1A;border:0;color:#94A3B8;text-transform:uppercase;letter-spacing:0.12em;font-size:11px;font-weight:700;
+    padding:9px 16px;border-radius:12px;cursor:pointer;
+    box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1);display:inline-flex;align-items:center;gap:8px}
+  .v3chip:hover{color:#BFFF00;transform:scale(1.04)}
+  .v3chip.on{background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+    box-shadow:3px 3px 10px rgba(0,0,0,0.5),0 0 16px rgba(191,255,0,0.4)}
+  .v3chip svg{width:13px;height:13px}
+
+  /* table card V3 */
+  .v3table-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;padding:0;overflow:hidden;
+    box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
+  .v3table-head{display:flex;align-items:center;padding:20px 26px;gap:14px;border-bottom:1px solid rgba(255,255,255,0.05)}
+  .v3table-head .ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:18px;color:#fff;letter-spacing:-0.02em}
+  .v3table-head .filters{margin-left:auto;display:flex;gap:8px}
+  .v3table{width:100%;border-collapse:collapse}
+  .v3table th{font-family:'Satoshi',sans-serif;text-align:left;font-size:10px;font-weight:800;letter-spacing:0.18em;
+    text-transform:uppercase;color:#94A3B8;padding:14px 26px;border-bottom:1px solid rgba(255,255,255,0.05);background:#0F0F0F}
+  .v3table td{padding:18px 26px;font-family:'Satoshi',sans-serif;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.04);color:#E2E8F0}
+  .v3table tr:last-child td{border-bottom:0}
+  .v3table tr:hover td{background:rgba(255,255,255,0.02)}
+  .v3table .num{font-family:'JetBrains Mono',monospace;font-weight:600;color:#fff}
+  .v3table .thumb{width:36px;height:36px;border-radius:10px;background:#1A1A1A;flex-shrink:0;
+    box-shadow:inset 2px 2px 6px rgba(0,0,0,0.5)}
+  .v3table .link-row{display:flex;align-items:center;gap:12px}
+  .v3table .link-row b{display:block;color:#fff;font-weight:700;font-size:14px}
+  .v3table .link-row span{font-family:'Satoshi',sans-serif;color:#94A3B8;font-size:10.5px;text-transform:uppercase;letter-spacing:0.18em;font-weight:700;margin-top:2px;display:block}
+  .v3pill{display:inline-block;background:rgba(191,255,0,0.12);color:#BFFF00;padding:4px 10px;border-radius:999px;
+    font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.1em}
+  .v3pill.coral{background:rgba(255,119,119,0.15);color:#FF7777}
+  .v3pill.neutral{background:rgba(148,163,184,0.15);color:#94A3B8}
+  .v3pill.gap{margin-right:6px}
+  .v3acts{display:flex;gap:6px;justify-content:flex-end}
+  .v3acts .a{width:34px;height:34px;border-radius:10px;background:#1A1A1A;color:#94A3B8;display:grid;place-items:center;cursor:pointer;
+    box-shadow:2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);
+    transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+  .v3acts .a:hover{color:#BFFF00;transform:scale(1.1)}
+  .v3acts .a svg{width:15px;height:15px}
+  .v3table-foot{padding:18px 26px;display:flex;align-items:center;justify-content:space-between;
+    font-family:'Satoshi',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:#94A3B8}
+
+  .filter-chip{background:#1A1A1A;border:0;color:#94A3B8;padding:8px 14px;border-radius:12px;
+    font-family:'Satoshi',sans-serif;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+    box-shadow:2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+  .filter-chip:hover{color:#BFFF00}
+  .filter-chip svg{width:12px;height:12px}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- SIDEBAR -->
+  <aside class="v3sb">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter" stroke-linecap="square">
+          <rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2"/>
+        </svg>
+      </div>
+      <span class="brand-name">AppLink</span>
+    </div>
+    <div class="sec">Principal</div>
+    <div class="nv on">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Links <span class="ct">40</span>
+    </div>
+    <a class="nv" href="02b-v3-criar-link.html" style="text-decoration:none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1A1.6 1.6 0 0 0 6.8 19l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H3a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 4.2 6.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
+      Engine config
+    </a>
+    <div class="nv">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Smartpages
+    </div>
+    <div class="nv">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg>
+      QR Codes
+    </div>
+
+    <div class="sec">Crescimento</div>
+    <div class="nv">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+      Pixels
+    </div>
+    <div class="nv">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+      Audiências
+    </div>
+    <div class="nv">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg>
+      Analytics
+    </div>
+
+    <div class="user">
+      <div class="av">MS</div>
+      <div>
+        <div class="nm">Maria Silva</div>
+        <div class="pl">Plano Pro</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="v3main">
+
+    <header class="v3hdr">
+      <div class="crumb">
+        <span>Workspace</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        <b>Painel de Links</b>
+      </div>
+      <div class="v3search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <input placeholder="Buscar link...">
+      </div>
+      <div class="icons">
+        <div class="ib"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+        <div class="ib"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+      </div>
+      <a class="btn-cta" href="02b-v3-criar-link.html" style="text-decoration:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 5v14M5 12h14"/></svg>
+        Criar link
+      </a>
+    </header>
+
+    <main class="v3content">
+
+      <div class="ttl-row">
+        <div>
+          <div class="eyebrow-cap">▮ Workspace · Maria Silva</div>
+          <h1 class="v3h1">Painel de <em>links.</em></h1>
+          <p class="v3sub">Gerencie smart links rastreáveis, pastas e métricas em tempo real. Cada clique alimenta seu funil.</p>
+        </div>
+      </div>
+
+      <!-- Quick create -->
+      <div class="quick">
+        <div class="fl-row">
+          <div class="fl">
+            <input placeholder=" " value="https://isabelafortes.com.br/promo-de-inverno">
+            <label>Cole uma URL longa</label>
+          </div>
+          <button class="quick-btn">
+            ENCURTAR
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- KPIs com progress ring + pulse dot -->
+      <div class="stats">
+        <svg width="0" height="0"><defs><linearGradient id="kpi-g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#BFFF00"/><stop offset="100%" stop-color="#FF7777"/>
+        </linearGradient></defs></svg>
+
+        <div class="stat">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
+          <div class="lbl">Cliques /mês</div>
+          <div class="val">48.219</div>
+          <div class="dlt">▲ +12,4% vs anterior</div>
+        </div>
+
+        <div class="stat">
+          <div class="ring">
+            <svg width="60" height="60" viewBox="0 0 60 60">
+              <circle class="bg" cx="30" cy="30" r="27"/>
+              <circle class="fg" cx="30" cy="30" r="27"/>
+            </svg>
+            <span class="pct">53%</span>
+          </div>
+          <div class="lbl">Cota plano Pro</div>
+          <div class="val">26.4K<span style="font-size:18px;color:#94A3B8">/50K</span></div>
+          <div class="dlt" style="color:#10B981">▲ saudável</div>
+        </div>
+
+        <div class="stat">
+          <div class="ic" style="background:rgba(255,119,119,0.12);color:#FF7777"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div class="lbl">Leads → CRM</div>
+          <div class="val">1.038</div>
+          <div class="dlt">▲ +5,6% sincronizados</div>
+        </div>
+
+        <div class="stat">
+          <div class="ic" style="background:rgba(16,185,129,0.12);color:#10B981"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="lbl">Redirect engine</div>
+          <div class="val" style="font-size:24px;display:flex;align-items:center;gap:4px"><span class="pulse-dot"></span> ONLINE</div>
+          <div class="dlt">28ms p95 · global</div>
+        </div>
+      </div>
+
+      <!-- Folders como chips neumórficos -->
+      <div class="chips-row">
+        <span class="v3chip on">📁 Todos os links</span>
+        <span class="v3chip">Campanhas</span>
+        <span class="v3chip">Podcast</span>
+        <span class="v3chip">Afiliados</span>
+        <span class="v3chip">Loja Demo</span>
+        <span class="v3chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 5v14M5 12h14"/></svg>
+          Nova pasta
+        </span>
+      </div>
+
+      <!-- Tabela de links -->
+      <div class="v3table-card">
+        <div class="v3table-head">
+          <span class="ttl">40 links</span>
+          <div class="filters">
+            <span class="filter-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Últimos 30 dias</span>
+            <span class="filter-chip">Domínio</span>
+            <span class="filter-chip">Pixels</span>
+          </div>
+        </div>
+        <table class="v3table">
+          <thead>
+            <tr><th>Link</th><th>Cliques</th><th>Pixels</th><th>Link curto</th><th>Criado</th><th style="text-align:right">Ações</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="link-row"><div class="thumb"></div><div><b>Promo de inverno — landing</b><span>Campanhas</span></div></div></td>
+              <td class="num">3.412</td>
+              <td><span class="v3pill gap">Meta</span></td>
+              <td class="num">plnk.to/inverno</td>
+              <td><span style="color:#94A3B8">12 mai 2026</span></td>
+              <td><div class="v3acts">
+                <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></span>
+                <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+                <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></span>
+              </div></td>
+            </tr>
+            <tr>
+              <td><div class="link-row"><div class="thumb"></div><div><b>Episódio 128 — exemplo</b><span>Podcast</span></div></div></td>
+              <td class="num">139</td>
+              <td><span class="v3pill neutral">—</span></td>
+              <td class="num">plnk.to/ep128</td>
+              <td><span style="color:#94A3B8">02 jan 2026</span></td>
+              <td><div class="v3acts">
+                <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></span>
+                <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+                <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></span>
+              </div></td>
+            </tr>
+            <tr>
+              <td><div class="link-row"><div class="thumb"></div><div><b>Cupom afiliado — Parceiro</b><span>Afiliados</span></div></div></td>
+              <td class="num">191</td>
+              <td><span class="v3pill gap">Meta</span><span class="v3pill coral">TikTok</span></td>
+              <td class="num">plnk.to/bhava</td>
+              <td><span style="color:#94A3B8">30 jun 2025</span></td>
+              <td><div class="v3acts">
+                <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></span>
+                <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+                <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></span>
+              </div></td>
+            </tr>
+            <tr>
+              <td><div class="link-row"><div class="thumb"></div><div><b>Fale no WhatsApp</b><span>Atendimento · link WhatsApp</span></div></div></td>
+              <td class="num">2.087</td>
+              <td><span class="v3pill">Meta</span></td>
+              <td class="num">plnk.to/zap</td>
+              <td><span style="color:#94A3B8">22 mai 2026</span></td>
+              <td><div class="v3acts">
+                <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></span>
+                <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+                <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></span>
+              </div></td>
+            </tr>
+            <tr>
+              <td><div class="link-row"><div class="thumb"></div><div><b>Ebook Saúde — captura</b><span>Campanhas</span></div></div></td>
+              <td class="num">78</td>
+              <td><span class="v3pill neutral">—</span></td>
+              <td class="num">plnk.to/fibras</td>
+              <td><span style="color:#94A3B8">13 nov 2025</span></td>
+              <td><div class="v3acts">
+                <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></span>
+                <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+                <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></span>
+              </div></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="v3table-foot">
+          <span>Mostrando 1–5 de 40</span>
+          <span>Página 1 de 8</span>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="assets/theme.js"></script>
+</body>
+</html>
