@@ -125,6 +125,8 @@
   .v3table tr:last-child td{border-bottom:0}
   .v3table tr:hover td{background:rgba(255,255,255,0.02)}
   .v3table .num{font-family:'JetBrains Mono',monospace;font-weight:600;color:#fff}
+  .v3table .link-orig{color:#94A3B8 !important;font-weight:500;font-size:12.5px;cursor:help}
+  .v3table .link-orig:hover{color:#BFFF00 !important}
   .v3table .thumb{width:36px;height:36px;border-radius:10px;background:#1A1A1A;flex-shrink:0;
     box-shadow:inset 2px 2px 6px rgba(0,0,0,0.5)}
   .v3table .link-row{display:flex;align-items:center;gap:12px}
@@ -510,16 +512,17 @@
             <!-- 4. Columns -->
             <div class="filter-pill" data-filter="cols">
               <svg class="fp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-              <span class="fp-lbl" id="fp-cols-lbl">6 colunas</span>
+              <span class="fp-lbl" id="fp-cols-lbl">7 colunas</span>
               <svg class="fp-ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
               <div class="fp-pop fp-pop-check">
                 <div class="fp-row fp-row-head"><label><input type="checkbox" id="fp-cols-all" checked> Todas as colunas</label></div>
-                <div class="fp-row"><label><input type="checkbox" value="2" checked> Link</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="2" checked> Título</label></div>
                 <div class="fp-row"><label><input type="checkbox" value="3" checked> Cliques</label></div>
                 <div class="fp-row"><label><input type="checkbox" value="4" checked> Pixels</label></div>
-                <div class="fp-row"><label><input type="checkbox" value="5" checked> Link curto</label></div>
-                <div class="fp-row"><label><input type="checkbox" value="6" checked> Criado</label></div>
-                <div class="fp-row"><label><input type="checkbox" value="7" checked> Ações</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="5" checked> Link</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="6" checked> Link curto</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="7" checked> Criado</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="8" checked> Ações</label></div>
               </div>
             </div>
 
@@ -543,7 +546,7 @@
 
         <table class="v3table">
           <thead>
-            <tr><th style="width:42px"><span class="v3check partial"></span></th><th>Link</th><th>Cliques</th><th>Pixels</th><th>Link curto</th><th>Criado</th><th style="text-align:right">Ações</th></tr>
+            <tr><th style="width:42px"><span class="v3check partial"></span></th><th>Título</th><th>Cliques</th><th>Pixels</th><th>Link</th><th>Link curto</th><th>Criado</th><th style="text-align:right">Ações</th></tr>
           </thead>
           <tbody>
             <tr class="sel">
@@ -551,6 +554,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Promo de inverno — landing</b><span>Campanhas</span></div></div></td>
               <td class="num">3.412</td>
               <td><span class="v3pill gap">Meta</span></td>
+              <td class="num link-orig" title="https://cliente-exemplo.com/promo-de-inverno">https://cliente-exemplo.com/promo-de…</td>
               <td class="num">plnk.to/inverno</td>
               <td><span style="color:#94A3B8">12 mai 2026</span></td>
               <td><div class="v3acts">
@@ -565,6 +569,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Episódio 128 — exemplo</b><span>Podcast</span></div></div></td>
               <td class="num">139</td>
               <td><span class="v3pill neutral">—</span></td>
+              <td class="num link-orig" title="https://podcast.exemplo.com/ep128">https://podcast.exemplo.com/ep128</td>
               <td class="num">plnk.to/ep128</td>
               <td><span style="color:#94A3B8">02 jan 2026</span></td>
               <td><div class="v3acts">
@@ -579,6 +584,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Cupom afiliado — Parceiro</b><span>Afiliados</span></div></div></td>
               <td class="num">191</td>
               <td><span class="v3pill gap">Meta</span><span class="v3pill coral">TikTok</span></td>
+              <td class="num link-orig" title="https://parceiro-exemplo.com/?ref=maria">https://parceiro-exemplo.com/?ref=ma…</td>
               <td class="num">plnk.to/parceiro</td>
               <td><span style="color:#94A3B8">30 jun 2025</span></td>
               <td><div class="v3acts">
@@ -593,6 +599,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Fale no WhatsApp</b><span>Atendimento · link WhatsApp</span></div></div></td>
               <td class="num">2.087</td>
               <td><span class="v3pill">Meta</span></td>
+              <td class="num link-orig" title="https://wa.me/5511999999999">https://wa.me/5511999999999</td>
               <td class="num">plnk.to/zap</td>
               <td><span style="color:#94A3B8">22 mai 2026</span></td>
               <td><div class="v3acts">
@@ -607,6 +614,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Ebook Saúde — captura</b><span>Campanhas</span></div></div></td>
               <td class="num">78</td>
               <td><span class="v3pill neutral">—</span></td>
+              <td class="num link-orig" title="https://cliente-exemplo.com/ebook-fibras">https://cliente-exemplo.com/ebook-fi…</td>
               <td class="num">plnk.to/fibras</td>
               <td><span style="color:#94A3B8">13 nov 2025</span></td>
               <td><div class="v3acts">
@@ -621,6 +629,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Webinar 12/jun — Tráfego direto</b><span>Campanhas</span></div></div></td>
               <td class="num">1.823</td>
               <td><span class="v3pill gap">Meta</span></td>
+              <td class="num link-orig" title="https://cliente-exemplo.com/webinar-12jun">https://cliente-exemplo.com/webinar-…</td>
               <td class="num">plnk.to/webinar</td>
               <td><span style="color:#94A3B8">12 jun 2026</span></td>
               <td><div class="v3acts">
@@ -635,6 +644,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Lista de espera Curso Pro</b><span>Captura</span></div></div></td>
               <td class="num">4.521</td>
               <td><span class="v3pill gap">Meta · Google</span></td>
+              <td class="num link-orig" title="https://cursopro.exemplo.com/lista-espera">https://cursopro.exemplo.com/lista-e…</td>
               <td class="num">plnk.to/curso</td>
               <td><span style="color:#94A3B8">28 abr 2026</span></td>
               <td><div class="v3acts">
@@ -649,6 +659,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Planilha gratuita Conteúdo</b><span>Captura</span></div></div></td>
               <td class="num">2.103</td>
               <td><span class="v3pill gap">Meta</span></td>
+              <td class="num link-orig" title="https://cliente-exemplo.com/planilha-conteudo">https://cliente-exemplo.com/planilha…</td>
               <td class="num">plnk.to/planilha</td>
               <td><span style="color:#94A3B8">15 mar 2026</span></td>
               <td><div class="v3acts">
@@ -663,6 +674,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Episódio 127 — Vendas</b><span>Podcast</span></div></div></td>
               <td class="num">89</td>
               <td><span class="v3pill neutral">—</span></td>
+              <td class="num link-orig" title="https://podcast.exemplo.com/ep127">https://podcast.exemplo.com/ep127</td>
               <td class="num">plnk.to/ep127</td>
               <td><span style="color:#94A3B8">19 dez 2025</span></td>
               <td><div class="v3acts">
@@ -677,6 +689,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Episódio 126 — Mindset</b><span>Podcast</span></div></div></td>
               <td class="num">134</td>
               <td><span class="v3pill neutral">—</span></td>
+              <td class="num link-orig" title="https://podcast.exemplo.com/ep126">https://podcast.exemplo.com/ep126</td>
               <td class="num">plnk.to/ep126</td>
               <td><span style="color:#94A3B8">05 dez 2025</span></td>
               <td><div class="v3acts">
@@ -691,6 +704,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Episódio 125 — Tráfego</b><span>Podcast</span></div></div></td>
               <td class="num">201</td>
               <td><span class="v3pill gap">TikTok</span></td>
+              <td class="num link-orig" title="https://podcast.exemplo.com/ep125">https://podcast.exemplo.com/ep125</td>
               <td class="num">plnk.to/ep125</td>
               <td><span style="color:#94A3B8">21 nov 2025</span></td>
               <td><div class="v3acts">
@@ -705,6 +719,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Loja Demo — Cupom 20OFF</b><span>Loja Demo</span></div></div></td>
               <td class="num">567</td>
               <td><span class="v3pill gap">Meta</span></td>
+              <td class="num link-orig" title="https://loja-exemplo.com/cupom-20off">https://loja-exemplo.com/cupom-20off</td>
               <td class="num">plnk.to/20off</td>
               <td><span style="color:#94A3B8">08 out 2025</span></td>
               <td><div class="v3acts">
@@ -719,6 +734,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Loja Demo — Black Friday</b><span>Loja Demo</span></div></div></td>
               <td class="num">1.342</td>
               <td><span class="v3pill gap">Meta · Google</span></td>
+              <td class="num link-orig" title="https://loja-exemplo.com/black-friday-2025">https://loja-exemplo.com/black-frida…</td>
               <td class="num">plnk.to/bf</td>
               <td><span style="color:#94A3B8">22 nov 2025</span></td>
               <td><div class="v3acts">
@@ -733,6 +749,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Newsletter semanal</b><span>Newsletter</span></div></div></td>
               <td class="num">3.014</td>
               <td><span class="v3pill neutral">—</span></td>
+              <td class="num link-orig" title="https://newsletter.exemplo.com/subscribe">https://newsletter.exemplo.com/subsc…</td>
               <td class="num">plnk.to/news</td>
               <td><span style="color:#94A3B8">14 mai 2026</span></td>
               <td><div class="v3acts">
@@ -747,6 +764,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Mentoria 1:1 — formulário</b><span>Campanhas</span></div></div></td>
               <td class="num">78</td>
               <td><span class="v3pill gap">Meta</span></td>
+              <td class="num link-orig" title="https://cliente-exemplo.com/mentoria-1a1">https://cliente-exemplo.com/mentoria…</td>
               <td class="num">plnk.to/mentoria</td>
               <td><span style="color:#94A3B8">02 mai 2026</span></td>
               <td><div class="v3acts">
@@ -761,6 +779,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Reels — Como criar conteúdo</b><span>Campanhas</span></div></div></td>
               <td class="num">5.231</td>
               <td><span class="v3pill gap">Meta</span></td>
+              <td class="num link-orig" title="https://instagram.com/reels/criar-conteudo">https://instagram.com/reels/criar-co…</td>
               <td class="num">plnk.to/reels</td>
               <td><span style="color:#94A3B8">30 abr 2026</span></td>
               <td><div class="v3acts">
@@ -775,6 +794,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Quiz — Qual seu nicho</b><span>Captura</span></div></div></td>
               <td class="num">412</td>
               <td><span class="v3pill gap">Meta · TikTok</span></td>
+              <td class="num link-orig" title="https://cliente-exemplo.com/quiz-nicho">https://cliente-exemplo.com/quiz-nicho</td>
               <td class="num">plnk.to/quiz</td>
               <td><span style="color:#94A3B8">18 abr 2026</span></td>
               <td><div class="v3acts">
@@ -789,6 +809,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Treinamento 3 dias</b><span>Campanhas</span></div></div></td>
               <td class="num">1.892</td>
               <td><span class="v3pill gap">Meta</span></td>
+              <td class="num link-orig" title="https://cliente-exemplo.com/treinamento-3dias">https://cliente-exemplo.com/treiname…</td>
               <td class="num">plnk.to/treino</td>
               <td><span style="color:#94A3B8">10 abr 2026</span></td>
               <td><div class="v3acts">
@@ -803,6 +824,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>PDF — Roteiro de live</b><span>Captura</span></div></div></td>
               <td class="num">256</td>
               <td><span class="v3pill neutral">—</span></td>
+              <td class="num link-orig" title="https://cliente-exemplo.com/roteiro-live.pdf">https://cliente-exemplo.com/roteiro-…</td>
               <td class="num">plnk.to/pdf-live</td>
               <td><span style="color:#94A3B8">28 mar 2026</span></td>
               <td><div class="v3acts">
@@ -817,6 +839,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Curso Express — checkout</b><span>Campanhas</span></div></div></td>
               <td class="num">89</td>
               <td><span class="v3pill gap">Meta</span></td>
+              <td class="num link-orig" title="https://cursoexpress.exemplo.com/checkout">https://cursoexpress.exemplo.com/che…</td>
               <td class="num">plnk.to/checkout</td>
               <td><span style="color:#94A3B8">20 mar 2026</span></td>
               <td><div class="v3acts">
@@ -831,6 +854,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Atendimento WhatsApp</b><span>Atendimento</span></div></div></td>
               <td class="num">723</td>
               <td><span class="v3pill neutral">—</span></td>
+              <td class="num link-orig" title="https://wa.me/5511988887777">https://wa.me/5511988887777</td>
               <td class="num">plnk.to/atend</td>
               <td><span style="color:#94A3B8">12 mar 2026</span></td>
               <td><div class="v3acts">
@@ -845,6 +869,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Episódio 124 — Marketing</b><span>Podcast</span></div></div></td>
               <td class="num">178</td>
               <td><span class="v3pill gap">TikTok</span></td>
+              <td class="num link-orig" title="https://podcast.exemplo.com/ep124">https://podcast.exemplo.com/ep124</td>
               <td class="num">plnk.to/ep124</td>
               <td><span style="color:#94A3B8">07 nov 2025</span></td>
               <td><div class="v3acts">
@@ -859,6 +884,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Episódio 123 — Disciplina</b><span>Podcast</span></div></div></td>
               <td class="num">156</td>
               <td><span class="v3pill neutral">—</span></td>
+              <td class="num link-orig" title="https://podcast.exemplo.com/ep123">https://podcast.exemplo.com/ep123</td>
               <td class="num">plnk.to/ep123</td>
               <td><span style="color:#94A3B8">24 out 2025</span></td>
               <td><div class="v3acts">
@@ -873,6 +899,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Loja Demo — Combo verão</b><span>Loja Demo</span></div></div></td>
               <td class="num">432</td>
               <td><span class="v3pill gap">Meta</span></td>
+              <td class="num link-orig" title="https://loja-exemplo.com/combo-verao">https://loja-exemplo.com/combo-verao</td>
               <td class="num">plnk.to/verao</td>
               <td><span style="color:#94A3B8">15 set 2025</span></td>
               <td><div class="v3acts">
@@ -887,6 +914,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Indicação afiliado</b><span>Afiliados</span></div></div></td>
               <td class="num">92</td>
               <td><span class="v3pill gap">TikTok</span></td>
+              <td class="num link-orig" title="https://parceiro-exemplo.com/indicacao-afiliado">https://parceiro-exemplo.com/indicac…</td>
               <td class="num">plnk.to/indica</td>
               <td><span style="color:#94A3B8">18 fev 2026</span></td>
               <td><div class="v3acts">
@@ -901,6 +929,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Bio link Smartpage</b><span>Smartpage</span></div></div></td>
               <td class="num">12.045</td>
               <td><span class="v3pill gap">Meta · TikTok · Google</span></td>
+              <td class="num link-orig" title="https://applink.exemplo.com/maria">https://applink.exemplo.com/maria</td>
               <td class="num">plnk.to/maria</td>
               <td><span style="color:#94A3B8">01 jan 2024</span></td>
               <td><div class="v3acts">
@@ -915,6 +944,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Trailer do livro</b><span>Campanhas</span></div></div></td>
               <td class="num">1.567</td>
               <td><span class="v3pill gap">Meta</span></td>
+              <td class="num link-orig" title="https://cliente-exemplo.com/trailer-livro">https://cliente-exemplo.com/trailer-…</td>
               <td class="num">plnk.to/livro</td>
               <td><span style="color:#94A3B8">14 set 2025</span></td>
               <td><div class="v3acts">
@@ -929,6 +959,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Reels viral 2M views</b><span>Campanhas</span></div></div></td>
               <td class="num">8.234</td>
               <td><span class="v3pill gap">Meta · TikTok</span></td>
+              <td class="num link-orig" title="https://instagram.com/p/reels-viral-2m">https://instagram.com/p/reels-viral-2m</td>
               <td class="num">plnk.to/viral</td>
               <td><span style="color:#94A3B8">03 mar 2026</span></td>
               <td><div class="v3acts">
@@ -943,6 +974,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Lead magnet — Frameworks</b><span>Captura</span></div></div></td>
               <td class="num">612</td>
               <td><span class="v3pill gap">Meta</span></td>
+              <td class="num link-orig" title="https://cliente-exemplo.com/frameworks">https://cliente-exemplo.com/frameworks</td>
               <td class="num">plnk.to/framework</td>
               <td><span style="color:#94A3B8">25 fev 2026</span></td>
               <td><div class="v3acts">
@@ -957,6 +989,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Calendário editorial</b><span>Newsletter</span></div></div></td>
               <td class="num">134</td>
               <td><span class="v3pill neutral">—</span></td>
+              <td class="num link-orig" title="https://newsletter.exemplo.com/calendario-editorial">https://newsletter.exemplo.com/calen…</td>
               <td class="num">plnk.to/calend</td>
               <td><span style="color:#94A3B8">19 fev 2026</span></td>
               <td><div class="v3acts">
@@ -971,6 +1004,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Cupom Parceiro 15%</b><span>Afiliados</span></div></div></td>
               <td class="num">234</td>
               <td><span class="v3pill neutral">—</span></td>
+              <td class="num link-orig" title="https://parceiro-exemplo.com/?coupon=P15">https://parceiro-exemplo.com/?coupon…</td>
               <td class="num">plnk.to/p15</td>
               <td><span style="color:#94A3B8">30 jan 2026</span></td>
               <td><div class="v3acts">
@@ -985,6 +1019,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Episódio 122 — Foco</b><span>Podcast</span></div></div></td>
               <td class="num">87</td>
               <td><span class="v3pill neutral">—</span></td>
+              <td class="num link-orig" title="https://podcast.exemplo.com/ep122">https://podcast.exemplo.com/ep122</td>
               <td class="num">plnk.to/ep122</td>
               <td><span style="color:#94A3B8">10 out 2025</span></td>
               <td><div class="v3acts">
@@ -999,6 +1034,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Material complementar</b><span>Captura</span></div></div></td>
               <td class="num">56</td>
               <td><span class="v3pill neutral">—</span></td>
+              <td class="num link-orig" title="https://cliente-exemplo.com/material-complementar">https://cliente-exemplo.com/material…</td>
               <td class="num">plnk.to/material</td>
               <td><span style="color:#94A3B8">22 jan 2026</span></td>
               <td><div class="v3acts">
@@ -1013,6 +1049,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Resultados alunos</b><span>Campanhas</span></div></div></td>
               <td class="num">1.023</td>
               <td><span class="v3pill gap">Meta</span></td>
+              <td class="num link-orig" title="https://cliente-exemplo.com/resultados-alunos">https://cliente-exemplo.com/resultad…</td>
               <td class="num">plnk.to/alunos</td>
               <td><span style="color:#94A3B8">12 abr 2026</span></td>
               <td><div class="v3acts">
@@ -1027,6 +1064,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Promoção relâmpago</b><span>Campanhas</span></div></div></td>
               <td class="num">2.456</td>
               <td><span class="v3pill gap">Meta · Google</span></td>
+              <td class="num link-orig" title="https://cliente-exemplo.com/promo-relampago">https://cliente-exemplo.com/promo-re…</td>
               <td class="num">plnk.to/relampago</td>
               <td><span style="color:#94A3B8">28 mai 2026</span></td>
               <td><div class="v3acts">
@@ -1041,6 +1079,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Lista VIP — invite</b><span>Captura</span></div></div></td>
               <td class="num">198</td>
               <td><span class="v3pill gap">Meta</span></td>
+              <td class="num link-orig" title="https://cliente-exemplo.com/lista-vip">https://cliente-exemplo.com/lista-vip</td>
               <td class="num">plnk.to/vip</td>
               <td><span style="color:#94A3B8">16 mai 2026</span></td>
               <td><div class="v3acts">
@@ -1055,6 +1094,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>E-book gratuito 30 dias</b><span>Captura</span></div></div></td>
               <td class="num">3.211</td>
               <td><span class="v3pill gap">Meta</span></td>
+              <td class="num link-orig" title="https://cliente-exemplo.com/ebook-30dias">https://cliente-exemplo.com/ebook-30…</td>
               <td class="num">plnk.to/ebook</td>
               <td><span style="color:#94A3B8">05 fev 2026</span></td>
               <td><div class="v3acts">
@@ -1069,6 +1109,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Smart Link Linktree-style</b><span>Smartpage</span></div></div></td>
               <td class="num">6.789</td>
               <td><span class="v3pill gap">Meta · TikTok</span></td>
+              <td class="num link-orig" title="https://applink.exemplo.com/maria-links">https://applink.exemplo.com/maria-li…</td>
               <td class="num">plnk.to/linktree</td>
               <td><span style="color:#94A3B8">12 dez 2025</span></td>
               <td><div class="v3acts">
@@ -1083,6 +1124,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Pesquisa NPS — clientes</b><span>Atendimento</span></div></div></td>
               <td class="num">67</td>
               <td><span class="v3pill neutral">—</span></td>
+              <td class="num link-orig" title="https://cliente-exemplo.com/nps-clientes">https://cliente-exemplo.com/nps-clie…</td>
               <td class="num">plnk.to/nps</td>
               <td><span style="color:#94A3B8">18 abr 2026</span></td>
               <td><div class="v3acts">
@@ -1097,6 +1139,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Workshop ao vivo — inscrição</b><span>Campanhas</span></div></div></td>
               <td class="num">1.234</td>
               <td><span class="v3pill gap">Meta · TikTok</span></td>
+              <td class="num link-orig" title="https://cliente-exemplo.com/workshop-inscricao">https://cliente-exemplo.com/workshop…</td>
               <td class="num">plnk.to/work</td>
               <td><span style="color:#94A3B8">05 mai 2026</span></td>
               <td><div class="v3acts">
@@ -1275,7 +1318,7 @@ https://affiliates.parceiro.com/cupom?ref=maria</textarea>
   // 1. ROW ACTIONS (3 icons)
   $$('tbody tr').forEach(tr => {
     const linkName = tr.querySelector('td:nth-child(2) b')?.textContent.trim() || 'Link';
-    const shortUrl = tr.querySelector('td.num:nth-child(5)')?.textContent.trim() || '';
+    const shortUrl = tr.querySelector('td.num:nth-child(6)')?.textContent.trim() || '';
     const acts = tr.querySelectorAll('.v3acts .a');
     if (acts.length >= 4){
       acts[0].style.cursor='pointer'; acts[0].title='Analytics';
@@ -1398,7 +1441,7 @@ https://affiliates.parceiro.com/cupom?ref=maria</textarea>
   });
 
   // 6. SORT HEADERS
-  ['Link','Cliques','Pixels','Link curto','Criado'].forEach(name => {
+  ['Título','Cliques','Pixels','Link','Link curto','Criado'].forEach(name => {
     $$('thead th').forEach(th => {
       if (th.textContent.trim() === name){
         th.classList.add('sortable');
