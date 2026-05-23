@@ -90,7 +90,10 @@
   .fl textarea{resize:vertical;min-height:78px;padding-top:22px}
   .fl label{position:absolute;top:1.05rem;left:1.2rem;color:#94A3B8;font-family:'Satoshi',sans-serif;font-size:13.5px;
     transition:.35s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none}
-  .fl.filled label,.fl:focus-within label{top:-0.5rem;left:1rem;transform:scale(0.65);color:#BFFF00;
+  .fl.filled label,
+  .fl input:not(:placeholder-shown) ~ label,
+  .fl textarea:not(:placeholder-shown) ~ label,
+  .fl:focus-within label{top:-0.5rem;left:1rem;transform:scale(0.65);color:#BFFF00;
     font-weight:700;text-transform:uppercase;letter-spacing:0.18em;background:#141414;padding:0 8px;border-radius:4px}
   .fl:focus-within{border-color:rgba(191,255,0,0.5)}
   .fl-prefix{display:flex;align-items:stretch}
