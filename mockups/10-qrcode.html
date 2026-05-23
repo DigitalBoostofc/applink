@@ -1,112 +1,494 @@
 <!doctype html>
-<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AppLink — QR Code</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Syne:ital,wght@0,700;0,800;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/tokens.css">
-<link rel="stylesheet" href="assets/ui.css">
 <style>
-  .qr-grid{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi',sans-serif;min-height:100vh;padding-bottom:100px}
+  a{text-decoration:none;color:inherit}
+  svg{display:block}
+
+  /* ── SHELL ── */
+  .shell{display:flex;min-height:100vh}
+
+  /* ── SIDEBAR V3 ── */
+  .v3sb{width:256px;flex-shrink:0;background:#050505;border-right:1px solid rgba(255,255,255,0.05);
+    display:flex;flex-direction:column;padding:20px 16px;gap:4px;position:sticky;top:0;height:100vh;overflow-y:auto}
+  .v3sb .brand{display:flex;align-items:center;gap:12px;padding:8px 4px 24px}
+  .v3sb .brand-mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#BFFF00,#FF7777);
+    display:grid;place-items:center;box-shadow:4px 4px 10px rgba(0,0,0,0.55),-2px -2px 6px rgba(255,255,255,0.03),0 0 22px rgba(191,255,0,0.25)}
+  .v3sb .brand-mark svg{width:22px;height:22px;color:#0A0A0A}
+  .v3sb .brand-name{font-family:'General Sans',sans-serif;font-weight:700;font-size:17px;letter-spacing:-0.02em;color:#fff}
+  .v3sb .sec{font-size:9px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:#5A5A60;padding:14px 12px 6px}
+  .v3sb .nv{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;
+    font-family:'Satoshi',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;
+    font-size:11px;color:#94A3B8;cursor:pointer;transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .v3sb .nv svg{width:16px;height:16px;flex-shrink:0}
+  .v3sb .nv:hover{color:#fff;background:rgba(255,255,255,0.03)}
+  .v3sb .nv.on{background:linear-gradient(90deg,rgba(191,255,0,0.12),rgba(191,255,0,0));
+    color:#BFFF00;border-right:3px solid #BFFF00;border-radius:12px 0 0 12px;padding-right:9px}
+  .v3sb .user{margin-top:auto;display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;
+    background:#0F0F0F;box-shadow:inset 2px 2px 6px rgba(0,0,0,0.5)}
+  .v3sb .user .av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#BFFF00,#FF7777);
+    color:#0A0A0A;display:grid;place-items:center;font-weight:800;font-size:13px;box-shadow:2px 2px 6px rgba(0,0,0,0.4)}
+  .v3sb .user .nm{font-family:'Satoshi',sans-serif;font-size:12px;font-weight:700;color:#fff}
+  .v3sb .user .pl{font-family:'Satoshi',sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:#94A3B8;font-weight:700}
+
+  /* ── MAIN ── */
+  .v3main{flex:1;min-width:0}
+  .v3hdr{position:sticky;top:0;z-index:10;height:80px;background:rgba(10,10,10,0.85);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.04);
+    display:flex;align-items:center;padding:0 32px;gap:18px}
+  .v3hdr .ib{width:42px;height:42px;border-radius:12px;background:#1A1A1A;color:#94A3B8;display:grid;place-items:center;cursor:pointer;
+    box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .v3hdr .ib:hover{color:#BFFF00;transform:scale(1.06)} .v3hdr .ib svg{width:17px;height:17px}
+  .crumb{display:flex;align-items:center;gap:10px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+    text-transform:uppercase;letter-spacing:0.18em;color:#94A3B8}
+  .crumb b{color:#fff} .crumb svg{width:12px;height:12px;color:#5A5A60}
+  .v3search{margin-left:auto;width:256px;display:flex;align-items:center;gap:10px;height:42px;padding:0 16px;
+    background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);border-radius:14px;
+    box-shadow:inset 4px 4px 8px rgba(0,0,0,0.55),inset -2px -2px 6px rgba(255,255,255,0.025);
+    color:#94A3B8;transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .v3search:focus-within{width:320px;border-color:rgba(191,255,0,0.5)}
+  .v3search svg{width:14px;height:14px}
+  .v3search input{border:0;background:transparent;outline:none;color:#fff;flex:1;font-family:'Satoshi',sans-serif;font-size:13px}
+  .btn-ghost{display:inline-flex;align-items:center;gap:8px;background:#1A1A1A;color:#94A3B8;
+    padding:11px 20px;border-radius:14px;font-family:'Satoshi',sans-serif;font-weight:700;font-size:11px;
+    text-transform:uppercase;letter-spacing:0.18em;cursor:pointer;border:0;
+    box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .btn-ghost:hover{color:#fff;transform:scale(1.03)} .btn-ghost svg{width:15px;height:15px}
+  .btn-cta{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;padding:12px 22px;border-radius:14px;
+    font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.2em;
+    cursor:pointer;border:0;display:inline-flex;align-items:center;gap:8px;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 22px rgba(191,255,0,0.3);transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .btn-cta:hover{transform:scale(1.04)} .btn-cta svg{width:15px;height:15px}
+
+  /* ── CONTENT LAYOUT ── */
+  .v3content{padding:32px;display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start;max-width:1400px}
+
+  .eyebrow-cap{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:#BFFF00;margin-bottom:10px}
+  .v3h1{font-family:'General Sans',sans-serif;font-weight:600;font-size:40px;line-height:1;letter-spacing:-0.03em;color:#fff;margin-top:6px}
+  .v3h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .v3sub{font-family:'Satoshi',sans-serif;font-size:13.5px;color:#94A3B8;line-height:1.6;max-width:520px;margin-top:8px}
+
+  /* ── CARD NEUMÓRFICO ── */
+  .v3card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;padding:24px;
+    box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);margin-bottom:18px}
+  .card-ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:15px;color:#fff;letter-spacing:-0.01em;margin-bottom:16px}
+  .card-ttl-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:10px}
+  .card-ttl-row .desc{font-family:'Satoshi',sans-serif;font-size:11px;color:#94A3B8;font-weight:600;text-transform:uppercase;letter-spacing:0.12em}
+
+  /* ── FLOATING LABEL ── */
+  .fl{position:relative;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:14px;
+    box-shadow:inset 4px 4px 8px rgba(0,0,0,0.55),inset -2px -2px 6px rgba(255,255,255,0.025);
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .fl input,.fl select{width:100%;background:transparent;border:0;outline:none;
+    padding:22px 18px 12px;color:#fff;font-family:'Satoshi',sans-serif;font-size:13.5px;font-weight:500}
+  .fl select{appearance:none;cursor:pointer}
+  .fl label{position:absolute;top:1.1rem;left:1.2rem;color:#94A3B8;font-family:'Satoshi',sans-serif;font-size:13.5px;
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none}
+  .fl.filled label,
+  .fl input:not(:placeholder-shown) ~ label,
+  .fl select:not(:first-child) ~ label,
+  .fl:focus-within label{top:-0.5rem;left:1rem;transform:scale(0.65);color:#BFFF00;
+    font-weight:700;text-transform:uppercase;letter-spacing:0.18em;background:#141414;padding:0 8px;border-radius:4px}
+  .fl:focus-within{border-color:rgba(191,255,0,0.5)}
+  .fl-note{font-family:'Satoshi',sans-serif;font-size:11px;color:#5A5A60;font-weight:600;margin-top:10px;
+    text-transform:uppercase;letter-spacing:0.12em}
+
+  /* ── OPT GRID (shapes/eyes) ── */
+  .opt-ttl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.25em;color:#94A3B8;margin:20px 0 10px}
+  .opt-ttl:first-child{margin-top:0}
   .opt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-  .opt{height:68px;border:var(--bd-w-sm) solid var(--bd-c);border-radius:8px;
-    display:grid;place-items:center;cursor:pointer;background:var(--surface)}
-  [data-brand="appex"] .opt{border-color:var(--edge-strong)}
-  .opt.on{background:var(--accent);color:var(--on-accent)}
-  .opt svg{width:24px;height:24px}
-  .qr-prev{position:sticky;top:20px}
-  .qr-big{width:240px;height:240px;background:#fff;border:var(--bd-w-sm) solid var(--bd-c);
-    border-radius:14px;display:grid;place-items:center;margin:0 auto}
-  .sw{width:30px;height:30px;border-radius:50%;border:var(--bd-w-sm) solid var(--bd-c);cursor:pointer}
+  .opt{height:72px;border-radius:14px;background:#1A1A1A;display:grid;place-items:center;cursor:pointer;
+    box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1);color:#5A5A60;border:1px solid transparent}
+  .opt svg{width:26px;height:26px}
+  .opt:hover{color:#fff;transform:scale(1.04)}
+  .opt.on{background:linear-gradient(135deg,rgba(191,255,0,0.15),rgba(255,119,119,0.1));
+    color:#BFFF00;border-color:rgba(191,255,0,0.35);
+    box-shadow:3px 3px 10px rgba(0,0,0,0.5),0 0 18px rgba(191,255,0,0.2)}
+
+  /* ── COLOR SWATCHES ── */
+  .color-group{display:flex;flex-direction:column;gap:8px;flex:1}
+  .color-label{font-family:'Satoshi',sans-serif;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.22em;color:#94A3B8}
+  .color-swatches{display:flex;gap:8px;flex-wrap:wrap}
+  .sw{width:32px;height:32px;border-radius:50%;cursor:pointer;border:2px solid transparent;
+    transition:.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:2px 2px 6px rgba(0,0,0,0.5)}
+  .sw.on{border-color:#BFFF00;box-shadow:2px 2px 6px rgba(0,0,0,0.5),0 0 10px rgba(191,255,0,0.4);transform:scale(1.15)}
+  .sw-grad{background:linear-gradient(135deg,#BFFF00,#FF7777)}
+  .sw-flat-black{background:#0A0A0A;border:2px solid rgba(255,255,255,0.15)}
+  .sw-purple{background:#7C3AED}
+  .sw-cyan{background:#08A6B8}
+  .sw-pink{background:#DB2777}
+  .sw-white{background:#fff;border:2px solid rgba(255,255,255,0.3)}
+  .sw-lime{background:#BEF264}
+  .sw-yellow{background:#FEF08A}
+
+  /* ── SPRING TOGGLE ── */
+  .tg-row{display:flex;align-items:flex-start;justify-content:space-between;padding:14px 0;
+    border-bottom:1px solid rgba(255,255,255,0.04)}
+  .tg-row:last-child{border-bottom:0}
+  .tg-row .lbl{font-family:'Satoshi',sans-serif;font-weight:700;font-size:13px;color:#fff}
+  .tg-row .desc{font-family:'Satoshi',sans-serif;font-size:11px;color:#94A3B8;margin-top:3px;max-width:200px}
+  .tg{width:44px;height:24px;background:#2D2D38;border-radius:999px;position:relative;cursor:pointer;flex-shrink:0;
+    box-shadow:inset 3px 3px 6px rgba(0,0,0,0.6),inset -1px -1px 3px rgba(255,255,255,0.03);
+    transition:.4s cubic-bezier(0.34,1.56,0.64,1)}
+  .tg::after{content:"";position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;
+    box-shadow:1px 1px 3px rgba(0,0,0,0.4);transition:.4s cubic-bezier(0.34,1.56,0.64,1)}
+  .tg.on{background:linear-gradient(135deg,#BFFF00,#FF7777);box-shadow:0 0 15px rgba(191,255,0,0.4)}
+  .tg.on::after{transform:scale(1.1);left:23px}
+
+  /* ── QR PREVIEW ── */
+  .preview-wrap{position:sticky;top:96px}
+  .qr-big{width:220px;height:220px;background:#fff;border-radius:20px;display:grid;place-items:center;margin:0 auto 18px;
+    box-shadow:6px 6px 16px rgba(0,0,0,0.55),-2px -2px 6px rgba(255,255,255,0.025),0 0 28px rgba(191,255,0,0.2)}
+  .eyebrow-cap{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:#BFFF00;margin-bottom:16px}
+  .dl-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:6px}
+  .dl-btn{padding:12px 0;border-radius:12px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;
+    text-transform:uppercase;letter-spacing:0.18em;cursor:pointer;border:0;display:grid;place-items:center;
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .dl-btn.primary{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 18px rgba(191,255,0,0.3)}
+  .dl-btn.primary:hover{transform:scale(1.05)}
+  .dl-btn.sec{background:#1A1A1A;color:#94A3B8;
+    box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025)}
+  .dl-btn.sec:hover{color:#fff;transform:scale(1.03)}
+
+  /* ── TEMPLATES SALVOS ── */
+  .tpl-grid{display:flex;gap:10px;flex-wrap:wrap}
+  .tpl-thumb{width:52px;height:52px;border-radius:12px;background:#1A1A1A;cursor:pointer;
+    box-shadow:inset 2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);
+    display:grid;place-items:center;color:#5A5A60;font-family:'Satoshi',sans-serif;font-size:18px;font-weight:700;
+    transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+  .tpl-thumb:hover{color:#BFFF00;transform:scale(1.06)}
+
+  /* ── STICKY SAVE FOOTER ── */
+  .save-foot{position:fixed;left:256px;right:0;bottom:0;z-index:20;
+    background:rgba(10,10,10,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border-top:1px solid rgba(255,255,255,0.04);padding:16px 32px;
+    box-shadow:0 -10px 30px rgba(0,0,0,0.5)}
+  .save-foot::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,#BFFF00,#FF7777,transparent)}
+  .save-foot-inner{display:flex;align-items:center;gap:16px;max-width:1400px;margin:0 auto}
+  .save-foot .hint{font-family:'Satoshi',sans-serif;font-size:12px;color:#94A3B8;flex:1}
+  .save-foot .hint b{color:#fff}
 </style>
 </head>
 <body>
-<div class="app">
-  <aside class="sidebar">
-    <div class="logo"><div class="logo-mark"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter" stroke-linecap="square"><rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2"/></svg></div><span class="logo-name" data-brand-name>AppLink</span></div>
-    <div class="nav-group"><div class="nav-label">Principal</div>
-      <a class="nav-item" href="01-dashboard-links.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Links</a>
-      <a class="nav-item" href="06-smartpages.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Smartpages</a>
-      <a class="nav-item active" href="10-qrcode.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg> QR Codes</a></div>
-    <div class="nav-group"><div class="nav-label">Crescimento</div>
-      <a class="nav-item" href="11-pixels.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg> Pixels</a>
-      <a class="nav-item" href="12-audiencias.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg> Audiências</a>
-      <a class="nav-item" href="03-analytics-link.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg> Analytics</a></div>
-    <div class="nav-group"><div class="nav-label">Configuração</div>
-      <a class="nav-item" href="13-dominios.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg> Domínios</a>
-      <a class="nav-item" href="14-integracoes.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6M6 21v-6M6 9a3 3 0 0 0 0 6M18 3v12M18 15a3 3 0 0 0 0-6"/></svg> Integrações</a>
-      <a class="nav-item" href="15-equipe.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg> Equipe</a></div>
-    <div class="grow"></div>
-    <div class="nav-item" style="background:rgba(255,255,255,.05)"><div class="avatar" style="width:24px;height:24px;font-size:10px">IF</div> Maria Silva</div>
+<div class="shell">
+
+  <!-- SIDEBAR V3 -->
+  <aside class="v3sb">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter" stroke-linecap="square">
+          <rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2"/>
+        </svg>
+      </div>
+      <span class="brand-name">AppLink</span>
+    </div>
+
+    <div class="sec">Principal</div>
+    <a class="nv" href="01-dashboard.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Painel
+    </a>
+    <a class="nv" href="02-criar-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      Criar link
+    </a>
+    <a class="nv" href="02c-tipos-de-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1A1.6 1.6 0 0 0 6.8 19l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H3a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 4.2 6.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
+      Tipos de link
+    </a>
+    <a class="nv" href="06-smartpages.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Smartpages
+    </a>
+    <a class="nv on" href="10-qrcode.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg>
+      QR Codes
+    </a>
+
+    <div class="sec">Crescimento</div>
+    <a class="nv" href="03-analytics-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg>
+      Analytics
+    </a>
+    <a class="nv" href="11-pixels.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg>
+      Pixels
+    </a>
+    <a class="nv" href="12-audiencias.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+      Audiências
+    </a>
+
+    <div class="sec">Configuração</div>
+    <a class="nv" href="13-dominios.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
+      Domínios
+    </a>
+    <a class="nv" href="14-integracoes.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6M6 21v-6M6 9a3 3 0 0 0 0 6M18 3v12M18 15a3 3 0 0 0 0-6"/></svg>
+      Integrações
+    </a>
+    <a class="nv" href="15-equipe.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+      Equipe
+    </a>
+    <a class="nv" href="16-billing.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
+      Billing
+    </a>
+    <a class="nv" href="09-settings.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 0 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1A1.6 1.6 0 0 0 6.8 19l-.1.1a2 2 0 0 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H3a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 4.2 6.8l-.1-.1a2 2 0 0 1 2.8-2.8l.1.1A1.6 1.6 0 0 0 9 4.1V4a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 0 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
+      Settings
+    </a>
+
+    <div class="user">
+      <div class="av">MS</div>
+      <div>
+        <div class="nm">Maria Silva</div>
+        <div class="pl">Plano Pro</div>
+      </div>
+    </div>
   </aside>
 
-  <div class="main">
-    <header class="topbar"><div class="col"><div class="page-sub">QR Codes</div><div class="page-title" style="font-size:18px">Editor de QR Code</div></div>
-      <div class="spacer"></div><button class="btn btn-secondary">Salvar template</button>
-      <button class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Baixar</button></header>
+  <!-- MAIN -->
+  <div class="v3main">
 
-    <main class="content">
-      <div class="qr-grid">
-        <div class="col gap-16">
-          <div class="card card-pad col gap-10">
-            <div class="section-title">Link de destino</div>
-            <select class="select"><option>plnk.to/promo-inverno</option><option>plnk.to/isabela (smartpage)</option></select>
-            <span class="page-sub">QR dinâmico — você pode trocar o destino depois sem reimprimir.</span>
+    <header class="v3hdr">
+      <a class="ib" href="01-dashboard.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg>
+      </a>
+      <div class="crumb">
+        <span>Workspace</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        <b>QR Codes</b>
+      </div>
+      <div class="v3search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <input placeholder="Buscar link...">
+      </div>
+      <button class="btn-ghost">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v14a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Salvar template
+      </button>
+      <button class="btn-cta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Baixar QR
+      </button>
+    </header>
+
+    <main class="v3content">
+
+      <!-- COLUNA ESQUERDA: CONFIGURAÇÕES -->
+      <div>
+        <div class="eyebrow-cap">▮ Editor de QR Code</div>
+        <h1 class="v3h1">QR Code <em>dinâmico.</em></h1>
+        <p class="v3sub" style="margin-bottom:28px">Personalize estilo, cores e logo. Troque o destino depois sem reimprimir — o QR continua válido.</p>
+
+        <!-- LINK DE DESTINO -->
+        <div class="v3card">
+          <div class="card-ttl-row">
+            <span class="card-ttl">Link de destino</span>
+            <span class="desc">QR dinâmico</span>
           </div>
-          <div class="card card-pad col gap-12">
-            <div class="section-title">Forma dos módulos</div>
-            <div class="opt-grid">
-              <div class="opt on"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16"/></svg></div>
-              <div class="opt"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="5"/></svg></div>
-              <div class="opt"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg></div>
-              <div class="opt"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l9 9-9 9-9-9z"/></svg></div>
+          <div class="fl filled">
+            <select>
+              <option>plnk.to/promo-inverno</option>
+              <option>plnk.to/isabela (smartpage)</option>
+              <option>plnk.to/ep128 (podcast)</option>
+            </select>
+            <label>Selecionar link</label>
+          </div>
+          <p class="fl-note">QR dinâmico — troque o destino a qualquer momento sem reimprimir.</p>
+        </div>
+
+        <!-- FORMA DOS MÓDULOS -->
+        <div class="v3card">
+          <div class="card-ttl">Estilo visual</div>
+
+          <div class="opt-ttl">Forma dos módulos</div>
+          <div class="opt-grid">
+            <div class="opt on">
+              <svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16"/></svg>
             </div>
-            <div class="section-title mt-8">Estilo dos olhos</div>
-            <div class="opt-grid">
-              <div class="opt on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><rect x="5" y="5" width="14" height="14"/></svg></div>
-              <div class="opt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><rect x="5" y="5" width="14" height="14" rx="5"/></svg></div>
-              <div class="opt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="7"/></svg></div>
-              <div class="opt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6h12v12"/></svg></div>
+            <div class="opt">
+              <svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="5"/></svg>
+            </div>
+            <div class="opt">
+              <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg>
+            </div>
+            <div class="opt">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l9 9-9 9-9-9z"/></svg>
             </div>
           </div>
-          <div class="card card-pad col gap-12">
-            <div class="section-title">Cores</div>
-            <div class="row gap-16">
-              <div class="col gap-6"><span class="label">Módulos</span>
-                <div class="row gap-6"><span class="sw" style="background:#000"></span><span class="sw" style="background:#7C3AED"></span><span class="sw" style="background:#08A6B8"></span><span class="sw" style="background:#DB2777"></span></div></div>
-              <div class="col gap-6"><span class="label">Fundo</span>
-                <div class="row gap-6"><span class="sw" style="background:#fff"></span><span class="sw" style="background:#BEF264"></span><span class="sw" style="background:#FEF08A"></span></div></div>
+
+          <div class="opt-ttl">Estilo dos olhos (finder pattern)</div>
+          <div class="opt-grid">
+            <div class="opt on">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><rect x="5" y="5" width="14" height="14"/></svg>
             </div>
-            <div class="row between mt-8"><div class="col"><b>Logo no centro</b><span class="faint" style="font-size:12px">Inserir marca no miolo do QR</span></div><span class="toggle on"></span></div>
+            <div class="opt">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><rect x="5" y="5" width="14" height="14" rx="5"/></svg>
+            </div>
+            <div class="opt">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="7"/></svg>
+            </div>
+            <div class="opt">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6h12v12H6z"/><path d="M6 6l6 6M18 6l-6 6"/></svg>
+            </div>
           </div>
         </div>
 
-        <div class="qr-prev col gap-16">
-          <div class="card card-pad col gap-12">
-            <div class="eyebrow">Pré-visualização</div>
-            <div class="qr-big">
-              <svg width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.4"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20h1"/></svg>
+        <!-- CORES -->
+        <div class="v3card">
+          <div class="card-ttl">Cores</div>
+          <div style="display:flex;gap:24px;flex-wrap:wrap">
+            <div class="color-group">
+              <div class="color-label" style="margin-bottom:10px">Módulos (foreground)</div>
+              <div class="color-swatches">
+                <div class="sw sw-flat-black on" title="Preto"></div>
+                <div class="sw sw-purple" title="Roxo"></div>
+                <div class="sw sw-cyan" title="Ciano"></div>
+                <div class="sw sw-pink" title="Pink"></div>
+                <div class="sw sw-grad" title="Gradiente lime→coral"></div>
+              </div>
             </div>
-            <div class="row gap-8"><button class="btn btn-primary grow" style="justify-content:center">PNG</button>
-              <button class="btn btn-secondary grow" style="justify-content:center">SVG</button>
-              <button class="btn btn-secondary grow" style="justify-content:center">PDF</button></div>
-          </div>
-          <div class="card card-pad col gap-8">
-            <div class="eyebrow">Templates salvos</div>
-            <div class="row gap-8">
-              <div class="thumb" style="width:46px;height:46px"></div>
-              <div class="thumb" style="width:46px;height:46px"></div>
-              <div class="thumb" style="width:46px;height:46px;display:grid;place-items:center;color:var(--ink-3)">+</div>
+            <div class="color-group">
+              <div class="color-label" style="margin-bottom:10px">Fundo (background)</div>
+              <div class="color-swatches">
+                <div class="sw sw-white on" title="Branco"></div>
+                <div class="sw sw-lime" title="Lime claro"></div>
+                <div class="sw sw-yellow" title="Amarelo suave"></div>
+              </div>
             </div>
           </div>
         </div>
+
+        <!-- OPÇÕES ADICIONAIS -->
+        <div class="v3card">
+          <div class="card-ttl">Opções</div>
+          <div class="tg-row">
+            <div>
+              <div class="lbl">Logo no centro</div>
+              <div class="desc">Insere sua marca no miolo do QR Code</div>
+            </div>
+            <div class="tg on"></div>
+          </div>
+          <div class="tg-row">
+            <div>
+              <div class="lbl">Margem de silêncio</div>
+              <div class="desc">Espaço em branco ao redor para melhor leitura</div>
+            </div>
+            <div class="tg on"></div>
+          </div>
+          <div class="tg-row">
+            <div>
+              <div class="lbl">Alta resolução (300 dpi)</div>
+              <div class="desc">Ideal para impressão física</div>
+            </div>
+            <div class="tg"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUNA DIREITA: PREVIEW + DOWNLOAD -->
+      <div class="preview-wrap">
+
+        <!-- PREVIEW CARD -->
+        <div class="v3card">
+          <div class="eyebrow-cap">▮ Pré-visualização ao vivo</div>
+          <div class="qr-big">
+            <svg width="170" height="170" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="1.4">
+              <rect x="3" y="3" width="7" height="7"/>
+              <rect x="14" y="3" width="7" height="7"/>
+              <rect x="3" y="14" width="7" height="7"/>
+              <path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20h1"/>
+              <rect x="4" y="4" width="5" height="5" fill="#0A0A0A" stroke="none"/>
+              <rect x="15" y="4" width="5" height="5" fill="#0A0A0A" stroke="none"/>
+              <rect x="4" y="15" width="5" height="5" fill="#0A0A0A" stroke="none"/>
+            </svg>
+          </div>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#5A5A60;text-align:center;margin-bottom:18px">
+            plnk.to/promo-inverno
+          </p>
+          <div class="dl-row">
+            <button class="dl-btn primary">PNG</button>
+            <button class="dl-btn sec">SVG</button>
+            <button class="dl-btn sec">PDF</button>
+          </div>
+        </div>
+
+        <!-- TEMPLATES SALVOS -->
+        <div class="v3card">
+          <div class="card-ttl-row" style="margin-bottom:14px">
+            <span class="card-ttl" style="margin-bottom:0">Templates salvos</span>
+          </div>
+          <div class="tpl-grid">
+            <div class="tpl-thumb" title="Template clássico" style="background:linear-gradient(135deg,rgba(191,255,0,0.12),rgba(191,255,0,0))"></div>
+            <div class="tpl-thumb" title="Template arredondado" style="background:linear-gradient(135deg,rgba(255,119,119,0.12),rgba(255,119,119,0))"></div>
+            <div class="tpl-thumb" title="Novo template">+</div>
+          </div>
+          <p style="font-family:'Satoshi',sans-serif;font-size:11px;color:#5A5A60;font-weight:600;text-transform:uppercase;letter-spacing:0.14em;margin-top:14px">
+            Clique em + para salvar o estilo atual como template.
+          </p>
+        </div>
+
+        <!-- STATUS ENGINE -->
+        <div class="v3card" style="background:rgba(191,255,0,0.06);border-color:rgba(191,255,0,0.12)">
+          <div style="display:flex;align-items:center;gap:10px;color:#BFFF00;font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.18em;margin-bottom:8px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>
+            QR dinâmico ativo
+          </div>
+          <p style="font-family:'Satoshi',sans-serif;font-size:11.5px;color:#E2E8F0;line-height:1.5">
+            O destino pode ser alterado a qualquer momento sem reimprimir o código.
+          </p>
+        </div>
+
       </div>
     </main>
   </div>
 </div>
-<script src="assets/theme.js"></script>
+
+<!-- STICKY SAVE FOOTER -->
+<div class="save-foot">
+  <div class="save-foot-inner">
+    <div class="hint"><b>2 alterações</b> pendentes · Forma dos módulos, Logo ativo</div>
+    <button class="btn-ghost">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v14a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
+      Salvar rascunho
+    </button>
+    <button class="btn-cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      Baixar QR Code
+    </button>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.opt').forEach(function(o){
+    o.closest('.opt-grid').addEventListener('click', function(e){
+      var el = e.target.closest('.opt');
+      if (!el) return;
+      o.closest('.opt-grid').querySelectorAll('.opt').forEach(function(x){ x.classList.remove('on'); });
+      el.classList.add('on');
+    });
+  });
+  document.querySelectorAll('.tg').forEach(function(t){
+    t.addEventListener('click', function(){ t.classList.toggle('on'); });
+  });
+</script>
 </body>
 </html>

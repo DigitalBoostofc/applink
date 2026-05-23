@@ -1,178 +1,598 @@
 <!doctype html>
-<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AppLink — Editor de Smartpage</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Syne:ital,wght@0,700;0,800;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/tokens.css">
-<link rel="stylesheet" href="assets/ui.css">
 <style>
-  .ed{display:flex;flex-direction:column;height:100vh}
-  .ed-bar{height:60px;flex-shrink:0;background:var(--topbar);
-    border-bottom:var(--bd-w) solid var(--bd-c);display:flex;align-items:center;
-    gap:14px;padding:0 18px;color:var(--ink-on-dark)}
-  [data-brand="appex"] .ed-bar{color:var(--ink-1)}
-  .ed-body{flex:1;display:flex;min-height:0}
-  .ed-left{width:280px;flex-shrink:0;background:var(--surface);
-    border-right:var(--bd-w) solid var(--bd-c);overflow-y:auto}
-  [data-brand="appex"] .ed-left,[data-brand="appex"] .ed-right{border-color:var(--edge)}
-  .ed-canvas{flex:1;display:grid;place-items:center;overflow-y:auto;padding:30px}
-  .ed-right{width:300px;flex-shrink:0;background:var(--surface);
-    border-left:var(--bd-w) solid var(--bd-c);overflow-y:auto}
-  .blocks{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px}
-  .blk{display:flex;flex-direction:column;align-items:center;gap:6px;padding:13px 6px;
-    border:var(--bd-w-sm) solid var(--bd-c);border-radius:var(--r-btn);cursor:grab;
-    font-size:11px;font-weight:700;background:var(--surface)}
-  [data-brand="appex"] .blk{border-color:var(--edge-strong);font-weight:500}
-  .blk:hover{background:var(--accent);color:var(--on-accent)}
-  .blk svg{width:18px;height:18px}
-  /* phone */
-  .phone{width:300px;border:var(--bd-w) solid var(--bd-c);border-radius:30px;
-    background:#fff;padding:14px;box-shadow:var(--sh-card-lg)}
-  [data-brand="appex"] .phone{border-width:8px;box-shadow:var(--shadow-xl)}
-  .ph-bg{background:linear-gradient(160deg,#7C3AED,#DB2777);border-radius:18px;
-    padding:20px 14px;display:flex;flex-direction:column;gap:10px;align-items:center}
-  .ph-av{width:64px;height:64px;border-radius:50%;background:#fff;border:2px solid #000}
-  .ph-name{color:#fff;font-weight:800;font-size:15px}
-  .ph-bio{color:rgba(255,255,255,.85);font-size:11px;text-align:center}
-  .ph-btn{width:100%;background:#BEF264;color:#000;border:2px solid #000;border-radius:10px;
-    padding:10px;text-align:center;font-weight:800;font-size:12px;box-shadow:3px 3px 0 #000}
-  .ph-btn.sel{outline:3px dashed var(--accent-2);outline-offset:3px}
-  .ph-social{display:flex;gap:8px}
-  .ph-social div{width:30px;height:30px;border-radius:8px;background:#fff;border:2px solid #000}
-  .secrow{padding:13px 14px;border-bottom:var(--bd-w-sm) solid var(--bd-c)}
-  [data-brand="appex"] .secrow{border-color:var(--edge)}
-  .blk-sec{grid-column:1/-1;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--ink-3,rgba(255,255,255,.35));padding:8px 2px 2px;margin-top:4px}
-  .blk-sec:first-child{margin-top:0;padding-top:2px}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi',sans-serif;overflow:hidden}
+a{text-decoration:none;color:inherit}
+
+/* ══ LAYOUT RAIZ ══ */
+.ed{display:flex;flex-direction:column;height:100vh}
+.ed-body{flex:1;display:flex;min-height:0}
+
+/* ══ TOPBAR ══ */
+.ed-bar{height:64px;flex-shrink:0;background:rgba(8,8,8,0.97);backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05);
+  display:flex;align-items:center;padding:0 20px;gap:14px;z-index:20}
+.ed-back{width:38px;height:38px;border-radius:11px;background:#1A1A1A;color:#94A3B8;display:grid;place-items:center;cursor:pointer;flex-shrink:0;
+  box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.ed-back:hover{color:#BFFF00;transform:scale(1.08)}
+.ed-back svg{width:16px;height:16px}
+.ed-crumb{display:flex;flex-direction:column;gap:1px}
+.ed-crumb .sub{font-family:'Satoshi',sans-serif;font-weight:700;font-size:9.5px;text-transform:uppercase;
+  letter-spacing:0.2em;color:#5A5A60}
+.ed-crumb .ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:14px;color:#fff;letter-spacing:-0.01em}
+
+/* tabs no topbar */
+.ed-tabs{display:flex;gap:2px;margin-left:20px;background:#141414;padding:4px;border-radius:12px;
+  box-shadow:inset 2px 2px 6px rgba(0,0,0,0.55),inset -1px -1px 3px rgba(255,255,255,0.02)}
+.ed-tab{padding:7px 16px;border-radius:9px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+  text-transform:uppercase;letter-spacing:0.15em;color:#5A5A60;cursor:pointer;
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.ed-tab:hover{color:#94A3B8}
+.ed-tab.on{background:#1A1A1A;color:#fff;
+  box-shadow:2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025)}
+.ed-spacer{flex:1}
+.ed-saved{display:inline-flex;align-items:center;gap:7px;font-family:'Satoshi',sans-serif;font-weight:800;
+  font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:#10B981;flex-shrink:0}
+.saved-dot{width:7px;height:7px;border-radius:50%;background:#10B981;
+  box-shadow:0 0 8px rgba(16,185,129,0.6);animation:sdot 3s ease-in-out infinite}
+@keyframes sdot{0%,100%{opacity:1}50%{opacity:0.5}}
+.ed-btn-sec{background:#1A1A1A;color:#94A3B8;border:0;padding:10px 18px;border-radius:12px;
+  font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;flex-shrink:0;
+  box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.ed-btn-sec:hover{color:#fff}
+.ed-btn-sec svg,.ed-btn-pri svg{width:14px;height:14px}
+.ed-btn-pri{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;border:0;padding:10px 22px;border-radius:12px;
+  font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.18em;cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;flex-shrink:0;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 22px rgba(191,255,0,0.3);
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.ed-btn-pri:hover{transform:scale(1.04)}
+
+/* ══ PAINEL ESQUERDO — BLOCOS ══ */
+.ed-left{width:274px;flex-shrink:0;background:#0C0C0C;border-right:1px solid rgba(255,255,255,0.04);
+  display:flex;flex-direction:column;overflow:hidden}
+.panel-tabs{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.panel-tab{flex:1;padding:11px 6px;text-align:center;font-family:'Satoshi',sans-serif;font-weight:800;
+  font-size:9.5px;text-transform:uppercase;letter-spacing:0.18em;color:#5A5A60;cursor:pointer;
+  border-bottom:2px solid transparent;transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.panel-tab.on{color:#BFFF00;border-bottom-color:#BFFF00}
+.panel-tab:hover{color:#94A3B8}
+.panel-search{margin:10px 12px;display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;
+  background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);border-radius:10px;
+  box-shadow:inset 2px 2px 5px rgba(0,0,0,0.5),inset -1px -1px 3px rgba(255,255,255,0.02)}
+.panel-search svg{width:13px;height:13px;color:#5A5A60;flex-shrink:0}
+.panel-search input{border:0;background:transparent;outline:none;color:#fff;flex:1;
+  font-family:'Satoshi',sans-serif;font-size:12px}
+.panel-search input::placeholder{color:#3A3A40}
+.blk-scroll{flex:1;overflow-y:auto;padding:0 12px 20px}
+.blk-scroll::-webkit-scrollbar{width:3px}
+.blk-scroll::-webkit-scrollbar-track{background:transparent}
+.blk-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:2px}
+
+/* seções de blocos */
+.blk-sec{grid-column:1/-1;font-family:'Satoshi',sans-serif;font-weight:800;font-size:9px;
+  text-transform:uppercase;letter-spacing:0.22em;color:#5A5A60;
+  padding:14px 2px 8px;border-top:1px solid rgba(255,255,255,0.04);margin-top:6px}
+.blk-sec:first-child{border-top:none;margin-top:0;padding-top:12px}
+
+/* grid de cards de bloco */
+.blk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+
+/* card de bloco 64×64+ */
+.blk-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  padding:10px 4px 9px;background:#1A1A1A;border-radius:14px;cursor:grab;position:relative;min-height:64px;
+  box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1);user-select:none;-webkit-user-select:none}
+.blk-card:hover{background:#222;transform:translateY(-2px) scale(1.03);
+  box-shadow:4px 4px 12px rgba(0,0,0,0.6),0 0 14px rgba(191,255,0,0.07)}
+.blk-card:active{cursor:grabbing;transform:scale(0.96)}
+.blk-card.sel{background:rgba(191,255,0,0.1);border:1px solid rgba(191,255,0,0.3);
+  box-shadow:0 0 16px rgba(191,255,0,0.2),3px 3px 8px rgba(0,0,0,0.5)}
+.blk-card .bic{width:20px;height:20px;color:#5A5A60;transition:.2s}
+.blk-card:hover .bic{color:#94A3B8}
+.blk-card.sel .bic{color:#BFFF00}
+.blk-card .blbl{font-family:'Satoshi',sans-serif;font-weight:700;font-size:9.5px;text-transform:uppercase;
+  letter-spacing:0.08em;color:#3A3A40;text-align:center;line-height:1.2;transition:.2s}
+.blk-card:hover .blbl{color:#5A5A60}
+.blk-card.sel .blbl{color:#BFFF00}
+/* drag handle */
+.blk-drag{position:absolute;top:5px;right:5px;opacity:0;transition:.15s;pointer-events:none}
+.blk-card:hover .blk-drag{opacity:1}
+
+/* ══ CANVAS CENTRAL ══ */
+.ed-canvas{flex:1;overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;padding:40px 20px 60px;
+  background:#080808;
+  background-image:radial-gradient(rgba(255,255,255,0.055) 1px,transparent 1px);
+  background-size:22px 22px}
+.ed-canvas::-webkit-scrollbar{width:4px}
+.ed-canvas::-webkit-scrollbar-track{background:transparent}
+.ed-canvas::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:2px}
+
+/* phone V3 */
+.phone-v3{width:316px;flex-shrink:0;background:#101010;border-radius:48px;border:8px solid #1C1C1C;overflow:hidden;
+  box-shadow:18px 18px 48px rgba(0,0,0,0.85),-6px -6px 16px rgba(255,255,255,0.025),
+    0 0 0 1px rgba(255,255,255,0.04),0 0 50px rgba(191,255,0,0.04)}
+.phone-notch{height:26px;background:#0A0A0A;display:flex;align-items:center;justify-content:center;
+  border-bottom:1px solid rgba(255,255,255,0.03)}
+.notch-pill{width:70px;height:6px;background:#1C1C1C;border-radius:3px}
+.phone-screen{background:linear-gradient(165deg,#0D0D1A 0%,#0F0A1E 35%,#0D150D 70%,#1A0D10 100%);
+  min-height:580px;padding:22px 14px 40px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.ph-av-wrap{width:72px;height:72px;border-radius:50%;padding:3px;
+  background:linear-gradient(135deg,#BFFF00,#FF7777);
+  box-shadow:0 0 0 3px #0D0D1A,0 0 22px rgba(191,255,0,0.35)}
+.ph-av{width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#2A1A4A,#1A2A1A);
+  display:grid;place-items:center;font-family:'General Sans',sans-serif;font-weight:700;font-size:22px;color:#BFFF00}
+.ph-name{font-family:'General Sans',sans-serif;font-weight:700;font-size:17px;color:#fff;letter-spacing:-0.02em;text-align:center}
+.ph-bio{font-family:'Satoshi',sans-serif;font-size:12px;color:#6B7280;text-align:center;line-height:1.55;
+  max-width:240px;padding:0 8px}
+.ph-social{display:flex;gap:7px;margin-top:2px}
+.ph-si{width:30px;height:30px;border-radius:9px;background:rgba(255,255,255,0.07);display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,0.1)}
+.ph-si svg{width:14px;height:14px;color:#94A3B8}
+.ph-btns{width:100%;display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.ph-btn{width:100%;padding:11px 14px;border-radius:14px;font-family:'Satoshi',sans-serif;font-weight:800;
+  font-size:12.5px;text-align:center;letter-spacing:0.02em;cursor:pointer}
+.ph-btn.lime{background:#BFFF00;color:#0A0A0A;box-shadow:0 4px 14px rgba(191,255,0,0.28)}
+.ph-btn.lime.sel{background:#BFFF00;color:#0A0A0A;
+  box-shadow:0 0 0 2px #0D0D1A,0 0 0 4px #BFFF00,0 6px 22px rgba(191,255,0,0.45);outline:none}
+.ph-btn.glass{background:rgba(255,255,255,0.07);color:#E2E8F0;border:1px solid rgba(255,255,255,0.1)}
+.ph-btn.coral{background:rgba(255,119,119,0.14);color:#FF7777;border:1px solid rgba(255,119,119,0.2)}
+
+/* canvas label */
+.canvas-label{font-family:'Satoshi',sans-serif;font-weight:800;font-size:9.5px;text-transform:uppercase;
+  letter-spacing:0.22em;color:#3A3A40;margin-top:20px;text-align:center}
+
+/* ══ PAINEL DIREITO — PROPRIEDADES ══ */
+.ed-right{width:294px;flex-shrink:0;background:#0C0C0C;border-left:1px solid rgba(255,255,255,0.04);
+  overflow-y:auto;display:flex;flex-direction:column}
+.ed-right::-webkit-scrollbar{width:3px}
+.ed-right::-webkit-scrollbar-track{background:transparent}
+.ed-right::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.07);border-radius:2px}
+.props-hdr{padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  border-bottom:1px solid rgba(255,255,255,0.05);flex-shrink:0}
+.props-hdr-l{display:flex;flex-direction:column;gap:2px}
+.props-eyebrow{font-family:'Satoshi',sans-serif;font-weight:800;font-size:9px;text-transform:uppercase;
+  letter-spacing:0.25em;color:#BFFF00}
+.props-ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:15px;color:#fff;letter-spacing:-0.01em}
+.props-acts{display:flex;gap:5px}
+.pact{width:30px;height:30px;border-radius:9px;background:#1A1A1A;color:#5A5A60;display:grid;place-items:center;cursor:pointer;
+  box-shadow:2px 2px 5px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.pact:hover{color:#BFFF00;transform:scale(1.1)}
+.pact svg{width:13px;height:13px}
+.pact.danger:hover{color:#FF7777}
+
+/* seções de propriedades */
+.psec{padding:16px 18px;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;flex-direction:column;gap:12px}
+.psec-title{font-family:'Satoshi',sans-serif;font-weight:800;font-size:9px;text-transform:uppercase;
+  letter-spacing:0.25em;color:#5A5A60}
+
+/* floating label inputs */
+.fl{position:relative;background:rgba(255,255,255,0.022);border:1px solid rgba(255,255,255,0.06);border-radius:12px;
+  box-shadow:inset 3px 3px 7px rgba(0,0,0,0.55),inset -1px -1px 4px rgba(255,255,255,0.02);
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.fl input{width:100%;background:transparent;border:0;outline:none;padding:20px 14px 10px;color:#fff;
+  font-family:'Satoshi',sans-serif;font-size:13px;font-weight:500}
+.fl label{position:absolute;top:1rem;left:1rem;color:#5A5A60;font-family:'Satoshi',sans-serif;font-size:13px;
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;white-space:nowrap}
+.fl input:not(:placeholder-shown) ~ label,
+.fl:focus-within label{top:-0.5rem;left:0.85rem;transform:scale(0.62);color:#BFFF00;
+  font-weight:800;text-transform:uppercase;letter-spacing:0.18em;background:#0C0C0C;padding:0 7px;border-radius:4px}
+.fl:focus-within{border-color:rgba(191,255,0,0.45)}
+
+/* prop row (label + toggle) */
+.prop-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.prop-lbl{font-family:'Satoshi',sans-serif;font-weight:600;font-size:12.5px;color:#94A3B8}
+
+/* toggle spring V3 */
+.tg{width:44px;height:24px;border-radius:999px;background:#1A1A1A;position:relative;cursor:pointer;flex-shrink:0;
+  box-shadow:inset 3px 3px 6px rgba(0,0,0,0.6),inset -1px -1px 3px rgba(255,255,255,0.025);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.tg::after{content:"";position:absolute;width:18px;height:18px;background:#3A3A40;border-radius:50%;
+  top:3px;left:3px;transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.tg.on{background:linear-gradient(135deg,#BFFF00,#FF7777);box-shadow:0 0 12px rgba(191,255,0,0.35)}
+.tg.on::after{background:#0A0A0A;left:23px;box-shadow:1px 1px 4px rgba(0,0,0,0.4)}
+
+/* segmented control */
+.v3seg{display:flex;gap:0;background:#141414;border-radius:10px;padding:3px;
+  box-shadow:inset 2px 2px 5px rgba(0,0,0,0.55),inset -1px -1px 3px rgba(255,255,255,0.02)}
+.v3seg .sg{flex:1;padding:7px 4px;text-align:center;border-radius:8px;font-family:'Satoshi',sans-serif;
+  font-weight:800;font-size:9.5px;text-transform:uppercase;letter-spacing:0.1em;color:#5A5A60;cursor:pointer;
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.v3seg .sg.on{background:#1A1A1A;color:#BFFF00;
+  box-shadow:2px 2px 5px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025)}
+.v3seg .sg:hover:not(.on){color:#94A3B8}
+
+/* checkbox V3 */
+.v3cb-row{display:flex;align-items:center;gap:10px}
+.v3cb{width:18px;height:18px;border-radius:6px;background:#1A1A1A;display:inline-grid;place-items:center;cursor:pointer;flex-shrink:0;
+  box-shadow:inset 3px 3px 5px rgba(0,0,0,0.55),inset -1px -1px 3px rgba(255,255,255,0.025);
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.v3cb.on{background:linear-gradient(135deg,#BFFF00,#FF7777);box-shadow:0 0 10px rgba(191,255,0,0.35)}
+.v3cb svg{width:11px;height:11px;color:#0A0A0A}
+.v3cb-lbl{font-family:'Satoshi',sans-serif;font-size:12.5px;color:#94A3B8}
+
+/* empty state pane */
+.props-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:28px;opacity:0.5}
+.props-empty svg{width:28px;height:28px;color:#3A3A40}
+.props-empty p{font-family:'Satoshi',sans-serif;font-size:12px;color:#5A5A60;text-align:center;line-height:1.5;
+  text-transform:uppercase;letter-spacing:0.12em;font-weight:700}
 </style>
 </head>
 <body>
 <div class="ed">
 
-  <!-- topbar -->
+  <!-- ══════════ TOPBAR EDITOR V3 ══════════ -->
   <div class="ed-bar">
-    <a class="btn-icon" href="06-smartpages.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></a>
-    <div class="col"><span class="page-sub">Smartpages</span><b>Bio da Maria</b></div>
-    <div class="tabs" style="border:0;margin-left:18px">
-      <div class="tab active">Design</div>
-      <div class="tab">Compartilhar</div>
-      <div class="tab">Analytics</div>
-      <a class="tab" href="08-leads-smartpage.html" style="text-decoration:none">Leads</a>
+    <a class="ed-back" href="06-smartpages.html" title="Voltar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+    </a>
+    <div class="ed-crumb">
+      <span class="sub">Smartpages</span>
+      <span class="ttl">Bio da Maria</span>
     </div>
-    <div class="spacer grow"></div>
-    <span class="badge badge-success"><span class="dot"></span> Salvo</span>
-    <button class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/></svg> Visualizar</button>
-    <button class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg> Publicar</button>
+
+    <div class="ed-tabs">
+      <div class="ed-tab on">Design</div>
+      <div class="ed-tab">Compartilhar</div>
+      <div class="ed-tab">Analytics</div>
+      <a class="ed-tab" href="08-leads-smartpage.html">Leads</a>
+    </div>
+
+    <div class="ed-spacer"></div>
+
+    <span class="ed-saved">
+      <span class="saved-dot"></span>
+      Salvo
+    </span>
+    <button class="ed-btn-sec">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+      Visualizar
+    </button>
+    <button class="ed-btn-pri">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      Publicar
+    </button>
   </div>
 
+  <!-- ══════════ BODY 3 PAINÉIS ══════════ -->
   <div class="ed-body">
 
-    <!-- left: blocos -->
+    <!-- ─── PAINEL ESQUERDO: BLOCOS ─── -->
     <aside class="ed-left">
-      <div class="tabs" style="padding:0 14px">
-        <div class="tab">Tema</div><div class="tab active">Blocos</div><div class="tab">Config</div>
+      <div class="panel-tabs">
+        <div class="panel-tab">Tema</div>
+        <div class="panel-tab on">Blocos</div>
+        <div class="panel-tab">Config</div>
       </div>
-      <div style="padding:12px 14px 4px"><span class="eyebrow">Arraste para a página</span></div>
-      <div class="blocks">
 
-        <!-- ── Conteúdo ── -->
-        <div class="blk-sec">Conteúdo</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="8" rx="3"/></svg>Botão</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Texto</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 16 0v1"/></svg>Avatar</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 14l5-4 4 3 4-4 5 5"/></svg>Card</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="5" width="12" height="14" rx="2"/><path d="M3 8v8M21 8v8"/></svg>Carrossel</div>
-
-        <!-- ── Mídia ── -->
-        <div class="blk-sec">Mídia</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>Vídeo</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>Áudio</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M21 12h-3M12 21v-3M3 12h3"/></svg>Música</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1" fill="currentColor"/></svg>RSS</div>
-
-        <!-- ── Interativos ── -->
-        <div class="blk-sec">Interativos</div>
-        <div class="blk" style="background:var(--accent);color:var(--on-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>Form</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg>Contador</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9a3 3 0 1 1 4 3l-1 1v1M12 17h.01"/></svg>Q&amp;A</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Calendário</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></svg>Messenger</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2"/><path d="M14 11h4M14 14h2"/></svg>vCard</div>
-
-        <!-- ── Social & Contato ── -->
-        <div class="blk-sec">Social &amp; Contato</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 2a14 14 0 0 1 0 20 14 14 0 0 1 0-20z"/></svg>Social</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Mapa</div>
-
-        <!-- ── Lojas ── -->
-        <div class="blk-sec">Lojas</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shopify</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3L4 8v8l8 5 8-5V8z"/><path d="M4 8l8 5 8-5M12 13v8"/></svg>Magento</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 9h20M9 21V9"/></svg>WordPress</div>
-
-        <!-- ── Layout ── -->
-        <div class="blk-sec">Layout</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M9 9l-3 3 3 3M15 9l3 3-3 3"/></svg>Iframe</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7l4-4 4 4M8 17l4 4 4-4M12 3v18"/></svg>Espaço</div>
-        <div class="blk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="6" y1="7" x2="18" y2="7" stroke-dasharray="3 2"/><line x1="6" y1="17" x2="18" y2="17" stroke-dasharray="3 2"/></svg>Divisor</div>
-
+      <div class="panel-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <input placeholder="Buscar bloco...">
       </div>
+
+      <div class="blk-scroll">
+        <div class="blk-grid">
+
+          <!-- ─── CONTEÚDO (5) ─── -->
+          <div class="blk-sec">Conteúdo</div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="8" rx="3"/></svg>
+            <span class="blbl">Botão</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+            <span class="blbl">Texto</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 16 0v1"/></svg>
+            <span class="blbl">Avatar</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 14l5-4 4 3 4-4 5 5"/></svg>
+            <span class="blbl">Card</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="5" width="12" height="14" rx="2"/><path d="M3 8v8M21 8v8"/></svg>
+            <span class="blbl">Carrossel</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <!-- ─── MÍDIA (4) ─── -->
+          <div class="blk-sec">Mídia</div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>
+            <span class="blbl">Vídeo</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            <span class="blbl">Áudio</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M21 12h-3M12 21v-3M3 12h3"/></svg>
+            <span class="blbl">Música</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1" fill="currentColor"/></svg>
+            <span class="blbl">RSS</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <!-- ─── INTERATIVOS (6) ─── -->
+          <div class="blk-sec">Interativos</div>
+
+          <div class="blk-card sel">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+            <span class="blbl">Form</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#BFFF00"/><circle cx="7" cy="2" r="1" fill="#BFFF00"/><circle cx="3" cy="5" r="1" fill="#BFFF00"/><circle cx="7" cy="5" r="1" fill="#BFFF00"/><circle cx="3" cy="8" r="1" fill="#BFFF00"/><circle cx="7" cy="8" r="1" fill="#BFFF00"/></svg>
+          </div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg>
+            <span class="blbl">Contador</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9a3 3 0 1 1 4 3l-1 1v1M12 17h.01"/></svg>
+            <span class="blbl">Q&amp;A</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            <span class="blbl">Calendário</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></svg>
+            <span class="blbl">Messenger</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2"/><path d="M14 11h4M14 14h2"/></svg>
+            <span class="blbl">vCard</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <!-- ─── SOCIAL & CONTATO (2) ─── -->
+          <div class="blk-sec">Social &amp; Contato</div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 2a14 14 0 0 1 0 20 14 14 0 0 1 0-20z"/></svg>
+            <span class="blbl">Social</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="blbl">Mapa</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <!-- ─── LOJAS (3) ─── -->
+          <div class="blk-sec">Lojas</div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <span class="blbl">Shopify</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3L4 8v8l8 5 8-5V8z"/><path d="M4 8l8 5 8-5M12 13v8"/></svg>
+            <span class="blbl">Magento</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 9h20M9 21V9"/></svg>
+            <span class="blbl">WordPress</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <!-- ─── LAYOUT (3) ─── -->
+          <div class="blk-sec">Layout</div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M9 9l-3 3 3 3M15 9l3 3-3 3"/></svg>
+            <span class="blbl">Iframe</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7l4-4 4 4M8 17l4 4 4-4M12 3v18"/></svg>
+            <span class="blbl">Espaço</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+          <div class="blk-card">
+            <svg class="bic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="6" y1="7" x2="18" y2="7" stroke-dasharray="3 2"/><line x1="6" y1="17" x2="18" y2="17" stroke-dasharray="3 2"/></svg>
+            <span class="blbl">Divisor</span>
+            <svg class="blk-drag" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="3" cy="2" r="1" fill="#5A5A60"/><circle cx="7" cy="2" r="1" fill="#5A5A60"/><circle cx="3" cy="5" r="1" fill="#5A5A60"/><circle cx="7" cy="5" r="1" fill="#5A5A60"/><circle cx="3" cy="8" r="1" fill="#5A5A60"/><circle cx="7" cy="8" r="1" fill="#5A5A60"/></svg>
+          </div>
+
+        </div><!-- /blk-grid -->
+      </div><!-- /blk-scroll -->
     </aside>
 
-    <!-- center: preview -->
+    <!-- ─── CANVAS CENTRAL ─── -->
     <div class="ed-canvas">
-      <div class="phone">
-        <div class="ph-bg">
-          <div class="ph-av"></div>
-          <div class="ph-name">Maria Silva</div>
-          <div class="ph-bio">Nutricionista · longevidade & ciência. Pega tudo aqui 👇</div>
-          <div class="ph-social"><div></div><div></div><div></div></div>
-          <div class="ph-btn">🎧 Ouvir o podcast</div>
-          <div class="ph-btn sel">✦ Baixar o ebook grátis</div>
-          <div class="ph-btn">📅 Agendar mentoria</div>
-          <div class="ph-btn" style="background:#fff">🛒 Cupom de parceiros</div>
+      <div>
+        <div class="phone-v3">
+          <div class="phone-notch"><div class="notch-pill"></div></div>
+          <div class="phone-screen">
+
+            <!-- Avatar com ring lime -->
+            <div class="ph-av-wrap">
+              <div class="ph-av">MS</div>
+            </div>
+
+            <div class="ph-name">Maria Silva</div>
+            <div class="ph-bio">Nutricionista · longevidade &amp; ciência.<br>Pega tudo aqui 👇</div>
+
+            <!-- Social icons row -->
+            <div class="ph-social">
+              <div class="ph-si" title="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="ph-si" title="TikTok">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+              </div>
+              <div class="ph-si" title="YouTube">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 6.5a2.5 2.5 0 0 0-1.76-1.77C19 4.5 12 4.5 12 4.5s-7 0-8.74.23A2.5 2.5 0 0 0 1.5 6.5 26.5 26.5 0 0 0 1.25 12a26.5 26.5 0 0 0 .25 5.5 2.5 2.5 0 0 0 1.76 1.77C5 19.5 12 19.5 12 19.5s7 0 8.74-.23a2.5 2.5 0 0 0 1.76-1.77A26.5 26.5 0 0 0 22.75 12a26.5 26.5 0 0 0-.25-5.5z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="ph-si" title="Spotify">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 13.5a8 8 0 0 1 8 0M7 10a10 10 0 0 1 10 0M9 17a6 6 0 0 1 6 0"/></svg>
+              </div>
+            </div>
+
+            <!-- Buttons da smartpage -->
+            <div class="ph-btns">
+              <div class="ph-btn lime">🎧 Ouvir o podcast</div>
+              <div class="ph-btn lime sel">✦ Baixar o ebook grátis</div>
+              <div class="ph-btn glass">📅 Agendar mentoria</div>
+              <div class="ph-btn coral">🛒 Cupom de parceiros</div>
+            </div>
+
+          </div>
         </div>
+        <div class="canvas-label">Preview · Bio da Maria</div>
       </div>
     </div>
 
-    <!-- right: editar bloco -->
+    <!-- ─── PAINEL DIREITO: PROPRIEDADES ─── -->
     <aside class="ed-right">
-      <div class="secrow row between">
-        <b>Bloco · Botão</b>
-        <div class="row gap-4">
-          <span class="btn-icon" title="Esconder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>
-          <span class="btn-icon" title="Duplicar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
-          <span class="btn-icon" title="Excluir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></span>
+
+      <div class="props-hdr">
+        <div class="props-hdr-l">
+          <span class="props-eyebrow">Bloco selecionado</span>
+          <span class="props-ttl">Botão</span>
+        </div>
+        <div class="props-acts">
+          <div class="pact" title="Esconder/mostrar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="pact" title="Duplicar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </div>
+          <div class="pact danger" title="Excluir">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+          </div>
         </div>
       </div>
-      <div class="secrow col gap-12">
-        <div class="field"><label class="label">Texto do botão</label>
-          <input class="input" value="✦ Baixar o ebook grátis"></div>
-        <div class="field"><label class="label">Link de destino</label>
-          <input class="input" value="plnk.to/fibras-ebook"></div>
-      </div>
-      <div class="secrow col gap-12">
-        <div class="row between"><span class="label">Aparência customizada</span><span class="toggle on"></span></div>
-        <div class="field"><label class="label">Estilo do botão</label>
-          <div class="segmented"><div class="active">Sólido</div><div>Contorno</div><div>Suave</div></div></div>
-      </div>
-      <div class="secrow col gap-12">
-        <div class="row between"><span class="label">Animação (pulsar)</span><span class="toggle on"></span></div>
-        <div class="row between"><span class="label">Agendar exibição</span><span class="toggle"></span></div>
-      </div>
-      <div class="secrow col gap-10">
-        <span class="label">Capturar clique como evento</span>
-        <div class="row gap-8"><span class="checkbox on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-          <span style="font-size:12.5px">Registrar conversão no analytics</span></div>
-      </div>
-    </aside>
 
-  </div>
-</div>
-<script src="assets/theme.js"></script>
+      <!-- Conteúdo -->
+      <div class="psec">
+        <span class="psec-title">Conteúdo</span>
+        <div class="fl">
+          <input placeholder=" " value="✦ Baixar o ebook grátis" id="btn-text">
+          <label for="btn-text">Texto do botão</label>
+        </div>
+        <div class="fl">
+          <input placeholder=" " value="plnk.to/fibras-ebook" id="btn-link">
+          <label for="btn-link">Link de destino</label>
+        </div>
+      </div>
+
+      <!-- Aparência -->
+      <div class="psec">
+        <span class="psec-title">Aparência</span>
+        <div class="prop-row">
+          <span class="prop-lbl">Customizada</span>
+          <div class="tg on"></div>
+        </div>
+        <div>
+          <div style="font-family:'Satoshi',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:#5A5A60;margin-bottom:8px">Estilo</div>
+          <div class="v3seg">
+            <div class="sg on">Sólido</div>
+            <div class="sg">Contorno</div>
+            <div class="sg">Suave</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'Satoshi',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:#5A5A60;margin-bottom:8px">Ícone</div>
+          <div class="v3seg">
+            <div class="sg">Nenhum</div>
+            <div class="sg on">Emoji</div>
+            <div class="sg">SVG</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comportamento -->
+      <div class="psec">
+        <span class="psec-title">Comportamento</span>
+        <div class="prop-row">
+          <span class="prop-lbl">Animação (pulsar)</span>
+          <div class="tg on"></div>
+        </div>
+        <div class="prop-row">
+          <span class="prop-lbl">Agendar exibição</span>
+          <div class="tg"></div>
+        </div>
+        <div class="prop-row">
+          <span class="prop-lbl">Abrir em nova aba</span>
+          <div class="tg on"></div>
+        </div>
+      </div>
+
+      <!-- Rastreamento -->
+      <div class="psec">
+        <span class="psec-title">Rastreamento</span>
+        <div class="v3cb-row">
+          <div class="v3cb on">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <span class="v3cb-lbl">Registrar conversão no analytics</span>
+        </div>
+        <div class="v3cb-row">
+          <div class="v3cb on">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <span class="v3cb-lbl">Disparar evento para pixels</span>
+        </div>
+        <div class="v3cb-row">
+          <div class="v3cb">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <span class="v3cb-lbl">Capturar lead ao clicar</span>
+        </div>
+      </div>
+
+    </aside>
+  </div><!-- /ed-body -->
+</div><!-- /ed -->
 </body>
 </html>

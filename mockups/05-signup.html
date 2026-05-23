@@ -1,66 +1,286 @@
 <!doctype html>
-<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AppLink — Criar conta</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Syne:ital,wght@0,700;0,800;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/tokens.css">
-<link rel="stylesheet" href="assets/ui.css">
 <style>
-  .auth{min-height:100vh;display:grid;place-items:center;padding:40px 20px}
-  .auth-card{width:412px;max-width:100%;padding:32px}
-  .auth-mark{width:52px;height:52px;border-radius:13px;background:var(--accent-grad);
-    display:grid;place-items:center;border:var(--bd-w-sm) solid var(--bd-c);box-shadow:var(--sh-btn)}
-  .auth-mark svg{width:26px;height:26px;color:var(--on-accent)}
-  .auth h1{font-size:24px;margin-top:18px}
-  .auth .sub{font-size:13px;color:var(--ink-3);margin-top:4px}
-  .perks{font-size:12px;color:var(--ink-2)}
-  .perks div{display:flex;gap:7px;align-items:center;padding:3px 0}
-  .perks svg{width:14px;height:14px;color:var(--success)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+
+.auth-canvas{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;position:relative}
+.auth-canvas::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse 800px 520px at 38% 40%,rgba(191,255,0,0.045) 0%,transparent 68%);pointer-events:none}
+
+/* split layout */
+.auth-split{display:flex;align-items:center;gap:52px;max-width:840px;width:100%;position:relative;z-index:1}
+
+/* card */
+.auth-card{width:440px;flex-shrink:0;background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;padding:38px;
+  box-shadow:16px 16px 40px rgba(0,0,0,0.7),-8px -8px 20px rgba(255,255,255,0.025),0 0 60px rgba(191,255,0,0.07)}
+
+/* logo mark */
+.auth-mark-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.auth-mark{width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,#BFFF00,#FF7777);
+  display:grid;place-items:center;
+  box-shadow:6px 6px 14px rgba(0,0,0,0.55),-3px -3px 8px rgba(255,255,255,0.03),0 0 28px rgba(191,255,0,0.35)}
+.auth-mark svg{width:28px;height:28px;color:#0A0A0A}
+
+/* badge */
+.v3badge{background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+  font-family:'Satoshi',sans-serif;font-weight:800;font-size:9.5px;text-transform:uppercase;letter-spacing:0.18em;
+  padding:6px 12px;border-radius:999px;white-space:nowrap;
+  box-shadow:0 0 18px rgba(191,255,0,0.35)}
+
+/* type */
+.auth-title{font-family:'General Sans',sans-serif;font-weight:600;font-size:26px;line-height:1.05;letter-spacing:-0.03em;color:#fff;margin-bottom:6px}
+.auth-sub{font-family:'Satoshi',sans-serif;font-size:13.5px;color:#94A3B8;line-height:1.55;margin-bottom:24px}
+
+/* floating label */
+.fl{position:relative;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:14px;
+  box-shadow:inset 4px 4px 8px rgba(0,0,0,0.55),inset -2px -2px 6px rgba(255,255,255,0.025);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.fl input{width:100%;background:transparent;border:0;outline:none;padding:22px 18px 12px;color:#fff;
+  font-family:'Satoshi',sans-serif;font-size:14px;font-weight:500}
+.fl input[type="password"]{padding-right:50px}
+.fl label{position:absolute;top:1.05rem;left:1.2rem;color:#94A3B8;font-family:'Satoshi',sans-serif;font-size:14px;
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none}
+.fl input:not(:placeholder-shown)~label,
+.fl:focus-within label{top:-0.5rem;left:1rem;transform:scale(0.65);color:#BFFF00;
+  font-weight:700;text-transform:uppercase;letter-spacing:0.18em;background:#141414;padding:0 8px;border-radius:4px}
+.fl:focus-within{border-color:rgba(191,255,0,0.5)}
+.fl-wrap{margin-bottom:12px}
+
+/* eye toggle */
+.pw-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:0;
+  cursor:pointer;color:#5A5A60;padding:4px;transition:.2s;display:grid;place-items:center}
+.pw-eye:hover{color:#94A3B8}
+.pw-eye svg{width:16px;height:16px;display:block}
+
+/* checkbox */
+.check-row{display:flex;align-items:flex-start;gap:10px;margin:4px 0 20px}
+.v3check{width:20px;height:20px;border-radius:6px;background:#1A1A1A;display:inline-grid;place-items:center;
+  cursor:pointer;flex-shrink:0;margin-top:1px;
+  box-shadow:inset 3px 3px 6px rgba(0,0,0,0.55),inset -1px -1px 3px rgba(255,255,255,0.025);
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.v3check svg{width:11px;height:11px;color:#0A0A0A;opacity:0}
+.v3check.on{background:linear-gradient(135deg,#BFFF00,#FF7777);box-shadow:0 0 12px rgba(191,255,0,0.45),2px 2px 6px rgba(0,0,0,0.4)}
+.v3check.on svg{opacity:1}
+.check-label{font-family:'Satoshi',sans-serif;font-size:12.5px;color:#94A3B8;line-height:1.5}
+.check-label a{color:#BFFF00;text-decoration:none;font-weight:700}
+.check-label a:hover{color:#FF7777}
+
+/* primary button */
+.btn-primary{width:100%;background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;border:0;
+  padding:16px;border-radius:14px;font-family:'Satoshi',sans-serif;font-weight:800;
+  font-size:12px;text-transform:uppercase;letter-spacing:0.22em;cursor:pointer;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 28px rgba(191,255,0,0.35);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1);display:flex;align-items:center;justify-content:center;gap:10px}
+.btn-primary:hover{transform:scale(1.03);box-shadow:4px 4px 14px rgba(0,0,0,0.55),0 0 36px rgba(191,255,0,0.45)}
+.btn-primary svg{width:16px;height:16px}
+
+/* legal + switch */
+.auth-legal{font-family:'Satoshi',sans-serif;font-size:11px;color:#5A5A60;text-align:center;margin-top:12px;line-height:1.5}
+.auth-legal a{color:#94A3B8;text-decoration:underline}
+.auth-switch{text-align:center;margin-top:14px;font-family:'Satoshi',sans-serif;font-size:13px;color:#5A5A60}
+.auth-switch a{color:#BFFF00;font-weight:700;text-decoration:none;transition:color .2s}
+.auth-switch a:hover{color:#FF7777}
+
+/* divider */
+.v3divider{height:1px;background:rgba(255,255,255,0.05);margin:16px 0}
+
+/* BENEFITS PANEL */
+.auth-benefits{flex:1;min-width:0}
+.ben-eyebrow{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;
+  letter-spacing:0.3em;color:#BFFF00;margin-bottom:14px}
+.ben-title{font-family:'General Sans',sans-serif;font-weight:600;font-size:32px;line-height:1.1;
+  letter-spacing:-0.03em;color:#fff;margin-bottom:8px}
+.ben-title em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.ben-sub{font-family:'Satoshi',sans-serif;font-size:13.5px;color:#94A3B8;line-height:1.6;margin-bottom:28px}
+.ben-list{display:flex;flex-direction:column;gap:16px}
+.ben-item{display:flex;align-items:flex-start;gap:14px}
+.ben-icon{width:28px;height:28px;border-radius:8px;background:rgba(191,255,0,0.1);color:#BFFF00;
+  display:grid;place-items:center;flex-shrink:0;
+  box-shadow:inset 2px 2px 6px rgba(0,0,0,0.4)}
+.ben-icon svg{width:14px;height:14px}
+.ben-item-body b{font-family:'Satoshi',sans-serif;font-weight:700;font-size:13.5px;color:#fff;display:block;margin-bottom:3px}
+.ben-item-body span{font-family:'Satoshi',sans-serif;font-size:12px;color:#94A3B8;line-height:1.5}
+.ben-proof{display:flex;align-items:center;gap:12px;margin-top:28px;padding:14px 18px;background:#141414;
+  border:1px solid rgba(255,255,255,0.04);border-radius:16px;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.45),-2px -2px 6px rgba(255,255,255,0.02)}
+.ben-proof .av-stack{display:flex}
+.ben-proof .av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#BFFF00,#FF7777);
+  border:2px solid #141414;display:grid;place-items:center;font-weight:800;font-size:10px;color:#0A0A0A;margin-left:-8px}
+.ben-proof .av:first-child{margin-left:0}
+.ben-proof-text b{font-family:'Satoshi',sans-serif;font-weight:700;font-size:13px;color:#fff;display:block}
+.ben-proof-text span{font-family:'Satoshi',sans-serif;font-size:11px;color:#94A3B8}
+
+/* copyright */
+.auth-copy{font-family:'Satoshi',sans-serif;font-size:11px;color:#3A3A40;letter-spacing:0.1em;margin-top:28px;position:relative;z-index:1}
+
+/* responsive */
+@media(max-width:760px){
+  .auth-split{flex-direction:column}
+  .auth-card{width:100%;max-width:440px}
+  .auth-benefits{max-width:440px}
+}
 </style>
 </head>
 <body>
-<div class="auth">
-  <div class="card auth-card col">
-    <div class="row between center">
-      <div class="auth-mark">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter" stroke-linecap="square"><rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2"/></svg>
+<div class="auth-canvas">
+  <div class="auth-split">
+
+    <!-- CARD -->
+    <div class="auth-card">
+      <div class="auth-mark-row">
+        <div class="auth-mark">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter" stroke-linecap="square">
+            <rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2"/>
+            <rect x="13" y="13" width="12.5" height="12.5" rx="2"/>
+          </svg>
+        </div>
+        <span class="v3badge">7 dias grátis · sem cartão</span>
       </div>
-      <span class="badge badge-accent tag-rot">7 dias grátis · sem cartão</span>
-    </div>
-    <h1 class="page-title">Criar sua conta</h1>
-    <div class="sub">Encurte, rastreie e converta com smart links.</div>
 
-    <div class="col gap-12 mt-24">
-      <div class="field"><label class="label">Nome</label>
-        <input class="input" placeholder="Seu nome"></div>
-      <div class="field"><label class="label">E-mail de trabalho</label>
-        <input class="input" type="email" placeholder="voce@empresa.com"></div>
-      <div class="field"><label class="label">Senha</label>
-        <input class="input" type="password" placeholder="Mínimo 8 caracteres"></div>
-      <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center">
-        Começar grátis
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      <h1 class="auth-title">Criar sua conta</h1>
+      <p class="auth-sub">Encurte, rastreie e converta com smart links.</p>
+
+      <!-- Nome -->
+      <div class="fl-wrap">
+        <div class="fl">
+          <input type="text" placeholder=" ">
+          <label>Nome completo</label>
+        </div>
+      </div>
+
+      <!-- E-mail -->
+      <div class="fl-wrap">
+        <div class="fl">
+          <input type="email" placeholder=" ">
+          <label>E-mail de trabalho</label>
+        </div>
+      </div>
+
+      <!-- Senha -->
+      <div class="fl-wrap">
+        <div class="fl" style="position:relative">
+          <input type="password" placeholder=" " id="pw1">
+          <label>Senha (mín. 8 caracteres)</label>
+          <button class="pw-eye" onclick="var f=document.getElementById('pw1');f.type=f.type==='password'?'text':'password'" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Confirmar senha -->
+      <div class="fl-wrap">
+        <div class="fl" style="position:relative">
+          <input type="password" placeholder=" " id="pw2">
+          <label>Confirmar senha</label>
+          <button class="pw-eye" onclick="var f=document.getElementById('pw2');f.type=f.type==='password'?'text':'password'" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Aceito termos -->
+      <div class="check-row">
+        <span class="v3check on">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg>
+        </span>
+        <span class="check-label">Li e aceito os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a></span>
+      </div>
+
+      <!-- CTA -->
+      <button class="btn-primary">
+        Começar 7 dias grátis
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </button>
+
+      <p class="auth-legal">Sem compromisso. Cancele quando quiser. Sem cartão de crédito.</p>
+
+      <div class="v3divider"></div>
+      <div class="auth-switch">Já tem conta? <a href="04-login.html">Entrar</a></div>
     </div>
 
-    <div class="perks mt-16">
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Links e smartpages ilimitados no teste</div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Pixels de retargeting e analytics completos</div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Conecta ao AppexCRM quando quiser</div>
+    <!-- BENEFITS PANEL -->
+    <div class="auth-benefits">
+      <div class="ben-eyebrow">▮ Por que AppLink?</div>
+      <h2 class="ben-title">Links que<br><em>convertem.</em></h2>
+      <p class="ben-sub">Uma plataforma completa para encurtar, rastrear e converter cada clique no seu funil.</p>
+
+      <div class="ben-list">
+        <div class="ben-item">
+          <div class="ben-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+            </svg>
+          </div>
+          <div class="ben-item-body">
+            <b>Smart links rastreáveis</b>
+            <span>Encurte, personalize e rastreie cada clique com pixels de retargeting.</span>
+          </div>
+        </div>
+        <div class="ben-item">
+          <div class="ben-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+              <path d="M3 3v18h18M7 14l4-4 4 3 5-6"/>
+            </svg>
+          </div>
+          <div class="ben-item-body">
+            <b>Analytics em tempo real</b>
+            <span>Visualize cliques, origens, dispositivos e conversões por link.</span>
+          </div>
+        </div>
+        <div class="ben-item">
+          <div class="ben-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+              <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+            </svg>
+          </div>
+          <div class="ben-item-body">
+            <b>Smartpages & link in bio</b>
+            <span>Crie páginas de captura e mini-sites sem código, publicadas em segundos.</span>
+          </div>
+        </div>
+        <div class="ben-item">
+          <div class="ben-icon" style="background:rgba(255,119,119,0.1);color:#FF7777">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+              <path d="M13 2 3 14h9l-1 8 10-12h-9z"/>
+            </svg>
+          </div>
+          <div class="ben-item-body">
+            <b>Integra ao AppexCRM</b>
+            <span>Sincronize leads automaticamente. Uma identidade, duas plataformas.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ben-proof">
+        <div class="av-stack">
+          <div class="av">MS</div>
+          <div class="av">JR</div>
+          <div class="av">CA</div>
+        </div>
+        <div class="ben-proof-text">
+          <b>+12.000 criadores ativos</b>
+          <span>Confiando no AppLink para crescer</span>
+        </div>
+      </div>
     </div>
 
-    <div class="sub" style="font-size:11px;text-align:center;margin-top:16px">
-      Ao criar a conta você concorda com os Termos e a Política de Privacidade.</div>
-    <div class="divider mt-16"></div>
-    <div class="sub" style="text-align:center;margin-top:14px">
-      Já tem conta? <a href="04-login.html" style="color:var(--accent-2);font-weight:700">Entrar</a>
-    </div>
   </div>
+  <span class="auth-copy">© 2026 AppLink · Todos os direitos reservados</span>
 </div>
-<script src="assets/theme.js"></script>
 </body>
 </html>

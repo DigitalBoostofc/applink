@@ -1,244 +1,802 @@
 <!doctype html>
-<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AppLink — Estados &amp; edge cases</title>
+<title>AppLink — Estados &amp; Handoff</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Syne:ital,wght@0,700;0,800;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/tokens.css">
-<link rel="stylesheet" href="assets/ui.css">
 <style>
-  .doc{max-width:1080px;margin:0 auto;padding:42px 28px 140px}
-  .doc h1{font-family:var(--font-display);font-style:italic;font-weight:900;letter-spacing:-.02em;font-size:30px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.45)}
-  .doc .sub{color:rgba(255,255,255,.85);font-size:13px;text-shadow:0 1px 2px rgba(0,0,0,.45)}
-  .doc section{margin-top:38px}
-  .doc h2{font-family:var(--font-display);font-style:italic;font-weight:900;font-size:18px;color:#fff;letter-spacing:-.02em;text-shadow:0 1px 2px rgba(0,0,0,.45);margin-bottom:4px}
-  .doc .hint{font-size:13px;color:rgba(255,255,255,.82);margin-bottom:14px;text-shadow:0 1px 2px rgba(0,0,0,.45)}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
-  .demo{background:var(--surface);border:var(--bd-w) solid #000;border-radius:var(--r-card);
-    box-shadow:var(--sh-card);padding:18px;color:var(--ink-1);display:flex;flex-direction:column;gap:12px}
-  [data-brand="appex"] .demo{border-width:1px;border-color:var(--edge);box-shadow:var(--shadow-md)}
-  .demo .lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
-  /* skeletons */
-  .sk{background:linear-gradient(90deg,var(--surface-hover) 0,#E4E4E7 50%,var(--surface-hover) 100%);
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi',sans-serif}
+  .shell{display:flex;min-height:100vh}
+
+  /* ── sidebar V3 ── */
+  .v3sb{width:256px;flex-shrink:0;background:#050505;border-right:1px solid rgba(255,255,255,0.05);
+    display:flex;flex-direction:column;padding:20px 16px;gap:4px;position:sticky;top:0;height:100vh;overflow-y:auto}
+  .v3sb .brand{display:flex;align-items:center;gap:12px;padding:8px 4px 24px}
+  .v3sb .brand-mark{width:40px;height:40px;border-radius:12px;
+    background:linear-gradient(135deg,#BFFF00,#FF7777);display:grid;place-items:center;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.55),-2px -2px 6px rgba(255,255,255,0.03),0 0 22px rgba(191,255,0,0.25)}
+  .v3sb .brand-mark svg{width:22px;height:22px;color:#0A0A0A}
+  .v3sb .brand-name{font-family:'General Sans',sans-serif;font-weight:700;font-size:17px;letter-spacing:-0.02em;color:#fff}
+  .v3sb .sec{font-size:9px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:#5A5A60;padding:14px 12px 6px}
+  .v3sb .nv{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;
+    font-family:'Satoshi',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;
+    font-size:11px;color:#94A3B8;cursor:pointer;transition:.35s cubic-bezier(0.34,1.56,0.64,1);text-decoration:none}
+  .v3sb .nv svg{width:16px;height:16px;flex-shrink:0}
+  .v3sb .nv:hover{color:#fff;background:rgba(255,255,255,0.03)}
+  .v3sb .nv.on{background:linear-gradient(90deg,rgba(191,255,0,0.12) 0%,rgba(191,255,0,0) 100%);
+    color:#BFFF00;border-right:3px solid #BFFF00;border-radius:12px 0 0 12px;padding-right:9px}
+  .v3sb .user{margin-top:auto;display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;background:#0F0F0F;
+    box-shadow:inset 2px 2px 6px rgba(0,0,0,0.5)}
+  .v3sb .user .av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+    display:grid;place-items:center;font-weight:800;font-size:13px;box-shadow:2px 2px 6px rgba(0,0,0,0.4)}
+  .v3sb .user .nm{font-size:12px;font-weight:700;color:#fff}
+  .v3sb .user .pl{font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:#94A3B8;font-weight:700}
+
+  /* ── main ── */
+  .v3main{flex:1;min-width:0}
+  .v3hdr{position:sticky;top:0;z-index:10;height:80px;background:rgba(10,10,10,0.82);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.04);
+    display:flex;align-items:center;padding:0 32px;gap:24px}
+  .crumb{display:flex;align-items:center;gap:10px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+    text-transform:uppercase;letter-spacing:0.18em;color:#94A3B8}
+  .crumb b{color:#fff}.crumb svg{width:12px;height:12px;color:#5A5A60}
+  .v3hdr .hdr-badge{margin-left:auto;background:rgba(191,255,0,0.08);border:1px solid rgba(191,255,0,0.2);
+    color:#BFFF00;padding:6px 14px;border-radius:999px;font-family:'Satoshi',sans-serif;
+    font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.18em}
+
+  /* ── content ── */
+  .v3content{padding:32px 32px 80px;max-width:1200px}
+  .eyebrow-cap{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;
+    letter-spacing:0.3em;color:#BFFF00;margin-bottom:10px}
+  .v3h1{font-family:'General Sans',sans-serif;font-weight:600;font-size:44px;line-height:1;
+    letter-spacing:-0.03em;color:#fff}
+  .v3h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .v3sub{font-family:'Satoshi',sans-serif;font-size:14px;color:#94A3B8;line-height:1.6;
+    max-width:560px;margin-top:10px}
+  .ttl-row{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:36px;
+    gap:32px;flex-wrap:wrap}
+
+  /* ── section ── */
+  .cat-section{margin-bottom:44px}
+  .cat-hdr{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+  .cat-num{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#BFFF00,#FF7777);
+    color:#0A0A0A;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;
+    font-weight:800;font-size:13px;flex-shrink:0;
+    box-shadow:3px 3px 8px rgba(0,0,0,0.5),0 0 14px rgba(191,255,0,0.25)}
+  .cat-title{font-family:'General Sans',sans-serif;font-weight:600;font-size:20px;color:#fff;
+    letter-spacing:-0.02em}
+  .cat-hint{font-family:'Satoshi',sans-serif;font-size:12px;color:#5A5A60;margin-left:auto;
+    text-transform:uppercase;letter-spacing:0.14em;font-weight:700}
+  .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+
+  /* ── demo card ── */
+  .demo-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:24px;
+    padding:22px;box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);
+    display:flex;flex-direction:column;gap:16px}
+  .demo-label{font-family:'Satoshi',sans-serif;font-weight:800;font-size:9px;text-transform:uppercase;
+    letter-spacing:0.25em;color:#5A5A60}
+  .demo-usage{font-family:'JetBrains Mono',monospace;font-size:10px;color:#BFFF00;font-weight:700;
+    margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,0.04)}
+
+  /* ── skeleton ── */
+  .sk{background:linear-gradient(90deg,#1A1A1A 0%,#232323 50%,#1A1A1A 100%);
     background-size:200% 100%;animation:shimmer 1.4s linear infinite;border-radius:6px}
   @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-  .sk-line{height:11px;border-radius:6px;margin:6px 0}
-  /* spinner */
-  .spin{width:18px;height:18px;border:3px solid rgba(0,0,0,.15);border-top-color:#000;border-radius:50%;
-    animation:rot .8s linear infinite}
+  .sk-line{height:11px;border-radius:6px;margin:5px 0}
+  .sk-avatar{width:38px;height:38px;border-radius:50%}
+  .sk-thumb{width:48px;height:48px;border-radius:12px}
+  .sk-btn{height:36px;border-radius:12px}
+
+  /* ── spinner ── */
+  .v3spin{width:16px;height:16px;border:2.5px solid rgba(0,0,0,0.25);border-top-color:#0A0A0A;
+    border-radius:50%;animation:rot .7s linear infinite;display:inline-block;vertical-align:middle}
   @keyframes rot{to{transform:rotate(360deg)}}
-  /* error input */
-  .input.is-error{border-color:var(--danger);box-shadow:0 0 0 3px color-mix(in srgb,var(--danger) 30%,transparent)}
-  .help-error{font-size:12px;color:var(--danger);font-weight:600;display:flex;gap:5px;align-items:center}
-  .help-error svg{width:13px;height:13px}
-  /* focus showcase */
-  .force-focus{box-shadow:var(--focus-ring) !important}
-  /* faux row */
-  .pix{height:38px;width:120px;background:var(--surface-hover);border-radius:6px}
+
+  /* ── V3 buttons (for demos) ── */
+  .dbtn{border:0;border-radius:12px;padding:10px 18px;cursor:pointer;
+    font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;
+    text-transform:uppercase;letter-spacing:0.18em;display:inline-flex;align-items:center;gap:8px;
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .dbtn svg{width:14px;height:14px}
+  .dbtn-cta{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 18px rgba(191,255,0,0.28)}
+  .dbtn-cta:hover{transform:scale(1.04)}
+  .dbtn-sec{background:#1A1A1A;color:#94A3B8;
+    box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025)}
+  .dbtn-sec:hover{color:#fff}
+  .dbtn-danger{background:rgba(239,68,68,0.15);color:#EF4444;
+    box-shadow:3px 3px 8px rgba(0,0,0,0.5)}
+  .dbtn:disabled{opacity:0.38;cursor:not-allowed;transform:none !important}
+
+  /* ── focus ring demo ── */
+  .focus-ring-demo{box-shadow:0 0 0 2px #0A0A0A,0 0 0 4px #BFFF00 !important;
+    outline:none !important}
+
+  /* ── V3 input (for demos) ── */
+  .dinput{width:100%;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);
+    border-radius:12px;padding:12px 16px;color:#fff;
+    font-family:'Satoshi',sans-serif;font-size:13px;outline:none;
+    box-shadow:inset 4px 4px 8px rgba(0,0,0,0.55),inset -2px -2px 6px rgba(255,255,255,0.025)}
+  .dinput.focus{border-color:rgba(191,255,0,0.5);box-shadow:inset 4px 4px 8px rgba(0,0,0,0.55),inset -2px -2px 6px rgba(255,255,255,0.025),0 0 0 2px #0A0A0A,0 0 0 4px rgba(191,255,0,0.6)}
+  .dinput.error{border-color:rgba(239,68,68,0.5);
+    box-shadow:inset 4px 4px 8px rgba(0,0,0,0.55),0 0 0 2px #0A0A0A,0 0 0 4px rgba(239,68,68,0.5)}
+  .dinput:disabled{opacity:.38;cursor:not-allowed}
+  .field-lbl{font-family:'Satoshi',sans-serif;font-weight:700;font-size:11px;color:#94A3B8;
+    text-transform:uppercase;letter-spacing:0.14em;margin-bottom:6px;display:block}
+  .field-err{font-family:'Satoshi',sans-serif;font-size:11px;color:#EF4444;font-weight:600;
+    display:flex;align-items:center;gap:5px;margin-top:6px}
+  .field-err svg{width:12px;height:12px}
+
+  /* ── V3 toggle ── */
+  .tg{width:42px;height:22px;border-radius:999px;position:relative;cursor:pointer;flex-shrink:0;
+    background:#2A2A2A;box-shadow:inset 2px 2px 4px rgba(0,0,0,0.6);
+    transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .tg::after{content:"";position:absolute;width:16px;height:16px;background:#fff;border-radius:50%;
+    top:3px;left:3px;transition:.35s cubic-bezier(0.34,1.56,0.64,1);
+    box-shadow:1px 1px 4px rgba(0,0,0,0.4)}
+  .tg.on{background:linear-gradient(135deg,#BFFF00,#FF7777);
+    box-shadow:0 0 12px rgba(191,255,0,0.35)}
+  .tg.on::after{left:23px;background:#0A0A0A}
+  .tg:disabled{opacity:.38;cursor:not-allowed}
+  .tg-row{display:flex;align-items:center;gap:10px;font-family:'Satoshi',sans-serif;
+    font-size:13px;color:#94A3B8}
+
+  /* ── empty state illustration ── */
+  .empty-illu{display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:24px 10px;gap:14px;text-align:center}
+  .empty-illu .empty-icon{width:64px;height:64px;display:grid;place-items:center}
+  .empty-title{font-family:'General Sans',sans-serif;font-weight:600;font-size:17px;color:#fff;
+    letter-spacing:-0.01em}
+  .empty-sub{font-family:'Satoshi',sans-serif;font-size:13px;color:#5A5A60;max-width:240px;
+    line-height:1.5}
+
+  /* ── error page ── */
+  .err-page{display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:24px;gap:12px;text-align:center}
+  .err-code{font-family:'General Sans',sans-serif;font-weight:600;font-size:52px;
+    letter-spacing:-0.04em;line-height:1;background:linear-gradient(135deg,#FF7777,#FFD400);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .err-title{font-family:'General Sans',sans-serif;font-weight:600;font-size:18px;color:#fff;
+    letter-spacing:-0.01em}
+  .err-sub{font-family:'Satoshi',sans-serif;font-size:13px;color:#5A5A60;line-height:1.5}
+
+  /* ── toast ── */
+  .toast{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:16px;
+    font-family:'Satoshi',sans-serif;font-size:13px;font-weight:600;
+    box-shadow:8px 8px 20px rgba(0,0,0,0.6),-4px -4px 10px rgba(255,255,255,0.025)}
+  .toast.success{background:linear-gradient(90deg,rgba(16,185,129,0.15),rgba(16,185,129,0.08));
+    border:1px solid rgba(16,185,129,0.25);color:#10B981}
+  .toast.danger{background:linear-gradient(90deg,rgba(239,68,68,0.15),rgba(239,68,68,0.08));
+    border:1px solid rgba(239,68,68,0.25);color:#EF4444}
+  .toast.info{background:#1A1A1A;border:1px solid rgba(255,255,255,0.06);color:#94A3B8;
+    box-shadow:inset 2px 2px 6px rgba(0,0,0,0.4)}
+  .toast svg{width:16px;height:16px;flex-shrink:0}
+  .toast .tc{font-weight:800}
+  .toast .td{font-size:11.5px;opacity:0.75;margin-top:1px;font-weight:400}
+
+  /* ── danger modal ── */
+  .danger-modal{background:#141414;border:1px solid rgba(239,68,68,0.2);border-radius:24px;
+    padding:24px;box-shadow:12px 12px 30px rgba(0,0,0,0.65),-6px -6px 14px rgba(255,255,255,0.02),
+    0 0 40px rgba(239,68,68,0.06)}
+  .danger-modal-icon{width:48px;height:48px;border-radius:14px;
+    background:rgba(239,68,68,0.12);display:grid;place-items:center;margin-bottom:14px}
+  .danger-modal-icon svg{width:22px;height:22px;color:#EF4444}
+  .danger-modal h4{font-family:'General Sans',sans-serif;font-weight:600;font-size:17px;
+    color:#fff;letter-spacing:-0.01em;margin-bottom:8px}
+  .danger-modal p{font-family:'Satoshi',sans-serif;font-size:13px;color:#5A5A60;line-height:1.55;margin-bottom:18px}
+  .danger-modal-foot{display:flex;gap:10px}
+  .dbtn-sm{padding:9px 16px;font-size:10px}
+
+  /* ── KPI skeleton row ── */
+  .kpi-sk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .kpi-sk{background:#141414;border-radius:20px;padding:18px;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.4),-2px -2px 6px rgba(255,255,255,0.02)}
+
+  /* ── loading overlay ── */
+  .loading-overlay{position:relative;border-radius:16px;overflow:hidden}
+  .loading-veil{position:absolute;inset:0;background:rgba(10,10,10,0.75);
+    backdrop-filter:blur(2px);display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:10px;border-radius:16px;z-index:2}
+  .v3spin-lg{width:28px;height:28px;border:3px solid rgba(191,255,0,0.2);
+    border-top-color:#BFFF00;border-radius:50%;animation:rot .8s linear infinite}
+  .loading-txt{font-family:'Satoshi',sans-serif;font-size:11px;font-weight:800;
+    text-transform:uppercase;letter-spacing:0.2em;color:#BFFF00}
 </style>
 </head>
 <body>
-<div class="doc">
+<div class="shell">
 
-  <h1>Estados &amp; edge cases</h1>
-  <p class="sub">Catálogo dos estados que todo componente precisa cobrir antes do handoff. Use o seletor no canto para alternar identidade.</p>
+  <!-- ── SIDEBAR V3 ── -->
+  <aside class="v3sb">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter" stroke-linecap="square">
+          <rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2"/>
+        </svg>
+      </div>
+      <span class="brand-name">AppLink</span>
+    </div>
 
-  <!-- ===================== BOTÕES ===================== -->
-  <section>
-    <h2>Botões</h2>
-    <p class="hint">Default · hover · <b>focus visível</b> · disabled · loading. O foco usa um ring duplo (zinc + lime) que se destaca em qualquer base — WCAG 2.4.7.</p>
-    <div class="grid">
-      <div class="demo"><span class="lbl">Default</span>
-        <button class="btn btn-primary">Criar link</button>
-        <button class="btn btn-secondary">Secundário</button>
-        <button class="btn btn-danger">Excluir</button></div>
-      <div class="demo"><span class="lbl">Focus (forçado)</span>
-        <button class="btn btn-primary force-focus">Criar link</button>
-        <button class="btn btn-secondary force-focus">Secundário</button>
-        <button class="btn btn-danger force-focus">Excluir</button></div>
-      <div class="demo"><span class="lbl">Disabled</span>
-        <button class="btn btn-primary" disabled style="opacity:.45;cursor:not-allowed">Criar link</button>
-        <button class="btn btn-secondary" disabled style="opacity:.45;cursor:not-allowed">Secundário</button>
-        <button class="btn btn-danger" disabled style="opacity:.45;cursor:not-allowed">Excluir</button></div>
-      <div class="demo"><span class="lbl">Loading</span>
-        <button class="btn btn-primary"><span class="spin"></span> Salvando…</button>
-        <button class="btn btn-secondary"><span class="spin"></span> Carregando…</button></div>
-      <div class="demo"><span class="lbl">Tamanhos</span>
-        <button class="btn btn-primary btn-sm">Pequeno</button>
-        <button class="btn btn-primary">Normal</button>
-        <button class="btn btn-primary btn-lg">Grande (CTA)</button></div>
-      <div class="demo"><span class="lbl">Botão ícone</span>
-        <div class="row gap-8">
-          <button class="btn-icon" aria-label="Copiar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
-          <button class="btn-icon force-focus" aria-label="Compartilhar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8h16v-8M12 3v13M7 8l5-5 5 5"/></svg></button>
-          <button class="btn-icon" disabled aria-label="Excluir" style="opacity:.4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button>
+    <div class="sec">Principal</div>
+    <a class="nv" href="01-dashboard.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Painel
+    </a>
+    <a class="nv" href="02-criar-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+      Criar
+    </a>
+    <a class="nv" href="02c-tipos-de-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+      Tipos
+    </a>
+    <a class="nv" href="06-smartpages.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Smartpages
+    </a>
+    <a class="nv" href="10-qrcode.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg>
+      QR Code
+    </a>
+
+    <div class="sec">Crescimento</div>
+    <a class="nv" href="03-analytics-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg>
+      Analytics
+    </a>
+    <a class="nv" href="11-pixels.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+      Pixels
+    </a>
+    <a class="nv" href="12-audiencias.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+      Audiências
+    </a>
+
+    <div class="sec">Configuração</div>
+    <a class="nv" href="13-dominios.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
+      Domínios
+    </a>
+    <a class="nv" href="14-integracoes.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6M6 21v-6M6 9a3 3 0 0 0 0 6M18 3v12M18 15a3 3 0 0 0 0-6"/></svg>
+      Integrações
+    </a>
+    <a class="nv" href="15-equipe.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Equipe
+    </a>
+    <a class="nv" href="16-billing.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+      Billing
+    </a>
+    <a class="nv" href="09-settings.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1A1.6 1.6 0 0 0 6.8 19l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H3a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 4.2 6.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
+      Settings
+    </a>
+
+    <div class="user">
+      <div class="av">MS</div>
+      <div>
+        <div class="nm">Maria Silva</div>
+        <div class="pl">Plano Pro</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <div class="v3main">
+
+    <header class="v3hdr">
+      <div class="crumb">
+        <span>Design System</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        <b>Estados &amp; Handoff</b>
+      </div>
+      <div class="hdr-badge">Catálogo · 6 seções · 14 demos</div>
+    </header>
+
+    <main class="v3content">
+
+      <div class="ttl-row">
+        <div>
+          <div class="eyebrow-cap">▮ Design System · Handoff</div>
+          <h1 class="v3h1">Estados &amp; <em>edge cases.</em></h1>
+          <p class="v3sub">Catálogo dos estados que todo componente precisa cobrir antes do handoff. Cada card mostra em qual tela o estado aparece.</p>
         </div>
-        <span class="faint" style="font-size:11px">Todo <code>.btn-icon</code> precisa de <code>aria-label</code>.</span>
       </div>
-    </div>
-  </section>
 
-  <!-- ===================== INPUTS ===================== -->
-  <section>
-    <h2>Inputs &amp; formulários</h2>
-    <p class="hint">Default · preenchido · focus · erro · disabled · ajuda contextual.</p>
-    <div class="grid">
-      <div class="demo"><span class="lbl">Default &amp; preenchido</span>
-        <div class="field"><label class="label">URL de destino</label>
-          <input class="input" placeholder="https://seusite.com/pagina"></div>
-        <div class="field"><label class="label">Título</label>
-          <input class="input" value="Promo de inverno"></div></div>
-      <div class="demo"><span class="lbl">Focus</span>
-        <div class="field"><label class="label">URL</label>
-          <input class="input force-focus" value="https://promo.com"></div>
-        <div class="field"><label class="label">Slug</label>
-          <div class="input-group"><span class="addon">plnk.to/</span>
-            <input class="input" value="inverno"></div></div></div>
-      <div class="demo"><span class="lbl">Erro</span>
-        <div class="field"><label class="label">URL</label>
-          <input class="input is-error" value="não-é-url-válida">
-          <span class="help-error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg> Informe uma URL completa (com https://)</span>
+      <!-- ══ 1. LOADING ══ -->
+      <div class="cat-section">
+        <div class="cat-hdr">
+          <div class="cat-num">1</div>
+          <span class="cat-title">Loading</span>
+          <span class="cat-hint">Skeleton + spinner · nunca deixar o usuário no vazio</span>
         </div>
-        <div class="field"><label class="label">Slug já em uso</label>
-          <div class="input-group"><span class="addon">plnk.to/</span>
-            <input class="input is-error" value="promo"></div>
-          <span class="help-error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg> Esse slug já existe</span></div></div>
-      <div class="demo"><span class="lbl">Disabled</span>
-        <div class="field"><label class="label">Plano</label>
-          <input class="input" value="Pro · não editável aqui" disabled style="opacity:.5;cursor:not-allowed"></div>
-        <div class="field"><label class="label">API key</label>
-          <input class="input mono" value="apk_live_****3c91" disabled style="opacity:.7"></div></div>
-      <div class="demo"><span class="lbl">Toggle</span>
-        <div class="row gap-8"><span class="toggle on" role="switch" aria-checked="true" tabindex="0"></span><span>Deep linking</span></div>
-        <div class="row gap-8"><span class="toggle" role="switch" aria-checked="false" tabindex="0"></span><span>Cloaking</span></div>
-        <div class="row gap-8"><span class="toggle on force-focus" role="switch" aria-checked="true" tabindex="0"></span><span>Foco no toggle</span></div>
-        <div class="row gap-8"><span class="toggle" role="switch" aria-checked="false" aria-disabled="true" style="opacity:.45"></span><span class="faint">Disabled</span></div></div>
-      <div class="demo"><span class="lbl">Checkbox</span>
-        <div class="row gap-8"><span class="checkbox on" role="checkbox" aria-checked="true" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><span>Capturar leads no CRM</span></div>
-        <div class="row gap-8"><span class="checkbox" role="checkbox" aria-checked="false" tabindex="0"></span><span>Aceito os termos</span></div>
-        <div class="row gap-8"><span class="checkbox force-focus" role="checkbox" aria-checked="false" tabindex="0"></span><span>Foco no checkbox</span></div></div>
-    </div>
-  </section>
+        <div class="cat-grid">
 
-  <!-- ===================== ALERTAS / BANNERS ===================== -->
-  <section>
-    <h2>Banners, alertas &amp; feedback</h2>
-    <p class="hint">Sucesso, aviso, erro, informativo. Sempre acompanhados de ícone — não dependem só da cor (WCAG 1.4.1).</p>
-    <div class="grid" style="grid-template-columns:1fr">
-      <div class="banner banner-accent" role="status"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Link criado com sucesso · plnk.to/promo-inverno</div>
-      <div class="banner banner-warning" role="alert"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg> Você atingiu 90% do seu limite de cliques deste mês.</div>
-      <div class="banner" role="alert" style="background:var(--danger-soft);color:var(--danger);border:var(--bd-w-sm) solid #000"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg> Não foi possível salvar o link. Verifique a URL e tente de novo.</div>
-      <div class="banner" role="status" style="background:var(--surface);color:var(--ink-1);border:var(--bd-w-sm) solid #000"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg> Aguardando propagação DNS · pode levar até 48h.</div>
-    </div>
-  </section>
+          <!-- Loading: skeleton card de link -->
+          <div class="demo-card">
+            <div class="demo-label">Skeleton · card de link</div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <div class="sk sk-avatar"></div>
+              <div style="flex:1">
+                <div class="sk sk-line" style="width:60%"></div>
+                <div class="sk sk-line" style="width:40%;height:9px"></div>
+              </div>
+              <div class="sk" style="width:48px;height:22px;border-radius:999px"></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <div class="sk sk-avatar"></div>
+              <div style="flex:1">
+                <div class="sk sk-line" style="width:50%"></div>
+                <div class="sk sk-line" style="width:35%;height:9px"></div>
+              </div>
+              <div class="sk" style="width:48px;height:22px;border-radius:999px"></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <div class="sk sk-avatar"></div>
+              <div style="flex:1">
+                <div class="sk sk-line" style="width:65%"></div>
+                <div class="sk sk-line" style="width:30%;height:9px"></div>
+              </div>
+              <div class="sk" style="width:48px;height:22px;border-radius:999px"></div>
+            </div>
+            <div class="demo-usage">uso em: 01-dashboard.html · tabela de links</div>
+          </div>
 
-  <!-- ===================== TABELA: VAZIA / CARREGANDO / COM DADOS ===================== -->
-  <section>
-    <h2>Tabela — estados</h2>
-    <p class="hint">Carregando (skeleton) · vazio (CTA claro) · com erro de carregamento.</p>
+          <!-- Loading: skeleton KPI grid -->
+          <div class="demo-card">
+            <div class="demo-label">Skeleton · KPI cards</div>
+            <div class="kpi-sk-grid">
+              <div class="kpi-sk">
+                <div class="sk" style="width:34px;height:34px;border-radius:10px;margin-bottom:10px"></div>
+                <div class="sk sk-line" style="width:55%"></div>
+                <div class="sk sk-line" style="width:80%;height:18px;margin-top:8px"></div>
+              </div>
+              <div class="kpi-sk">
+                <div class="sk" style="width:34px;height:34px;border-radius:10px;margin-bottom:10px"></div>
+                <div class="sk sk-line" style="width:65%"></div>
+                <div class="sk sk-line" style="width:70%;height:18px;margin-top:8px"></div>
+              </div>
+              <div class="kpi-sk">
+                <div class="sk" style="width:34px;height:34px;border-radius:10px;margin-bottom:10px"></div>
+                <div class="sk sk-line" style="width:50%"></div>
+                <div class="sk sk-line" style="width:90%;height:18px;margin-top:8px"></div>
+              </div>
+              <div class="kpi-sk">
+                <div class="sk" style="width:34px;height:34px;border-radius:10px;margin-bottom:10px"></div>
+                <div class="sk sk-line" style="width:60%"></div>
+                <div class="sk sk-line" style="width:75%;height:18px;margin-top:8px"></div>
+              </div>
+            </div>
+            <div class="demo-usage">uso em: 01-dashboard.html · métricas principais</div>
+          </div>
 
-    <div class="demo" style="margin-bottom:14px"><span class="lbl">Carregando — skeleton</span>
-      <table class="table">
-        <thead><tr><th>Título</th><th>Cliques</th><th>Pixels</th><th>Link curto</th><th>Criado</th></tr></thead>
-        <tbody>
-          <tr><td><div class="sk sk-line" style="width:60%"></div></td><td><div class="sk sk-line" style="width:40px"></div></td><td><div class="sk sk-line" style="width:60px"></div></td><td><div class="sk sk-line" style="width:80%"></div></td><td><div class="sk sk-line" style="width:70px"></div></td></tr>
-          <tr><td><div class="sk sk-line" style="width:50%"></div></td><td><div class="sk sk-line" style="width:40px"></div></td><td><div class="sk sk-line" style="width:90px"></div></td><td><div class="sk sk-line" style="width:80%"></div></td><td><div class="sk sk-line" style="width:70px"></div></td></tr>
-          <tr><td><div class="sk sk-line" style="width:65%"></div></td><td><div class="sk sk-line" style="width:40px"></div></td><td><div class="sk sk-line" style="width:60px"></div></td><td><div class="sk sk-line" style="width:80%"></div></td><td><div class="sk sk-line" style="width:70px"></div></td></tr>
-        </tbody>
-      </table>
-    </div>
+          <!-- Loading: botão em estado loading + overlay em card -->
+          <div class="demo-card">
+            <div class="demo-label">Spinner · botão + overlay</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <button class="dbtn dbtn-cta" style="justify-content:center">
+                <span class="v3spin"></span>
+                Salvando link…
+              </button>
+              <button class="dbtn dbtn-sec" style="justify-content:center">
+                <span class="v3spin"></span>
+                Carregando…
+              </button>
+            </div>
+            <div class="loading-overlay">
+              <div style="background:#1A1A1A;border-radius:14px;padding:16px;
+                box-shadow:inset 3px 3px 8px rgba(0,0,0,0.4)">
+                <div class="sk sk-line" style="width:70%"></div>
+                <div class="sk sk-line" style="width:50%;margin-top:8px"></div>
+              </div>
+              <div class="loading-veil">
+                <div class="v3spin-lg"></div>
+                <span class="loading-txt">Atualizando…</span>
+              </div>
+            </div>
+            <div class="demo-usage">uso em: 02-criar-link.html · 09-settings.html</div>
+          </div>
 
-    <div class="demo" style="margin-bottom:14px;align-items:center"><span class="lbl" style="align-self:flex-start">Vazio · primeiro link</span>
-      <div class="empty" style="padding:40px 10px">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        <div style="font-family:var(--font-display);font-weight:800;font-style:italic;font-size:18px;color:var(--ink-1);margin-top:6px">Você ainda não tem links</div>
-        <div class="faint" style="font-size:13px;margin:6px 0 14px">Crie seu primeiro smart link em 30 segundos.</div>
-        <button class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg> Criar link</button>
+        </div>
       </div>
-    </div>
 
-    <div class="demo" style="align-items:center"><span class="lbl" style="align-self:flex-start">Erro ao carregar</span>
-      <div class="empty" style="padding:36px 10px">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg>
-        <div style="font-family:var(--font-display);font-weight:800;font-style:italic;font-size:18px;color:var(--ink-1);margin-top:6px">Não foi possível carregar os links</div>
-        <div class="faint" style="font-size:13px;margin:6px 0 14px">Verifique sua conexão e tente novamente.</div>
-        <button class="btn btn-secondary">↻ Tentar de novo</button>
+      <!-- ══ 2. EMPTY STATE ══ -->
+      <div class="cat-section">
+        <div class="cat-hdr">
+          <div class="cat-num">2</div>
+          <span class="cat-title">Empty State</span>
+          <span class="cat-hint">Ilustração tracejada lime + CTA orientador</span>
+        </div>
+        <div class="cat-grid">
+
+          <!-- Empty: lista de links vazia -->
+          <div class="demo-card">
+            <div class="demo-label">Empty · lista de links</div>
+            <div class="empty-illu">
+              <div class="empty-icon">
+                <!-- tracejada lime -->
+                <svg viewBox="0 0 64 64" fill="none" width="64" height="64">
+                  <circle cx="32" cy="32" r="28" stroke="rgba(191,255,0,0.15)" stroke-width="2" stroke-dasharray="6 4"/>
+                  <path d="M22 32a10 10 0 0 0 14.14 1.07l6-6a10 10 0 0 0-14.14-14.14l-3.44 3.44"
+                    stroke="#BFFF00" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+                  <path d="M42 32a10 10 0 0 0-14.14-1.07l-6 6a10 10 0 0 0 14.14 14.14l3.43-3.43"
+                    stroke="#BFFF00" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+                </svg>
+              </div>
+              <div class="empty-title">Nenhum link ainda</div>
+              <div class="empty-sub">Crie seu primeiro smart link em 30 segundos e comece a rastrear cliques.</div>
+              <button class="dbtn dbtn-cta" style="margin-top:6px">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 5v14M5 12h14"/></svg>
+                Criar link
+              </button>
+            </div>
+            <div class="demo-usage">uso em: 01-dashboard.html · pasta vazia</div>
+          </div>
+
+          <!-- Empty: analytics sem dados -->
+          <div class="demo-card">
+            <div class="demo-label">Empty · analytics sem cliques</div>
+            <div class="empty-illu">
+              <div class="empty-icon">
+                <svg viewBox="0 0 64 64" fill="none" width="64" height="64">
+                  <rect x="8" y="36" width="10" height="20" rx="3" stroke="rgba(191,255,0,0.2)" stroke-width="2" stroke-dasharray="5 3" fill="none"/>
+                  <rect x="22" y="26" width="10" height="30" rx="3" stroke="rgba(191,255,0,0.35)" stroke-width="2" stroke-dasharray="5 3" fill="none"/>
+                  <rect x="36" y="18" width="10" height="38" rx="3" stroke="rgba(191,255,0,0.5)" stroke-width="2" stroke-dasharray="5 3" fill="none"/>
+                  <rect x="50" y="10" width="10" height="46" rx="3" stroke="#BFFF00" stroke-width="2" stroke-dasharray="5 3" fill="none"/>
+                  <path d="M6 58h52" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div class="empty-title">Nenhum clique ainda</div>
+              <div class="empty-sub">Compartilhe o link e os dados aparecerão aqui em tempo real.</div>
+              <div style="display:flex;gap:8px;margin-top:6px">
+                <button class="dbtn dbtn-cta">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  Copiar link
+                </button>
+                <button class="dbtn dbtn-sec">Baixar QR</button>
+              </div>
+            </div>
+            <div class="demo-usage">uso em: 03-analytics-link.html · recém criado</div>
+          </div>
+
+          <!-- Empty: smartpage sem blocos -->
+          <div class="demo-card">
+            <div class="demo-label">Empty · smartpage sem blocos</div>
+            <div class="empty-illu">
+              <div class="empty-icon">
+                <svg viewBox="0 0 64 64" fill="none" width="64" height="64">
+                  <rect x="10" y="10" width="44" height="44" rx="8" stroke="rgba(191,255,0,0.2)" stroke-width="2" stroke-dasharray="6 3" fill="none"/>
+                  <path d="M10 22h44" stroke="rgba(191,255,0,0.15)" stroke-width="1.5" stroke-dasharray="4 3"/>
+                  <rect x="14" y="28" width="18" height="10" rx="4" stroke="rgba(191,255,0,0.4)" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
+                  <rect x="36" y="28" width="14" height="10" rx="4" stroke="rgba(191,255,0,0.4)" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
+                  <rect x="14" y="42" width="36" height="6" rx="3" stroke="rgba(191,255,0,0.25)" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
+                </svg>
+              </div>
+              <div class="empty-title">Página em branco</div>
+              <div class="empty-sub">Adicione blocos de conteúdo para montar sua smartpage.</div>
+              <button class="dbtn dbtn-cta" style="margin-top:6px">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 5v14M5 12h14"/></svg>
+                Adicionar bloco
+              </button>
+            </div>
+            <div class="demo-usage">uso em: 07-editor-smartpage.html · nova página</div>
+          </div>
+
+        </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ===================== KPI: CARREGANDO ===================== -->
-  <section>
-    <h2>Métricas — carregando</h2>
-    <p class="hint">Skeletons das KPIs antes dos dados chegarem.</p>
-    <div class="kpi-row" style="grid-template-columns:repeat(4,1fr)">
-      <div class="kpi"><div class="sk" style="width:38px;height:38px;border-radius:9px"></div>
-        <div style="flex:1"><div class="sk sk-line" style="width:55%"></div><div class="sk sk-line" style="width:35%;height:18px;margin-top:8px"></div></div></div>
-      <div class="kpi"><div class="sk" style="width:38px;height:38px;border-radius:9px"></div>
-        <div style="flex:1"><div class="sk sk-line" style="width:70%"></div><div class="sk sk-line" style="width:50%;height:18px;margin-top:8px"></div></div></div>
-      <div class="kpi"><div class="sk" style="width:38px;height:38px;border-radius:9px"></div>
-        <div style="flex:1"><div class="sk sk-line" style="width:60%"></div><div class="sk sk-line" style="width:30%;height:18px;margin-top:8px"></div></div></div>
-      <div class="kpi"><div class="sk" style="width:38px;height:38px;border-radius:9px"></div>
-        <div style="flex:1"><div class="sk sk-line" style="width:65%"></div><div class="sk sk-line" style="width:40%;height:18px;margin-top:8px"></div></div></div>
-    </div>
-  </section>
+      <!-- ══ 3. ERRO ══ -->
+      <div class="cat-section">
+        <div class="cat-hdr">
+          <div class="cat-num">3</div>
+          <span class="cat-title">Erro</span>
+          <span class="cat-hint">404 · 500 · falha de rede</span>
+        </div>
+        <div class="cat-grid">
 
-  <!-- ===================== ANALYTICS: SEM DADOS ===================== -->
-  <section>
-    <h2>Analytics — sem cliques ainda</h2>
-    <p class="hint">CTA orienta o usuário a compartilhar o link para começar a coletar dados.</p>
-    <div class="card card-pad" style="text-align:center;padding:50px">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--ink-3)" stroke-width="1.6" style="margin:0 auto"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg>
-      <div class="section-title" style="margin-top:8px">Nenhum clique no seu link ainda</div>
-      <div class="faint" style="font-size:13px;margin:6px 0 14px">Compartilhe o link e acompanhe os dados aqui em tempo real.</div>
-      <div class="row gap-8" style="justify-content:center">
-        <button class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar link</button>
-        <button class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8h16v-8M12 3v13M7 8l5-5 5 5"/></svg> Baixar QR</button>
+          <!-- 404 -->
+          <div class="demo-card">
+            <div class="demo-label">Erro 404 · página não encontrada</div>
+            <div class="err-page">
+              <div class="err-code">404</div>
+              <div class="err-title">Página não encontrada</div>
+              <div class="err-sub">O link pode ter sido movido, expirado ou excluído. Verifique o endereço e tente novamente.</div>
+              <div style="display:flex;gap:8px;margin-top:4px">
+                <button class="dbtn dbtn-cta">Ir ao Painel</button>
+                <button class="dbtn dbtn-sec">Criar link</button>
+              </div>
+            </div>
+            <div class="demo-usage">uso em: redirect engine · slug inválido</div>
+          </div>
+
+          <!-- 500 -->
+          <div class="demo-card">
+            <div class="demo-label">Erro 500 · falha no servidor</div>
+            <div class="err-page">
+              <div class="err-code" style="background:linear-gradient(135deg,#EF4444,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent">500</div>
+              <div class="err-title">Algo deu errado</div>
+              <div class="err-sub">Nosso servidor encontrou um problema inesperado. Já fomos notificados — tente novamente em instantes.</div>
+              <div style="display:flex;gap:8px;margin-top:4px">
+                <button class="dbtn dbtn-cta">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                  Tentar novamente
+                </button>
+                <button class="dbtn dbtn-sec">Status do sistema</button>
+              </div>
+            </div>
+            <div class="demo-usage">uso em: api error · falha ao salvar link</div>
+          </div>
+
+          <!-- Limite atingido -->
+          <div class="demo-card">
+            <div class="demo-label">Guard-rail · limite do plano atingido</div>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+                <div>
+                  <div style="font-family:'Satoshi',sans-serif;font-weight:700;font-size:14px;color:#fff;margin-bottom:4px">
+                    Limite de cliques atingido
+                  </div>
+                  <div style="font-family:'Satoshi',sans-serif;font-size:12px;color:#5A5A60;line-height:1.5">
+                    Links continuam redirecionando, mas pixels e tracking estão pausados até a renovação.
+                  </div>
+                </div>
+                <span style="background:#EF4444;color:#fff;padding:4px 10px;border-radius:999px;
+                  font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;white-space:nowrap">100%</span>
+              </div>
+              <div style="height:5px;border-radius:3px;background:rgba(239,68,68,0.15);overflow:hidden">
+                <div style="width:100%;height:100%;background:linear-gradient(90deg,#EF4444,#FF7777)"></div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button class="dbtn dbtn-cta">Fazer upgrade</button>
+                <button class="dbtn dbtn-sec">Ver consumo</button>
+              </div>
+            </div>
+            <div class="demo-usage">uso em: 16-billing.html · 01-dashboard.html banner</div>
+          </div>
+
+        </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ===================== LIMITE / GUARD-RAIL ===================== -->
-  <section>
-    <h2>Limite do plano atingido</h2>
-    <p class="hint">Quando o usuário atinge 100% do limite mensal — bloqueia a criação e oferece upgrade.</p>
-    <div class="card card-pad col gap-12">
-      <div class="row between"><div class="col"><b>Limite de cliques do mês atingido</b><span class="faint" style="font-size:12px">Seus links continuam funcionando, mas pixels e tracking estão pausados.</span></div><span class="badge" style="background:var(--danger);color:#fff;border:var(--bd-w-sm) solid #000">100%</span></div>
-      <div class="bar"><span style="width:100%;background:var(--danger)"></span></div>
-      <div class="row gap-8"><button class="btn btn-primary">Fazer upgrade</button><button class="btn btn-ghost">Ver consumo</button></div>
-    </div>
-  </section>
+      <!-- ══ 4. FOCO VISÍVEL ══ -->
+      <div class="cat-section">
+        <div class="cat-hdr">
+          <div class="cat-num">4</div>
+          <span class="cat-title">Foco Visível</span>
+          <span class="cat-hint">Ring duplo zinc + lime · WCAG 2.4.7</span>
+        </div>
+        <div class="cat-grid">
 
-  <!-- ===================== TYPING / WHILE TYPING ===================== -->
-  <section>
-    <h2>Inline — gerando preview</h2>
-    <p class="hint">Enquanto o sistema busca metadata da URL colada.</p>
-    <div class="card card-pad row gap-12 center">
-      <div class="sk" style="width:120px;height:64px;border-radius:8px"></div>
-      <div class="col gap-4" style="flex:1">
-        <div class="sk sk-line" style="width:70%"></div>
-        <div class="sk sk-line" style="width:90%;height:9px"></div>
+          <!-- Focus: input -->
+          <div class="demo-card">
+            <div class="demo-label">Input com foco visível (forçado)</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div>
+                <span class="field-lbl">URL de destino · focus</span>
+                <input class="dinput focus" value="https://cliente-exemplo.com/promo">
+              </div>
+              <div>
+                <span class="field-lbl">Slug · sem foco</span>
+                <input class="dinput" placeholder="meu-link">
+              </div>
+            </div>
+            <div class="demo-usage">uso em: 02-criar-link.html · qualquer input</div>
+          </div>
+
+          <!-- Focus: botões -->
+          <div class="demo-card">
+            <div class="demo-label">Botões com foco visível (forçado)</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <button class="dbtn dbtn-cta focus-ring-demo">Criar link · foco</button>
+              <button class="dbtn dbtn-sec focus-ring-demo">Cancelar · foco</button>
+              <button class="dbtn dbtn-danger focus-ring-demo">Excluir · foco</button>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#5A5A60;
+              padding:10px 12px;background:#0F0F0F;border-radius:10px;margin-top:4px">
+              box-shadow: 0 0 0 2px #0A0A0A,<br>0 0 0 4px #BFFF00
+            </div>
+            <div class="demo-usage">uso em: global · todos os interativos</div>
+          </div>
+
+          <!-- Focus: toggle + checkbox -->
+          <div class="demo-card">
+            <div class="demo-label">Toggle &amp; checkbox com foco</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div class="tg-row">
+                <div class="tg on" role="switch" aria-checked="true" tabindex="0"
+                  style="box-shadow:0 0 0 2px #0A0A0A,0 0 0 4px rgba(191,255,0,0.7),0 0 12px rgba(191,255,0,0.35)"></div>
+                <span>Deep linking · ativo + foco</span>
+              </div>
+              <div class="tg-row">
+                <div class="tg" role="switch" aria-checked="false" tabindex="0"
+                  style="box-shadow:0 0 0 2px #0A0A0A,0 0 0 4px rgba(191,255,0,0.5)"></div>
+                <span>Cloaking · desligado + foco</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="width:18px;height:18px;border-radius:5px;background:rgba(191,255,0,0.12);
+                  display:grid;place-items:center;
+                  box-shadow:0 0 0 2px #0A0A0A,0 0 0 4px rgba(191,255,0,0.6)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#BFFF00" stroke-width="3" width="11" height="11"><path d="M20 6L9 17l-5-5"/></svg>
+                </div>
+                <span style="font-family:'Satoshi',sans-serif;font-size:13px;color:#94A3B8">Aceitar termos · foco</span>
+              </div>
+            </div>
+            <div class="demo-usage">uso em: 02-criar-link.html · 09-settings.html</div>
+          </div>
+
+        </div>
       </div>
-      <div class="row gap-6 center" style="color:var(--ink-3);font-size:12px"><span class="spin" style="border-color:rgba(0,0,0,.15);border-top-color:#000"></span> Lendo metadata…</div>
-    </div>
-  </section>
 
-  <!-- ===================== NOTAS A11Y ===================== -->
-  <section>
-    <h2>Notas de acessibilidade</h2>
-    <div class="card card-pad col gap-8" style="font-size:13.5px">
-      <div class="row gap-8"><span class="badge badge-success" style="flex-shrink:0">OK</span> Foco visível em todos os interativos (ring duplo zinc + lime).</div>
-      <div class="row gap-8"><span class="badge badge-success" style="flex-shrink:0">OK</span> Mensagens de erro acompanhadas de ícone + texto — não dependem da cor.</div>
-      <div class="row gap-8"><span class="badge badge-success" style="flex-shrink:0">OK</span> <code>prefers-reduced-motion</code>: animações zeradas.</div>
-      <div class="row gap-8"><span class="badge badge-warning" style="flex-shrink:0">TODO</span> Em implementação: <code>aria-label</code> em todo <code>.btn-icon</code>, <code>role="switch"</code>/<code>"checkbox"</code> com <code>aria-checked</code>, <code>aria-live</code> nos toasts.</div>
-      <div class="row gap-8"><span class="badge badge-warning" style="flex-shrink:0">TODO</span> Tamanho de toque mínimo 44×44px em mobile (atualmente 32-34 em desktop).</div>
-    </div>
-  </section>
+      <!-- ══ 5. DISABLED ══ -->
+      <div class="cat-section">
+        <div class="cat-hdr">
+          <div class="cat-num">5</div>
+          <span class="cat-title">Disabled</span>
+          <span class="cat-hint">Opacidade 0.38 · cursor not-allowed · sem pointer events</span>
+        </div>
+        <div class="cat-grid">
 
+          <!-- Disabled: inputs -->
+          <div class="demo-card">
+            <div class="demo-label">Inputs desabilitados</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div>
+                <span class="field-lbl">Plano (não editável aqui)</span>
+                <input class="dinput" value="Pro · gerenciar em Billing" disabled style="opacity:.38;cursor:not-allowed">
+              </div>
+              <div>
+                <span class="field-lbl">API Key (somente leitura)</span>
+                <input class="dinput" value="apk_live_••••3c91" disabled
+                  style="opacity:.38;cursor:not-allowed;font-family:'JetBrains Mono',monospace;font-size:12px">
+              </div>
+              <div>
+                <span class="field-lbl">Domínio próprio (plano Free)</span>
+                <input class="dinput" placeholder="Disponível a partir do Starter" disabled style="opacity:.38;cursor:not-allowed">
+              </div>
+            </div>
+            <div class="demo-usage">uso em: 09-settings.html · 16-billing.html</div>
+          </div>
+
+          <!-- Disabled: botões -->
+          <div class="demo-card">
+            <div class="demo-label">Botões desabilitados</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <button class="dbtn dbtn-cta" disabled>Salvar alterações</button>
+              <button class="dbtn dbtn-sec" disabled>Exportar CSV</button>
+              <button class="dbtn dbtn-danger" disabled>Excluir workspace</button>
+            </div>
+            <div style="font-family:'Satoshi',sans-serif;font-size:11px;color:#5A5A60;
+              margin-top:4px;line-height:1.6">
+              <code style="font-family:'JetBrains Mono',monospace;font-size:10px;
+                background:#0F0F0F;padding:2px 6px;border-radius:4px;color:#BFFF00">opacity: 0.38</code>
+              + <code style="font-family:'JetBrains Mono',monospace;font-size:10px;
+                background:#0F0F0F;padding:2px 6px;border-radius:4px;color:#94A3B8">cursor: not-allowed</code>
+            </div>
+            <div class="demo-usage">uso em: formulários com campos inválidos</div>
+          </div>
+
+          <!-- Disabled: toggle -->
+          <div class="demo-card">
+            <div class="demo-label">Toggles desabilitados</div>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div class="tg-row" style="opacity:.38">
+                <div class="tg on" role="switch" aria-checked="true" aria-disabled="true" style="cursor:not-allowed"></div>
+                <span>Deep linking · ativo, locked</span>
+              </div>
+              <div class="tg-row" style="opacity:.38">
+                <div class="tg" role="switch" aria-checked="false" aria-disabled="true" style="cursor:not-allowed"></div>
+                <span>A/B Rotator · plano Free não inclui</span>
+              </div>
+              <div class="tg-row" style="opacity:.38">
+                <div class="tg" role="switch" aria-checked="false" aria-disabled="true" style="cursor:not-allowed"></div>
+                <span>White-label · somente Business</span>
+              </div>
+            </div>
+            <div class="demo-usage">uso em: 02-criar-link.html · feature gate</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══ 6. FEEDBACK ══ -->
+      <div class="cat-section">
+        <div class="cat-hdr">
+          <div class="cat-num">6</div>
+          <span class="cat-title">Feedback</span>
+          <span class="cat-hint">Toast success/danger · modal de confirmação destrutiva</span>
+        </div>
+        <div class="cat-grid">
+
+          <!-- Toasts -->
+          <div class="demo-card">
+            <div class="demo-label">Toasts · sucesso, erro, info</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div class="toast success">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>
+                <div>
+                  <div class="tc">Link criado com sucesso</div>
+                  <div class="td">plnk.to/promo-inverno · copiado para a área de transferência</div>
+                </div>
+              </div>
+              <div class="toast danger">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg>
+                <div>
+                  <div class="tc">Erro ao salvar</div>
+                  <div class="td">URL inválida · verifique o endereço e tente novamente</div>
+                </div>
+              </div>
+              <div class="toast info">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+                <div>
+                  <div class="tc" style="color:#fff">Propagação DNS</div>
+                  <div class="td">Pode levar até 48h · o link já está ativo</div>
+                </div>
+              </div>
+            </div>
+            <div class="demo-usage">uso em: global · ações do usuário</div>
+          </div>
+
+          <!-- Danger modal -->
+          <div class="demo-card">
+            <div class="demo-label">Modal de confirmação destrutiva</div>
+            <div class="danger-modal">
+              <div class="danger-modal-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg>
+              </div>
+              <h4>Excluir 3 links selecionados?</h4>
+              <p>Esta ação é permanente e não pode ser desfeita. Os dados de cliques e pixels associados também serão removidos.</p>
+              <div class="danger-modal-foot">
+                <button class="dbtn dbtn-sec dbtn-sm">Cancelar</button>
+                <button class="dbtn dbtn-danger dbtn-sm">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="13" height="13"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>
+                  Excluir permanentemente
+                </button>
+              </div>
+            </div>
+            <div class="demo-usage">uso em: 01-dashboard.html · bulk actions</div>
+          </div>
+
+          <!-- Warning banner -->
+          <div class="demo-card">
+            <div class="demo-label">Banners inline · aviso + erro</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;
+                background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:14px;
+                font-family:'Satoshi',sans-serif;font-size:13px;color:#F59E0B;line-height:1.5">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="flex-shrink:0;margin-top:1px"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+                Você atingiu 90% do seu limite de cliques deste mês.
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;
+                background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:14px;
+                font-family:'Satoshi',sans-serif;font-size:13px;color:#EF4444;line-height:1.5">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg>
+                Não foi possível verificar o domínio. Confira os registros DNS.
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;
+                background:rgba(191,255,0,0.07);border:1px solid rgba(191,255,0,0.2);border-radius:14px;
+                font-family:'Satoshi',sans-serif;font-size:13px;color:#BFFF00;line-height:1.5">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="flex-shrink:0;margin-top:1px"><polyline points="20 6 9 17 4 12"/></svg>
+                Domínio verificado com sucesso · plnk.to ativo.
+              </div>
+            </div>
+            <div class="demo-usage">uso em: 13-dominios.html · 16-billing.html</div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
 </div>
-<script src="assets/theme.js"></script>
+
 </body>
 </html>

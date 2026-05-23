@@ -1,100 +1,490 @@
 <!doctype html>
-<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AppLink — Leads da Smartpage</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Syne:ital,wght@0,700;0,800;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/tokens.css">
-<link rel="stylesheet" href="assets/ui.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi',sans-serif;min-height:100vh}
+a{text-decoration:none;color:inherit}
+
+/* ── SIDEBAR V3 (idêntica) ── */
+.shell{display:flex;min-height:100vh}
+.v3sb{width:256px;flex-shrink:0;background:#050505;border-right:1px solid rgba(255,255,255,0.05);
+  display:flex;flex-direction:column;padding:20px 16px;gap:4px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.v3sb .brand{display:flex;align-items:center;gap:12px;padding:8px 4px 24px;flex-shrink:0}
+.v3sb .brand-mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#BFFF00,#FF7777);
+  display:grid;place-items:center;flex-shrink:0;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.55),-2px -2px 6px rgba(255,255,255,0.03),0 0 22px rgba(191,255,0,0.25)}
+.v3sb .brand-mark svg{width:22px;height:22px;color:#0A0A0A}
+.v3sb .brand-name{font-family:'General Sans',sans-serif;font-weight:700;font-size:17px;letter-spacing:-0.02em;color:#fff}
+.v3sb .sec{font-size:9px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:#5A5A60;padding:14px 12px 6px;flex-shrink:0}
+.v3sb .nv{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;
+  font-family:'Satoshi',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;
+  font-size:11px;color:#94A3B8;cursor:pointer;transition:.35s cubic-bezier(0.34,1.56,0.64,1);flex-shrink:0}
+.v3sb .nv svg{width:16px;height:16px;flex-shrink:0}
+.v3sb .nv:hover{color:#fff;background:rgba(255,255,255,0.03)}
+.v3sb .nv.on{background:linear-gradient(90deg,rgba(191,255,0,0.12) 0%,rgba(191,255,0,0) 100%);
+  color:#BFFF00;border-right:3px solid #BFFF00;border-radius:12px 0 0 12px;padding-right:9px}
+.v3sb .nv .ct{margin-left:auto;background:rgba(255,255,255,0.06);color:#BFFF00;padding:2px 8px;border-radius:999px;font-size:9px;font-weight:800}
+.v3sb .user{margin-top:auto;display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;background:#0F0F0F;
+  box-shadow:inset 2px 2px 6px rgba(0,0,0,0.5);flex-shrink:0}
+.v3sb .user .av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+  display:grid;place-items:center;font-weight:800;font-size:13px;box-shadow:2px 2px 6px rgba(0,0,0,0.4);flex-shrink:0}
+.v3sb .user .nm{font-family:'Satoshi',sans-serif;font-size:12px;font-weight:700;color:#fff}
+.v3sb .user .pl{font-family:'Satoshi',sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:#94A3B8;font-weight:700}
+
+/* ── MAIN ── */
+.v3main{flex:1;min-width:0;padding-bottom:80px}
+.v3hdr{position:sticky;top:0;z-index:10;height:80px;background:rgba(10,10,10,0.85);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.04);
+  display:flex;align-items:center;padding:0 32px;gap:20px}
+.crumb{display:flex;align-items:center;gap:10px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+  text-transform:uppercase;letter-spacing:0.18em;color:#94A3B8}
+.crumb b{color:#fff}
+.crumb svg{width:12px;height:12px;color:#5A5A60}
+.hdr-back{width:38px;height:38px;border-radius:11px;background:#1A1A1A;color:#94A3B8;display:grid;place-items:center;cursor:pointer;flex-shrink:0;
+  box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.hdr-back:hover{color:#BFFF00;transform:scale(1.08)}
+.hdr-back svg{width:16px;height:16px}
+.hdr-spacer{flex:1}
+.btn-sec{background:#1A1A1A;color:#94A3B8;border:0;padding:10px 18px;border-radius:12px;
+  font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:0.15em;
+  cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+  box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.btn-sec:hover{color:#fff}
+.btn-sec svg{width:14px;height:14px}
+.btn-lime{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;border:0;padding:10px 20px;border-radius:12px;
+  font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:0.18em;
+  cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 20px rgba(191,255,0,0.28);
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.btn-lime:hover{transform:scale(1.04)}
+.btn-lime svg{width:14px;height:14px}
+
+/* ── CONTENT ── */
+.v3content{padding:32px 32px 80px}
+.eyebrow-cap{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:#BFFF00;margin-bottom:10px}
+.v3h2{font-family:'General Sans',sans-serif;font-weight:600;font-size:36px;line-height:1.05;letter-spacing:-0.03em;color:#fff;margin-bottom:6px}
+.v3h2 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.v3sub{font-family:'Satoshi',sans-serif;font-size:13.5px;color:#94A3B8;line-height:1.6;margin-top:6px;margin-bottom:28px}
+
+/* ── PAGE TABS ── */
+.pg-tabs{display:flex;gap:4px;margin-bottom:28px;background:#141414;padding:4px;border-radius:14px;width:fit-content;
+  box-shadow:inset 2px 2px 6px rgba(0,0,0,0.55),inset -1px -1px 3px rgba(255,255,255,0.025)}
+.pg-tab{padding:10px 20px;border-radius:10px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;
+  text-transform:uppercase;letter-spacing:0.15em;color:#5A5A60;cursor:pointer;
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.pg-tab:hover{color:#94A3B8}
+.pg-tab.on{background:#1A1A1A;color:#fff;
+  box-shadow:2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025)}
+
+/* ── KPI STATS ── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.stat{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;padding:22px;position:relative;
+  box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
+.stat .lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:9.5px;text-transform:uppercase;letter-spacing:0.22em;color:#94A3B8}
+.stat .val{font-family:'General Sans',sans-serif;font-weight:600;font-size:32px;line-height:1;letter-spacing:-0.03em;color:#fff;margin-top:12px}
+.stat .dlt{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#10B981;margin-top:8px;font-weight:600}
+.stat .ic{position:absolute;top:22px;right:22px;width:44px;height:44px;border-radius:14px;
+  background:rgba(191,255,0,0.1);color:#BFFF00;display:grid;place-items:center;
+  box-shadow:inset 2px 2px 5px rgba(0,0,0,0.4)}
+.stat .ic svg{width:20px;height:20px}
+
+/* ── CRM BANNER ── */
+.crm-banner{background:linear-gradient(90deg,rgba(16,185,129,0.1),rgba(16,185,129,0.04));
+  border:1px solid rgba(16,185,129,0.2);border-radius:18px;padding:14px 20px;
+  display:flex;align-items:center;gap:14px;margin-bottom:24px;
+  box-shadow:0 0 24px rgba(16,185,129,0.06)}
+.crm-banner .bi{width:38px;height:38px;border-radius:12px;background:rgba(16,185,129,0.14);color:#10B981;
+  display:grid;place-items:center;flex-shrink:0;
+  box-shadow:inset 2px 2px 5px rgba(0,0,0,0.3)}
+.crm-banner .bi svg{width:18px;height:18px}
+.crm-banner .bt{font-family:'Satoshi',sans-serif;font-weight:700;font-size:13px;color:#F5F5F7;flex:1;line-height:1.5}
+.crm-banner .bt b{color:#10B981}
+.crm-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(16,185,129,0.14);color:#10B981;
+  padding:6px 14px;border-radius:999px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+  text-transform:uppercase;letter-spacing:0.12em;flex-shrink:0;
+  box-shadow:0 0 12px rgba(16,185,129,0.15)}
+.crm-dot{width:6px;height:6px;border-radius:50%;background:#10B981;box-shadow:0 0 6px rgba(16,185,129,0.6)}
+
+/* ── TABLE CARD V3 ── */
+.v3tc{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;overflow:hidden;
+  box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
+.tc-head{display:flex;align-items:center;padding:18px 24px;gap:14px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.tc-head .ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:17px;color:#fff;letter-spacing:-0.02em}
+.tc-head .ttl span{font-family:'Satoshi',sans-serif;font-weight:700;font-size:12px;color:#5A5A60;margin-left:8px;
+  text-transform:uppercase;letter-spacing:0.1em}
+.tc-head .ml{margin-left:auto;display:flex;gap:8px;align-items:center}
+.filter-chip{background:#1A1A1A;border:0;color:#94A3B8;padding:8px 14px;border-radius:10px;
+  font-family:'Satoshi',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;
+  box-shadow:2px 2px 5px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.filter-chip:hover{color:#BFFF00}
+.filter-chip svg{width:12px;height:12px}
+.filter-chip.on{background:rgba(191,255,0,0.1);color:#BFFF00;border:1px solid rgba(191,255,0,0.25)}
+
+/* tabela */
+.v3table{width:100%;border-collapse:collapse}
+.v3table th{font-family:'Satoshi',sans-serif;text-align:left;font-size:9.5px;font-weight:800;letter-spacing:0.2em;
+  text-transform:uppercase;color:#5A5A60;padding:13px 24px;border-bottom:1px solid rgba(255,255,255,0.05);
+  background:#0F0F0F;white-space:nowrap}
+.v3table td{padding:15px 24px;font-family:'Satoshi',sans-serif;font-size:13px;
+  border-bottom:1px solid rgba(255,255,255,0.04);color:#E2E8F0;vertical-align:middle}
+.v3table tr:last-child td{border-bottom:0}
+.v3table tr:hover td{background:rgba(255,255,255,0.018)}
+.v3table .mono{font-family:'JetBrains Mono',monospace;font-weight:500;color:#94A3B8;font-size:12px}
+
+/* lead row */
+.lead-row{display:flex;align-items:center;gap:10px}
+.lead-av{width:32px;height:32px;border-radius:10px;background:#1A1A1A;color:#BFFF00;display:grid;place-items:center;
+  font-family:'General Sans',sans-serif;font-weight:700;font-size:11px;flex-shrink:0;
+  box-shadow:inset 2px 2px 5px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025)}
+.lead-name{font-family:'Satoshi',sans-serif;font-weight:700;font-size:13.5px;color:#fff}
+
+/* badges de status */
+.badge-src{display:inline-flex;align-items:center;background:rgba(148,163,184,0.1);color:#94A3B8;
+  padding:4px 10px;border-radius:999px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+  text-transform:uppercase;letter-spacing:0.1em}
+.badge-src.ig{background:rgba(225,48,108,0.1);color:#E1306C}
+.badge-src.wa{background:rgba(37,211,102,0.1);color:#25D366}
+.badge-src.di{background:rgba(191,255,0,0.1);color:#BFFF00}
+.badge-crm-ok{display:inline-flex;align-items:center;gap:5px;background:rgba(16,185,129,0.12);color:#10B981;
+  padding:4px 10px;border-radius:999px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+  text-transform:uppercase;letter-spacing:0.1em}
+.badge-crm-ok .d{width:5px;height:5px;border-radius:50%;background:#10B981}
+.badge-crm-pend{display:inline-flex;align-items:center;gap:5px;background:rgba(245,158,11,0.12);color:#F59E0B;
+  padding:4px 10px;border-radius:999px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+  text-transform:uppercase;letter-spacing:0.1em}
+
+/* footer de paginação */
+.tc-foot{padding:16px 24px;display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(255,255,255,0.04);gap:16px}
+.tc-foot .info{font-family:'Satoshi',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.15em;color:#5A5A60}
+.pag{display:flex;align-items:center;gap:8px}
+.pag-btn{width:32px;height:32px;border-radius:9px;background:#1A1A1A;color:#94A3B8;display:grid;place-items:center;cursor:pointer;
+  box-shadow:2px 2px 5px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.pag-btn:hover{color:#BFFF00;transform:scale(1.08)}
+.pag-btn svg{width:13px;height:13px}
+.pag-info{font-family:'JetBrains Mono',monospace;font-size:11px;color:#5A5A60;font-weight:600}
+
+/* ── PULSE DOT ── */
+.pulse-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#10B981;vertical-align:middle;
+  box-shadow:0 0 0 0 rgba(16,185,129,0.7);animation:p-glow 2.2s cubic-bezier(0.34,1.56,0.64,1) infinite}
+@keyframes p-glow{0%{box-shadow:0 0 0 0 rgba(16,185,129,0.7)}70%{box-shadow:0 0 0 10px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
+</style>
 </head>
 <body>
-<div class="app">
-  <aside class="sidebar">
-    <div class="logo">
-      <div class="logo-mark"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter" stroke-linecap="square"><rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2"/></svg></div>
-      <span class="logo-name" data-brand-name>AppLink</span>
+<div class="shell">
+
+  <!-- ══════════ SIDEBAR V3 ══════════ -->
+  <aside class="v3sb">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter" stroke-linecap="square">
+          <rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2"/>
+        </svg>
+      </div>
+      <span class="brand-name">AppLink</span>
     </div>
-    <div class="nav-group">
-      <div class="nav-label">Principal</div>
-      <a class="nav-item" href="01-dashboard-links.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Links</a>
-      <a class="nav-item active" href="06-smartpages.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Smartpages</a>
-      <a class="nav-item" href="10-qrcode.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg> QR Codes</a>
+
+    <div class="sec">Principal</div>
+    <a class="nv" href="01-dashboard.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Painel <span class="ct">40</span>
+    </a>
+    <a class="nv" href="02-criar-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      Criar
+    </a>
+    <a class="nv" href="02c-tipos-de-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Tipos
+    </a>
+    <a class="nv on" href="06-smartpages.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Smartpages <span class="ct">6</span>
+    </a>
+    <a class="nv" href="10-qrcode.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg>
+      QR Code
+    </a>
+
+    <div class="sec">Crescimento</div>
+    <a class="nv" href="03-analytics-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg>
+      Analytics
+    </a>
+    <a class="nv" href="11-pixels.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+      Pixels
+    </a>
+    <a class="nv" href="12-audiencias.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+      Audiências
+    </a>
+
+    <div class="sec">Configuração</div>
+    <a class="nv" href="13-dominios.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
+      Domínios
+    </a>
+    <a class="nv" href="14-integracoes.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6M6 21v-6M6 9a3 3 0 0 0 0 6M18 3v12M18 15a3 3 0 0 0 0-6"/></svg>
+      Integrações
+    </a>
+    <a class="nv" href="15-equipe.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+      Equipe
+    </a>
+    <a class="nv" href="16-billing.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+      Billing
+    </a>
+    <a class="nv" href="09-settings.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="2" fill="#0A0A0A" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="12" r="2" fill="#0A0A0A" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="18" r="2" fill="#0A0A0A" stroke="currentColor" stroke-width="2"/></svg>
+      Settings
+    </a>
+
+    <div class="user">
+      <div class="av">MS</div>
+      <div>
+        <div class="nm">Maria Silva</div>
+        <div class="pl">Plano Pro</div>
+      </div>
     </div>
-    <div class="nav-group">
-      <div class="nav-label">Crescimento</div>
-      <a class="nav-item" href="11-pixels.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg> Pixels</a>
-      <a class="nav-item" href="12-audiencias.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg> Audiências</a>
-      <a class="nav-item" href="03-analytics-link.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg> Analytics</a>
-    </div>
-    <div class="nav-group">
-      <div class="nav-label">Configuração</div>
-      <a class="nav-item" href="13-dominios.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg> Domínios</a>
-      <a class="nav-item" href="14-integracoes.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6M6 21v-6M6 9a3 3 0 0 0 0 6M18 3v12M18 15a3 3 0 0 0 0-6"/></svg> Integrações</a>
-      <a class="nav-item" href="15-equipe.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg> Equipe</a>
-    </div>
-    <div class="grow"></div>
-    <div class="nav-item" style="background:rgba(255,255,255,.05)"><div class="avatar" style="width:24px;height:24px;font-size:10px">IF</div> Maria Silva</div>
   </aside>
 
-  <div class="main">
-    <header class="topbar">
-      <a class="btn-icon" href="06-smartpages.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></a>
-      <div class="col"><div class="page-sub">Smartpages / Bio da Maria</div>
-        <div class="page-title" style="font-size:18px">Leads &amp; Analytics</div></div>
-      <div class="spacer"></div>
-      <button class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Exportar CSV</button>
+  <!-- ══════════ MAIN ══════════ -->
+  <div class="v3main">
+
+    <!-- Header sticky -->
+    <header class="v3hdr">
+      <a class="hdr-back" href="07-editor-smartpage.html" title="Voltar ao editor">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </a>
+      <div class="crumb">
+        <span>Smartpages</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        <span>Bio da Maria</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        <b>Leads</b>
+      </div>
+      <div class="hdr-spacer"></div>
+      <button class="btn-sec">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Exportar CSV
+      </button>
+      <button class="btn-lime">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        Enviar ao CRM
+      </button>
     </header>
 
-    <main class="content col gap-16">
-      <div class="tabs">
-        <div class="tab">Analytics da página</div>
-        <div class="tab active">Leads</div>
-        <div class="tab">Analytics por bloco</div>
+    <!-- Content -->
+    <main class="v3content">
+
+      <!-- Hero contextual -->
+      <div>
+        <div class="eyebrow-cap">▮ Bio da Maria · Formulário "Baixar ebook"</div>
+        <h2 class="v3h2"><em>Leads</em> capturados</h2>
+        <p class="v3sub">Todos os contatos do formulário desta smartpage, sincronizados automaticamente com o AppexCRM.</p>
       </div>
 
-      <div class="kpi-row" style="grid-template-columns:repeat(4,1fr)">
-        <div class="kpi"><div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-          <div><div class="kpi-label">Leads capturados</div><div class="kpi-value">312</div><div class="kpi-delta up">▲ 14%</div></div></div>
-        <div class="kpi"><div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
-          <div><div class="kpi-label">Visitas da página</div><div class="kpi-value">14.207</div></div></div>
-        <div class="kpi"><div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></div>
-          <div><div class="kpi-label">Taxa de conversão</div><div class="kpi-value">2,2%</div></div></div>
-        <div class="kpi"><div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></div>
-          <div><div class="kpi-label">Sincronizados ao CRM</div><div class="kpi-value">312</div></div></div>
+      <!-- Page tabs -->
+      <div class="pg-tabs">
+        <div class="pg-tab">Analytics da página</div>
+        <div class="pg-tab on">Leads</div>
+        <div class="pg-tab">Analytics por bloco</div>
       </div>
 
-      <div class="banner banner-accent">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-        Todos os leads do formulário caem direto no funil do AppexCRM — sem exportar planilha.
-      </div>
-
-      <div class="card">
-        <div class="card-head"><span class="section-title">Leads — formulário "Baixar ebook"</span>
-          <div class="spacer grow"></div>
-          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Últimos 30 dias</span></div>
-        <table class="table">
-          <thead><tr><th>Nome</th><th>E-mail</th><th>Telefone</th><th>Origem</th><th>Data</th><th>CRM</th></tr></thead>
-          <tbody>
-            <tr><td><div class="row gap-8"><div class="avatar">MC</div> Marina Costa</div></td><td>marina.costa@gmail.com</td><td class="mono">+55 47 9 9988-1020</td><td><span class="badge badge-neutral">Instagram</span></td><td class="muted">22 mai 2026</td><td><span class="badge badge-success">Sincronizado</span></td></tr>
-            <tr><td><div class="row gap-8"><div class="avatar">RS</div> Rafael Souza</div></td><td>rafael@empresa.com.br</td><td class="mono">+55 11 9 8123-7766</td><td><span class="badge badge-neutral">WhatsApp</span></td><td class="muted">22 mai 2026</td><td><span class="badge badge-success">Sincronizado</span></td></tr>
-            <tr><td><div class="row gap-8"><div class="avatar">JP</div> Juliana Prado</div></td><td>ju.prado@outlook.com</td><td class="mono">+55 21 9 9456-3322</td><td><span class="badge badge-neutral">Direto</span></td><td class="muted">21 mai 2026</td><td><span class="badge badge-success">Sincronizado</span></td></tr>
-            <tr><td><div class="row gap-8"><div class="avatar">LF</div> Lucas Ferreira</div></td><td>lucasf@gmail.com</td><td class="mono">+55 31 9 9011-8890</td><td><span class="badge badge-neutral">Instagram</span></td><td class="muted">21 mai 2026</td><td><span class="badge badge-warning">Enviando…</span></td></tr>
-            <tr><td><div class="row gap-8"><div class="avatar">AC</div> Ana Carvalho</div></td><td>ana.carvalho@gmail.com</td><td class="mono">+55 48 9 9233-4501</td><td><span class="badge badge-neutral">Instagram</span></td><td class="muted">20 mai 2026</td><td><span class="badge badge-success">Sincronizado</span></td></tr>
-          </tbody>
-        </table>
-        <div class="row between" style="padding:14px 18px">
-          <span class="page-sub">Mostrando 1–5 de 312</span>
-          <div class="row gap-8"><span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></span>
-            <span class="page-sub">Página 1 de 63</span>
-            <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></span></div>
+      <!-- KPI Stats -->
+      <div class="stats">
+        <div class="stat">
+          <div class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div class="lbl">Leads capturados</div>
+          <div class="val">312</div>
+          <div class="dlt">▲ +14% vs mês anterior</div>
+        </div>
+        <div class="stat">
+          <div class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>
+          </div>
+          <div class="lbl">Visitas da página</div>
+          <div class="val">14.207</div>
+          <div class="dlt" style="color:#94A3B8">desde a publicação</div>
+        </div>
+        <div class="stat">
+          <div class="ic" style="background:rgba(255,119,119,0.1);color:#FF7777">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg>
+          </div>
+          <div class="lbl">Taxa de conversão</div>
+          <div class="val">2,2%</div>
+          <div class="dlt" style="color:#94A3B8">visitas → leads</div>
+        </div>
+        <div class="stat">
+          <div class="ic" style="background:rgba(16,185,129,0.1);color:#10B981">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="lbl">Sincronizados CRM</div>
+          <div class="val" style="font-size:22px;display:flex;align-items:center;gap:8px;margin-top:12px">
+            <span class="pulse-dot"></span>
+            <span style="font-size:32px;font-family:'General Sans',sans-serif;font-weight:600;letter-spacing:-0.03em">311</span>
+          </div>
+          <div class="dlt">1 enviando…</div>
         </div>
       </div>
+
+      <!-- Banner CRM -->
+      <div class="crm-banner">
+        <div class="bi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <span class="bt">Todos os leads do formulário caem direto no funil do <b>AppexCRM</b> — sem exportar planilha, sem perder contato.</span>
+        <span class="crm-badge"><span class="crm-dot"></span>Integrado</span>
+      </div>
+
+      <!-- Tabela de leads -->
+      <div class="v3tc">
+        <div class="tc-head">
+          <span class="ttl">Leads <span>formulário "Baixar ebook"</span></span>
+          <div class="ml">
+            <button class="filter-chip on">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              Últimos 30 dias
+            </button>
+            <button class="filter-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 6h16M4 12h10M4 18h6"/></svg>
+              Origem
+            </button>
+            <button class="filter-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+              Buscar lead
+            </button>
+          </div>
+        </div>
+
+        <table class="v3table">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>E-mail</th>
+              <th>Telefone</th>
+              <th>Origem</th>
+              <th>Data</th>
+              <th>CRM</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="lead-row">
+                  <div class="lead-av">MC</div>
+                  <span class="lead-name">Marina Costa</span>
+                </div>
+              </td>
+              <td class="mono">marina.costa@gmail.com</td>
+              <td class="mono">+55 47 9 9988-1020</td>
+              <td><span class="badge-src ig">Instagram</span></td>
+              <td><span style="color:#5A5A60;font-family:'JetBrains Mono',monospace;font-size:12px">22 mai 2026</span></td>
+              <td><span class="badge-crm-ok"><span class="d"></span>Sincronizado</span></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="lead-row">
+                  <div class="lead-av">RS</div>
+                  <span class="lead-name">Rafael Souza</span>
+                </div>
+              </td>
+              <td class="mono">rafael@empresa.com.br</td>
+              <td class="mono">+55 11 9 8123-7766</td>
+              <td><span class="badge-src wa">WhatsApp</span></td>
+              <td><span style="color:#5A5A60;font-family:'JetBrains Mono',monospace;font-size:12px">22 mai 2026</span></td>
+              <td><span class="badge-crm-ok"><span class="d"></span>Sincronizado</span></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="lead-row">
+                  <div class="lead-av">JP</div>
+                  <span class="lead-name">Juliana Prado</span>
+                </div>
+              </td>
+              <td class="mono">ju.prado@outlook.com</td>
+              <td class="mono">+55 21 9 9456-3322</td>
+              <td><span class="badge-src di">Direto</span></td>
+              <td><span style="color:#5A5A60;font-family:'JetBrains Mono',monospace;font-size:12px">21 mai 2026</span></td>
+              <td><span class="badge-crm-ok"><span class="d"></span>Sincronizado</span></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="lead-row">
+                  <div class="lead-av">LF</div>
+                  <span class="lead-name">Lucas Ferreira</span>
+                </div>
+              </td>
+              <td class="mono">lucasf@gmail.com</td>
+              <td class="mono">+55 31 9 9011-8890</td>
+              <td><span class="badge-src ig">Instagram</span></td>
+              <td><span style="color:#5A5A60;font-family:'JetBrains Mono',monospace;font-size:12px">21 mai 2026</span></td>
+              <td><span class="badge-crm-pend">Enviando…</span></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="lead-row">
+                  <div class="lead-av">AC</div>
+                  <span class="lead-name">Ana Carvalho</span>
+                </div>
+              </td>
+              <td class="mono">ana.carvalho@gmail.com</td>
+              <td class="mono">+55 48 9 9233-4501</td>
+              <td><span class="badge-src ig">Instagram</span></td>
+              <td><span style="color:#5A5A60;font-family:'JetBrains Mono',monospace;font-size:12px">20 mai 2026</span></td>
+              <td><span class="badge-crm-ok"><span class="d"></span>Sincronizado</span></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="lead-row">
+                  <div class="lead-av">FO</div>
+                  <span class="lead-name">Felipe Oliveira</span>
+                </div>
+              </td>
+              <td class="mono">felipeo@hotmail.com</td>
+              <td class="mono">+55 51 9 8754-2211</td>
+              <td><span class="badge-src di">Direto</span></td>
+              <td><span style="color:#5A5A60;font-family:'JetBrains Mono',monospace;font-size:12px">19 mai 2026</span></td>
+              <td><span class="badge-crm-ok"><span class="d"></span>Sincronizado</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="tc-foot">
+          <span class="info">Mostrando 1–6 de 312 leads</span>
+          <div class="pag">
+            <div class="pag-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+            </div>
+            <span class="pag-info">Página 1 de 52</span>
+            <div class="pag-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </main>
   </div>
 </div>
-<script src="assets/theme.js"></script>
 </body>
 </html>

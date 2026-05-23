@@ -1,117 +1,27 @@
 <!doctype html>
-<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AppLink — Mockups</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Syne:ital,wght@0,700;0,800;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/tokens.css">
-<link rel="stylesheet" href="assets/ui.css">
+<title>AppLink — V3 Configuration Engine</title>
+<meta http-equiv="refresh" content="0;url=01-dashboard.html">
+<link rel="canonical" href="01-dashboard.html">
 <style>
-  .wrap{max-width:1100px;margin:0 auto;padding:48px 28px 140px}
-  .head-mark{width:60px;height:60px;border-radius:15px;background:var(--accent-grad);
-    display:grid;place-items:center;border:var(--bd-w-sm) solid var(--bd-c);box-shadow:var(--sh-btn)}
-  .head-mark svg{width:30px;height:30px;color:var(--on-accent)}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
-  .scard{display:flex;flex-direction:column;gap:10px;padding:18px;cursor:pointer;
-    background:var(--surface);border:var(--bd-w) solid var(--bd-c);
-    border-radius:var(--r-card);box-shadow:var(--sh-card);transition:.16s var(--ease);
-    color:var(--ink-1)}
-  .scard:hover{transform:translate(-3px,-3px);box-shadow:10px 10px 0 #000}
-  [data-brand="appex"] .scard{border-width:1px;border-color:var(--edge);box-shadow:var(--shadow-md)}
-  [data-brand="appex"] .scard:hover{transform:none;box-shadow:var(--shadow-lg);border-color:var(--accent)}
-  .scard .n{font-family:var(--font-mono);font-size:12px;color:var(--ink-3);font-weight:600}
-  .scard .t{font-family:var(--font-display);font-weight:900;font-style:italic;
-    font-size:16px;letter-spacing:-.02em}
-  [data-brand="appex"] .scard .t{font-weight:600;font-style:normal}
-  .scard .d{font-size:12.5px;color:var(--ink-3);line-height:1.45}
-  .grp-label{font-family:var(--font-display);font-weight:900;font-style:italic;
-    font-size:13px;text-transform:uppercase;letter-spacing:.04em;
-    margin:34px 0 4px;color:var(--ink-on-dark);opacity:.9}
-  [data-brand="appex"] .grp-label{font-weight:700;font-style:normal;color:var(--ink-1)}
+  html,body{margin:0;padding:0;background:#0A0A0A;color:#F5F5F7;font-family:system-ui,sans-serif;height:100%}
+  .wrap{min-height:100%;display:grid;place-items:center;text-align:center;padding:32px}
+  a{color:#BFFF00;font-weight:700;text-decoration:none;letter-spacing:0.05em;text-transform:uppercase;font-size:13px}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#BFFF00;margin-right:10px;
+       box-shadow:0 0 14px rgba(191,255,0,0.6);animation:p 1.4s ease-in-out infinite}
+  @keyframes p{0%,100%{opacity:1}50%{opacity:0.35}}
 </style>
 </head>
 <body>
 <div class="wrap">
-
-  <div class="row gap-16">
-    <div class="head-mark">
-      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter" stroke-linecap="square"><rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2"/></svg>
-    </div>
-    <div>
-      <div class="page-title" style="font-size:26px;color:var(--ink-on-dark)"><span data-brand-name>AppLink</span> — Mockups</div>
-      <div class="page-sub" style="color:var(--ink-on-dark-2)">Protótipo navegável. <b>3 identidades para comparação</b>: v2 AppLink premium, v3 Configuration Engine (neumórfico), e Módulo AppexCRM. Use o seletor no canto inferior direito para alternar em qualquer tela.</div>
-    </div>
-  </div>
-
-  <div class="grp-label">Comparação · 3 identidades</div>
-  <div class="grid">
-    <a class="scard" href="00-design-system.html" style="border-color:#BFFF00"><span class="n">v2</span><span class="t">AppLink premium</span><span class="d">Jet black + lime neon · bordas sutis · Space Grotesk.</span></a>
-    <a class="scard" href="19-v3-neumorphism.html" style="border-color:#FF7777"><span class="n">v3</span><span class="t">Config Engine (Neumórfico)</span><span class="d">Sombras 3D + spring physics + uppercase tracking · General Sans + Satoshi · paleta V2.</span></a>
-    <a class="scard" href="17-modulo-crm.html" style="border-color:#635BFF"><span class="n">CRM</span><span class="t">Módulo AppexCRM</span><span class="d">White-label dentro do CRM. Identidade Stripe purple.</span></a>
-  </div>
-
-  <div class="grp-label">V3 nativo · telas funcionais</div>
-  <div class="grid">
-    <a class="scard" href="01b-v3-dashboard.html" style="border-color:#BFFF00"><span class="n">01b</span><span class="t">Dashboard V3</span><span class="d">Painel de links em vocabulário neumórfico nativo — progress ring, pulse dot, chips spring.</span></a>
-    <a class="scard" href="02b-v3-criar-link.html" style="border-color:#BFFF00"><span class="n">02b</span><span class="t">Criar link V3</span><span class="d">Form em V3 nativo: floating labels, accordion neumórfico para opções avançadas, sticky save footer.</span></a>
-  </div>
-
-  <div class="grp-label">Fundação</div>
-  <div class="grid">
-    <a class="scard" href="00-design-system.html"><span class="n">00</span><span class="t">Sistema de Design</span><span class="d">Tokens, cores, tipografia e componentes nos 2 temas.</span></a>
-  </div>
-
-  <div class="grp-label">Núcleo — Links</div>
-  <div class="grid">
-    <a class="scard" href="01-dashboard-links.html"><span class="n">01</span><span class="t">Painel de Links</span><span class="d">Lista de links, pastas, filtros, ações e métricas.</span></a>
-    <a class="scard" href="02-criar-link.html"><span class="n">02</span><span class="t">Criar / Editar Link</span><span class="d">Form com tipos de link, pixels, UTMs e opções avançadas. Feedback visual de exclusividade mútua dos roteamentos.</span></a>
-    <a class="scard" href="02c-tipos-de-link.html" style="border-color:#BFFF00"><span class="n">02c</span><span class="t">Tipos de Link — Spec</span><span class="d">12 tipos documentados: Smart Link, A/B Rotator e Roteamento por País com formulários completos. 9 tipos em preview.</span></a>
-    <a class="scard" href="03-analytics-link.html"><span class="n">03</span><span class="t">Analytics do Link</span><span class="d">KPIs, gráfico de cliques, países, dispositivos, pixels.</span></a>
-    <a class="scard" href="10-qrcode.html"><span class="n">10</span><span class="t">QR Code</span><span class="d">Builder de QR dinâmico e branded.</span></a>
-  </div>
-
-  <div class="grp-label">Link-in-bio — Smartpages</div>
-  <div class="grid">
-    <a class="scard" href="06-smartpages.html"><span class="n">06</span><span class="t">Smartpages</span><span class="d">Dashboard das mini landing pages.</span></a>
-    <a class="scard" href="07-editor-smartpage.html"><span class="n">07</span><span class="t">Editor de Smartpage</span><span class="d">Builder de blocos drag &amp; drop.</span></a>
-    <a class="scard" href="08-leads-smartpage.html"><span class="n">08</span><span class="t">Leads da Smartpage</span><span class="d">Captura de leads + analytics da página.</span></a>
-  </div>
-
-  <div class="grp-label">Crescimento</div>
-  <div class="grid">
-    <a class="scard" href="11-pixels.html"><span class="n">11</span><span class="t">Pixels</span><span class="d">Pixels de retargeting conectados.</span></a>
-    <a class="scard" href="12-audiencias.html"><span class="n">12</span><span class="t">Audiências</span><span class="d">Audiências de retargeting a partir dos links.</span></a>
-  </div>
-
-  <div class="grp-label">Configuração</div>
-  <div class="grid">
-    <a class="scard" href="13-dominios.html"><span class="n">13</span><span class="t">Domínios</span><span class="d">Domínios customizados e DNS.</span></a>
-    <a class="scard" href="14-integracoes.html"><span class="n">14</span><span class="t">Integrações</span><span class="d">Zapier, Make, Webhook e API.</span></a>
-    <a class="scard" href="15-equipe.html"><span class="n">15</span><span class="t">Equipe &amp; Workspaces</span><span class="d">Membros, papéis e workspaces.</span></a>
-    <a class="scard" href="16-billing.html"><span class="n">16</span><span class="t">Planos &amp; Cobrança</span><span class="d">Planos, uso de cliques e faturas.</span></a>
-    <a class="scard" href="09-settings.html"><span class="n">09</span><span class="t">Configurações</span><span class="d">Perfil, conta, privacidade (LGPD).</span></a>
-  </div>
-
-  <div class="grp-label">Autenticação</div>
-  <div class="grid">
-    <a class="scard" href="04-login.html"><span class="n">04</span><span class="t">Login</span><span class="d">Entrada — conta própria ou via AppexCRM.</span></a>
-    <a class="scard" href="05-signup.html"><span class="n">05</span><span class="t">Cadastro</span><span class="d">Criação de conta — 7 dias grátis.</span></a>
-  </div>
-
-  <div class="grp-label">Módulo</div>
-  <div class="grid">
-    <a class="scard" href="17-modulo-crm.html"><span class="n">17</span><span class="t">Módulo no AppexCRM</span><span class="d">AppLink embarcado no CRM, leads direto no funil.</span></a>
-  </div>
-
-  <div class="grp-label">Qualidade &amp; handoff</div>
-  <div class="grid">
-    <a class="scard" href="18-states.html"><span class="n">18</span><span class="t">Estados &amp; edge cases</span><span class="d">Loading, vazio, erro, foco, disabled. Catálogo para handoff.</span></a>
-  </div>
-
+  <noscript>
+    <p style="margin-bottom:24px">Abrindo o painel V3 do AppLink...</p>
+    <a href="01-dashboard.html">→ Ir para o Dashboard</a>
+  </noscript>
+  <p><span class="dot"></span>Carregando AppLink V3 · <a href="01-dashboard.html">Dashboard</a></p>
 </div>
-<script src="assets/theme.js"></script>
 </body>
 </html>

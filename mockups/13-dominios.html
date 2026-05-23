@@ -1,73 +1,492 @@
 <!doctype html>
-<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AppLink — Domínios</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Syne:ital,wght@0,700;0,800;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/tokens.css">
-<link rel="stylesheet" href="assets/ui.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
+.shell{display:flex;min-height:100vh}
+
+/* ── SIDEBAR V3 ── */
+.v3sb{width:256px;flex-shrink:0;background:#050505;
+  border-right:1px solid rgba(255,255,255,0.05);
+  display:flex;flex-direction:column;padding:20px 16px;gap:4px;
+  position:sticky;top:0;height:100vh;overflow-y:auto}
+.v3sb .brand{display:flex;align-items:center;gap:12px;padding:8px 4px 24px}
+.v3sb .brand-mark{width:40px;height:40px;border-radius:12px;
+  background:linear-gradient(135deg,#BFFF00,#FF7777);display:grid;place-items:center;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.55),-2px -2px 6px rgba(255,255,255,0.03),0 0 22px rgba(191,255,0,0.25)}
+.v3sb .brand-mark svg{width:22px;height:22px;color:#0A0A0A}
+.v3sb .brand-name{font-family:'General Sans',sans-serif;font-weight:700;font-size:17px;letter-spacing:-0.02em;color:#fff}
+.v3sb .sec{font-size:9px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:#5A5A60;padding:14px 12px 6px}
+.v3sb .nv{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;text-decoration:none;
+  font-family:'Satoshi',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;
+  font-size:11px;color:#94A3B8;cursor:pointer;transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.v3sb .nv svg{width:16px;height:16px;flex-shrink:0}
+.v3sb .nv:hover{color:#fff;background:rgba(255,255,255,0.03)}
+.v3sb .nv.on{background:linear-gradient(90deg,rgba(191,255,0,0.12) 0%,rgba(191,255,0,0) 100%);
+  color:#BFFF00;border-right:3px solid #BFFF00;border-radius:12px 0 0 12px;padding-right:9px}
+.v3sb .user{margin-top:auto;display:flex;align-items:center;gap:12px;padding:12px;
+  border-radius:16px;background:#0F0F0F;box-shadow:inset 2px 2px 6px rgba(0,0,0,0.5)}
+.v3sb .user .av{width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+  display:grid;place-items:center;font-weight:800;font-size:13px;box-shadow:2px 2px 6px rgba(0,0,0,0.4)}
+.v3sb .user .nm{font-family:'Satoshi',sans-serif;font-size:12px;font-weight:700;color:#fff}
+.v3sb .user .pl{font-family:'Satoshi',sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:#94A3B8;font-weight:700}
+
+/* ── MAIN ── */
+.v3main{flex:1;min-width:0;padding-bottom:60px}
+.v3hdr{position:sticky;top:0;z-index:10;height:80px;
+  background:rgba(10,10,10,0.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  display:flex;align-items:center;padding:0 32px;gap:24px}
+.crumb{display:flex;align-items:center;gap:10px;font-family:'Satoshi',sans-serif;
+  font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:#94A3B8}
+.crumb b{color:#fff}.crumb svg{width:12px;height:12px;color:#5A5A60}
+.hdr-cta{margin-left:auto;background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;
+  padding:12px 22px;border-radius:14px;border:0;cursor:pointer;
+  font-family:'Satoshi',sans-serif;font-weight:800;font-size:11.5px;
+  text-transform:uppercase;letter-spacing:0.18em;display:inline-flex;align-items:center;gap:8px;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 22px rgba(191,255,0,0.3);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.hdr-cta:hover{transform:scale(1.04)}.hdr-cta svg{width:16px;height:16px}
+
+/* ── CONTENT ── */
+.v3content{padding:32px 32px 80px;max-width:1040px}
+.eyebrow-cap{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+  text-transform:uppercase;letter-spacing:0.3em;color:#BFFF00;margin-bottom:8px}
+.v3h1{font-family:'General Sans',sans-serif;font-weight:600;font-size:40px;
+  line-height:1;letter-spacing:-0.03em;color:#fff;margin-top:4px}
+.v3h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.v3sub{font-family:'Satoshi',sans-serif;font-size:13.5px;color:#94A3B8;
+  line-height:1.6;max-width:540px;margin-top:8px;margin-bottom:32px}
+.sec-lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+  text-transform:uppercase;letter-spacing:0.3em;color:#94A3B8;
+  display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.sec-lbl::before{content:"▮";color:#BFFF00}
+
+/* ── DOMAIN ACCORDION CARD ── */
+.dom-acc{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:24px;
+  box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);
+  overflow:hidden;transition:.35s cubic-bezier(0.34,1.56,0.64,1);margin-bottom:12px}
+.dom-acc.active{box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025),0 0 28px rgba(191,255,0,0.1)}
+.dom-acc.shared{opacity:.8}
+.dom-h{display:flex;align-items:center;gap:16px;padding:20px 24px;cursor:pointer}
+.dom-acc.shared .dom-h{cursor:default}
+
+/* domain icon */
+.dom-ic{width:48px;height:48px;border-radius:14px;flex-shrink:0;
+  display:grid;place-items:center;background:rgba(191,255,0,0.08);color:#BFFF00;
+  box-shadow:inset 2px 2px 6px rgba(0,0,0,0.45),inset -1px -1px 3px rgba(255,255,255,0.02)}
+.dom-ic.shared{background:rgba(148,163,184,0.08);color:#94A3B8}
+.dom-ic svg{width:20px;height:20px}
+
+/* domain info */
+.dom-info{flex:1;min-width:0}
+.dom-info .hostname{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14.5px;
+  color:#fff;letter-spacing:-0.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dom-info .meta{display:flex;align-items:center;gap:10px;margin-top:5px;flex-wrap:wrap}
+.dom-type{font-family:'Satoshi',sans-serif;font-weight:700;font-size:10px;
+  text-transform:uppercase;letter-spacing:0.15em;color:#5A5A60}
+.dom-links{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#5A5A60}
+
+/* status badges */
+.ssl-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;
+  border-radius:999px;font-family:'Satoshi',sans-serif;font-weight:800;
+  font-size:10px;text-transform:uppercase;letter-spacing:0.12em;white-space:nowrap;flex-shrink:0}
+.ssl-badge.ok{background:rgba(16,185,129,0.15);color:#10B981}
+.ssl-badge.warn{background:rgba(245,158,11,0.15);color:#F59E0B}
+.ssl-badge.neutral{background:rgba(148,163,184,0.12);color:#94A3B8}
+
+.pdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.pdot.green{background:#10B981;animation:pdot-g 2.2s ease infinite}
+.pdot.yellow{background:#F59E0B;animation:pdot-y 2.2s ease infinite}
+@keyframes pdot-g{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,0.7)}60%{box-shadow:0 0 0 8px rgba(16,185,129,0)}}
+@keyframes pdot-y{0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,0.7)}60%{box-shadow:0 0 0 8px rgba(245,158,11,0)}}
+
+/* action icons */
+.dom-acts{display:flex;gap:6px;flex-shrink:0}
+.act-btn{width:36px;height:36px;border-radius:10px;background:#1A1A1A;color:#94A3B8;
+  display:grid;place-items:center;border:0;cursor:pointer;
+  box-shadow:2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.act-btn:hover{color:#BFFF00;transform:scale(1.1)}.act-btn svg{width:15px;height:15px}
+.act-btn.danger:hover{color:#FF7777}
+
+/* chevron */
+.chev{width:38px;height:38px;border-radius:10px;background:#1A1A1A;color:#94A3B8;
+  display:grid;place-items:center;flex-shrink:0;
+  box-shadow:2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.chev svg{width:16px;height:16px}
+.dom-acc.active .chev{transform:rotate(180deg);color:#BFFF00}
+
+/* accordion body */
+.dom-body-wrap{display:grid;grid-template-rows:0fr;transition:.45s cubic-bezier(0.34,1.56,0.64,1)}
+.dom-acc.active .dom-body-wrap{grid-template-rows:1fr}
+.dom-body-wrap>div{overflow:hidden}
+.dom-acc.active .dom-body-wrap>div{border-top:1px solid rgba(255,255,255,0.04)}
+.dom-body{padding:24px;display:flex;flex-direction:column;gap:20px}
+
+/* DNS record box */
+.dns-section-lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+  text-transform:uppercase;letter-spacing:0.25em;color:#94A3B8;margin-bottom:12px}
+.dns-section-lbl span{color:#BFFF00;margin-right:4px}
+.dns-record{background:#0F0F0F;border:1px solid rgba(255,255,255,0.06);border-radius:16px;
+  padding:0;overflow:hidden;box-shadow:inset 3px 3px 8px rgba(0,0,0,0.55)}
+.dns-record-head{display:grid;grid-template-columns:100px 140px 1fr 44px;gap:0;
+  background:rgba(255,255,255,0.025);border-bottom:1px solid rgba(255,255,255,0.05)}
+.dns-col-h{padding:10px 16px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:9px;
+  text-transform:uppercase;letter-spacing:0.22em;color:#5A5A60}
+.dns-record-row{display:grid;grid-template-columns:100px 140px 1fr 44px;gap:0;align-items:center}
+.dns-cell{padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#E2E8F0;
+  border-right:1px solid rgba(255,255,255,0.04)}
+.dns-cell:last-child{border-right:0;padding:0;display:grid;place-items:center}
+.dns-cell .type-tag{display:inline-block;background:rgba(191,255,0,0.1);color:#BFFF00;
+  padding:3px 9px;border-radius:6px;font-size:10px;font-weight:700;letter-spacing:0.1em}
+.dns-cell .val{color:#BFFF00;font-weight:700}
+.copy-btn{width:32px;height:32px;border:0;border-radius:8px;background:#1A1A1A;color:#94A3B8;
+  display:grid;place-items:center;cursor:pointer;
+  box-shadow:2px 2px 6px rgba(0,0,0,0.5);transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.copy-btn:hover{color:#BFFF00;transform:scale(1.1)}.copy-btn svg{width:13px;height:13px}
+
+/* SSL info row */
+.ssl-info-row{display:flex;align-items:center;gap:14px;padding:14px 18px;
+  background:#1A1A1A;border-radius:14px;
+  box-shadow:inset 2px 2px 6px rgba(0,0,0,0.45)}
+.ssl-info-row svg{flex-shrink:0}
+.ssl-info-row p{font-family:'Satoshi',sans-serif;font-size:12.5px;color:#E2E8F0;line-height:1.5;flex:1}
+.ssl-info-row p b{color:#BFFF00;font-weight:700}
+
+/* warning banner */
+.cf-warn{display:flex;gap:12px;align-items:flex-start;padding:14px 18px;
+  background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.2);border-radius:14px}
+.cf-warn svg{flex-shrink:0;margin-top:1px}
+.cf-warn p{font-family:'Satoshi',sans-serif;font-size:12px;color:#E2E8F0;line-height:1.5}
+.cf-warn p b{color:#F59E0B}
+
+/* add domain card */
+.add-dom{background:rgba(255,255,255,0.015);border:1px dashed rgba(255,255,255,0.1);
+  border-radius:24px;padding:22px 24px;display:flex;align-items:center;gap:16px;
+  cursor:pointer;transition:.35s cubic-bezier(0.34,1.56,0.64,1);margin-bottom:12px}
+.add-dom:hover{border-color:rgba(191,255,0,0.35);background:rgba(191,255,0,0.03)}
+.add-dom:hover .add-ic{color:#BFFF00;background:rgba(191,255,0,0.12)}
+.add-ic{width:48px;height:48px;border-radius:14px;background:#1A1A1A;color:#5A5A60;
+  display:grid;place-items:center;flex-shrink:0;
+  box-shadow:inset 2px 2px 6px rgba(0,0,0,0.45);transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.add-ic svg{width:20px;height:20px}
+.add-dom .nm{font-family:'General Sans',sans-serif;font-weight:600;font-size:15px;color:#fff}
+.add-dom .dsc{font-family:'Satoshi',sans-serif;font-size:12px;color:#5A5A60;margin-top:3px}
+
+/* how-to steps */
+.steps-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:24px;
+  padding:26px;margin-top:28px;
+  box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
+.steps-card .ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:17px;
+  color:#fff;letter-spacing:-0.02em;margin-bottom:22px}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.step{display:flex;flex-direction:column;gap:10px}
+.step-num{width:30px;height:30px;border-radius:999px;
+  background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+  display:grid;place-items:center;font-family:'Satoshi',sans-serif;font-weight:800;font-size:12px;
+  box-shadow:0 0 16px rgba(191,255,0,0.3),3px 3px 8px rgba(0,0,0,0.4)}
+.step .step-ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:14px;color:#fff}
+.step .step-dsc{font-family:'Satoshi',sans-serif;font-size:12px;color:#94A3B8;line-height:1.6}
+.step code{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11.5px;
+  background:#0F0F0F;color:#BFFF00;padding:6px 12px;border-radius:8px;margin-top:6px;
+  border:1px solid rgba(191,255,0,0.18);box-shadow:inset 2px 2px 5px rgba(0,0,0,0.5)}
+</style>
 </head>
 <body>
-<div class="app">
-  <aside class="sidebar">
-    <div class="logo"><div class="logo-mark"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter" stroke-linecap="square"><rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2"/></svg></div><span class="logo-name" data-brand-name>AppLink</span></div>
-    <div class="nav-group"><div class="nav-label">Principal</div>
-      <a class="nav-item" href="01-dashboard-links.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Links</a>
-      <a class="nav-item" href="06-smartpages.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Smartpages</a>
-      <a class="nav-item" href="10-qrcode.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg> QR Codes</a></div>
-    <div class="nav-group"><div class="nav-label">Crescimento</div>
-      <a class="nav-item" href="11-pixels.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg> Pixels</a>
-      <a class="nav-item" href="12-audiencias.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg> Audiências</a>
-      <a class="nav-item" href="03-analytics-link.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg> Analytics</a></div>
-    <div class="nav-group"><div class="nav-label">Configuração</div>
-      <a class="nav-item active" href="13-dominios.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg> Domínios</a>
-      <a class="nav-item" href="14-integracoes.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6M6 21v-6M6 9a3 3 0 0 0 0 6M18 3v12M18 15a3 3 0 0 0 0-6"/></svg> Integrações</a>
-      <a class="nav-item" href="15-equipe.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg> Equipe</a></div>
-    <div class="grow"></div>
-    <div class="nav-item" style="background:rgba(255,255,255,.05)"><div class="avatar" style="width:24px;height:24px;font-size:10px">IF</div> Maria Silva</div>
+<div class="shell">
+
+  <!-- SIDEBAR V3 -->
+  <aside class="v3sb">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter" stroke-linecap="square">
+          <rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2"/>
+        </svg>
+      </div>
+      <span class="brand-name">AppLink</span>
+    </div>
+    <div class="sec">Principal</div>
+    <a class="nv" href="01-dashboard.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Painel
+    </a>
+    <a class="nv" href="02-criar-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      Criar
+    </a>
+    <a class="nv" href="02c-tipos-de-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Tipos
+    </a>
+    <a class="nv" href="03-analytics-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg>
+      Analytics
+    </a>
+    <a class="nv" href="06-smartpages.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Smartpages
+    </a>
+    <a class="nv" href="10-qrcode.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg>
+      QR Code
+    </a>
+    <div class="sec">Crescimento</div>
+    <a class="nv" href="11-pixels.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+      Pixels
+    </a>
+    <a class="nv" href="12-audiencias.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+      Audiências
+    </a>
+    <div class="sec">Configuração</div>
+    <a class="nv on" href="13-dominios.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
+      Domínios
+    </a>
+    <a class="nv" href="14-integracoes.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6M6 21v-6M6 9a3 3 0 0 0 0 6M18 3v12M18 15a3 3 0 0 0 0-6"/></svg>
+      Integrações
+    </a>
+    <a class="nv" href="15-equipe.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+      Equipe
+    </a>
+    <a class="nv" href="16-billing.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+      Billing
+    </a>
+    <a class="nv" href="09-settings.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1A1.6 1.6 0 0 0 6.8 19l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H3a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 4.2 6.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
+      Settings
+    </a>
+    <div class="user">
+      <div class="av">MS</div>
+      <div>
+        <div class="nm">Maria Silva</div>
+        <div class="pl">Plano Pro</div>
+      </div>
+    </div>
   </aside>
 
-  <div class="main">
-    <header class="topbar"><div class="page-title">Domínios customizados</div><div class="spacer"></div>
-      <button class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg> Adicionar domínio</button></header>
+  <!-- MAIN -->
+  <div class="v3main">
+    <header class="v3hdr">
+      <div class="crumb">
+        <span>Configuração</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        <b>Domínios customizados</b>
+      </div>
+      <button class="hdr-cta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 5v14M5 12h14"/></svg>
+        Adicionar domínio
+      </button>
+    </header>
 
-    <main class="content col gap-18">
-      <div class="card">
-        <div class="card-head"><span class="section-title">Seus domínios</span></div>
-        <table class="table">
-          <thead><tr><th>Domínio</th><th>Tipo</th><th>Links</th><th>Status DNS</th><th>Ações</th></tr></thead>
-          <tbody>
-            <tr><td class="mono"><b>link.cliente-exemplo.com</b></td><td>Subdomínio</td><td class="num">28</td>
-              <td><span class="badge badge-success"><span class="dot"></span> Verificado</span></td>
-              <td><div class="row gap-4"><span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></span></div></td></tr>
-            <tr><td class="mono"><b>vai.cliente-exemplo.com</b></td><td>Subdomínio</td><td class="num">0</td>
-              <td><span class="badge badge-warning"><span class="dot"></span> Propagando</span></td>
-              <td><div class="row gap-4"><span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></span></div></td></tr>
-            <tr><td class="mono">plnk.to</td><td>Padrão AppLink</td><td class="num">12</td>
-              <td><span class="badge badge-neutral">Compartilhado</span></td><td><span class="faint">—</span></td></tr>
-          </tbody>
-        </table>
+    <main class="v3content">
+      <div class="eyebrow-cap">▮ Configuração · Branding</div>
+      <h1 class="v3h1">Domínios <em>próprios.</em></h1>
+      <p class="v3sub">Use seu próprio domínio nos links curtos. SSL automático, suporte a wildcard e certificados gerenciados pelo AppLink.</p>
+
+      <div class="sec-lbl">Seus domínios — 2 customizados · 1 padrão</div>
+
+      <!-- link.cliente-exemplo.com — verified, accordion open -->
+      <div class="dom-acc active">
+        <div class="dom-h">
+          <div class="dom-ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="dom-info">
+            <div class="hostname">link.cliente-exemplo.com</div>
+            <div class="meta">
+              <span class="dom-type">Subdomínio</span>
+              <span class="dom-links">28 links ativos</span>
+            </div>
+          </div>
+          <span class="ssl-badge ok"><span class="pdot green"></span> SSL Verificado</span>
+          <div class="dom-acts">
+            <button class="act-btn" title="Editar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+            </button>
+            <button class="act-btn danger" title="Remover">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+            </button>
+          </div>
+          <div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div class="dom-body-wrap"><div>
+          <div class="dom-body">
+            <div>
+              <div class="dns-section-lbl"><span>01</span> Registro DNS (CNAME)</div>
+              <div class="dns-record">
+                <div class="dns-record-head">
+                  <div class="dns-col-h">Tipo</div>
+                  <div class="dns-col-h">Host / Nome</div>
+                  <div class="dns-col-h">Valor / Aponta para</div>
+                  <div class="dns-col-h"></div>
+                </div>
+                <div class="dns-record-row">
+                  <div class="dns-cell"><span class="type-tag">CNAME</span></div>
+                  <div class="dns-cell">link</div>
+                  <div class="dns-cell"><span class="val">links.applink.io</span></div>
+                  <div class="dns-cell">
+                    <button class="copy-btn" title="Copiar valor">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ssl-info-row">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+              <p>Certificado TLS emitido em <b>23 mai 2026</b> · Let's Encrypt · Renovação automática em 89 dias · Wildcard <b>*.cliente-exemplo.com</b> coberto.</p>
+            </div>
+
+            <div class="cf-warn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/></svg>
+              <p><b>Cloudflare:</b> deixe o registro como "DNS only" (nuvem cinza) — o proxy laranja bloqueia a verificação de SSL do AppLink.</p>
+            </div>
+          </div>
+        </div></div>
       </div>
 
-      <div class="card card-pad col gap-12">
-        <div class="section-title">Como conectar um domínio</div>
-        <div class="row gap-12 wrap">
-          <div class="col gap-4" style="flex:1;min-width:220px;align-items:flex-start"><span class="badge badge-accent">1</span><b>Crie um registro CNAME</b>
-            <span class="faint" style="font-size:12px">No seu provedor de DNS, aponte o subdomínio para:</span>
-            <code class="mono" style="background:var(--surface-2);padding:6px 9px;border-radius:6px;font-size:12px;border:var(--bd-w-sm) solid var(--bd-c)">links.applink.io</code></div>
-          <div class="col gap-4" style="flex:1;min-width:220px;align-items:flex-start"><span class="badge badge-accent">2</span><b>Aguarde a propagação</b>
-            <span class="faint" style="font-size:12px">O DNS leva de 24h a 48h para propagar. O TLS é emitido automaticamente.</span></div>
-          <div class="col gap-4" style="flex:1;min-width:220px;align-items:flex-start"><span class="badge badge-accent">3</span><b>Pronto</b>
-            <span class="faint" style="font-size:12px">O domínio fica disponível na criação de links e smartpages.</span></div>
+      <!-- vai.cliente-exemplo.com — propagating -->
+      <div class="dom-acc">
+        <div class="dom-h">
+          <div class="dom-ic" style="background:rgba(245,158,11,0.08);color:#F59E0B">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </div>
+          <div class="dom-info">
+            <div class="hostname">vai.cliente-exemplo.com</div>
+            <div class="meta">
+              <span class="dom-type">Subdomínio</span>
+              <span class="dom-links">0 links · configurando</span>
+            </div>
+          </div>
+          <span class="ssl-badge warn"><span class="pdot yellow"></span> Propagando DNS</span>
+          <div class="dom-acts">
+            <button class="act-btn danger" title="Remover">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+            </button>
+          </div>
+          <div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></div>
         </div>
-        <div class="banner banner-warning" style="font-size:12px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg> No Cloudflare, deixe o registro como "DNS only" (nuvem cinza) — o proxy laranja impede a verificação.</div>
+        <div class="dom-body-wrap"><div>
+          <div class="dom-body">
+            <div>
+              <div class="dns-section-lbl"><span>01</span> Registro DNS (CNAME) — aguardando propagação</div>
+              <div class="dns-record">
+                <div class="dns-record-head">
+                  <div class="dns-col-h">Tipo</div>
+                  <div class="dns-col-h">Host / Nome</div>
+                  <div class="dns-col-h">Valor / Aponta para</div>
+                  <div class="dns-col-h"></div>
+                </div>
+                <div class="dns-record-row">
+                  <div class="dns-cell"><span class="type-tag">CNAME</span></div>
+                  <div class="dns-cell">vai</div>
+                  <div class="dns-cell"><span class="val">links.applink.io</span></div>
+                  <div class="dns-cell">
+                    <button class="copy-btn">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:14px 18px;
+              background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.2);border-radius:14px">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+              <p style="font-family:'Satoshi',sans-serif;font-size:12.5px;color:#E2E8F0;line-height:1.5">Propagação DNS pode levar de <b style="color:#F59E0B">24h a 48h</b>. O certificado TLS será emitido automaticamente assim que o registro for verificado.</p>
+            </div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- plnk.to — default/shared, no expand -->
+      <div class="dom-acc shared">
+        <div class="dom-h" style="cursor:default">
+          <div class="dom-ic shared">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </div>
+          <div class="dom-info">
+            <div class="hostname" style="color:#94A3B8">plnk.to</div>
+            <div class="meta">
+              <span class="dom-type">Domínio padrão AppLink</span>
+              <span class="dom-links">12 links</span>
+            </div>
+          </div>
+          <span class="ssl-badge neutral">Compartilhado · TLS gerenciado</span>
+        </div>
+      </div>
+
+      <!-- Add domain CTA -->
+      <div class="add-dom">
+        <div class="add-ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <div>
+          <div class="nm">Conectar outro domínio</div>
+          <div class="dsc">Apex (A record), subdomínio (CNAME) ou wildcard — SSL automático em todos</div>
+        </div>
+      </div>
+
+      <!-- How to connect steps -->
+      <div class="steps-card">
+        <div class="ttl">Como conectar um domínio</div>
+        <div class="steps-grid">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-ttl">Crie um registro CNAME</div>
+            <div class="step-dsc">No seu provedor de DNS, aponte o subdomínio para o AppLink.</div>
+            <code>links.applink.io</code>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-ttl">Aguarde a propagação</div>
+            <div class="step-dsc">O DNS leva de 24h a 48h para propagar globalmente. O TLS é emitido em seguida.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-ttl">Pronto para usar</div>
+            <div class="step-dsc">O domínio aparece na lista de opções ao criar links e Smartpages.</div>
+          </div>
+        </div>
       </div>
     </main>
   </div>
 </div>
-<script src="assets/theme.js"></script>
+
+<script>
+document.querySelectorAll('.dom-acc:not(.shared)').forEach(function(acc){
+  var h=acc.querySelector('.dom-h');
+  h.addEventListener('click',function(e){
+    if(e.target.closest('.act-btn'))return;
+    acc.classList.toggle('active');
+  });
+});
+document.querySelectorAll('.copy-btn').forEach(function(btn){
+  btn.addEventListener('click',function(e){
+    e.stopPropagation();
+    var orig=btn.innerHTML;
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#BFFF00" stroke-width="2.6" width="13" height="13"><path d="M20 6L9 17l-5-5"/></svg>';
+    setTimeout(function(){btn.innerHTML=orig;},1800);
+  });
+});
+</script>
 </body>
 </html>

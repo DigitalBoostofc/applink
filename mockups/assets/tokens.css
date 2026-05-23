@@ -1,196 +1,19 @@
 /* ============================================================
-   AppLink — Design Tokens · DUAS IDENTIDADES
-   [data-brand="applink"] -> AppLink: dark-first premium, lime neon + coral
-   [data-brand="appex"]   -> módulo white-label AppexCRM (minimalista)
-   [data-mode]            -> dark | light  (afeta só o tema appex)
-   Identidade baseada no moodboard "OPÇÃO 3" (2026-05-22).
+   AppLink — Design Tokens · V3 "Configuration Engine"
+   Dark Neumorphism · Jet Black core · Lime neon + Coral pink
+   Fontes: General Sans (display) + Satoshi (UI)
+   Spring easing tátil · sombras duplas (preta + branca sutil)
    ============================================================ */
 
 :root {
-  --success: #16A34A;
+  /* status base */
+  --success: #10B981;
   --danger:  #EF4444;
   --warning: #F59E0B;
   --h-input: 38px;
   --h-btn: 38px;
   --h-row: 52px;
-}
 
-/* ============================================================
-   IDENTIDADE 1 — AppLink avulso
-   Dark-first premium · neon lime + coral pink + yellow pop + cream
-   Fontes: Space Grotesk (display) + Inter (UI)
-   ============================================================ */
-[data-brand="applink"] {
-  /* tipografia */
-  --font-display: 'Space Grotesk', 'Inter', sans-serif;
-  --font-ui:      'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
-  --display-style: normal;
-  --display-weight: 700;
-  --display-tracking: -0.025em;
-
-  /* fundo: jet black sólido */
-  --canvas: #0D0D0D;
-  --canvas-fixed: scroll;
-  --sidebar: #0A0A0A;
-  --topbar:  #0D0D0D;
-  --surface: #161616;          /* cards */
-  --surface-2: #1A1A1A;
-  --surface-hover: #1F1F1F;
-  --surface-raised: #1A1A1A;
-
-  /* glass */
-  --glass-bg: rgba(255,255,255,0.05);
-  --glass-bd: rgba(255,255,255,0.10);
-  --glass-blur: 14px;
-
-  /* tinta — leitura sobre jet black */
-  --ink-1: #FAFAFA;
-  --ink-2: #A1A1A6;
-  --ink-3: #6B6B70;
-  --ink-on-dark:   #FAFAFA;
-  --ink-on-dark-2: #A1A1A6;
-
-  /* tinta sobre o card escuro - mesmas (cards são pretos no novo tema) */
-  /* bordas — sutis mas definidas */
-  --bd-c: #2A2A2A;
-  --bd-w: 1.5px;
-  --bd-w-sm: 1px;
-  --edge: #242424;
-  --edge-strong: #303030;
-
-  /* raios — baixos, conforme moodboard */
-  --r-pill: 999px;
-  --r-input: 8px;
-  --r-btn: 8px;
-  --r-card: 10px;
-  --r-lg: 14px;
-
-  /* sombras — hard offset reservadas para elementos interativos / sticky notes */
-  --sh-btn:       3px 3px 0 #000;
-  --sh-btn-hover: 0 0 0 #000;
-  --sh-card:      0 1px 0 rgba(255,255,255,0.03), 0 8px 24px rgba(0,0,0,0.6);
-  --sh-card-lg:   0 1px 0 rgba(255,255,255,0.04), 0 16px 40px rgba(0,0,0,0.7);
-  --sh-pop:       0 24px 60px rgba(0,0,0,0.75);
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
-  --shadow-md: var(--sh-card);
-  --shadow-lg: var(--sh-card-lg);
-  --shadow-xl: var(--sh-pop);
-
-  /* paleta de marca */
-  --lime-neon:   #BFFF00;   /* primária */
-  --coral-pink:  #FF7777;
-  --yellow-pop:  #FFD400;
-  --warm-cream:  #FFE2C0;
-  --jet-black:   #0D0D0D;
-
-  --accent:        var(--lime-neon);
-  --accent-hover:  #AEEC00;
-  --accent-2:      var(--coral-pink);
-  --accent-3:      var(--yellow-pop);
-  --accent-4:      var(--warm-cream);
-  --on-accent:     #0D0D0D;
-  --accent-soft:   rgba(191,255,0,0.14);
-  --accent-grad:   linear-gradient(135deg,#D6FF3A 0%,#BFFF00 100%);
-  --accent-ink:    #0D0D0D;
-
-  /* status — sobre fundo escuro */
-  --success-soft: rgba(22,163,74,0.18);
-  --danger-soft:  rgba(239,68,68,0.18);
-  --warning-soft: rgba(245,158,11,0.18);
-
-  /* movimento */
-  --ease: cubic-bezier(0.2,0.9,0.3,1.1);
-  --ease-soft: cubic-bezier(0.16,1,0.3,1);
-  --focus-ring: 0 0 0 2px #0D0D0D, 0 0 0 4px #BFFF00;
-
-  --brand-name: 'AppLink';
-}
-
-/* ============================================================
-   IDENTIDADE 2 — Módulo AppexCRM (minimalista, white-label)
-   ============================================================ */
-[data-brand="appex"] {
-  --font-display: 'Inter', system-ui, sans-serif;
-  --font-ui:      'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
-  --display-style: normal;
-  --display-weight: 600;
-  --display-tracking: -0.02em;
-
-  --canvas-fixed: scroll;
-  --glass-bg: var(--surface);
-  --glass-bd: var(--edge);
-  --glass-blur: 0px;
-
-  --bd-c: var(--edge);
-  --bd-w: 1px;
-  --bd-w-sm: 1px;
-
-  --r-pill: 20px;
-  --r-input: 8px;
-  --r-btn: 6px;
-  --r-card: 12px;
-  --r-lg: 16px;
-
-  /* accent roxo Stripe (AppexCRM) */
-  --accent-50:#EEEEFF;--accent-100:#D8D8FF;--accent-200:#B8B7FF;--accent-300:#9996FF;
-  --accent-400:#7A77FF;--accent-500:#635BFF;--accent-600:#4B44E8;--accent-700:#3830C5;
-  --accent-800:#2820A0;--accent-900:#1A1480;
-  --accent: #635BFF;
-  --accent-hover: #4B44E8;
-  --accent-2: #635BFF;
-  --on-accent: #FFFFFF;
-  --accent-grad: linear-gradient(135deg,#635BFF 0%,#4B44E8 100%);
-
-  --ease: cubic-bezier(0.16,1,0.3,1);
-  --ease-soft: cubic-bezier(0.16,1,0.3,1);
-
-  --ink-on-dark: #F5F5F7;
-  --ink-on-dark-2: #86868B;
-}
-
-[data-brand="appex"][data-mode="dark"] {
-  --canvas:#0C0C0F;--sidebar:#111113;--topbar:#161618;--surface:#161618;
-  --surface-2:#1D1D20;--surface-hover:#1D1D20;--surface-raised:#1D1D20;
-  --edge:rgba(255,255,255,0.06);--edge-strong:rgba(255,255,255,0.10);
-  --ink-1:#F5F5F7;--ink-2:#86868B;--ink-3:#48484E;
-  --accent-soft:color-mix(in srgb,var(--accent) 16%,transparent);
-  --success-soft:color-mix(in srgb,var(--success) 16%,transparent);
-  --danger-soft:color-mix(in srgb,var(--danger) 18%,transparent);
-  --warning-soft:color-mix(in srgb,var(--warning) 18%,transparent);
-  --sh-btn:var(--shadow-sm);--sh-card:var(--shadow-md);
-  --shadow-sm:0 1px 2px rgba(0,0,0,0.3);
-  --shadow-md:0 1px 4px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.05);
-  --shadow-lg:0 4px 20px rgba(0,0,0,0.45),0 0 0 1px rgba(255,255,255,0.05);
-  --shadow-xl:0 8px 40px rgba(0,0,0,0.55),0 0 0 1px rgba(255,255,255,0.06);
-  --sh-btn-hover:var(--shadow-sm);
-  --focus-ring:0 0 0 3px color-mix(in srgb,var(--accent) 28%,transparent);
-}
-[data-brand="appex"][data-mode="light"] {
-  --canvas:#F6F9FC;--sidebar:#FFFFFF;--topbar:#FFFFFF;--surface:#FFFFFF;
-  --surface-2:#F6F9FC;--surface-hover:#F6F9FC;--surface-raised:#FFFFFF;
-  --edge:rgba(0,0,0,0.08);--edge-strong:rgba(0,0,0,0.14);
-  --ink-1:#0F172A;--ink-2:#425466;--ink-3:#8898AA;
-  --accent-soft:color-mix(in srgb,var(--accent) 10%,transparent);
-  --success-soft:color-mix(in srgb,var(--success) 12%,transparent);
-  --danger-soft:color-mix(in srgb,var(--danger) 10%,transparent);
-  --warning-soft:color-mix(in srgb,var(--warning) 12%,transparent);
-  --shadow-sm:0 1px 2px rgba(0,0,0,0.06);
-  --shadow-md:0 1px 3px rgba(0,0,0,0.08),0 0 0 1px rgba(0,0,0,0.04);
-  --shadow-lg:0 4px 16px rgba(0,0,0,0.10),0 0 0 1px rgba(0,0,0,0.04);
-  --shadow-xl:0 8px 32px rgba(0,0,0,0.12),0 0 0 1px rgba(0,0,0,0.05);
-  --sh-btn:var(--shadow-sm);--sh-card:var(--shadow-md);--sh-btn-hover:var(--shadow-sm);
-  --focus-ring:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent);
-}
-[data-brand="appex"] { --ink-on-dark:#F5F5F7; }
-
-/* ============================================================
-   IDENTIDADE 3 — V3 "Configuration Engine" (Dark Neumorphism)
-   Estrutura: shadows duplos (out+in), spring easing, uppercase tracking.
-   Paleta: V2 (lime + coral + yellow + cream + jet black).
-   ============================================================ */
-[data-brand="v3"] {
   /* tipografia — General Sans (display) + Satoshi (body) */
   --font-display: 'General Sans', 'Space Grotesk', sans-serif;
   --font-ui:      'Satoshi', 'Inter', system-ui, sans-serif;
@@ -204,7 +27,7 @@
   --canvas-fixed: scroll;
   --sidebar: #050505;
   --topbar:  #0A0A0A;
-  --surface: #141414;        /* card surface */
+  --surface: #141414;          /* card surface */
   --surface-2: #1A1A1A;
   --surface-hover: #1F1F1F;
   --surface-raised: #161616;
@@ -221,7 +44,7 @@
   --ink-on-dark:   #F5F5F7;
   --ink-on-dark-2: #94A3B8;
 
-  /* bordas — quase invisíveis (a separação vem das sombras) */
+  /* bordas — quase invisíveis (separação vem das sombras) */
   --bd-c: rgba(255,255,255,0.04);
   --bd-w: 1px;
   --bd-w-sm: 1px;
@@ -247,7 +70,7 @@
   --shadow-lg: var(--sh-card-lg);
   --shadow-xl: var(--sh-pop);
 
-  /* paleta de marca — V2 */
+  /* paleta de marca */
   --lime-neon:   #BFFF00;
   --coral-pink:  #FF7777;
   --yellow-pop:  #FFD400;
@@ -263,9 +86,8 @@
   --accent-soft:   rgba(191,255,0,0.12);
   --accent-grad:   linear-gradient(135deg,#BFFF00 0%,#FF7777 100%);
   --accent-ink:    #0A0A0A;
-  --success:       #10B981;
 
-  /* status */
+  /* status soft */
   --success-soft: rgba(16,185,129,0.18);
   --danger-soft:  rgba(239,68,68,0.18);
   --warning-soft: rgba(245,158,11,0.18);
@@ -277,4 +99,3 @@
 
   --brand-name: 'AppLink';
 }
-

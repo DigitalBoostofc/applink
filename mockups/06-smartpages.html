@@ -1,124 +1,469 @@
 <!doctype html>
-<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AppLink — Smartpages</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Syne:ital,wght@0,700;0,800;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/tokens.css">
-<link rel="stylesheet" href="assets/ui.css">
 <style>
-  .sp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .sp{padding:0;overflow:hidden;cursor:pointer;transition:.16s var(--ease)}
-  .sp:hover{transform:translate(-3px,-3px);box-shadow:10px 10px 0 #000}
-  [data-brand="appex"] .sp:hover{transform:none;box-shadow:var(--shadow-lg)}
-  .sp-prev{height:150px;background:var(--accent-grad);display:grid;place-items:center;
-    border-bottom:var(--bd-w) solid var(--bd-c)}
-  [data-brand="appex"] .sp-prev{border-bottom-width:1px;border-color:var(--edge)}
-  .sp-prev svg{width:34px;height:34px;color:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi',sans-serif;min-height:100vh}
+a{text-decoration:none;color:inherit}
+
+/* ── SIDEBAR V3 ── */
+.shell{display:flex;min-height:100vh}
+.v3sb{width:256px;flex-shrink:0;background:#050505;border-right:1px solid rgba(255,255,255,0.05);
+  display:flex;flex-direction:column;padding:20px 16px;gap:4px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.v3sb .brand{display:flex;align-items:center;gap:12px;padding:8px 4px 24px;flex-shrink:0}
+.v3sb .brand-mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#BFFF00,#FF7777);
+  display:grid;place-items:center;flex-shrink:0;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.55),-2px -2px 6px rgba(255,255,255,0.03),0 0 22px rgba(191,255,0,0.25)}
+.v3sb .brand-mark svg{width:22px;height:22px;color:#0A0A0A}
+.v3sb .brand-name{font-family:'General Sans',sans-serif;font-weight:700;font-size:17px;letter-spacing:-0.02em;color:#fff}
+.v3sb .sec{font-size:9px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:#5A5A60;padding:14px 12px 6px;flex-shrink:0}
+.v3sb .nv{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;
+  font-family:'Satoshi',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;
+  font-size:11px;color:#94A3B8;cursor:pointer;transition:.35s cubic-bezier(0.34,1.56,0.64,1);flex-shrink:0}
+.v3sb .nv svg{width:16px;height:16px;flex-shrink:0}
+.v3sb .nv:hover{color:#fff;background:rgba(255,255,255,0.03)}
+.v3sb .nv.on{background:linear-gradient(90deg,rgba(191,255,0,0.12) 0%,rgba(191,255,0,0) 100%);
+  color:#BFFF00;border-right:3px solid #BFFF00;border-radius:12px 0 0 12px;padding-right:9px}
+.v3sb .nv .ct{margin-left:auto;background:rgba(255,255,255,0.06);color:#BFFF00;padding:2px 8px;border-radius:999px;font-size:9px;font-weight:800}
+.v3sb .user{margin-top:auto;display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;background:#0F0F0F;
+  box-shadow:inset 2px 2px 6px rgba(0,0,0,0.5);flex-shrink:0}
+.v3sb .user .av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+  display:grid;place-items:center;font-weight:800;font-size:13px;box-shadow:2px 2px 6px rgba(0,0,0,0.4);flex-shrink:0}
+.v3sb .user .nm{font-family:'Satoshi',sans-serif;font-size:12px;font-weight:700;color:#fff}
+.v3sb .user .pl{font-family:'Satoshi',sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:#94A3B8;font-weight:700}
+
+/* ── MAIN ── */
+.v3main{flex:1;min-width:0;padding-bottom:80px}
+.v3hdr{position:sticky;top:0;z-index:10;height:80px;background:rgba(10,10,10,0.85);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.04);
+  display:flex;align-items:center;padding:0 32px;gap:20px}
+.crumb{display:flex;align-items:center;gap:10px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+  text-transform:uppercase;letter-spacing:0.18em;color:#94A3B8}
+.crumb b{color:#fff}
+.crumb svg{width:12px;height:12px;color:#5A5A60}
+.v3search{margin-left:auto;width:256px;display:flex;align-items:center;gap:10px;height:42px;padding:0 16px;
+  background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);border-radius:14px;
+  box-shadow:inset 4px 4px 8px rgba(0,0,0,0.55),inset -2px -2px 6px rgba(255,255,255,0.025);
+  color:#94A3B8;transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.v3search:focus-within{width:320px;border-color:rgba(191,255,0,0.5)}
+.v3search svg{width:14px;height:14px;flex-shrink:0}
+.v3search input{border:0;background:transparent;outline:none;color:#fff;flex:1;font-family:'Satoshi',sans-serif;font-size:13px}
+.ib{width:42px;height:42px;border-radius:12px;background:#1A1A1A;color:#94A3B8;display:grid;place-items:center;cursor:pointer;flex-shrink:0;
+  box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.ib:hover{color:#BFFF00;transform:scale(1.1)}
+.ib svg{width:17px;height:17px}
+.btn-cta{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;padding:12px 22px;border-radius:14px;
+  font-family:'Satoshi',sans-serif;font-weight:800;font-size:11.5px;text-transform:uppercase;letter-spacing:0.18em;
+  cursor:pointer;border:0;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 22px rgba(191,255,0,0.3);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.btn-cta:hover{transform:scale(1.04)}
+.btn-cta svg{width:15px;height:15px}
+
+/* ── CONTENT ── */
+.v3content{padding:36px 32px 80px}
+.eyebrow-cap{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:#BFFF00;margin-bottom:10px}
+.v3h1{font-family:'General Sans',sans-serif;font-weight:600;font-size:44px;line-height:1.05;letter-spacing:-0.03em;color:#fff}
+.v3h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.v3sub{font-family:'Satoshi',sans-serif;font-size:14px;color:#94A3B8;line-height:1.65;max-width:520px;margin-top:10px}
+.ttl-row{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;gap:32px;flex-wrap:wrap}
+
+/* ── KPI STATS ── */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:28px}
+.stat{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;padding:24px;position:relative;
+  box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
+.stat .lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.25em;color:#94A3B8}
+.stat .val{font-family:'General Sans',sans-serif;font-weight:600;font-size:36px;line-height:1;letter-spacing:-0.03em;color:#fff;margin-top:12px}
+.stat .dlt{font-family:'JetBrains Mono',monospace;font-size:11px;color:#10B981;margin-top:8px;font-weight:600}
+.stat .ic{position:absolute;top:24px;right:24px;width:48px;height:48px;border-radius:14px;
+  background:rgba(191,255,0,0.1);color:#BFFF00;display:grid;place-items:center;
+  box-shadow:inset 2px 2px 6px rgba(0,0,0,0.4)}
+.stat .ic svg{width:22px;height:22px}
+
+/* ── FILTER CHIPS ── */
+.chips-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.v3chip{background:#1A1A1A;border:0;color:#94A3B8;text-transform:uppercase;letter-spacing:0.12em;font-size:10.5px;font-weight:700;
+  font-family:'Satoshi',sans-serif;padding:9px 16px;border-radius:12px;cursor:pointer;
+  box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1);display:inline-flex;align-items:center;gap:7px}
+.v3chip:hover{color:#BFFF00;transform:scale(1.03)}
+.v3chip.on{background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+  box-shadow:3px 3px 10px rgba(0,0,0,0.5),0 0 16px rgba(191,255,0,0.4)}
+.v3chip svg{width:12px;height:12px}
+
+/* ── SMARTPAGE GRID ── */
+.sp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.sp-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;overflow:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.sp-card:hover{transform:translateY(-4px);box-shadow:12px 12px 28px rgba(0,0,0,0.65),-4px -4px 12px rgba(255,255,255,0.035),0 0 28px rgba(191,255,0,0.07)}
+.sp-thumb{height:156px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.sp-thumb .tc{display:flex;flex-direction:column;align-items:center;gap:8px}
+.sp-thumb .ti{width:48px;height:48px;border-radius:16px;background:rgba(0,0,0,0.28);backdrop-filter:blur(8px);
+  display:grid;place-items:center;border:1px solid rgba(255,255,255,0.18)}
+.sp-thumb .ti svg{width:22px;height:22px;color:#fff}
+.sp-thumb .tl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;color:rgba(255,255,255,0.65)}
+.sp-acts{position:absolute;top:10px;right:10px;display:flex;gap:5px;opacity:0;transition:.22s}
+.sp-card:hover .sp-acts{opacity:1}
+.sp-act{width:30px;height:30px;border-radius:9px;background:rgba(0,0,0,0.58);backdrop-filter:blur(8px);
+  display:grid;place-items:center;color:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.14);
+  cursor:pointer;transition:.2s cubic-bezier(0.34,1.56,0.64,1)}
+.sp-act:hover{color:#BFFF00;transform:scale(1.1)}
+.sp-act svg{width:13px;height:13px}
+.sp-info{padding:18px 20px 20px;flex:1}
+.sp-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px}
+.sp-name{font-family:'General Sans',sans-serif;font-weight:600;font-size:15px;color:#fff;letter-spacing:-0.015em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.badge-on{display:inline-flex;align-items:center;gap:5px;background:rgba(16,185,129,0.14);color:#10B981;
+  padding:4px 10px;border-radius:999px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+  text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;flex-shrink:0}
+.badge-draft{display:inline-flex;align-items:center;gap:5px;background:rgba(245,158,11,0.14);color:#F59E0B;
+  padding:4px 10px;border-radius:999px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+  text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;flex-shrink:0}
+.sp-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:pulse-sp 2.2s ease-in-out infinite}
+@keyframes pulse-sp{0%,100%{opacity:1}50%{opacity:0.35}}
+.sp-slug{font-family:'JetBrains Mono',monospace;font-size:11px;color:#5A5A60;margin-bottom:14px}
+.sp-metrics{display:flex;gap:18px}
+.sp-m{font-family:'Satoshi',sans-serif;font-size:12px;color:#5A5A60}
+.sp-m b{color:#94A3B8;font-weight:700;margin-right:3px}
+.sp-m-nil{font-family:'Satoshi',sans-serif;font-size:12px;color:#3A3A40;font-style:italic}
+
+/* ── NOVA SP CARD ── */
+.sp-new{background:rgba(255,255,255,0.016);border:1px dashed rgba(255,255,255,0.08);border-radius:28px;
+  display:flex;align-items:center;justify-content:center;min-height:272px;cursor:pointer;
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.sp-new:hover{border-color:rgba(191,255,0,0.35);background:rgba(191,255,0,0.025)}
+.sp-new:hover .nc-ic{background:rgba(191,255,0,0.14);color:#BFFF00;box-shadow:0 0 16px rgba(191,255,0,0.2)}
+.sp-new:hover .nc-ttl{color:#BFFF00}
+.nc{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:28px}
+.nc-ic{width:52px;height:52px;border-radius:16px;background:#1A1A1A;color:#5A5A60;display:grid;place-items:center;
+  box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.nc-ic svg{width:22px;height:22px}
+.nc-ttl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:12px;color:#5A5A60;text-transform:uppercase;
+  letter-spacing:0.18em;transition:.3s}
+.nc-sub{font-family:'Satoshi',sans-serif;font-size:12px;color:#3A3A40;line-height:1.55}
 </style>
 </head>
 <body>
-<div class="app">
-  <aside class="sidebar">
-    <div class="logo">
-      <div class="logo-mark"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter" stroke-linecap="square"><rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2"/></svg></div>
-      <span class="logo-name" data-brand-name>AppLink</span>
+<div class="shell">
+
+  <!-- ══════════ SIDEBAR V3 ══════════ -->
+  <aside class="v3sb">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter" stroke-linecap="square">
+          <rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2"/>
+        </svg>
+      </div>
+      <span class="brand-name">AppLink</span>
     </div>
-    <div class="nav-group">
-      <div class="nav-label">Principal</div>
-      <a class="nav-item" href="01-dashboard-links.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Links</a>
-      <a class="nav-item active" href="06-smartpages.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Smartpages</a>
-      <a class="nav-item" href="10-qrcode.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg> QR Codes</a>
+
+    <div class="sec">Principal</div>
+    <a class="nv" href="01-dashboard.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Painel <span class="ct">40</span>
+    </a>
+    <a class="nv" href="02-criar-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      Criar
+    </a>
+    <a class="nv" href="02c-tipos-de-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Tipos
+    </a>
+    <a class="nv on" href="06-smartpages.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Smartpages <span class="ct">6</span>
+    </a>
+    <a class="nv" href="10-qrcode.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg>
+      QR Code
+    </a>
+
+    <div class="sec">Crescimento</div>
+    <a class="nv" href="03-analytics-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg>
+      Analytics
+    </a>
+    <a class="nv" href="11-pixels.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+      Pixels
+    </a>
+    <a class="nv" href="12-audiencias.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+      Audiências
+    </a>
+
+    <div class="sec">Configuração</div>
+    <a class="nv" href="13-dominios.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
+      Domínios
+    </a>
+    <a class="nv" href="14-integracoes.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6M6 21v-6M6 9a3 3 0 0 0 0 6M18 3v12M18 15a3 3 0 0 0 0-6"/></svg>
+      Integrações
+    </a>
+    <a class="nv" href="15-equipe.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+      Equipe
+    </a>
+    <a class="nv" href="16-billing.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+      Billing
+    </a>
+    <a class="nv" href="09-settings.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="2" fill="#0A0A0A" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="12" r="2" fill="#0A0A0A" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="18" r="2" fill="#0A0A0A" stroke="currentColor" stroke-width="2"/></svg>
+      Settings
+    </a>
+
+    <div class="user">
+      <div class="av">MS</div>
+      <div>
+        <div class="nm">Maria Silva</div>
+        <div class="pl">Plano Pro</div>
+      </div>
     </div>
-    <div class="nav-group">
-      <div class="nav-label">Crescimento</div>
-      <a class="nav-item" href="11-pixels.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg> Pixels</a>
-      <a class="nav-item" href="12-audiencias.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg> Audiências</a>
-      <a class="nav-item" href="03-analytics-link.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg> Analytics</a>
-    </div>
-    <div class="nav-group">
-      <div class="nav-label">Configuração</div>
-      <a class="nav-item" href="13-dominios.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg> Domínios</a>
-      <a class="nav-item" href="14-integracoes.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6M6 21v-6M6 9a3 3 0 0 0 0 6M18 3v12M18 15a3 3 0 0 0 0-6"/></svg> Integrações</a>
-      <a class="nav-item" href="15-equipe.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg> Equipe</a>
-    </div>
-    <div class="grow"></div>
-    <div class="nav-item" style="background:rgba(255,255,255,.05)"><div class="avatar" style="width:24px;height:24px;font-size:10px">IF</div> Maria Silva</div>
   </aside>
 
-  <div class="main">
-    <header class="topbar">
-      <div class="page-title">Smartpages</div>
-      <div class="spacer"></div>
-      <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="Buscar smartpage..."></div>
-      <a class="btn btn-primary" href="07-editor-smartpage.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg> Criar smartpage</a>
+  <!-- ══════════ MAIN ══════════ -->
+  <div class="v3main">
+
+    <!-- Header sticky -->
+    <header class="v3hdr">
+      <div class="crumb">
+        <span>Workspace</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        <b>Smartpages</b>
+      </div>
+      <div class="v3search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <input placeholder="Buscar smartpage...">
+      </div>
+      <div class="ib" title="Notificações">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+      </div>
+      <a class="btn-cta" href="07-editor-smartpage.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 5v14M5 12h14"/></svg>
+        Criar smartpage
+      </a>
     </header>
 
-    <main class="content col gap-18">
-      <div class="kpi-row" style="grid-template-columns:repeat(3,1fr)">
-        <div class="kpi"><div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></div>
-          <div><div class="kpi-label">Smartpages</div><div class="kpi-value">6</div></div></div>
-        <div class="kpi"><div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
-          <div><div class="kpi-label">Visitas no mês</div><div class="kpi-value">27.491</div><div class="kpi-delta up">▲ 9,2%</div></div></div>
-        <div class="kpi"><div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-          <div><div class="kpi-label">Leads capturados</div><div class="kpi-value">842</div><div class="kpi-delta up">▲ 6,1%</div></div></div>
+    <!-- Content -->
+    <main class="v3content">
+
+      <!-- Hero -->
+      <div class="ttl-row">
+        <div>
+          <div class="eyebrow-cap">▮ Workspace · Maria Silva</div>
+          <h1 class="v3h1">Minhas <em>smartpages.</em></h1>
+          <p class="v3sub">Páginas de link-in-bio, captura de leads e funis. Cada visita alimenta seu CRM em tempo real.</p>
+        </div>
       </div>
 
+      <!-- KPI Stats -->
+      <div class="stats">
+        <div class="stat">
+          <div class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <div class="lbl">Total smartpages</div>
+          <div class="val">6</div>
+          <div class="dlt" style="color:#94A3B8">4 publicadas · 1 rascunho</div>
+        </div>
+        <div class="stat">
+          <div class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>
+          </div>
+          <div class="lbl">Visitas no mês</div>
+          <div class="val">27.491</div>
+          <div class="dlt">▲ +9,2% vs anterior</div>
+        </div>
+        <div class="stat">
+          <div class="ic" style="background:rgba(255,119,119,0.1);color:#FF7777">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div class="lbl">Leads capturados</div>
+          <div class="val">842</div>
+          <div class="dlt">▲ +6,1% sincronizados</div>
+        </div>
+      </div>
+
+      <!-- Filtros -->
+      <div class="chips-row">
+        <button class="v3chip on">Todas</button>
+        <button class="v3chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="5"/></svg>
+          Publicadas (4)
+        </button>
+        <button class="v3chip">Rascunhos (1)</button>
+        <button class="v3chip">Arquivadas</button>
+        <button class="v3chip" style="margin-left:auto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 6h16M4 12h10M4 18h6"/></svg>
+          Ordenar
+        </button>
+      </div>
+
+      <!-- Grid de smartpages -->
       <div class="sp-grid">
-        <a class="card sp" href="07-editor-smartpage.html">
-          <div class="sp-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 16 0v1"/></svg></div>
-          <div class="card-pad col gap-8">
-            <div class="row between"><b>Bio da Maria</b><span class="badge badge-success"><span class="dot"></span> No ar</span></div>
-            <span class="faint mono" style="font-size:12px">plnk.to/isabela</span>
-            <div class="row gap-16 mt-8"><span class="page-sub">👁 14.2k visitas</span><span class="page-sub">✦ 312 leads</span></div>
+
+        <!-- 1 · Bio da Maria -->
+        <a class="sp-card" href="07-editor-smartpage.html">
+          <div class="sp-thumb" style="background:linear-gradient(150deg,#4C1D95,#9D174D)">
+            <div class="tc">
+              <div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 16 0v1"/></svg></div>
+              <span class="tl">Bio Page</span>
+            </div>
+            <div class="sp-acts">
+              <div class="sp-act" title="Editar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg></div>
+              <div class="sp-act" title="Analytics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></div>
+              <div class="sp-act" title="Copiar link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+            </div>
+          </div>
+          <div class="sp-info">
+            <div class="sp-top">
+              <span class="sp-name">Bio da Maria</span>
+              <span class="badge-on"><span class="sp-dot"></span>No ar</span>
+            </div>
+            <div class="sp-slug">plnk.to/mariasilva</div>
+            <div class="sp-metrics">
+              <span class="sp-m"><b>14.2k</b> visitas</span>
+              <span class="sp-m"><b>312</b> leads</span>
+            </div>
           </div>
         </a>
-        <a class="card sp" href="07-editor-smartpage.html">
-          <div class="sp-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-          <div class="card-pad col gap-8">
-            <div class="row between"><b>Link do podcast</b><span class="badge badge-success"><span class="dot"></span> No ar</span></div>
-            <span class="faint mono" style="font-size:12px">plnk.to/podcast</span>
-            <div class="row gap-16 mt-8"><span class="page-sub">👁 8.4k visitas</span><span class="page-sub">✦ 196 leads</span></div>
+
+        <!-- 2 · Podcast -->
+        <a class="sp-card" href="07-editor-smartpage.html">
+          <div class="sp-thumb" style="background:linear-gradient(150deg,#0C1445,#1E3A8A)">
+            <div class="tc">
+              <div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+              <span class="tl">Podcast</span>
+            </div>
+            <div class="sp-acts">
+              <div class="sp-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg></div>
+              <div class="sp-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></div>
+              <div class="sp-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+            </div>
+          </div>
+          <div class="sp-info">
+            <div class="sp-top">
+              <span class="sp-name">Link do podcast</span>
+              <span class="badge-on"><span class="sp-dot"></span>No ar</span>
+            </div>
+            <div class="sp-slug">plnk.to/podcast</div>
+            <div class="sp-metrics">
+              <span class="sp-m"><b>8.4k</b> visitas</span>
+              <span class="sp-m"><b>196</b> leads</span>
+            </div>
           </div>
         </a>
-        <a class="card sp" href="07-editor-smartpage.html">
-          <div class="sp-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v14H3zM8 21h8M12 17v4"/></svg></div>
-          <div class="card-pad col gap-8">
-            <div class="row between"><b>Workshop — inscrições</b><span class="badge badge-warning">Rascunho</span></div>
-            <span class="faint mono" style="font-size:12px">plnk.to/workshop</span>
-            <div class="row gap-16 mt-8"><span class="page-sub">👁 — visitas</span><span class="page-sub">✦ — leads</span></div>
+
+        <!-- 3 · Workshop (rascunho) -->
+        <a class="sp-card" href="07-editor-smartpage.html">
+          <div class="sp-thumb" style="background:linear-gradient(150deg,#181818,#242424)">
+            <div class="tc">
+              <div class="ti" style="border-color:rgba(255,255,255,0.08)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v14H3zM8 21h8M12 17v4"/></svg>
+              </div>
+              <span class="tl">Workshop</span>
+            </div>
+            <div class="sp-acts">
+              <div class="sp-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg></div>
+              <div class="sp-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></div>
+              <div class="sp-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+            </div>
+          </div>
+          <div class="sp-info">
+            <div class="sp-top">
+              <span class="sp-name">Workshop — inscrições</span>
+              <span class="badge-draft">Rascunho</span>
+            </div>
+            <div class="sp-slug">plnk.to/workshop</div>
+            <div class="sp-metrics">
+              <span class="sp-m-nil">— visitas</span>
+              <span class="sp-m-nil" style="margin-left:16px">— leads</span>
+            </div>
           </div>
         </a>
-        <a class="card sp" href="07-editor-smartpage.html">
-          <div class="sp-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h12v20l-6-4-6 4z"/></svg></div>
-          <div class="card-pad col gap-8">
-            <div class="row between"><b>Ebook Saúde</b><span class="badge badge-success"><span class="dot"></span> No ar</span></div>
-            <span class="faint mono" style="font-size:12px">plnk.to/fibras-ebook</span>
-            <div class="row gap-16 mt-8"><span class="page-sub">👁 3.1k visitas</span><span class="page-sub">✦ 178 leads</span></div>
+
+        <!-- 4 · Ebook Saúde -->
+        <a class="sp-card" href="07-editor-smartpage.html">
+          <div class="sp-thumb" style="background:linear-gradient(150deg,#052E16,#166534)">
+            <div class="tc">
+              <div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h12v20l-6-4-6 4z"/></svg></div>
+              <span class="tl">Ebook</span>
+            </div>
+            <div class="sp-acts">
+              <div class="sp-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg></div>
+              <div class="sp-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></div>
+              <div class="sp-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+            </div>
+          </div>
+          <div class="sp-info">
+            <div class="sp-top">
+              <span class="sp-name">Ebook Saúde</span>
+              <span class="badge-on"><span class="sp-dot"></span>No ar</span>
+            </div>
+            <div class="sp-slug">plnk.to/fibras-ebook</div>
+            <div class="sp-metrics">
+              <span class="sp-m"><b>3.1k</b> visitas</span>
+              <span class="sp-m"><b>178</b> leads</span>
+            </div>
           </div>
         </a>
-        <a class="card sp" href="07-editor-smartpage.html">
-          <div class="sp-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4M4 6v12a2 2 0 0 0 2 2h14v-4M18 12a2 2 0 0 0 0 4h4v-4z"/></svg></div>
-          <div class="card-pad col gap-8">
-            <div class="row between"><b>Mentoria 1:1</b><span class="badge badge-success"><span class="dot"></span> No ar</span></div>
-            <span class="faint mono" style="font-size:12px">plnk.to/mentoria</span>
-            <div class="row gap-16 mt-8"><span class="page-sub">👁 1.8k visitas</span><span class="page-sub">✦ 56 leads</span></div>
+
+        <!-- 5 · Mentoria -->
+        <a class="sp-card" href="07-editor-smartpage.html">
+          <div class="sp-thumb" style="background:linear-gradient(150deg,#3A2000,#7A4500)">
+            <div class="tc">
+              <div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4M4 6v12a2 2 0 0 0 2 2h14v-4M18 12a2 2 0 0 0 0 4h4v-4z"/></svg></div>
+              <span class="tl">Mentoria</span>
+            </div>
+            <div class="sp-acts">
+              <div class="sp-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg></div>
+              <div class="sp-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></div>
+              <div class="sp-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+            </div>
+          </div>
+          <div class="sp-info">
+            <div class="sp-top">
+              <span class="sp-name">Mentoria 1:1</span>
+              <span class="badge-on"><span class="sp-dot"></span>No ar</span>
+            </div>
+            <div class="sp-slug">plnk.to/mentoria</div>
+            <div class="sp-metrics">
+              <span class="sp-m"><b>1.8k</b> visitas</span>
+              <span class="sp-m"><b>56</b> leads</span>
+            </div>
           </div>
         </a>
-        <a class="card sp" href="07-editor-smartpage.html" style="display:grid;place-items:center;min-height:240px;border-style:dashed">
-          <div class="col center gap-8" style="color:var(--ink-3)">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-            <b>Criar nova smartpage</b>
-            <span class="page-sub">Comece de um template ou do zero</span>
+
+        <!-- Nova smartpage -->
+        <a class="sp-new" href="07-editor-smartpage.html">
+          <div class="nc">
+            <div class="nc-ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+            <span class="nc-ttl">Criar nova smartpage</span>
+            <span class="nc-sub">Comece de um template<br>ou do zero</span>
           </div>
         </a>
+
       </div>
     </main>
   </div>
 </div>
-<script src="assets/theme.js"></script>
 </body>
 </html>

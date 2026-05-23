@@ -1,90 +1,705 @@
 <!doctype html>
-<html lang="pt-BR" data-brand="applink" data-mode="dark">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AppLink — Integrações</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Syne:ital,wght@0,700;0,800;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/tokens.css">
-<link rel="stylesheet" href="assets/ui.css">
-<style>.int-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-  .int-ic{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;
-    background:var(--accent);color:var(--on-accent);border:var(--bd-w-sm) solid var(--bd-c);flex-shrink:0}
-  [data-brand="appex"] .int-ic{background:var(--accent-soft);color:var(--accent);border:0}
-  .int-ic svg{width:20px;height:20px}</style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi','Inter',sans-serif}
+.shell{display:flex;min-height:100vh}
+
+/* ── SIDEBAR V3 ── */
+.v3sb{width:256px;flex-shrink:0;background:#050505;
+  border-right:1px solid rgba(255,255,255,0.05);
+  display:flex;flex-direction:column;padding:20px 16px;gap:4px;
+  position:sticky;top:0;height:100vh;overflow-y:auto}
+.v3sb .brand{display:flex;align-items:center;gap:12px;padding:8px 4px 24px}
+.v3sb .brand-mark{width:40px;height:40px;border-radius:12px;
+  background:linear-gradient(135deg,#BFFF00,#FF7777);display:grid;place-items:center;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.55),-2px -2px 6px rgba(255,255,255,0.03),0 0 22px rgba(191,255,0,0.25)}
+.v3sb .brand-mark svg{width:22px;height:22px;color:#0A0A0A}
+.v3sb .brand-name{font-family:'General Sans',sans-serif;font-weight:700;font-size:17px;letter-spacing:-0.02em;color:#fff}
+.v3sb .sec{font-size:9px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:#5A5A60;padding:14px 12px 6px}
+.v3sb .nv{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;text-decoration:none;
+  font-family:'Satoshi',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;
+  font-size:11px;color:#94A3B8;cursor:pointer;transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.v3sb .nv svg{width:16px;height:16px;flex-shrink:0}
+.v3sb .nv:hover{color:#fff;background:rgba(255,255,255,0.03)}
+.v3sb .nv.on{background:linear-gradient(90deg,rgba(191,255,0,0.12) 0%,rgba(191,255,0,0) 100%);
+  color:#BFFF00;border-right:3px solid #BFFF00;border-radius:12px 0 0 12px;padding-right:9px}
+.v3sb .user{margin-top:auto;display:flex;align-items:center;gap:12px;padding:12px;
+  border-radius:16px;background:#0F0F0F;box-shadow:inset 2px 2px 6px rgba(0,0,0,0.5)}
+.v3sb .user .av{width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+  display:grid;place-items:center;font-weight:800;font-size:13px;box-shadow:2px 2px 6px rgba(0,0,0,0.4)}
+.v3sb .user .nm{font-family:'Satoshi',sans-serif;font-size:12px;font-weight:700;color:#fff}
+.v3sb .user .pl{font-family:'Satoshi',sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:#94A3B8;font-weight:700}
+
+/* ── MAIN ── */
+.v3main{flex:1;min-width:0;padding-bottom:60px}
+.v3hdr{position:sticky;top:0;z-index:10;height:80px;
+  background:rgba(10,10,10,0.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  display:flex;align-items:center;padding:0 32px;gap:24px}
+.crumb{display:flex;align-items:center;gap:10px;font-family:'Satoshi',sans-serif;
+  font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:#94A3B8}
+.crumb b{color:#fff}.crumb svg{width:12px;height:12px;color:#5A5A60}
+
+/* ── CONTENT ── */
+.v3content{padding:32px 32px 80px;max-width:1160px}
+.eyebrow-cap{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+  text-transform:uppercase;letter-spacing:0.3em;color:#BFFF00;margin-bottom:8px}
+.v3h1{font-family:'General Sans',sans-serif;font-weight:600;font-size:40px;
+  line-height:1;letter-spacing:-0.03em;color:#fff;margin-top:4px}
+.v3h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.v3sub{font-family:'Satoshi',sans-serif;font-size:13.5px;color:#94A3B8;
+  line-height:1.6;max-width:540px;margin-top:8px;margin-bottom:32px}
+.sec-lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+  text-transform:uppercase;letter-spacing:0.3em;color:#94A3B8;
+  display:flex;align-items:center;gap:10px;margin-bottom:16px;margin-top:32px}
+.sec-lbl:first-of-type{margin-top:0}
+.sec-lbl::before{content:"▮";color:#BFFF00}
+
+/* AppexCRM featured banner */
+.appex-banner{display:flex;align-items:center;gap:18px;padding:20px 24px;
+  background:rgba(191,255,0,0.06);border:1px solid rgba(191,255,0,0.22);
+  border-radius:20px;margin-bottom:28px;
+  box-shadow:inset 2px 2px 6px rgba(0,0,0,0.4),0 0 30px rgba(191,255,0,0.08)}
+.appex-ic{width:52px;height:52px;border-radius:14px;flex-shrink:0;
+  background:linear-gradient(135deg,#BFFF00,#FF7777);display:grid;place-items:center;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 20px rgba(191,255,0,0.35)}
+.appex-ic svg{width:24px;height:24px;color:#0A0A0A}
+.appex-text{flex:1}
+.appex-text .name{font-family:'General Sans',sans-serif;font-weight:600;font-size:16px;
+  color:#fff;letter-spacing:-0.01em;display:flex;align-items:center;gap:10px}
+.appex-text .sub{font-family:'Satoshi',sans-serif;font-size:12.5px;color:#94A3B8;margin-top:4px;line-height:1.5}
+.nativo-badge{background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+  padding:3px 10px;border-radius:999px;font-family:'Satoshi',sans-serif;
+  font-weight:800;font-size:9.5px;text-transform:uppercase;letter-spacing:0.2em}
+.connected-badge{background:rgba(16,185,129,0.15);color:#10B981;
+  padding:4px 12px;border-radius:999px;font-family:'Satoshi',sans-serif;
+  font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;
+  display:inline-flex;align-items:center;gap:6px}
+.pdot-sm{width:7px;height:7px;border-radius:50%;background:#10B981;
+  animation:pdot-g 2.2s ease infinite}
+@keyframes pdot-g{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,0.7)}60%{box-shadow:0 0 0 7px rgba(16,185,129,0)}}
+.appex-banner .btn-config{background:#1A1A1A;color:#BFFF00;border:1px solid rgba(191,255,0,0.2);
+  padding:10px 18px;border-radius:12px;cursor:pointer;font-family:'Satoshi',sans-serif;
+  font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:0.18em;
+  display:inline-flex;align-items:center;gap:8px;
+  box-shadow:2px 2px 6px rgba(0,0,0,0.5);transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.appex-banner .btn-config:hover{background:rgba(191,255,0,0.12);transform:scale(1.04)}
+.appex-banner .btn-config svg{width:14px;height:14px}
+
+/* ── INTEGRATION GRID ── */
+.int-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+
+/* base card */
+.int-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:20px;
+  padding:22px 20px;display:flex;flex-direction:column;align-items:flex-start;gap:0;
+  cursor:pointer;position:relative;
+  box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.int-card:hover{transform:translateY(-3px) scale(1.01);
+  box-shadow:8px 8px 20px rgba(0,0,0,0.65),-4px -4px 12px rgba(255,255,255,0.03)}
+.int-card.installed{border-color:rgba(16,185,129,0.18)}
+.int-card.installed:hover{box-shadow:8px 8px 20px rgba(0,0,0,0.65),-4px -4px 12px rgba(255,255,255,0.03),0 0 20px rgba(16,185,129,0.1)}
+
+/* AppexCRM special card */
+.int-card.appex-card{border:1px solid rgba(191,255,0,0.28);
+  background:linear-gradient(135deg,rgba(191,255,0,0.06) 0%,#141414 60%);
+  box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025),0 0 28px rgba(191,255,0,0.15)}
+.int-card.appex-card:hover{box-shadow:8px 8px 20px rgba(0,0,0,0.65),-4px -4px 12px rgba(255,255,255,0.03),0 0 40px rgba(191,255,0,0.25)}
+
+/* card icon */
+.int-ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;
+  flex-shrink:0;margin-bottom:14px;
+  box-shadow:inset 2px 2px 6px rgba(0,0,0,0.45),inset -1px -1px 3px rgba(255,255,255,0.02)}
+.int-ic svg{width:22px;height:22px}
+
+/* card text */
+.int-name{font-family:'General Sans',sans-serif;font-weight:600;font-size:14px;color:#fff;
+  letter-spacing:-0.01em}
+.int-desc{font-family:'Satoshi',sans-serif;font-size:11.5px;color:#5A5A60;
+  margin-top:5px;line-height:1.5;flex:1}
+
+/* status badge bottom */
+.int-status{margin-top:16px;display:inline-flex;align-items:center;gap:6px;
+  padding:5px 12px;border-radius:999px;font-family:'Satoshi',sans-serif;
+  font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;
+  align-self:flex-start}
+.int-status.connected{background:rgba(16,185,129,0.15);color:#10B981}
+.int-status.available{background:rgba(255,255,255,0.06);color:#5A5A60}
+.int-status .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+
+/* top-right corner badges */
+.int-card .corner-badge{position:absolute;top:14px;right:14px;
+  background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+  padding:3px 9px;border-radius:999px;font-family:'Satoshi',sans-serif;
+  font-weight:800;font-size:9px;text-transform:uppercase;letter-spacing:0.2em}
+
+/* ── API KEY SECTION ── */
+.api-card{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:24px;
+  overflow:hidden;margin-top:32px;
+  box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
+.api-head{padding:22px 26px;border-bottom:1px solid rgba(255,255,255,0.04);
+  display:flex;align-items:center;justify-content:space-between;gap:16px}
+.api-head .ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:18px;
+  color:#fff;letter-spacing:-0.02em}
+.api-head .sub{font-family:'Satoshi',sans-serif;font-size:12px;color:#5A5A60;margin-top:3px}
+.api-body{padding:26px}
+.fl{position:relative;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);
+  border-radius:14px;box-shadow:inset 4px 4px 8px rgba(0,0,0,0.55),inset -2px -2px 6px rgba(255,255,255,0.025);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.fl input{width:100%;background:transparent;border:0;outline:none;padding:22px 18px 12px;
+  color:#fff;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500}
+.fl label{position:absolute;top:1.05rem;left:1.2rem;color:#94A3B8;font-family:'Satoshi',sans-serif;
+  font-size:13.5px;transition:.35s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none}
+.fl input:not(:placeholder-shown)~label,.fl:focus-within label{
+  top:-0.5rem;left:1rem;transform:scale(0.65);color:#BFFF00;
+  font-weight:700;text-transform:uppercase;letter-spacing:0.18em;background:#141414;padding:0 8px;border-radius:4px}
+.fl:focus-within{border-color:rgba(191,255,0,0.5)}
+.fl-row{display:flex;gap:0}
+.fl-row .fl{border-radius:14px 0 0 14px;flex:1}
+.copy-addon{display:flex;align-items:center;padding:0 18px;background:#1A1A1A;
+  border:1px solid rgba(255,255,255,0.06);border-left:0;border-radius:0 14px 14px 0;
+  cursor:pointer;color:#94A3B8;
+  box-shadow:inset 3px 3px 6px rgba(0,0,0,0.5);
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.copy-addon:hover{color:#BFFF00}.copy-addon svg{width:16px;height:16px}
+.api-actions{display:flex;gap:10px;margin-top:18px}
+.btn-secondary{background:#1A1A1A;color:#94A3B8;border:0;padding:12px 20px;
+  border-radius:12px;cursor:pointer;font-family:'Satoshi',sans-serif;
+  font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:0.18em;
+  display:inline-flex;align-items:center;gap:8px;
+  box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.btn-secondary:hover{color:#fff;transform:scale(1.03)}.btn-secondary svg{width:14px;height:14px}
+.btn-ghost{background:transparent;color:#5A5A60;border:1px solid rgba(255,255,255,0.06);
+  padding:12px 20px;border-radius:12px;cursor:pointer;font-family:'Satoshi',sans-serif;
+  font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:0.18em;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.btn-ghost:hover{color:#94A3B8;border-color:rgba(255,255,255,0.1)}.btn-ghost svg{width:14px;height:14px}
+
+/* ── MODAL OVERLAY ── */
+.v3modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.78);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;z-index:1000;padding:40px 20px}
+.v3modal{width:560px;max-width:100%;max-height:calc(100vh - 80px);overflow-y:auto;
+  background:#141414;border:1px solid rgba(255,255,255,0.05);border-radius:28px;
+  display:flex;flex-direction:column;
+  box-shadow:16px 16px 40px rgba(0,0,0,0.7),-8px -8px 20px rgba(255,255,255,0.025),0 0 50px rgba(191,255,0,0.1)}
+.modal-hdr{padding:24px 26px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.modal-hdr-left{display:flex;align-items:center;gap:14px}
+.modal-hdr .ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:19px;
+  color:#fff;letter-spacing:-0.02em;margin:0}
+.modal-hdr .sub{font-family:'Satoshi',sans-serif;font-size:12px;color:#94A3B8;margin:5px 0 0;line-height:1.5}
+.modal-close{width:38px;height:38px;border-radius:10px;background:#1A1A1A;color:#94A3B8;
+  border:0;cursor:pointer;display:grid;place-items:center;flex-shrink:0;
+  box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025);
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.modal-close:hover{color:#FF7777;transform:rotate(90deg)}.modal-close svg{width:16px;height:16px}
+.modal-body{padding:22px 26px;flex:1}
+.modal-row{display:flex;align-items:center;justify-content:space-between;
+  padding:13px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.modal-row:last-child{border-bottom:0}
+.modal-row .lbl{font-family:'Satoshi',sans-serif;font-weight:700;font-size:13px;color:#fff}
+.modal-row .dsc{font-family:'Satoshi',sans-serif;font-size:11.5px;color:#94A3B8;margin-top:2px;line-height:1.4}
+.tg{width:44px;height:24px;background:#2D2D38;border-radius:999px;position:relative;
+  cursor:pointer;flex-shrink:0;
+  box-shadow:inset 3px 3px 6px rgba(0,0,0,0.6),inset -1px -1px 3px rgba(255,255,255,0.03);
+  transition:.4s cubic-bezier(0.34,1.56,0.64,1)}
+.tg::after{content:"";position:absolute;width:18px;height:18px;background:#fff;
+  border-radius:50%;top:3px;left:3px;box-shadow:1px 1px 3px rgba(0,0,0,0.4);
+  transition:.4s cubic-bezier(0.34,1.56,0.64,1)}
+.tg.on{background:linear-gradient(135deg,#BFFF00,#FF7777);box-shadow:0 0 15px rgba(191,255,0,0.4)}
+.tg.on::after{left:23px;transform:scale(1.08)}
+.modal-foot{padding:18px 26px;border-top:1px solid rgba(255,255,255,0.05);
+  display:flex;gap:10px;align-items:center;justify-content:flex-end}
+.modal-foot .hint{margin-right:auto;font-family:'Satoshi',sans-serif;font-size:11px;
+  font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:#94A3B8}
+.btn-cancel{background:#1A1A1A;color:#94A3B8;border:0;padding:11px 20px;border-radius:12px;
+  cursor:pointer;font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;
+  text-transform:uppercase;letter-spacing:0.18em;
+  box-shadow:2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.btn-cancel:hover{color:#fff}
+.btn-save{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;border:0;
+  padding:12px 24px;border-radius:12px;cursor:pointer;font-family:'Satoshi',sans-serif;
+  font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:0.2em;
+  display:inline-flex;align-items:center;gap:8px;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 22px rgba(191,255,0,0.3);
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+.btn-save:hover{transform:scale(1.04)}.btn-save svg{width:13px;height:13px}
+
+/* webhook url field inside modal */
+.modal-fl{position:relative;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px;margin-top:14px;
+  box-shadow:inset 4px 4px 8px rgba(0,0,0,0.55),inset -2px -2px 6px rgba(255,255,255,0.025)}
+.modal-fl input{width:100%;background:transparent;border:0;outline:none;
+  padding:18px 16px 10px;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px}
+.modal-fl label{position:absolute;top:.9rem;left:1.1rem;color:#94A3B8;
+  font-family:'Satoshi',sans-serif;font-size:12px;pointer-events:none;
+  transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+.modal-fl input:not(:placeholder-shown)~label,.modal-fl:focus-within label{
+  top:-.45rem;left:.9rem;transform:scale(0.65);color:#BFFF00;
+  font-weight:700;text-transform:uppercase;letter-spacing:0.18em;
+  background:#141414;padding:0 6px;border-radius:4px}
+.modal-fl:focus-within{border-color:rgba(191,255,0,0.5)}
+</style>
 </head>
 <body>
-<div class="app">
-  <aside class="sidebar">
-    <div class="logo"><div class="logo-mark"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter" stroke-linecap="square"><rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2"/></svg></div><span class="logo-name" data-brand-name>AppLink</span></div>
-    <div class="nav-group"><div class="nav-label">Principal</div>
-      <a class="nav-item" href="01-dashboard-links.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Links</a>
-      <a class="nav-item" href="06-smartpages.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Smartpages</a>
-      <a class="nav-item" href="10-qrcode.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg> QR Codes</a></div>
-    <div class="nav-group"><div class="nav-label">Crescimento</div>
-      <a class="nav-item" href="11-pixels.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg> Pixels</a>
-      <a class="nav-item" href="12-audiencias.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg> Audiências</a>
-      <a class="nav-item" href="03-analytics-link.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg> Analytics</a></div>
-    <div class="nav-group"><div class="nav-label">Configuração</div>
-      <a class="nav-item" href="13-dominios.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg> Domínios</a>
-      <a class="nav-item active" href="14-integracoes.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6M6 21v-6M6 9a3 3 0 0 0 0 6M18 3v12M18 15a3 3 0 0 0 0-6"/></svg> Integrações</a>
-      <a class="nav-item" href="15-equipe.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg> Equipe</a></div>
-    <div class="grow"></div>
-    <div class="nav-item" style="background:rgba(255,255,255,.05)"><div class="avatar" style="width:24px;height:24px;font-size:10px">IF</div> Maria Silva</div>
+<div class="shell">
+
+  <!-- SIDEBAR V3 -->
+  <aside class="v3sb">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter" stroke-linecap="square">
+          <rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2"/>
+        </svg>
+      </div>
+      <span class="brand-name">AppLink</span>
+    </div>
+    <div class="sec">Principal</div>
+    <a class="nv" href="01-dashboard.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Painel
+    </a>
+    <a class="nv" href="02-criar-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      Criar
+    </a>
+    <a class="nv" href="02c-tipos-de-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Tipos
+    </a>
+    <a class="nv" href="03-analytics-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg>
+      Analytics
+    </a>
+    <a class="nv" href="06-smartpages.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Smartpages
+    </a>
+    <a class="nv" href="10-qrcode.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg>
+      QR Code
+    </a>
+    <div class="sec">Crescimento</div>
+    <a class="nv" href="11-pixels.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+      Pixels
+    </a>
+    <a class="nv" href="12-audiencias.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+      Audiências
+    </a>
+    <div class="sec">Configuração</div>
+    <a class="nv" href="13-dominios.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
+      Domínios
+    </a>
+    <a class="nv on" href="14-integracoes.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6M6 21v-6M6 9a3 3 0 0 0 0 6M18 3v12M18 15a3 3 0 0 0 0-6"/></svg>
+      Integrações
+    </a>
+    <a class="nv" href="15-equipe.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+      Equipe
+    </a>
+    <a class="nv" href="16-billing.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+      Billing
+    </a>
+    <a class="nv" href="09-settings.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1A1.6 1.6 0 0 0 6.8 19l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H3a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 4.2 6.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
+      Settings
+    </a>
+    <div class="user">
+      <div class="av">MS</div>
+      <div>
+        <div class="nm">Maria Silva</div>
+        <div class="pl">Plano Pro</div>
+      </div>
+    </div>
   </aside>
 
-  <div class="main">
-    <header class="topbar"><div class="page-title">Integrações</div></header>
-    <main class="content col gap-18">
-      <div class="banner banner-accent">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-        Conectado ao AppexCRM — leads e eventos de clique fluem direto para o funil. Identidade unificada (SSO).
+  <!-- MAIN -->
+  <div class="v3main">
+    <header class="v3hdr">
+      <div class="crumb">
+        <span>Configuração</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        <b>Integrações</b>
       </div>
+    </header>
 
-      <div class="int-grid">
-        <div class="card card-pad row gap-12">
-          <div class="int-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
-          <div class="col grow"><b>Zapier</b><span class="faint" style="font-size:12px">Criar/atualizar links e disparar ações de formulário.</span></div>
-          <span class="badge badge-success"><span class="dot"></span> Conectado</span>
-        </div>
-        <div class="card card-pad row gap-12">
-          <div class="int-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 6h6a3 3 0 0 1 3 3v6"/></svg></div>
-          <div class="col grow"><b>Make</b><span class="faint" style="font-size:12px">Automação visual de cenários com seus links.</span></div>
-          <button class="btn btn-secondary btn-sm">Conectar</button>
-        </div>
-        <div class="card card-pad row gap-12">
-          <div class="int-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0zM12 7v10M7 12h10"/></svg></div>
-          <div class="col grow"><b>Pabbly</b><span class="faint" style="font-size:12px">Workflows de criação de links e webhook de forms.</span></div>
-          <button class="btn btn-secondary btn-sm">Conectar</button>
-        </div>
-        <div class="card card-pad row gap-12">
-          <div class="int-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-6l-2 3h-4l-2-3H2M5.5 5h13l3 7v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-6z"/></svg></div>
-          <div class="col grow"><b>Webhook</b><span class="faint" style="font-size:12px">Dispara um POST quando um formulário é enviado.</span></div>
-          <span class="badge badge-success"><span class="dot"></span> Conectado</span>
-        </div>
-      </div>
+    <main class="v3content">
+      <div class="eyebrow-cap">▮ Configuração · Conexões</div>
+      <h1 class="v3h1">Conecte seu <em>ecossistema.</em></h1>
+      <p class="v3sub">Automatize fluxos com Zapier e Make, receba notificações em Slack e Telegram, sincronize leads com seu CRM — tudo parte do mesmo funil.</p>
 
-      <div class="card">
-        <div class="card-head"><span class="section-title">API REST</span></div>
-        <div class="card-pad col gap-12">
-          <span class="page-sub">Crie e gerencie links programaticamente. Limite: 1.500 links/dia.</span>
-          <div class="field"><label class="label">Sua API Key</label>
-            <div class="input-group">
-              <input class="input mono" value="apk_live_8f2a••••••••••••••••3c91" readonly>
-              <span class="addon" style="border-radius:0 var(--r-input) var(--r-input) 0;border-left:0;cursor:pointer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
-            </div>
+      <!-- AppexCRM featured banner -->
+      <div class="appex-banner">
+        <div class="appex-ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div class="appex-text">
+          <div class="name">
+            AppexCRM
+            <span class="nativo-badge">Nativo</span>
+            <span class="connected-badge"><span class="pdot-sm"></span> Conectado</span>
           </div>
-          <div class="row gap-8">
-            <button class="btn btn-secondary">Gerar nova chave</button>
-            <button class="btn btn-ghost">Ver documentação</button>
+          <div class="sub">Leads e eventos de clique fluem direto para o funil do CRM. Identidade unificada (SSO) — login único em ambos os produtos.</div>
+        </div>
+        <button class="btn-config" onclick="openModal('appex')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1A1.6 1.6 0 0 0 6.8 19l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H3a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 4.2 6.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
+          Configurar
+        </button>
+      </div>
+
+      <!-- Section: Automação -->
+      <div class="sec-lbl" style="margin-top:0">Automação</div>
+      <div class="int-grid">
+
+        <!-- Zapier — connected -->
+        <div class="int-card installed" onclick="openModal('zapier')">
+          <div class="int-ic" style="background:rgba(255,74,0,0.12);color:#FF4A00">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>
+          </div>
+          <div class="int-name">Zapier</div>
+          <div class="int-desc">Crie e atualize links via Zaps. Trigger em envio de formulário.</div>
+          <span class="int-status connected"><span class="dot"></span> Conectado</span>
+        </div>
+
+        <!-- Make -->
+        <div class="int-card" onclick="openModal('make')">
+          <div class="int-ic" style="background:rgba(103,58,183,0.12);color:#7C3AED">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 6h6a3 3 0 0 1 3 3v6"/></svg>
+          </div>
+          <div class="int-name">Make</div>
+          <div class="int-desc">Automação visual de cenários com seus links e smartpages.</div>
+          <span class="int-status available"><span class="dot"></span> Disponível</span>
+        </div>
+
+        <!-- Webhook -->
+        <div class="int-card installed" onclick="openModal('webhook')">
+          <div class="int-ic" style="background:rgba(191,255,0,0.1);color:#BFFF00">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-6l-2 3h-4l-2-3H2M5.5 5h13l3 7v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-6z"/></svg>
+          </div>
+          <div class="int-name">Webhook</div>
+          <div class="int-desc">POST genérico ao criar link, clique ou envio de formulário.</div>
+          <span class="int-status connected"><span class="dot"></span> Conectado</span>
+        </div>
+
+        <!-- n8n -->
+        <div class="int-card" onclick="openModal('n8n')">
+          <div class="int-ic" style="background:rgba(234,88,12,0.12);color:#EA580C">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="int-name">n8n</div>
+          <div class="int-desc">Workflows auto-hospedados com eventos do AppLink como trigger.</div>
+          <span class="int-status available"><span class="dot"></span> Disponível</span>
+        </div>
+      </div>
+
+      <!-- Section: Notificações -->
+      <div class="sec-lbl">Notificações</div>
+      <div class="int-grid">
+
+        <!-- Slack -->
+        <div class="int-card" onclick="openModal('slack')">
+          <div class="int-ic" style="background:rgba(74,21,75,0.2);color:#E01E5A">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
+          </div>
+          <div class="int-name">Slack</div>
+          <div class="int-desc">Notificação de cliques, leads e alertas de pico de tráfego.</div>
+          <span class="int-status available"><span class="dot"></span> Disponível</span>
+        </div>
+
+        <!-- Telegram -->
+        <div class="int-card" onclick="openModal('telegram')">
+          <div class="int-ic" style="background:rgba(37,144,214,0.12);color:#2590D6">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.8 2.1L1 10l7.5 2.8L16 6l-6.3 8 7.3 3.9z"/></svg>
+          </div>
+          <div class="int-name">Telegram</div>
+          <div class="int-desc">Bot Telegram com alertas de clique e resumos diários.</div>
+          <span class="int-status available"><span class="dot"></span> Disponível</span>
+        </div>
+
+        <!-- Discord -->
+        <div class="int-card" onclick="openModal('discord')">
+          <div class="int-ic" style="background:rgba(88,101,242,0.12);color:#5865F2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.3 4A15.9 15.9 0 0 0 15.2 2.5a11.6 11.6 0 0 0-.5 1A14.7 14.7 0 0 0 9.3 3.5a11.6 11.6 0 0 0-.5-1A15.9 15.9 0 0 0 3.7 4C1 8.1.2 12.1.7 16c2.2 1.6 4.3 2.5 6.3 3.2a12.9 12.9 0 0 0 1.1-1.8 10.4 10.4 0 0 1-1.7-.8l.4-.3a11.4 11.4 0 0 0 9.8 0c.1.1.3.2.4.3-.5.3-1.1.6-1.7.8a12.9 12.9 0 0 0 1.1 1.8c2-.7 4.1-1.6 6.3-3.2.5-4.6-.8-8.5-3.4-12z"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/></svg>
+          </div>
+          <div class="int-name">Discord</div>
+          <div class="int-desc">Webhook para canal do servidor com eventos de link em tempo real.</div>
+          <span class="int-status available"><span class="dot"></span> Disponível</span>
+        </div>
+      </div>
+
+      <!-- Section: CRM & E-mail -->
+      <div class="sec-lbl">CRM &amp; E-mail marketing</div>
+      <div class="int-grid">
+
+        <!-- RD Station -->
+        <div class="int-card" onclick="openModal('rd')">
+          <div class="int-ic" style="background:rgba(0,163,100,0.12);color:#00A364">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10zm0-16a6 6 0 1 0 0 12A6 6 0 0 0 12 6zm0 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/></svg>
+          </div>
+          <div class="int-name">RD Station</div>
+          <div class="int-desc">Envio de leads capturados em Smartpages para a base do RD.</div>
+          <span class="int-status available"><span class="dot"></span> Disponível</span>
+        </div>
+
+        <!-- ActiveCampaign -->
+        <div class="int-card" onclick="openModal('ac')">
+          <div class="int-ic" style="background:rgba(21,120,255,0.12);color:#1578FF">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div class="int-name">ActiveCampaign</div>
+          <div class="int-desc">Adiciona contatos e dispara automações por clique ou lead.</div>
+          <span class="int-status available"><span class="dot"></span> Disponível</span>
+        </div>
+
+        <!-- Mailchimp — connected -->
+        <div class="int-card installed" onclick="openModal('mailchimp')">
+          <div class="int-ic" style="background:rgba(255,226,52,0.12);color:#FFD700">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 8h16M12 4v16"/></svg>
+          </div>
+          <div class="int-name">Mailchimp</div>
+          <div class="int-desc">Sincroniza lista com leads de Smartpages e automações de clique.</div>
+          <span class="int-status connected"><span class="dot"></span> Conectado</span>
+        </div>
+
+        <!-- HubSpot -->
+        <div class="int-card" onclick="openModal('hubspot')">
+          <div class="int-ic" style="background:rgba(255,122,0,0.12);color:#FF7A00">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.64 5.64l2.83 2.83M15.54 15.54l2.83 2.83M5.64 18.36l2.83-2.83M15.54 8.46l2.83-2.83"/></svg>
+          </div>
+          <div class="int-name">HubSpot</div>
+          <div class="int-desc">Cria contatos e negócios no HubSpot a partir de cliques e leads.</div>
+          <span class="int-status available"><span class="dot"></span> Disponível</span>
+        </div>
+      </div>
+
+      <!-- API REST -->
+      <div class="api-card">
+        <div class="api-head">
+          <div>
+            <div class="ttl">API REST</div>
+            <div class="sub">Crie e gerencie links programaticamente · Limite: 1.500 req/dia no plano Pro</div>
+          </div>
+          <span class="int-status connected" style="margin-top:0"><span class="dot"></span> Chave ativa</span>
+        </div>
+        <div class="api-body">
+          <div class="fl-row">
+            <div class="fl">
+              <input value="apk_live_8f2a••••••••••••••••3c91" placeholder=" " readonly>
+              <label>Sua API Key</label>
+            </div>
+            <button class="copy-addon" title="Copiar chave">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+          </div>
+          <div class="api-actions">
+            <button class="btn-secondary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.5 9a9 9 0 0 1 14.8-3.3L23 10M1 14l4.7 4.3A9 9 0 0 0 20.5 15"/></svg>
+              Gerar nova chave
+            </button>
+            <button class="btn-ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              Ver documentação
+            </button>
           </div>
         </div>
       </div>
     </main>
   </div>
 </div>
-<script src="assets/theme.js"></script>
+
+<!-- CONFIG MODAL — Zapier (default open) -->
+<div class="v3modal-overlay" id="modal-zapier" style="display:flex">
+  <div class="v3modal">
+    <div class="modal-hdr">
+      <div class="modal-hdr-left">
+        <div style="width:44px;height:44px;border-radius:12px;background:rgba(255,74,0,0.12);
+          display:grid;place-items:center;flex-shrink:0;box-shadow:inset 2px 2px 6px rgba(0,0,0,0.45)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF4A00" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>
+        </div>
+        <div>
+          <h3 class="ttl">Zapier</h3>
+          <p class="sub">Conectado · 12 Zaps ativos · última execução há 3 min</p>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeModal('zapier')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-row">
+        <div><div class="lbl">Trigger: link clicado</div><div class="dsc">Dispara Zap quando qualquer link é clicado.</div></div>
+        <div class="tg on"></div>
+      </div>
+      <div class="modal-row">
+        <div><div class="lbl">Trigger: formulário enviado</div><div class="dsc">Dispara Zap quando um lead é capturado via Smartpage.</div></div>
+        <div class="tg on"></div>
+      </div>
+      <div class="modal-row">
+        <div><div class="lbl">Action: criar link</div><div class="dsc">Permite criar links via Zap com dados de outros apps.</div></div>
+        <div class="tg on"></div>
+      </div>
+      <div class="modal-row">
+        <div><div class="lbl">Incluir metadados de UTM</div><div class="dsc">Envia parâmetros UTM junto com o payload do Zap.</div></div>
+        <div class="tg"></div>
+      </div>
+
+      <div style="margin-top:18px">
+        <div style="font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+          text-transform:uppercase;letter-spacing:0.25em;color:#94A3B8;margin-bottom:12px">
+          Webhook URL do Zap
+        </div>
+        <div class="modal-fl">
+          <input value="https://hooks.zapier.com/hooks/catch/1234567/abcdef/" placeholder=" " readonly>
+          <label>URL do webhook recebedor</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <span class="hint">12 Zaps · 4.218 execuções/30d</span>
+      <button class="btn-cancel" onclick="closeModal('zapier')">Fechar</button>
+      <button class="btn-save">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>
+        Salvar configuração
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIG MODAL — AppexCRM (hidden) -->
+<div class="v3modal-overlay" id="modal-appex" style="display:none">
+  <div class="v3modal">
+    <div class="modal-hdr">
+      <div class="modal-hdr-left">
+        <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#BFFF00,#FF7777);display:grid;place-items:center;flex-shrink:0;box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 16px rgba(191,255,0,0.3)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div>
+          <h3 class="ttl">AppexCRM <span class="nativo-badge" style="font-size:8px;vertical-align:middle">Nativo</span></h3>
+          <p class="sub">Integração nativa com SSO — identidade compartilhada entre produtos</p>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeModal('appex')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-row">
+        <div><div class="lbl">Sincronizar leads automaticamente</div><div class="dsc">Leads de Smartpages criam contatos no CRM em tempo real.</div></div>
+        <div class="tg on"></div>
+      </div>
+      <div class="modal-row">
+        <div><div class="lbl">Eventos de clique como atividades</div><div class="dsc">Cliques em links registram atividade no histórico do contato.</div></div>
+        <div class="tg on"></div>
+      </div>
+      <div class="modal-row">
+        <div><div class="lbl">Single Sign-On (SSO)</div><div class="dsc">Mesmo login para AppLink e AppexCRM.</div></div>
+        <div class="tg on"></div>
+      </div>
+      <div class="modal-row">
+        <div><div class="lbl">Atribuição de funil automática</div><div class="dsc">Identifica o funil correto baseado nas UTMs do clique.</div></div>
+        <div class="tg on"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <span class="hint">SSO ativo · 1.038 leads sincronizados</span>
+      <button class="btn-cancel" onclick="closeModal('appex')">Fechar</button>
+      <button class="btn-save">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>
+        Salvar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- GENERIC CONFIG MODAL (hidden — reused for all others) -->
+<div class="v3modal-overlay" id="modal-generic" style="display:none">
+  <div class="v3modal">
+    <div class="modal-hdr">
+      <div>
+        <h3 class="ttl" id="modal-generic-name">Integração</h3>
+        <p class="sub" id="modal-generic-sub">Configure a conexão com esta plataforma.</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('generic')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-row">
+        <div><div class="lbl">Ativar integração</div><div class="dsc">Habilita o fluxo de dados entre AppLink e esta plataforma.</div></div>
+        <div class="tg"></div>
+      </div>
+      <div style="margin-top:18px">
+        <div style="font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;
+          text-transform:uppercase;letter-spacing:0.25em;color:#94A3B8;margin-bottom:12px">
+          Chave de API / Token
+        </div>
+        <div class="modal-fl">
+          <input placeholder=" ">
+          <label>Cole sua chave de API aqui</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-cancel" onclick="closeModal('generic')">Cancelar</button>
+      <button class="btn-save">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>
+        Conectar
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+var genericNames={
+  make:'Make',webhook:'Webhook genérico',n8n:'n8n',
+  slack:'Slack',telegram:'Telegram',discord:'Discord',
+  rd:'RD Station',ac:'ActiveCampaign',mailchimp:'Mailchimp',hubspot:'HubSpot'
+};
+var genericSubs={
+  make:'Automação visual de cenários.',webhook:'Dispara HTTP POST em eventos de link.',
+  n8n:'Workflows auto-hospedados.',slack:'Notificações em canais Slack.',
+  telegram:'Bot Telegram para alertas.',discord:'Webhook para servidor Discord.',
+  rd:'Sincroniza leads com RD Station.',ac:'Automações ActiveCampaign.',
+  mailchimp:'Sincroniza lista Mailchimp.',hubspot:'CRM HubSpot via API.'
+};
+
+function openModal(id){
+  var specific=document.getElementById('modal-'+id);
+  if(specific){specific.style.display='flex';return;}
+  document.getElementById('modal-generic-name').textContent=genericNames[id]||id;
+  document.getElementById('modal-generic-sub').textContent=genericSubs[id]||'Configure esta integração.';
+  document.getElementById('modal-generic').style.display='flex';
+}
+function closeModal(id){
+  var el=document.getElementById('modal-'+id)||document.getElementById('modal-generic');
+  if(el)el.style.display='none';
+}
+document.querySelectorAll('.v3modal-overlay').forEach(function(o){
+  o.addEventListener('click',function(e){if(e.target===o)o.style.display='none';});
+});
+document.querySelectorAll('.tg').forEach(function(t){
+  t.addEventListener('click',function(e){e.stopPropagation();t.classList.toggle('on');});
+});
+</script>
 </body>
 </html>
