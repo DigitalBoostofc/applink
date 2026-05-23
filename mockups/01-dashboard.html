@@ -99,7 +99,11 @@
   .quick-btn:hover{transform:scale(1.03)}
 
   /* KPI grid V3 — 4 cards com progress ring + pulse + ícone */
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin:28px 0}
+  .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin:28px 0;width:100%;position:relative}
+  .stats > .stat{min-width:0}
+  .stats > svg{position:absolute;width:0;height:0;pointer-events:none}
+  @media (max-width:980px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:560px){.stats{grid-template-columns:1fr}}
   .stat{background:#141414;border:1px solid rgba(255,255,255,0.04);border-radius:28px;padding:24px;position:relative;
     box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
   .stat .lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:0.25em;color:#94A3B8}
@@ -272,36 +276,62 @@
       <span class="brand-name">AppLink</span>
     </div>
     <div class="sec">Principal</div>
-    <div class="nv on">
+    <a class="nv on" href="01-dashboard.html">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-      Links <span class="ct">40</span>
-    </div>
-    <a class="nv" href="02-criar-link.html" style="text-decoration:none">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1A1.6 1.6 0 0 0 6.8 19l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H3a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 4.2 6.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
-      Engine config
+      Painel <span class="ct">40</span>
     </a>
-    <div class="nv">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-      Smartpages
-    </div>
-    <div class="nv">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg>
-      QR Codes
-    </div>
-
-    <div class="sec">Crescimento</div>
-    <div class="nv">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
-      Pixels
-    </div>
-    <div class="nv">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
-      Audiências
-    </div>
-    <div class="nv">
+    <a class="nv" href="02-criar-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      Criar
+    </a>
+    <a class="nv" href="02c-tipos-de-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Tipos
+    </a>
+    <a class="nv" href="03-analytics-link.html">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg>
       Analytics
-    </div>
+    </a>
+    <a class="nv" href="06-smartpages.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Smartpages
+    </a>
+    <a class="nv" href="10-qrcode.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg>
+      QR Code
+    </a>
+
+    <div class="sec">Crescimento</div>
+    <a class="nv" href="11-pixels.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+      Pixels
+    </a>
+    <a class="nv" href="12-audiencias.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+      Audiências
+    </a>
+
+    <div class="sec">Configuração</div>
+    <a class="nv" href="13-dominios.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
+      Domínios
+    </a>
+    <a class="nv" href="14-integracoes.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6M6 21v-6M6 9a3 3 0 0 0 0 6M18 3v12M18 15a3 3 0 0 0 0-6"/></svg>
+      Integrações
+    </a>
+    <a class="nv" href="15-equipe.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+      Equipe
+    </a>
+    <a class="nv" href="16-billing.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+      Billing
+    </a>
+    <a class="nv" href="09-settings.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1A1.6 1.6 0 0 0 6.8 19l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H3a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 4.2 6.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
+      Settings
+    </a>
 
     <div class="user">
       <div class="av">MS</div>
@@ -349,7 +379,7 @@
       <div class="quick">
         <div class="fl-row">
           <div class="fl">
-            <input placeholder=" " value="https://isabelafortes.com.br/promo-de-inverno">
+            <input placeholder=" " value="https://cliente-exemplo.com/promo-de-inverno">
             <label>Cole uma URL longa</label>
           </div>
           <button class="quick-btn">
@@ -359,12 +389,13 @@
         </div>
       </div>
 
+      <!-- SVG defs do progress ring (fora do grid pra não ocupar coluna) -->
+      <svg width="0" height="0" style="position:absolute"><defs><linearGradient id="kpi-g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#BFFF00"/><stop offset="100%" stop-color="#FF7777"/>
+      </linearGradient></defs></svg>
+
       <!-- KPIs com progress ring + pulse dot -->
       <div class="stats">
-        <svg width="0" height="0"><defs><linearGradient id="kpi-g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#BFFF00"/><stop offset="100%" stop-color="#FF7777"/>
-        </linearGradient></defs></svg>
-
         <div class="stat">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
           <div class="lbl">Cliques /mês</div>
@@ -472,7 +503,7 @@
               <td><div class="link-row"><div class="thumb"></div><div><b>Cupom afiliado — Parceiro</b><span>Afiliados</span></div></div></td>
               <td class="num">191</td>
               <td><span class="v3pill gap">Meta</span><span class="v3pill coral">TikTok</span></td>
-              <td class="num">plnk.to/bhava</td>
+              <td class="num">plnk.to/parceiro</td>
               <td><span style="color:#94A3B8">30 jun 2025</span></td>
               <td><div class="v3acts">
                 <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></span>
@@ -556,7 +587,7 @@ https://affiliates.parceiro.com/cupom?ref=maria</textarea>
       <div class="url-prev">
         <span class="type-badge coral">Afiliado</span>
         <span class="raw">affiliates.parceiro.com/cupom?ref=maria</span>
-        <span class="slug">plnk.to/bhava2</span>
+        <span class="slug">plnk.to/parceiro2</span>
       </div>
 
       <div class="v3modal-eyebrow" style="margin-top:22px">▮ Aplicar a todos</div>

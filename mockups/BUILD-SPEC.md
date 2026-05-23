@@ -63,7 +63,7 @@ Telas de auth (login/signup) NÃO usam app-shell — são telas centralizadas.
 `.chip`, `.segmented`, `.search`, `.bar`, `.banner`, `.empty`, `.note`, `.avatar`,
 `.thumb`, `.section-title`, `.page-title`, `.page-sub`, `.eyebrow`.
 Ícones: SVG inline estilo Lucide (stroke, 24x24 viewBox) — copiar os de `01`.
-Conteúdo em **português BR**, dados fictícios realistas (criadora "Isabela Fortes").
+Conteúdo em **português BR**, dados fictícios realistas (criadora "Maria Silva").
 
 ## Lista de telas e o que cada uma contém
 
