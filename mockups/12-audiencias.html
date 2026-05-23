@@ -90,6 +90,98 @@
   .info-banner .txt{font-family:'Satoshi',sans-serif;font-size:14.5px;color:#E2E8F0;line-height:1.6}
   .info-banner .txt b{color:#BFFF00;font-weight:700}
 
+  /* ═════════════════ PIPELINE DE AUDIÊNCIAS (Feature 3) ═════════════════ */
+  .pipeline-card{background:linear-gradient(135deg,rgba(191,255,0,0.05),rgba(255,119,119,0.03));
+    border:1px solid rgba(191,255,0,0.22);border-radius:20px;padding:24px;margin:18px 0 28px;
+    box-shadow:8px 8px 24px rgba(0,0,0,0.45),inset 0 0 40px rgba(191,255,0,0.025)}
+  .pipeline-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:18px;
+    padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.05)}
+  .pipeline-hdr-left{display:flex;align-items:center;gap:14px;flex:1}
+  .pipeline-hdr-icon{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#BFFF00,#FF7777);
+    color:#0A0A0A;display:grid;place-items:center;flex-shrink:0;
+    box-shadow:4px 4px 12px rgba(0,0,0,0.5),0 0 22px rgba(191,255,0,0.3)}
+  .pipeline-hdr-icon svg{width:22px;height:22px}
+  .pipeline-ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:19px;color:#fff;letter-spacing:-0.02em;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pipeline-badge{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;font-size:9.5px;font-weight:800;
+    padding:3px 8px;border-radius:999px;letter-spacing:0.12em}
+  .pipeline-sub{font-family:'Satoshi',sans-serif;font-size:13px;color:#94A3B8;margin-top:4px;line-height:1.5}
+
+  /* 4 TIERS */
+  .pipeline-tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+  .pl-tier{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);border-radius:14px;
+    padding:16px;transition:.25s ease;position:relative;overflow:hidden}
+  .pl-tier::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+  .pl-tier.pure::before{background:linear-gradient(180deg,#A78BFA,#7C3AED)}
+  .pl-tier.hot::before{background:linear-gradient(180deg,#FF7777,#FF4444)}
+  .pl-tier.warm::before{background:linear-gradient(180deg,#FFD466,#FFA500)}
+  .pl-tier.cold::before{background:linear-gradient(180deg,#94A3B8,#5A5A60)}
+  .pl-tier.pure{border-color:rgba(167,139,250,0.3)}
+  .pl-tier.hot{border-color:rgba(255,119,119,0.3)}
+  .pl-tier.warm{border-color:rgba(255,212,102,0.3)}
+  .pl-tier.cold{border-color:rgba(148,163,184,0.2)}
+  .pl-tier:hover{transform:translateY(-2px);box-shadow:6px 6px 16px rgba(0,0,0,0.4)}
+  .pl-tier-hdr{display:flex;align-items:center;gap:8px;margin-bottom:14px;padding-bottom:10px;
+    border-bottom:1px solid rgba(255,255,255,0.05)}
+  .pl-tier-icon{font-size:16px}
+  .pl-tier-name{font-family:'General Sans',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.06em}
+  .pl-tier.pure .pl-tier-name{color:#A78BFA}
+  .pl-tier.hot .pl-tier-name{color:#FF7777}
+  .pl-tier.warm .pl-tier-name{color:#FFD466}
+  .pl-tier.cold .pl-tier-name{color:#94A3B8}
+  .pl-tier-size{font-family:'General Sans',sans-serif;font-weight:700;font-size:34px;color:#fff;line-height:1;letter-spacing:-0.03em}
+  .pl-tier-size-lbl{font-family:'Satoshi',sans-serif;font-size:11.5px;color:#94A3B8;font-weight:600;margin-top:2px;margin-bottom:14px}
+  .pl-tier-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid rgba(255,255,255,0.04)}
+  .pl-tier-lbl{font-family:'Satoshi',sans-serif;font-weight:700;font-size:9.5px;text-transform:uppercase;letter-spacing:0.13em;color:#5A5A60}
+  .pl-tier-val{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13px;color:#E5E7EB}
+  .pl-tier-quality{margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.04)}
+  .pl-quality-bar{height:6px;border-radius:999px;background:rgba(255,255,255,0.04);overflow:hidden;margin-bottom:5px}
+  .pl-quality-fill{height:100%;border-radius:999px;transition:.6s cubic-bezier(0.34,1.56,0.64,1)}
+  .pl-tier.pure .pl-quality-fill{background:linear-gradient(90deg,#A78BFA,#7C3AED);box-shadow:0 0 8px rgba(167,139,250,0.4)}
+  .pl-tier.hot .pl-quality-fill{background:linear-gradient(90deg,#FF7777,#FF4444);box-shadow:0 0 8px rgba(255,119,119,0.4)}
+  .pl-tier.warm .pl-quality-fill{background:linear-gradient(90deg,#FFD466,#FFA500);box-shadow:0 0 8px rgba(255,212,102,0.4)}
+  .pl-tier.cold .pl-quality-fill{background:linear-gradient(90deg,#94A3B8,#5A5A60)}
+  .pl-quality-score{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:11px;color:#94A3B8;display:flex;justify-content:flex-end}
+
+  /* SYNC */
+  .pipeline-sync{background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.04);border-radius:12px;padding:14px 16px;margin-bottom:16px}
+  .pipeline-sync-lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:0.14em;color:#94A3B8;margin-bottom:10px}
+  .pipeline-sync-badges{display:flex;gap:10px;flex-wrap:wrap}
+  .pl-sync{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;
+    background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);
+    font-family:'Satoshi',sans-serif;font-size:12px}
+  .pl-sync.ok{border-color:rgba(16,185,129,0.25)}
+  .pl-sync.pending{border-color:rgba(255,212,102,0.25)}
+  .pl-sync.err{border-color:rgba(255,119,119,0.25)}
+  .pl-sync-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .pl-sync.ok .pl-sync-dot{background:#10B981;box-shadow:0 0 8px rgba(16,185,129,0.6);animation:pl-pulse 2s ease-in-out infinite}
+  .pl-sync.pending .pl-sync-dot{background:#FFD466;box-shadow:0 0 8px rgba(255,212,102,0.5)}
+  .pl-sync.err .pl-sync-dot{background:#FF7777;box-shadow:0 0 8px rgba(255,119,119,0.5)}
+  @keyframes pl-pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+  .pl-sync-name{font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:0.08em;font-size:11px}
+  .pl-sync-count{color:#94A3B8;font-size:11.5px}
+
+  /* SUGESTÃO */
+  .pipeline-suggestion{display:flex;align-items:center;justify-content:space-between;gap:14px;
+    padding:16px 18px;border-radius:14px;
+    background:linear-gradient(135deg,rgba(191,255,0,0.08),rgba(255,119,119,0.04));
+    border:1px solid rgba(191,255,0,0.25)}
+  .pipeline-sg-left{display:flex;align-items:flex-start;gap:12px;flex:1}
+  .pipeline-sg-icon{font-size:22px;flex-shrink:0;line-height:1}
+  .pipeline-sg-ttl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:13.5px;color:#fff;line-height:1.4}
+  .pl-pure-tag{background:rgba(167,139,250,0.18);color:#A78BFA;padding:1px 8px;border-radius:999px;font-size:10.5px;letter-spacing:0.1em}
+  .pipeline-sg-sub{font-family:'Satoshi',sans-serif;font-size:12.5px;color:#94A3B8;margin-top:4px;line-height:1.5}
+  .pipeline-sg-sub strong{color:#BFFF00}
+  .pipeline-sg-cta{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;border:0;border-radius:12px;
+    padding:11px 18px;cursor:pointer;font-family:'Satoshi',sans-serif;font-weight:800;font-size:11.5px;
+    text-transform:uppercase;letter-spacing:0.13em;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+    box-shadow:0 4px 14px rgba(191,255,0,0.3);transition:.3s cubic-bezier(0.34,1.56,0.64,1);flex-shrink:0}
+  .pipeline-sg-cta:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(191,255,0,0.45)}
+
+  @media(max-width:980px){
+    .pipeline-tiers{grid-template-columns:repeat(2,1fr)}
+    .pipeline-suggestion{flex-direction:column;align-items:flex-start}
+  }
+
   /* ── SECTION HEADER ── */
   .section-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:12px}
   .section-hdr-left{display:flex;align-items:center;gap:10px}
@@ -219,15 +311,7 @@
     <div class="sec">Principal</div>
     <a class="nv" href="01-dashboard.html">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-      Painel
-    </a>
-    <a class="nv" href="02-criar-link.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-      Criar link
-    </a>
-    <a class="nv" href="02c-tipos-de-link.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1A1.6 1.6 0 0 0 6.8 19l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H3a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 4.2 6.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
-      Tipos de link
+      Link
     </a>
     <a class="nv" href="06-smartpages.html">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
@@ -318,6 +402,119 @@
           As audiências se atualizam em tempo real — sem precisar exportar CSV manualmente.
         </div>
       </div>
+
+      <!-- ════════ PIPELINE DE AUDIÊNCIAS — Feature 3 ════════ -->
+      <div class="pipeline-card">
+        <div class="pipeline-hdr">
+          <div class="pipeline-hdr-left">
+            <div class="pipeline-hdr-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h18M7 12h10M11 18h2"/></svg>
+            </div>
+            <div>
+              <div class="pipeline-ttl">Pipeline de Audiências <span class="pipeline-badge">SMART TRACKING PRO</span></div>
+              <div class="pipeline-sub">últimos 30 dias · audiências auto-segmentadas pela qualidade do lead</div>
+            </div>
+          </div>
+          <a class="card-hdr-help" href="#">(help)</a>
+        </div>
+
+        <!-- 4 TIERS -->
+        <div class="pipeline-tiers">
+          <div class="pl-tier pure">
+            <div class="pl-tier-hdr"><span class="pl-tier-icon">💎</span><span class="pl-tier-name">PURE</span></div>
+            <div class="pl-tier-size">127</div>
+            <div class="pl-tier-size-lbl">pessoas</div>
+            <div class="pl-tier-row">
+              <span class="pl-tier-lbl">CPL hist.</span>
+              <span class="pl-tier-val">R$ 28</span>
+            </div>
+            <div class="pl-tier-quality">
+              <div class="pl-quality-bar"><div class="pl-quality-fill" style="width:85%"></div></div>
+              <span class="pl-quality-score">8.5/10</span>
+            </div>
+          </div>
+
+          <div class="pl-tier hot">
+            <div class="pl-tier-hdr"><span class="pl-tier-icon">🔥</span><span class="pl-tier-name">HOT</span></div>
+            <div class="pl-tier-size">845</div>
+            <div class="pl-tier-size-lbl">pessoas</div>
+            <div class="pl-tier-row">
+              <span class="pl-tier-lbl">CPL hist.</span>
+              <span class="pl-tier-val">R$ 12</span>
+            </div>
+            <div class="pl-tier-quality">
+              <div class="pl-quality-bar"><div class="pl-quality-fill" style="width:68%"></div></div>
+              <span class="pl-quality-score">6.8/10</span>
+            </div>
+          </div>
+
+          <div class="pl-tier warm">
+            <div class="pl-tier-hdr"><span class="pl-tier-icon">🌡</span><span class="pl-tier-name">WARM</span></div>
+            <div class="pl-tier-size">2.341</div>
+            <div class="pl-tier-size-lbl">pessoas</div>
+            <div class="pl-tier-row">
+              <span class="pl-tier-lbl">CPL hist.</span>
+              <span class="pl-tier-val">R$ 6</span>
+            </div>
+            <div class="pl-tier-quality">
+              <div class="pl-quality-bar"><div class="pl-quality-fill" style="width:42%"></div></div>
+              <span class="pl-quality-score">4.2/10</span>
+            </div>
+          </div>
+
+          <div class="pl-tier cold">
+            <div class="pl-tier-hdr"><span class="pl-tier-icon">❄️</span><span class="pl-tier-name">COLD</span></div>
+            <div class="pl-tier-size">8.912</div>
+            <div class="pl-tier-size-lbl">pessoas</div>
+            <div class="pl-tier-row">
+              <span class="pl-tier-lbl">CPL hist.</span>
+              <span class="pl-tier-val">R$ 2</span>
+            </div>
+            <div class="pl-tier-quality">
+              <div class="pl-quality-bar"><div class="pl-quality-fill" style="width:21%"></div></div>
+              <span class="pl-quality-score">2.1/10</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SYNC STATUS -->
+        <div class="pipeline-sync">
+          <div class="pipeline-sync-lbl">Sincronização com plataformas:</div>
+          <div class="pipeline-sync-badges">
+            <span class="pl-sync ok">
+              <span class="pl-sync-dot"></span>
+              <span class="pl-sync-name">Meta</span>
+              <span class="pl-sync-count">4/4 sincronizadas</span>
+            </span>
+            <span class="pl-sync ok">
+              <span class="pl-sync-dot"></span>
+              <span class="pl-sync-name">TikTok</span>
+              <span class="pl-sync-count">4/4 sincronizadas</span>
+            </span>
+            <span class="pl-sync pending">
+              <span class="pl-sync-dot"></span>
+              <span class="pl-sync-name">Google Ads</span>
+              <span class="pl-sync-count">2/4 pending</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- SUGESTÃO ACTIONABLE -->
+        <div class="pipeline-suggestion">
+          <div class="pipeline-sg-left">
+            <div class="pipeline-sg-icon">💡</div>
+            <div>
+              <div class="pipeline-sg-ttl">Sugestão: criar Lookalike só do <span class="pl-pure-tag">PURE</span></div>
+              <div class="pipeline-sg-sub">LTV médio: <strong>R$ 850</strong> (vs R$ 230 da média geral). Lookalike de qualidade alta tende a ter <strong>CPM 35% menor</strong>.</div>
+            </div>
+          </div>
+          <button class="pipeline-sg-cta" id="pl-create-lookalike">
+            Criar Lookalike Premium
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="13" height="13"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+      <!-- ════════ /PIPELINE ════════ -->
 
       <!-- LISTA DE AUDIÊNCIAS -->
       <div>
@@ -598,6 +795,22 @@
       acc.classList.toggle('open');
     });
   });
+
+  /* ─── Pipeline: botão Criar Lookalike Premium ─── */
+  var lookalikeBtn = document.getElementById('pl-create-lookalike');
+  if (lookalikeBtn){
+    lookalikeBtn.addEventListener('click', function(){
+      var t = document.createElement('div');
+      t.textContent = '✓ Lookalike Premium criado · sincronizando com Meta + TikTok…';
+      t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);' +
+        'padding:14px 22px;border-radius:14px;background:#141414;border:1px solid rgba(191,255,0,0.3);' +
+        'box-shadow:0 0 22px rgba(191,255,0,0.2);color:#BFFF00;font-family:Satoshi,sans-serif;' +
+        'font-size:14px;font-weight:600;z-index:9999;transition:.4s';
+      document.body.appendChild(t);
+      setTimeout(function(){ t.style.opacity = '0'; }, 2800);
+      setTimeout(function(){ t.remove(); }, 3300);
+    });
+  }
 </script>
 </body>
 </html>

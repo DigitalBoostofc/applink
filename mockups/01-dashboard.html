@@ -288,6 +288,77 @@
     box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 22px rgba(191,255,0,0.3);transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
   .v3modal-foot .btn-import:hover{transform:scale(1.04)}
   .v3modal-foot .btn-import svg{width:13px;height:13px}
+
+  /* ─── LINK STATS MODAL ─── */
+  .stats-bd{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);
+    display:none;align-items:flex-start;justify-content:center;z-index:900;padding:40px 20px;overflow-y:auto}
+  .stats-bd.open{display:flex}
+  .stats-modal{background:#141414;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:28px 28px 24px;
+    width:100%;max-width:780px;
+    box-shadow:8px 16px 40px rgba(0,0,0,0.7),0 0 80px rgba(191,255,0,0.08);
+    transform:scale(0.96);transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+  .stats-bd.open .stats-modal{transform:scale(1)}
+
+  .stats-head{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .stats-thumb{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#BFFF00,#FF7777);
+    color:#0A0A0A;display:grid;place-items:center;flex-shrink:0;
+    box-shadow:0 0 22px rgba(191,255,0,0.3)}
+  .stats-thumb svg{width:22px;height:22px;stroke-width:2.4}
+  .stats-head-text{flex:1;min-width:0}
+  .stats-head-text h3{font-family:'General Sans',sans-serif;font-weight:600;font-size:20px;letter-spacing:-0.02em;color:#fff;
+    margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .stats-head-text .url{font-family:'JetBrains Mono',monospace;font-size:13px;color:#BFFF00;margin-top:4px;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .stats-close{width:36px;height:36px;border-radius:10px;background:#1A1A1A;color:#94A3B8;display:grid;place-items:center;cursor:pointer;border:0;
+    box-shadow:2px 2px 6px rgba(0,0,0,0.5);transition:.2s}
+  .stats-close:hover{color:#FF7777;transform:rotate(90deg)} .stats-close svg{width:15px;height:15px}
+
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+  .stats-cell{background:#1A1A1A;border:1px solid rgba(255,255,255,0.04);border-radius:16px;padding:16px;position:relative;
+    box-shadow:inset 2px 2px 6px rgba(0,0,0,0.4),-2px -2px 5px rgba(255,255,255,0.02)}
+  .stats-cell .lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:0.13em;color:#5A5A60}
+  .stats-cell .val{font-family:'General Sans',sans-serif;font-weight:600;font-size:24px;letter-spacing:-0.02em;color:#fff;margin-top:6px}
+  .stats-cell .dlt{font-family:'JetBrains Mono',monospace;font-size:11px;color:#10B981;margin-top:4px;font-weight:600}
+  .stats-cell .ic{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+    box-shadow:inset 2px 2px 5px rgba(0,0,0,0.4)}
+  .stats-cell .ic svg{width:14px;height:14px}
+  .stats-cell .ic.lime{background:rgba(191,255,0,0.1);color:#BFFF00}
+  .stats-cell .ic.yellow{background:rgba(255,212,0,0.12);color:#FFD400}
+  .stats-cell .ic.cyan{background:rgba(0,240,255,0.1);color:#00F0FF}
+  .stats-cell .ic.coral{background:rgba(255,119,119,0.12);color:#FF7777}
+
+  .stats-chart{background:#1A1A1A;border:1px solid rgba(255,255,255,0.04);border-radius:16px;padding:18px;margin-bottom:20px;
+    box-shadow:inset 2px 2px 6px rgba(0,0,0,0.4)}
+  .stats-chart .ct{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .stats-chart .ct .ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:14px;color:#fff}
+  .stats-chart .ct .meta{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#5A5A60}
+  .stats-chart-wrap{height:120px;display:flex;align-items:flex-end;gap:5px;padding:0 2px}
+  .stats-chart-wrap .b{flex:1;border-radius:5px 5px 0 0;background:linear-gradient(180deg,#BFFF00,rgba(191,255,0,0.35));
+    box-shadow:0 0 8px rgba(191,255,0,0.2);min-height:5px;transition:.3s}
+  .stats-chart-wrap .b:hover{background:linear-gradient(180deg,#FF7777,rgba(255,119,119,0.4))}
+
+  .stats-panels{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px}
+  .stats-panel{background:#1A1A1A;border:1px solid rgba(255,255,255,0.04);border-radius:16px;padding:16px;
+    box-shadow:inset 2px 2px 6px rgba(0,0,0,0.4)}
+  .stats-panel .ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:13.5px;color:#fff;margin-bottom:12px}
+  .stats-panel-row{display:grid;grid-template-columns:1fr 60px 90px;gap:8px;align-items:center;padding:6px 0;
+    border-bottom:1px solid rgba(255,255,255,0.04)}
+  .stats-panel-row:last-child{border-bottom:0}
+  .stats-panel-row .nm{font-family:'Satoshi',sans-serif;font-size:13px;color:#E2E8F0;font-weight:600}
+  .stats-panel-row .n{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#fff;text-align:right;font-weight:700}
+  .stats-panel-row .pr{display:flex;align-items:center;gap:6px}
+  .stats-panel-row .pr-tr{flex:1;height:4px;background:rgba(255,255,255,0.06);border-radius:999px;overflow:hidden}
+  .stats-panel-row .pr-fl{height:100%;background:linear-gradient(90deg,#BFFF00,#FF7777)}
+  .stats-panel-row .pr-n{font-family:'JetBrains Mono',monospace;font-size:11px;color:#94A3B8;font-weight:600;min-width:28px;text-align:right}
+
+  .stats-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.05);flex-wrap:wrap}
+  .stats-foot .hint{font-family:'Satoshi',sans-serif;font-size:12.5px;color:#5A5A60}
+  .stats-foot .btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;
+    padding:11px 18px;border-radius:12px;border:0;cursor:pointer;text-decoration:none;
+    font-family:'Satoshi',sans-serif;font-weight:800;font-size:12.5px;text-transform:uppercase;letter-spacing:0.13em;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 22px rgba(191,255,0,0.3);transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
+  .stats-foot .btn:hover{transform:scale(1.04)}
+  .stats-foot .btn svg{width:13px;height:13px}
 </style>
 </head>
 <body>
@@ -306,26 +377,18 @@
     <div class="sec">Principal</div>
     <a class="nv on" href="01-dashboard.html">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-      Painel <span class="ct">40</span>
+      Link <span class="ct">40</span>
     </a>
-    <a class="nv" href="02-criar-link.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-      Criar
-    </a>
-    <a class="nv" href="02c-tipos-de-link.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      Tipos
-    </a>
-    <a class="nv" href="03-analytics-link.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg>
-      Analytics
-    </a>
-    <a class="nv" href="06-smartpages.html">
+<a class="nv" href="06-smartpages.html">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
       Smartpages
     </a>
 
-    <div class="sec">Crescimento</div>
+    
+        <a class="nv" href="03-analytics-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg>
+      Analytics
+    </a><div class="sec">Crescimento</div>
     <a class="nv" href="11-pixels.html">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
       Pixels
@@ -2123,6 +2186,198 @@ https://affiliates.parceiro.com/cupom?ref=maria</textarea>
 
   // ESC fecha modal
   document.addEventListener('keydown', e => { if (e.key === 'Escape') window.closeQRModal(); });
+})();
+</script>
+
+<!-- ═══ LINK STATS MODAL ═══ -->
+<div class="stats-bd" id="stats-bd">
+  <div class="stats-modal">
+    <div class="stats-head">
+      <div class="stats-thumb">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg>
+      </div>
+      <div class="stats-head-text">
+        <h3 id="stats-title">—</h3>
+        <div class="url" id="stats-url">—</div>
+      </div>
+      <button class="stats-close" id="stats-close" title="Fechar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stats-cell">
+        <div class="ic lime"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
+        <div class="lbl">Cliques totais</div>
+        <div class="val" id="stats-clicks">0</div>
+        <div class="dlt" id="stats-clicks-dlt">▲ +0% período</div>
+      </div>
+      <div class="stats-cell">
+        <div class="ic coral"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/></svg></div>
+        <div class="lbl">Únicos</div>
+        <div class="val" id="stats-unique">0</div>
+        <div class="dlt" id="stats-unique-dlt">▲ 0% unicidade</div>
+      </div>
+      <div class="stats-cell">
+        <div class="ic yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/></svg></div>
+        <div class="lbl">Referrers</div>
+        <div class="val" id="stats-refs">0</div>
+        <div class="dlt" id="stats-refs-dlt">→ —</div>
+      </div>
+      <div class="stats-cell">
+        <div class="ic cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="lbl">Países</div>
+        <div class="val" id="stats-countries">0</div>
+        <div class="dlt" id="stats-countries-dlt">→ Brasil —</div>
+      </div>
+    </div>
+
+    <div class="stats-chart">
+      <div class="ct">
+        <div class="ttl">Cliques nas últimas 12 semanas</div>
+        <div class="meta" id="stats-chart-meta">—</div>
+      </div>
+      <div class="stats-chart-wrap" id="stats-chart-wrap"></div>
+    </div>
+
+    <div class="stats-panels">
+      <div class="stats-panel">
+        <div class="ttl">Top países</div>
+        <div id="stats-countries-list"></div>
+      </div>
+      <div class="stats-panel">
+        <div class="ttl">Dispositivos</div>
+        <div id="stats-devices-list"></div>
+      </div>
+    </div>
+
+    <div class="stats-foot">
+      <div class="hint">Janela: últimos 30 dias. Dados em tempo real.</div>
+      <a class="btn" href="03-analytics-link.html">
+        Ver analytics completo
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var bd = document.getElementById('stats-bd');
+  function openStats(){ bd.classList.add('open'); }
+  function closeStats(){ bd.classList.remove('open'); }
+  document.getElementById('stats-close').addEventListener('click', closeStats);
+  bd.addEventListener('click', function(e){ if (e.target === bd) closeStats(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeStats(); });
+
+  function fmt(n){ return n.toLocaleString('pt-BR'); }
+
+  // Deterministic synthetic stats from a link's click count + title
+  function statsFromRow(row){
+    var titleEl = row.querySelector('.link-row b');
+    var title = titleEl ? titleEl.textContent.trim() : 'Link';
+    var clicksTxt = row.querySelector('td.num') ? row.querySelector('td.num').textContent.trim() : '0';
+    var clicks = parseInt(clicksTxt.replace(/[^\d]/g,''), 10) || 0;
+    var nums = row.querySelectorAll('td.num');
+    var shortUrl = (nums[2] || nums[nums.length-1] || {}).textContent || '—';
+    shortUrl = shortUrl.trim();
+    var origEl = row.querySelector('.link-orig');
+    var dest = origEl ? (origEl.title || origEl.textContent || '').trim() : '';
+
+    // Derived metrics (deterministic mock)
+    var unique = Math.max(0, Math.round(clicks * 0.72));
+    var uniquePct = clicks ? Math.round(unique/clicks*100) : 0;
+    var refs = Math.max(1, Math.min(20, Math.round(Math.sqrt(clicks)/3) || 1));
+    var countries = Math.max(1, Math.min(40, Math.round(Math.sqrt(clicks)/4) || 1));
+
+    // 12-week bar distribution using a simple seeded PRNG
+    var seed = (clicks % 97) + title.length;
+    var bars = [];
+    for (var i = 0; i < 12; i++){
+      var v = (Math.sin(seed * (i+1) * 0.73) * 40) + 50;
+      bars.push(Math.max(10, Math.min(100, Math.round(v))));
+    }
+
+    // Country breakdown (Brazil dominant, BR-centric)
+    var brShare = Math.min(85, 50 + (clicks % 35));
+    var usShare = Math.round((100 - brShare) * 0.55);
+    var ptShare = Math.round((100 - brShare) * 0.30);
+    var otShare = 100 - brShare - usShare - ptShare;
+    var countriesList = [
+      { name:'🇧🇷 Brasil',   pct:brShare, n: Math.round(clicks*brShare/100) },
+      { name:'🇺🇸 EUA',      pct:usShare, n: Math.round(clicks*usShare/100) },
+      { name:'🇵🇹 Portugal', pct:ptShare, n: Math.round(clicks*ptShare/100) },
+      { name:'Outros',       pct:Math.max(0, otShare), n: Math.max(0, clicks - Math.round(clicks*(brShare+usShare+ptShare)/100)) }
+    ].filter(function(c){ return c.pct > 0; });
+
+    // Device breakdown — mobile dominant
+    var mob = 60 + (clicks % 30);
+    var tab = Math.round((100 - mob) * 0.25);
+    var dsk = 100 - mob - tab;
+    var devicesList = [
+      { name:'Celular',     pct:mob, n: Math.round(clicks*mob/100) },
+      { name:'Computador',  pct:dsk, n: Math.round(clicks*dsk/100) },
+      { name:'Tablet',      pct:tab, n: Math.round(clicks*tab/100) }
+    ];
+
+    return { title:title, clicks:clicks, unique:unique, uniquePct:uniquePct,
+             refs:refs, countries:countries, shortUrl:shortUrl, dest:dest,
+             bars:bars, countriesList:countriesList, devicesList:devicesList,
+             brShare:brShare };
+  }
+
+  function renderPanelRows(containerId, list){
+    var html = list.map(function(r){
+      return '<div class="stats-panel-row">'+
+        '<div class="nm">'+r.name+'</div>'+
+        '<div class="n">'+fmt(r.n)+'</div>'+
+        '<div class="pr"><div class="pr-tr"><div class="pr-fl" style="width:'+r.pct+'%"></div></div><span class="pr-n">'+r.pct+'%</span></div>'+
+      '</div>';
+    }).join('');
+    document.getElementById(containerId).innerHTML = html;
+  }
+
+  function showStats(s){
+    document.getElementById('stats-title').textContent = s.title;
+    document.getElementById('stats-url').textContent = s.shortUrl + (s.dest ? '  →  ' + s.dest : '');
+    document.getElementById('stats-clicks').textContent = fmt(s.clicks);
+    document.getElementById('stats-clicks-dlt').textContent = '▲ +' + (5 + (s.clicks%9)) + ',' + (s.clicks%9) + '% vs período anterior';
+    document.getElementById('stats-unique').textContent = fmt(s.unique);
+    document.getElementById('stats-unique-dlt').textContent = '▲ ' + s.uniquePct + '% taxa de unicidade';
+    document.getElementById('stats-refs').textContent = s.refs;
+    document.getElementById('stats-refs-dlt').textContent = '→ ' + (s.clicks > 500 ? 'instagram.com lidera' : (s.clicks > 100 ? 'tráfego direto' : '— sem dados'));
+    document.getElementById('stats-countries').textContent = s.countries;
+    document.getElementById('stats-countries-dlt').textContent = '→ Brasil ' + s.brShare + '% do tráfego';
+
+    // Bars
+    var wrap = document.getElementById('stats-chart-wrap');
+    wrap.innerHTML = s.bars.map(function(h){ return '<div class="b" style="height:'+h+'%"></div>'; }).join('');
+    document.getElementById('stats-chart-meta').textContent = 'Média semanal · ' + fmt(Math.round(s.clicks/12));
+
+    renderPanelRows('stats-countries-list', s.countriesList);
+    renderPanelRows('stats-devices-list', s.devicesList);
+  }
+
+  // Event delegation: first action icon (chart) opens stats modal for that row
+  document.querySelectorAll('.v3table tbody').forEach(function(tbody){
+    tbody.addEventListener('click', function(e){
+      var act = e.target.closest('.v3acts .a');
+      if (!act) return;
+      var acts = act.parentElement.querySelectorAll('.a');
+      if (acts[0] !== act) return; // only the first (chart) icon
+      var row = act.closest('tr');
+      if (!row) return;
+      e.preventDefault();
+      showStats(statsFromRow(row));
+      openStats();
+    });
+    // tooltip on first action
+    tbody.querySelectorAll('tr .v3acts .a:first-child').forEach(function(a){
+      a.setAttribute('title', 'Ver estatísticas');
+    });
+  });
 })();
 </script>
 

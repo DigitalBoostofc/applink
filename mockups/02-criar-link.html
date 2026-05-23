@@ -257,6 +257,148 @@
   .row-tg .desc{font-family:'Satoshi',sans-serif;font-size:13px;color:#94A3B8;margin-top:2px}
 
   /* ─── G04: MUTEX DE CONFLITO ─── */
+  /* ═════════════════ MODO DE DISPARO (no card Pixels) ═════════════════ */
+  .pixel-mode{margin-top:14px;display:none}
+  .pixel-mode.show{display:block;animation:pmIn .35s cubic-bezier(0.34, 1.56, 0.64, 1)}
+  @keyframes pmIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+  .pm-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);margin:4px 0 14px}
+  .pm-hdr{display:flex;align-items:center;gap:8px;margin-bottom:10px;color:#BFFF00}
+  .pm-title{font-family:'Satoshi',sans-serif;font-weight:800;font-size:11.5px;text-transform:uppercase;letter-spacing:0.14em;color:#E5E7EB}
+  .pm-options{display:flex;flex-direction:column;gap:8px}
+  .pm-opt{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:12px;cursor:pointer;
+    background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);
+    transition:.25s cubic-bezier(0.34, 1.56, 0.64, 1)}
+  .pm-opt:hover{border-color:rgba(191,255,0,0.3);background:rgba(191,255,0,0.03)}
+  .pm-opt:has(input:checked){border-color:rgba(191,255,0,0.5);background:rgba(191,255,0,0.06)}
+  .pm-opt input[type="radio"]{appearance:none;-webkit-appearance:none;width:16px;height:16px;border-radius:50%;
+    border:2px solid rgba(255,255,255,0.3);cursor:pointer;position:relative;flex-shrink:0;margin:1px 0 0;background:#0A0A0A}
+  .pm-opt input[type="radio"]:checked{border-color:#BFFF00}
+  .pm-opt input[type="radio"]:checked::after{content:'';position:absolute;inset:3px;background:#BFFF00;border-radius:50%;
+    box-shadow:0 0 6px rgba(191,255,0,0.5)}
+  .pm-opt-body{flex:1;min-width:0}
+  .pm-opt-ttl{font-family:'Satoshi',sans-serif;font-weight:700;font-size:13.5px;color:#fff;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .pm-opt-sub{font-family:'Satoshi',sans-serif;font-size:11.5px;color:#94A3B8;margin-top:3px;line-height:1.4}
+  .pm-opt-tag{background:rgba(255,255,255,0.08);color:#94A3B8;font-size:8.5px;font-weight:800;padding:2px 6px;border-radius:999px;
+    text-transform:uppercase;letter-spacing:0.1em}
+  .pm-opt-pro{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;font-size:8.5px;font-weight:800;padding:2px 6px;border-radius:999px;
+    text-transform:uppercase;letter-spacing:0.1em}
+  .pm-cta-single{width:100%;background:linear-gradient(90deg,rgba(191,255,0,0.12),rgba(255,119,119,0.08));
+    border:1px solid rgba(191,255,0,0.28);border-radius:14px;padding:13px 16px;cursor:pointer;
+    font-family:'Satoshi',sans-serif;font-weight:700;font-size:12.5px;color:#BFFF00;text-transform:uppercase;letter-spacing:0.13em;
+    display:flex;align-items:center;justify-content:space-between;gap:8px;
+    transition:.3s cubic-bezier(0.34, 1.56, 0.64, 1)}
+  .pm-cta-single:hover{transform:translateY(-1px);background:linear-gradient(90deg,rgba(191,255,0,0.22),rgba(255,119,119,0.14));
+    box-shadow:0 4px 16px rgba(191,255,0,0.15);border-color:rgba(191,255,0,0.45)}
+  .pm-cta-left{display:inline-flex;align-items:center;gap:8px}
+
+  /* ═════════════════ SMART TRACKING (PRO) ═════════════════ */
+  .adv-section-ttl.smart-ttl{grid-column:1 / -1;display:none;align-items:center;gap:10px;margin-top:24px}
+  .adv-section-ttl.smart-ttl.show{display:flex}
+  .smart-tracking-acc.hidden{display:none}
+  .smart-tracking-acc{grid-column:1 / -1;background:linear-gradient(135deg,rgba(191,255,0,0.04),rgba(255,119,119,0.025));
+    border:1px solid rgba(191,255,0,0.18) !important}
+  .smart-tracking-acc.active{box-shadow:6px 6px 18px rgba(0,0,0,0.45),-3px -3px 8px rgba(255,255,255,0.02),0 0 32px rgba(191,255,0,0.15) !important}
+  .smart-tracking-acc .acc-box.st-box{background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A}
+  .smart-tracking-acc .st-body-inner{padding:0 !important}
+  .smart-tracking-acc .st-intro{font-family:'Satoshi',sans-serif;font-size:13.5px;color:#E5E7EB;line-height:1.6;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.05)}
+  .st-mode-selector{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;padding-bottom:18px;
+    border-bottom:1px solid rgba(255,255,255,0.05)}
+  .st-save-row{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);display:flex;justify-content:flex-end}
+  .st-save-btn{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;border:0;border-radius:12px;
+    padding:12px 24px;cursor:pointer;font-family:'Satoshi',sans-serif;font-weight:800;font-size:12.5px;
+    text-transform:uppercase;letter-spacing:0.13em;display:inline-flex;align-items:center;gap:8px;
+    box-shadow:0 4px 14px rgba(191,255,0,0.25);transition:.3s cubic-bezier(0.34, 1.56, 0.64, 1)}
+  .st-save-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(191,255,0,0.35)}
+  /* Estados ATIVO vs PADRÃO no header */
+  .smart-tracking-acc .acc-status.off{background:rgba(148,163,184,0.12);color:#94A3B8}
+  .smart-tracking-acc.is-smart .acc-status{background:rgba(16,185,129,0.15);color:#10B981}
+  .smart-tracking-acc.is-smart .tg{background:linear-gradient(90deg,#BFFF00,#FFD466);position:relative;width:36px;height:20px;border-radius:999px;flex-shrink:0}
+  .smart-tracking-acc.is-smart .tg::after{content:'';position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,0.3)}
+  .smart-tracking-acc:not(.is-smart) .tg{background:rgba(255,255,255,0.08);position:relative;width:36px;height:20px;border-radius:999px;flex-shrink:0}
+  .smart-tracking-acc:not(.is-smart) .tg::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#94A3B8}
+  .adv-section-ttl.smart-ttl::before{display:none}
+  .pro-badge{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;font-size:9.5px;font-weight:800;
+    padding:2px 7px;border-radius:999px;letter-spacing:0.1em}
+  .st-block{margin-bottom:20px}
+  .st-block-ttl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:11.5px;text-transform:uppercase;
+    letter-spacing:0.14em;color:#E5E7EB;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .st-radio{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;cursor:pointer;
+    background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);margin-bottom:8px;
+    transition:.25s cubic-bezier(0.34, 1.56, 0.64, 1)}
+  .st-radio:hover{border-color:rgba(191,255,0,0.3);background:rgba(191,255,0,0.03)}
+  .st-radio:has(input:checked){border-color:rgba(191,255,0,0.5);background:rgba(191,255,0,0.06)}
+  .st-radio input[type="radio"]{appearance:none;-webkit-appearance:none;width:18px;height:18px;border-radius:50%;
+    border:2px solid rgba(255,255,255,0.3);cursor:pointer;position:relative;flex-shrink:0;margin:0;background:#0A0A0A}
+  .st-radio input[type="radio"]:checked{border-color:#BFFF00}
+  .st-radio input[type="radio"]:checked::after{content:'';position:absolute;inset:3px;background:#BFFF00;border-radius:50%;
+    box-shadow:0 0 8px rgba(191,255,0,0.5)}
+  .st-radio-text{flex:1}
+  .st-radio-ttl{font-family:'Satoshi',sans-serif;font-weight:700;font-size:14px;color:#fff;display:flex;align-items:center;gap:8px}
+  .st-radio-sub{font-family:'Satoshi',sans-serif;font-size:12px;color:#94A3B8;margin-top:2px}
+  .badge-recommended{background:#BFFF00;color:#0A0A0A;font-size:9px;font-weight:800;padding:2px 7px;border-radius:999px;
+    text-transform:uppercase;letter-spacing:0.08em}
+  .st-tiers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+  .st-tier{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);border-radius:14px;padding:14px 16px;
+    transition:.25s ease}
+  .st-tier:hover{transform:translateY(-1px);box-shadow:4px 4px 10px rgba(0,0,0,0.3)}
+  .st-tier.pure{border-color:rgba(167,139,250,0.3);background:rgba(167,139,250,0.05)}
+  .st-tier.hot{border-color:rgba(255,119,119,0.3);background:rgba(255,119,119,0.05)}
+  .st-tier.warm{border-color:rgba(255,212,102,0.3);background:rgba(255,212,102,0.04)}
+  .st-tier.cold{border-color:rgba(148,163,184,0.2);background:rgba(148,163,184,0.03)}
+  .st-tier-hdr{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;
+    border-bottom:1px solid rgba(255,255,255,0.05)}
+  .st-tier-icon{font-size:16px}
+  .st-tier-name{font-family:'General Sans',sans-serif;font-weight:700;font-size:13.5px;letter-spacing:0.05em}
+  .st-tier.pure .st-tier-name{color:#A78BFA}
+  .st-tier.hot .st-tier-name{color:#FF7777}
+  .st-tier.warm .st-tier-name{color:#FFD466}
+  .st-tier.cold .st-tier-name{color:#94A3B8}
+  .st-tier-desc{font-family:'Satoshi',sans-serif;font-size:11px;color:#94A3B8;margin-left:auto;font-weight:500}
+  .st-tier-body{display:flex;flex-direction:column;gap:4px}
+  .st-check{display:flex;align-items:center;gap:8px;padding:5px 6px;border-radius:6px;cursor:pointer;
+    font-size:12.5px;color:#E5E7EB;font-family:'Satoshi',sans-serif;font-weight:500}
+  .st-check:hover{background:rgba(255,255,255,0.02)}
+  .st-check input[type="checkbox"]{appearance:none;-webkit-appearance:none;width:14px;height:14px;border-radius:3px;
+    border:1.5px solid rgba(255,255,255,0.25);cursor:pointer;position:relative;background:#0A0A0A;flex-shrink:0;margin:0}
+  .st-check input[type="checkbox"]:checked{background:#BFFF00;border-color:#BFFF00}
+  .st-check input[type="checkbox"]:checked::after{content:'';position:absolute;left:3px;top:-1px;width:4px;height:8px;
+    border:solid #0A0A0A;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .st-check code{font-family:'JetBrains Mono',monospace;font-size:11px;background:rgba(0,0,0,0.35);
+    padding:1px 6px;border-radius:4px;color:#BFFF00;font-weight:600}
+  .st-inline-sel{background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.05);border-radius:6px;
+    color:#fff;font-family:'Satoshi',sans-serif;font-size:11px;padding:2px 6px;font-weight:600;cursor:pointer}
+  .st-event-row{display:flex;align-items:center;gap:8px;margin-top:6px}
+  .st-event-lbl{flex-shrink:0;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;font-size:9.5px;
+    color:#5A5A60;min-width:65px;font-family:'Satoshi',sans-serif}
+  .st-event-row select{background:#0F0F0F;border:1px solid rgba(255,255,255,0.06);border-radius:8px;color:#fff;
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;padding:5px 8px;outline:none;cursor:pointer;flex:1}
+  .st-event-row input[type="number"]{background:#0F0F0F;border:1px solid rgba(255,255,255,0.06);border-radius:8px;
+    color:#fff;font-family:'JetBrains Mono',monospace;font-size:11.5px;padding:5px 8px;outline:none;width:70px}
+  .st-event-row .st-currency{font-family:'JetBrains Mono',monospace;font-size:11px;color:#5A5A60;font-weight:600}
+  .st-event-row .st-curr-sel{flex:0 0 60px;font-size:10.5px}
+  .st-pixels-inherit{padding:14px 16px;border-radius:10px;background:rgba(0,0,0,0.25);
+    border:1px solid rgba(255,255,255,0.04);font-family:'Satoshi',sans-serif;font-size:13px;color:#94A3B8;line-height:1.5;
+    display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+  .st-pixels-inherit > svg{color:#BFFF00;flex-shrink:0}
+  .st-pixels-active{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;width:100%}
+  .st-pixel-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;background:rgba(191,255,0,0.1);color:#BFFF00;
+    border:1px solid rgba(191,255,0,0.18)}
+  .st-pixel-badge.muted{background:transparent;color:#5A5A60;border-color:rgba(255,255,255,0.06);cursor:pointer;
+    transition:.25s ease}
+  .st-pixel-badge.muted:hover{color:#BFFF00;border-color:rgba(191,255,0,0.3)}
+  .st-pix-dot{width:6px;height:6px;border-radius:50%;background:#10B981;box-shadow:0 0 6px rgba(16,185,129,0.6)}
+  .st-info{margin-top:18px;padding:14px 16px;border-radius:12px;background:rgba(191,255,0,0.04);
+    border:1px solid rgba(191,255,0,0.12)}
+  .st-info-ttl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:11.5px;text-transform:uppercase;
+    letter-spacing:0.12em;color:#BFFF00;margin-bottom:10px}
+  .st-info-list{margin:0;padding-left:18px;font-family:'Satoshi',sans-serif;font-size:12.5px;color:#E5E7EB;line-height:1.7}
+  .st-info-list li{margin-bottom:3px}
+  .st-info-list code{font-family:'JetBrains Mono',monospace;font-size:11px;background:rgba(0,0,0,0.3);
+    padding:1px 5px;border-radius:3px;color:#BFFF00}
+  .st-info-list strong{color:#fff}
+  @media(max-width:980px){.st-tiers{grid-template-columns:1fr}}
+
   .conflict-banner{display:flex;align-items:flex-start;gap:12px;
     padding:14px 18px;margin:8px 0;border-radius:14px;grid-column:1 / -1;
     background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.28);
@@ -291,7 +433,186 @@
   .pix-chip{background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;padding:7px 12px;border-radius:999px;
     font-family:'Satoshi',sans-serif;font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;
     box-shadow:0 0 14px rgba(191,255,0,0.25);display:inline-flex;align-items:center;gap:6px}
-  .pix-chip .x{cursor:pointer;opacity:.7}
+  .pix-chip .x{cursor:pointer;opacity:.7;font-weight:900;font-size:13px;line-height:1;padding:0 2px}
+  .pix-chip .x:hover{opacity:1}
+
+  /* ─── CUSTOM DROPDOWN MENU ─── */
+  .dd-wrap{position:relative}
+  .dd-menu{position:absolute;top:calc(100% + 6px);left:0;min-width:240px;background:#141414;
+    border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:6px;z-index:50;
+    box-shadow:8px 12px 28px rgba(0,0,0,0.7),0 0 0 1px rgba(191,255,0,0.05);
+    opacity:0;visibility:hidden;transform:translateY(-6px);transition:.22s cubic-bezier(0.34,1.56,0.64,1)}
+  .dd-menu.open{opacity:1;visibility:visible;transform:translateY(0)}
+  .dd-menu.right{left:auto;right:0}
+  .dd-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;cursor:pointer;
+    font-family:'Satoshi',sans-serif;font-weight:600;font-size:14px;color:#E2E8F0;transition:.18s}
+  .dd-item:hover{background:rgba(191,255,0,0.08);color:#fff}
+  .dd-item.active{background:rgba(191,255,0,0.12);color:#BFFF00}
+  .dd-item .ic{width:28px;height:28px;border-radius:8px;background:rgba(191,255,0,0.1);color:#BFFF00;
+    display:grid;place-items:center;flex-shrink:0}
+  .dd-item .ic svg{width:14px;height:14px}
+  .dd-item .meta{font-size:11.5px;color:#5A5A60;font-weight:500;margin-top:1px}
+  .dd-sep{height:1px;background:rgba(255,255,255,0.05);margin:4px 6px}
+
+  /* ─── TOAST ─── */
+  .toast-stack{position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column;gap:10px;z-index:1000;pointer-events:none}
+  .toast{background:#141414;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:12px 18px;
+    display:flex;align-items:center;gap:12px;min-width:280px;
+    box-shadow:8px 12px 28px rgba(0,0,0,0.7);pointer-events:auto;
+    font-family:'Satoshi',sans-serif;font-size:14px;color:#E2E8F0;font-weight:500;
+    transform:translateX(120%);transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .toast.show{transform:translateX(0)}
+  .toast.ok{border-color:rgba(191,255,0,0.35);box-shadow:8px 12px 28px rgba(0,0,0,0.7),0 0 22px rgba(191,255,0,0.15)}
+  .toast.warn{border-color:rgba(239,68,68,0.4);box-shadow:8px 12px 28px rgba(0,0,0,0.7),0 0 22px rgba(239,68,68,0.15)}
+  .toast .ic{width:24px;height:24px;border-radius:6px;display:grid;place-items:center;flex-shrink:0}
+  .toast.ok .ic{background:rgba(191,255,0,0.15);color:#BFFF00}
+  .toast.warn .ic{background:rgba(239,68,68,0.15);color:#EF4444}
+  .toast.info .ic{background:rgba(148,163,184,0.15);color:#94A3B8}
+  .toast .ic svg{width:14px;height:14px}
+
+  /* ─── MODAL ─── */
+  .modal-bd{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);
+    display:none;align-items:center;justify-content:center;z-index:900;padding:20px}
+  .modal-bd.open{display:flex}
+  .modal{background:#141414;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:32px;
+    width:100%;max-width:560px;box-shadow:8px 16px 40px rgba(0,0,0,0.7),0 0 80px rgba(191,255,0,0.1);
+    transform:scale(0.94);transition:.35s cubic-bezier(0.34,1.56,0.64,1)}
+  .modal-bd.open .modal{transform:scale(1)}
+  .modal h3{font-family:'General Sans',sans-serif;font-weight:600;font-size:22px;color:#fff;letter-spacing:-0.02em;margin-bottom:6px}
+  .modal p.lead{font-family:'Satoshi',sans-serif;font-size:14px;color:#94A3B8;margin-bottom:22px}
+  .modal .success-icon{width:56px;height:56px;border-radius:16px;
+    background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+    display:grid;place-items:center;margin-bottom:16px;
+    box-shadow:0 0 30px rgba(191,255,0,0.4)}
+  .modal .success-icon svg{width:28px;height:28px;stroke-width:3}
+  .modal .link-box{display:flex;align-items:center;gap:0;background:#0F0F0F;border:1px solid rgba(191,255,0,0.25);
+    border-radius:14px;overflow:hidden;margin-bottom:18px}
+  .modal .link-box input{flex:1;background:transparent;border:0;outline:none;padding:16px 18px;
+    color:#BFFF00;font-family:'JetBrains Mono',monospace;font-size:14.5px;font-weight:500}
+  .modal .link-box button{padding:0 18px;height:52px;background:rgba(191,255,0,0.12);color:#BFFF00;
+    border:0;border-left:1px solid rgba(191,255,0,0.2);cursor:pointer;
+    font-family:'Satoshi',sans-serif;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:0.1em;
+    display:flex;align-items:center;gap:8px;transition:.2s}
+  .modal .link-box button:hover{background:rgba(191,255,0,0.2);color:#fff}
+  .modal .link-box button svg{width:14px;height:14px}
+  .modal .actions{display:flex;gap:10px}
+  .modal .actions button{flex:1;padding:14px;border-radius:12px;border:0;cursor:pointer;
+    font-family:'Satoshi',sans-serif;font-weight:700;font-size:14px;transition:.25s}
+  .modal .actions .secondary{background:#1A1A1A;color:#94A3B8;border:1px solid rgba(255,255,255,0.06)}
+  .modal .actions .secondary:hover{color:#fff;border-color:rgba(255,255,255,0.15)}
+  .modal .actions .primary{background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;
+    box-shadow:0 0 22px rgba(191,255,0,0.25)}
+  .modal .actions .primary:hover{transform:scale(1.02)}
+  .modal .actions button:disabled,
+  .modal .actions button:disabled:hover{opacity:0.35;cursor:not-allowed;background:#2D2D38;color:#5A5A60;box-shadow:none;transform:none}
+  .modal-icon-pix{width:64px;height:64px;border-radius:50%;
+    background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+    display:grid;place-items:center;margin:0 auto 16px;
+    box-shadow:0 0 30px rgba(191,255,0,0.35),inset 2px 2px 6px rgba(255,255,255,0.2)}
+  .modal-icon-pix svg{width:28px;height:28px;stroke-width:2.4}
+  .modal h3.center,.modal p.lead.center{text-align:center}
+  .modal .pix-help{display:inline-flex;align-items:center;gap:6px;margin:0 0 22px;
+    font-family:'Satoshi',sans-serif;font-size:13px;color:#BFFF00;text-decoration:none;font-weight:600;cursor:pointer;
+    border-bottom:1px dotted rgba(191,255,0,0.4);padding-bottom:2px;transition:.2s}
+  .modal .pix-help:hover{color:#fff;border-bottom-color:#fff}
+  .modal .pix-help svg{width:13px;height:13px}
+  .modal .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+  .modal .stat{background:#0F0F0F;border:1px solid rgba(255,255,255,0.04);border-radius:12px;padding:12px}
+  .modal .stat .v{font-family:'General Sans',sans-serif;font-weight:600;font-size:16px;color:#fff}
+  .modal .stat .l{font-family:'Satoshi',sans-serif;font-size:11px;color:#94A3B8;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;margin-top:2px}
+
+  /* error state on inputs */
+  .topbar-url.err{border-color:rgba(239,68,68,0.5);box-shadow:inset 4px 4px 10px rgba(0,0,0,0.55),0 0 18px rgba(239,68,68,0.15)}
+  .fl.err{border-color:rgba(239,68,68,0.5)}
+
+  /* ─── A/B VARIANTS ─── */
+  .ab-row{display:grid;grid-template-columns:34px 1fr 96px 36px;gap:10px;margin-bottom:10px;align-items:center}
+  .ab-row:last-of-type{margin-bottom:0}
+  .ab-tag{width:34px;height:46px;border-radius:11px;display:grid;place-items:center;
+    background:linear-gradient(135deg,rgba(191,255,0,0.18),rgba(255,119,119,0.14));color:#BFFF00;
+    font-family:'General Sans',sans-serif;font-weight:700;font-size:15px;
+    box-shadow:inset 2px 2px 5px rgba(0,0,0,0.45)}
+  .ab-row .fl{margin:0}
+  .ab-row .fl input{padding-top:18px;padding-bottom:8px}
+  .ab-trash{width:34px;height:34px;border-radius:9px;background:#141414;color:#94A3B8;display:grid;place-items:center;
+    cursor:pointer;box-shadow:2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);
+    transition:.25s;border:1px solid rgba(255,255,255,0.04)}
+  .ab-trash:hover{color:#FF7777;border-color:rgba(255,119,119,0.3)}
+  .ab-trash.disabled{opacity:0.25;pointer-events:none}
+  .ab-trash svg{width:14px;height:14px}
+
+  .ab-footer{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:14px;
+    padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);flex-wrap:wrap}
+  .ab-sum{display:flex;align-items:center;gap:8px;font-family:'Satoshi',sans-serif;font-size:13px;color:#94A3B8;font-weight:600}
+  .ab-sum-label{text-transform:uppercase;letter-spacing:0.1em;font-weight:800;font-size:11px;color:#5A5A60}
+  .ab-sum-value{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;color:#BFFF00;
+    background:rgba(191,255,0,0.1);padding:3px 10px;border-radius:8px;transition:.25s}
+  .ab-sum-value.err{color:#EF4444;background:rgba(239,68,68,0.12)}
+  .ab-sum-hint{font-size:12px;color:#5A5A60}
+  .ab-sum-hint.err{color:#EF4444;font-weight:700}
+  .ab-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+
+  /* ─── ORG FORM CARDS (Pasta · Notas · Etiquetas) ─── */
+  .form-card{background:#1A1A1A;border:1px solid rgba(255,255,255,0.04);border-radius:18px;padding:16px 18px;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.45),-3px -3px 8px rgba(255,255,255,0.02)}
+  .form-card.full{grid-column:1 / -1}
+  .form-card-h{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .form-card-ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;
+    box-shadow:inset 2px 2px 5px rgba(0,0,0,0.4)}
+  .form-card-ic svg{width:15px;height:15px}
+  .form-card-ic.lime{background:rgba(191,255,0,0.1);color:#BFFF00}
+  .form-card-ic.coral{background:rgba(255,119,119,0.12);color:#FF7777}
+  .form-card-ic.cyan{background:rgba(0,240,255,0.1);color:#00F0FF}
+  .form-card-ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:14.5px;color:#fff;letter-spacing:-0.01em;flex:1}
+
+  /* ─── TAG INPUT ─── */
+  .tag-input-wrap{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:14px;
+    padding:8px 8px 8px 12px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-height:54px;cursor:text;
+    box-shadow:inset 4px 4px 8px rgba(0,0,0,0.55),inset -2px -2px 6px rgba(255,255,255,0.025);
+    transition:.25s cubic-bezier(0.34,1.56,0.64,1)}
+  .tag-input-wrap:focus-within{border-color:rgba(191,255,0,0.45)}
+  .tag-chip{display:inline-flex;align-items:center;gap:6px;
+    background:linear-gradient(135deg,rgba(191,255,0,0.14),rgba(255,119,119,0.10));color:#E2E8F0;
+    padding:5px 4px 5px 12px;border-radius:999px;font-family:'Satoshi',sans-serif;font-weight:700;font-size:12px;
+    text-transform:uppercase;letter-spacing:0.08em;border:1px solid rgba(191,255,0,0.2);
+    box-shadow:2px 2px 5px rgba(0,0,0,0.35)}
+  .tag-chip .x{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.06);color:#94A3B8;
+    display:grid;place-items:center;cursor:pointer;font-size:11px;font-weight:900;line-height:1;
+    border:0;padding:0;transition:.18s}
+  .tag-chip .x:hover{background:rgba(255,119,119,0.22);color:#FF7777}
+  .tag-input{border:0;background:transparent;outline:none;flex:1;min-width:140px;
+    color:#fff;font-family:'Satoshi',sans-serif;font-size:14px;font-weight:500;padding:6px 4px}
+  .tag-input::placeholder{color:#5A5A60}
+
+  /* ─── DEVICE / OS / GEO RULES ─── */
+  .geo-row{display:grid;grid-template-columns:90px 220px 1fr 36px;gap:10px;margin-bottom:10px;align-items:center}
+  .geo-row:last-of-type{margin-bottom:0}
+  .geo-row .fl{margin:0}
+  .geo-row .fl input,.geo-row .fl select{padding-top:18px;padding-bottom:8px}
+  .geo-row .fl select{padding-right:30px}
+  .geo-row .dev-select-wrap::after{content:"";position:absolute;right:14px;top:50%;width:8px;height:8px;
+    border-right:2px solid #94A3B8;border-bottom:2px solid #94A3B8;transform:translateY(-70%) rotate(45deg);pointer-events:none}
+  .dev-row{display:grid;grid-template-columns:200px 1fr 36px;gap:10px;margin-bottom:10px;align-items:center}
+  .dev-row:last-of-type{margin-bottom:0}
+  .dev-row .fl{margin:0}
+  .dev-row .fl input,.dev-row .fl select{padding-top:18px;padding-bottom:8px}
+  .dev-row .fl select{padding-right:34px}
+  .dev-select-wrap{position:relative}
+  .dev-select-wrap::after{content:"";position:absolute;right:14px;top:50%;width:8px;height:8px;
+    border-right:2px solid #94A3B8;border-bottom:2px solid #94A3B8;transform:translateY(-70%) rotate(45deg);pointer-events:none}
+  .dev-footer{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:14px;
+    padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);flex-wrap:wrap}
+  .dev-hint{font-family:'Satoshi',sans-serif;font-size:12.5px;color:#5A5A60;line-height:1.5;flex:1;min-width:240px}
+
+  /* image preview inside upload */
+  .upload-area.has-image{padding:0;border-style:solid;border-color:rgba(191,255,0,0.3);background:#0A0A0A;position:relative;overflow:hidden}
+  .upload-area.has-image img{width:100%;height:100%;object-fit:cover;border-radius:16px}
+  .upload-area .clear-btn{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:10px;
+    background:rgba(0,0,0,0.7);color:#fff;border:1px solid rgba(255,255,255,0.1);cursor:pointer;
+    display:none;align-items:center;justify-content:center;backdrop-filter:blur(8px);z-index:2}
+  .upload-area.has-image .clear-btn{display:flex}
+  .upload-area .clear-btn svg{width:16px;height:16px}
+  .upload-area .clear-btn:hover{background:rgba(239,68,68,0.8);border-color:rgba(239,68,68,0.6)}
 </style>
 </head>
 <body>
@@ -308,28 +629,20 @@
       <span class="brand-name">AppLink</span>
     </div>
     <div class="sec">Principal</div>
-    <a class="nv" href="01-dashboard.html">
+    <a class="nv on" href="01-dashboard.html">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-      Painel <span class="ct">40</span>
+      Link <span class="ct">40</span>
     </a>
-    <a class="nv on" href="02-criar-link.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-      Criar
-    </a>
-    <a class="nv" href="02c-tipos-de-link.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      Tipos
-    </a>
-    <a class="nv" href="03-analytics-link.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg>
-      Analytics
-    </a>
-    <a class="nv" href="06-smartpages.html">
+<a class="nv" href="06-smartpages.html">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
       Smartpages
     </a>
 
-    <div class="sec">Crescimento</div>
+    
+        <a class="nv" href="03-analytics-link.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg>
+      Analytics
+    </a><div class="sec">Crescimento</div>
     <a class="nv" href="11-pixels.html">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
       Pixels
@@ -397,27 +710,30 @@
       <div class="topbar">
 
         <!-- Dropdown tipo de link -->
-        <div class="type-dropdown" id="type-dd">
-          <div class="type-dd-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        <div class="dd-wrap">
+          <div class="type-dropdown" id="type-dd">
+            <div class="type-dd-icon" id="type-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            </div>
+            <div style="margin-left:4px">
+              <div style="font-family:'Satoshi',sans-serif;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.13em;color:#5A5A60;margin-bottom:2px">Tipo</div>
+              <div class="type-dd-label">Smart Link</div>
+            </div>
+            <div class="type-dd-arrow" style="margin-left:10px">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
           </div>
-          <div style="margin-left:4px">
-            <div style="font-family:'Satoshi',sans-serif;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.13em;color:#5A5A60;margin-bottom:2px">Tipo</div>
-            <div class="type-dd-label">Smart Link</div>
-          </div>
-          <div class="type-dd-arrow" style="margin-left:10px">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
+          <div class="dd-menu" id="type-dd-menu"></div>
         </div>
 
         <!-- URL input -->
-        <div class="topbar-url">
+        <div class="topbar-url" id="url-wrap">
           <span class="topbar-url-prefix">https://</span>
-          <input type="text" value="cliente-exemplo.com/promo-inverno" placeholder="yourlink.com/slug…">
+          <input id="url-input" type="text" value="cliente-exemplo.com/promo-inverno" placeholder="yourlink.com/slug…">
         </div>
 
         <!-- Refresh -->
-        <button class="topbar-refresh" title="Regenerar slug">
+        <button class="topbar-refresh" id="btn-regen" title="Regenerar slug">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
         </button>
 
@@ -438,24 +754,30 @@
           </div>
 
           <!-- Upload area -->
+          <input type="file" id="upload-file" accept="image/png,image/jpeg,image/webp" style="display:none">
           <div class="upload-area" id="upload-zone">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/>
-            </svg>
-            <div class="upl-lbl">Arraste ou clique para fazer upload</div>
-            <div class="upl-txt">PNG, JPG, WEBP — máx. 5 MB</div>
-            <div class="upl-sub">1200 × 630 px recomendado</div>
+            <button class="clear-btn" id="upload-clear" type="button" title="Remover imagem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <div class="upload-placeholder" id="upload-placeholder" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:100%;height:100%;pointer-events:none">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/>
+              </svg>
+              <div class="upl-lbl">Arraste ou clique para fazer upload</div>
+              <div class="upl-txt">PNG, JPG, WEBP — máx. 5 MB</div>
+              <div class="upl-sub">1200 × 630 px recomendado</div>
+            </div>
           </div>
 
           <!-- Título -->
-          <div class="fl filled" style="margin-bottom:12px">
-            <input type="text" value="Promo de inverno — até 40% OFF" placeholder=" ">
+          <div class="fl filled" id="fl-title" style="margin-bottom:12px">
+            <input id="link-title" type="text" value="Promo de inverno — até 40% OFF" placeholder=" ">
             <label>Título do seu link *</label>
           </div>
 
           <!-- Descrição -->
           <div class="fl filled">
-            <textarea placeholder=" ">Ofertas exclusivas da coleção de inverno. Aproveite antes que acabe.</textarea>
+            <textarea id="link-desc" placeholder=" ">Ofertas exclusivas da coleção de inverno. Aproveite antes que acabe.</textarea>
             <label>Descrição do seu link</label>
           </div>
         </div>
@@ -475,28 +797,30 @@
             </div>
 
             <!-- Chips ativos -->
-            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
-              <span class="pix-chip">Meta · 8417…2031 <span class="x">✕</span></span>
-              <span class="pix-chip">TikTok · CL9F…77 <span class="x">✕</span></span>
-            </div>
+            <div id="pixel-chips" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px"></div>
 
             <!-- Select floating label -->
             <div class="fl" style="margin-bottom:10px">
-              <select placeholder=" ">
-                <option value="" disabled selected hidden></option>
-                <option>Google Ads</option>
-                <option>Meta Pixel</option>
-                <option>TikTok Pixel</option>
-                <option>LinkedIn Insight</option>
-                <option>Pinterest Tag</option>
-              </select>
-              <label>Adicionar pixels</label>
+              <select id="pixel-select"></select>
+              <label>Adicionar pixel cadastrado</label>
             </div>
 
-            <a class="subtle-link">
+            <a class="subtle-link" id="btn-new-pixel">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
               Adicionar novo pixel
             </a>
+
+            <!-- ════ MODO DE DISPARO — botão único que abre o accordion lá embaixo ════ -->
+            <div class="pixel-mode" id="pixel-mode">
+              <div class="pm-divider"></div>
+              <button class="pm-cta-single" id="pm-configure">
+                <span class="pm-cta-left">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="14" height="14"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>
+                  Configurar modo de disparo de eventos
+                </span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="14" height="14"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+            </div>
           </div>
           <!-- /CARD 1 -->
 
@@ -514,43 +838,46 @@
               <!-- UTM Campaign -->
               <div class="fl filled" style="position:relative">
                 <div class="fl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div>
-                <input type="text" value="promo_inverno" placeholder=" " style="padding-left:44px">
+                <input id="utm-campaign" type="text" value="promo_inverno" placeholder=" " style="padding-left:44px">
                 <label style="left:3rem">UTM Campaign</label>
               </div>
               <!-- UTM Medium -->
               <div class="fl filled" style="position:relative">
                 <div class="fl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div>
-                <input type="text" value="bio" placeholder=" " style="padding-left:44px">
+                <input id="utm-medium" type="text" value="bio" placeholder=" " style="padding-left:44px">
                 <label style="left:3rem">UTM Medium</label>
               </div>
               <!-- UTM Source -->
               <div class="fl filled" style="position:relative">
                 <div class="fl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M4.93 4.93l14.14 14.14"/></svg></div>
-                <input type="text" value="instagram" placeholder=" " style="padding-left:44px">
+                <input id="utm-source" type="text" value="instagram" placeholder=" " style="padding-left:44px">
                 <label style="left:3rem">UTM Source</label>
               </div>
               <!-- UTM Term -->
               <div class="fl" style="position:relative">
                 <div class="fl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z"/></svg></div>
-                <input type="text" placeholder=" " style="padding-left:44px">
+                <input id="utm-term" type="text" placeholder=" " style="padding-left:44px">
                 <label style="left:3rem">UTM Term</label>
               </div>
               <!-- UTM Content (full width) -->
               <div class="fl utm-full" style="position:relative">
                 <div class="fl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h7"/></svg></div>
-                <input type="text" placeholder=" " style="padding-left:44px">
+                <input id="utm-content" type="text" placeholder=" " style="padding-left:44px">
                 <label style="left:3rem">UTM Content</label>
               </div>
             </div>
 
             <div class="utm-footer">
-              <a class="subtle-link">
+              <a class="subtle-link" id="btn-save-template">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
                 Adicionar novo template
               </a>
-              <div class="utm-tmpl-dropdown">
-                Do template
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+              <div class="dd-wrap">
+                <div class="utm-tmpl-dropdown" id="tmpl-dd">
+                  Do template
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <div class="dd-menu right" id="tmpl-dd-menu"></div>
               </div>
             </div>
           </div>
@@ -567,9 +894,8 @@
             </div>
 
             <div class="domain-row">
-              <div class="fl">
-                <select>
-                  <option value="" disabled selected hidden></option>
+              <div class="fl filled">
+                <select id="domain-select">
                   <option selected>plnk.to</option>
                   <option>meusite.com.br</option>
                   <option>links.marca.io</option>
@@ -577,7 +903,7 @@
                 <label>Domínio customizado</label>
               </div>
               <div class="fl filled">
-                <input type="text" value="promo-inverno" placeholder=" ">
+                <input id="slug-input" type="text" value="promo-inverno" placeholder=" ">
                 <label>Customizar slug</label>
               </div>
             </div>
@@ -602,7 +928,7 @@
             <div class="d">Roteamento condicional · A/B test · Agendamento · Proteção · Pixels server-side</div>
           </div>
           <div style="display:flex;align-items:center;gap:10px">
-            <span style="font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:#10B981;background:rgba(16,185,129,0.15);padding:4px 10px;border-radius:999px">2 ativos</span>
+            <span id="adv-counter" style="font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:#10B981;background:rgba(16,185,129,0.15);padding:4px 10px;border-radius:999px">0 ativos</span>
             <div class="adv-chev">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
             </div>
@@ -613,18 +939,149 @@
           <div>
             <div class="adv-inner" id="adv-inner">
 
+              <!-- SEÇÃO: Organização -->
+              <div class="adv-section-ttl">Organização</div>
+
+              <!-- Pasta -->
+              <div class="form-card">
+                <div class="form-card-h">
+                  <div class="form-card-ic lime">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                  </div>
+                  <span class="form-card-ttl">Pasta</span>
+                  <a class="card-hdr-help">(ajuda)</a>
+                </div>
+                <div class="fl">
+                  <select id="link-folder">
+                    <option value="" disabled selected hidden></option>
+                    <option value="">Sem pasta</option>
+                    <option value="campanhas">📁 Campanhas</option>
+                    <option value="podcast">📁 Podcast</option>
+                    <option value="afiliados">📁 Afiliados</option>
+                    <option value="atendimento">📁 Atendimento</option>
+                    <option value="ebooks">📁 E-books / Materiais</option>
+                    <option value="__new__">+ Criar nova pasta…</option>
+                  </select>
+                  <label>Selecione uma pasta</label>
+                </div>
+              </div>
+
+              <!-- Notas -->
+              <div class="form-card">
+                <div class="form-card-h">
+                  <div class="form-card-ic coral">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </div>
+                  <span class="form-card-ttl">Adicionar notas</span>
+                  <a class="card-hdr-help">(ajuda)</a>
+                </div>
+                <div class="fl">
+                  <textarea id="link-notes" placeholder=" " style="min-height:64px"></textarea>
+                  <label>Descrição interna do seu link</label>
+                </div>
+              </div>
+
+              <!-- Etiquetas (full-width) -->
+              <div class="form-card full">
+                <div class="form-card-h">
+                  <div class="form-card-ic cyan">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82zM7 7h.01"/></svg>
+                  </div>
+                  <span class="form-card-ttl">Etiquetas</span>
+                  <a class="card-hdr-help">(ajuda)</a>
+                </div>
+                <div class="tag-input-wrap" id="tag-wrap">
+                  <input id="tag-input" class="tag-input" type="text" placeholder="Adicionar etiquetas — pressione Enter ou vírgula para criar">
+                </div>
+              </div>
+
               <!-- SEÇÃO: Roteamento condicional -->
               <div class="adv-section-ttl">Roteamento condicional</div>
 
-              <!-- A/B Rotator (ATIVO) -->
-              <div class="acc active">
+              <!-- Teste A/B (OFF por padrão) -->
+              <div class="acc" data-mutex="abrouter" id="acc-abrouter">
                 <div class="acc-h">
                   <div class="acc-box lime">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>
                   </div>
                   <div class="acc-text">
-                    <div class="t">A/B Rotator</div>
-                    <div class="d">Distribui tráfego entre múltiplos destinos por porcentagem.</div>
+                    <div class="t">Teste A/B</div>
+                    <div class="d">Distribui tráfego entre múltiplos destinos por porcentagem (A/B/C…).</div>
+                  </div>
+                  <div class="acc-h-right">
+                    <span class="acc-status off">Off</span>
+                    <div class="tg"></div>
+                    <div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></div>
+                  </div>
+                </div>
+                <div class="acc-body"><div>
+                  <div id="ab-variants"></div>
+                  <div class="ab-footer">
+                    <div class="ab-sum">
+                      <span class="ab-sum-label">Soma:</span>
+                      <span class="ab-sum-value" id="ab-sum-value">100%</span>
+                      <span class="ab-sum-hint" id="ab-sum-hint">Deve totalizar 100%</span>
+                    </div>
+                    <div class="ab-actions">
+                      <a class="subtle-link" id="ab-balance">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+                        Distribuir igualmente
+                      </a>
+                      <a class="subtle-link" id="ab-add">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
+                        Adicionar variante
+                      </a>
+                    </div>
+                  </div>
+                </div></div>
+              </div>
+
+              <!-- G04: CONFLICT BANNER -->
+              <div class="conflict-banner" id="conflict-banner" style="display:none">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/></svg>
+                <div class="ct">
+                  <b>Roteamento exclusivo ativo</b>
+                  Só 1 roteamento condicional pode rodar por vez. <span id="conflict-active">Pause o modo ativo</span> para liberar os outros.
+                </div>
+              </div>
+
+              <!-- Geolocalização -->
+              <div class="acc" data-mutex="geo" id="acc-geo">
+                <div class="acc-h">
+                  <div class="acc-box yellow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
+                  </div>
+                  <div class="acc-text">
+                    <div class="t">Geolocalização <span class="conflict-badge" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg>Conflito</span></div>
+                    <div class="d">Roteia por estado e cidade do visitante (Brasil).</div>
+                  </div>
+                  <div class="acc-h-right">
+                    <span class="acc-status off">Off</span>
+                    <div class="tg"></div>
+                    <div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></div>
+                  </div>
+                </div>
+                <div class="acc-body"><div>
+                  <div id="geo-rules"></div>
+                  <div class="dev-footer">
+                    <div class="dev-hint">Visitantes que não baterem nenhuma regra seguem para o destino principal. Marcar "Todas as cidades" trava o estado nas outras regras.</div>
+                    <a class="subtle-link" id="geo-add">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
+                      Adicionar redirecionamento
+                    </a>
+                  </div>
+                </div></div>
+              </div>
+
+              <!-- Dispositivos (form factor) -->
+              <div class="acc" data-mutex="device" id="acc-device">
+                <div class="acc-h">
+                  <div class="acc-box cyan">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>
+                  </div>
+                  <div class="acc-text">
+                    <div class="t">Dispositivos <span class="conflict-badge" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg>Conflito</span></div>
+                    <div class="d">Roteia por tipo de aparelho: Desktop, Smartphone ou Tablet.</div>
                   </div>
                   <div class="acc-h-right">
                     <span class="acc-status">Ativo</span>
@@ -633,64 +1090,43 @@
                   </div>
                 </div>
                 <div class="acc-body"><div>
-                  <div style="display:grid;grid-template-columns:1fr 90px 36px;gap:10px;margin-bottom:10px">
-                    <div class="fl filled"><input value="cliente-exemplo.com/promo-inverno" placeholder=" " disabled style="opacity:.7"><label>Destino principal</label></div>
-                    <div class="fl filled"><input value="60" placeholder=" " disabled style="opacity:.7"><label>%</label></div>
-                    <div></div>
-                  </div>
-                  <div style="display:grid;grid-template-columns:1fr 90px 36px;gap:10px">
-                    <div class="fl filled"><input value="cliente-exemplo.com/promo-inverno-b" placeholder=" "><label>Variante B</label></div>
-                    <div class="fl filled"><input value="40" placeholder=" "><label>%</label></div>
-                    <div class="chev" style="align-self:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></div>
+                  <div id="dev-rules"></div>
+                  <div class="dev-footer">
+                    <div class="dev-hint">Aparelhos que não baterem nenhuma regra seguem para o destino principal do link.</div>
+                    <a class="subtle-link" id="dev-add">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
+                      Adicionar redirecionamento
+                    </a>
                   </div>
                 </div></div>
               </div>
 
-              <!-- G04: CONFLICT BANNER -->
-              <div class="conflict-banner">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/></svg>
-                <div class="ct">
-                  <b>Roteamento exclusivo ativo</b>
-                  Só 1 roteamento condicional pode rodar por vez. O <b style="display:inline;text-transform:none;font-size:inherit;letter-spacing:0;margin:0">A/B Rotator</b> está ativo — Geolocalização e Dispositivos estão bloqueados. Pause o A/B Rotator para liberar os outros modos.
-                </div>
-              </div>
-
-              <!-- Geolocalização — BLOQUEADA (G04 mutex) -->
-              <div class="acc locked">
+              <!-- Sistema operacional -->
+              <div class="acc" data-mutex="os" id="acc-os">
                 <div class="acc-h">
-                  <div class="acc-box yellow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
+                  <div class="acc-box violet">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 17h18M8 21h8M10 17v4M14 17v4"/></svg>
                   </div>
                   <div class="acc-text">
-                    <div class="t">Geolocalização <span class="conflict-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg>Conflito</span></div>
-                    <div class="d">Pause o A/B Rotator para ativar este roteamento.</div>
+                    <div class="t">Sistema operacional <span class="conflict-badge" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg>Conflito</span></div>
+                    <div class="d">Roteia por SO: iOS, Android, Windows, macOS, Linux.</div>
                   </div>
                   <div class="acc-h-right">
-                    <span class="acc-status off">Bloqueado</span>
+                    <span class="acc-status off">Off</span>
                     <div class="tg"></div>
                     <div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></div>
                   </div>
                 </div>
-                <div class="acc-body"><div></div></div>
-              </div>
-
-              <!-- Dispositivos & SO — BLOQUEADO (G04 mutex) -->
-              <div class="acc locked">
-                <div class="acc-h">
-                  <div class="acc-box cyan">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>
+                <div class="acc-body"><div>
+                  <div id="os-rules"></div>
+                  <div class="dev-footer">
+                    <div class="dev-hint">Sistemas que não baterem nenhuma regra seguem para o destino principal do link.</div>
+                    <a class="subtle-link" id="os-add">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
+                      Adicionar redirecionamento
+                    </a>
                   </div>
-                  <div class="acc-text">
-                    <div class="t">Dispositivos &amp; Sistema operacional <span class="conflict-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg>Conflito</span></div>
-                    <div class="d">Pause o A/B Rotator para ativar este roteamento.</div>
-                  </div>
-                  <div class="acc-h-right">
-                    <span class="acc-status off">Bloqueado</span>
-                    <div class="tg"></div>
-                    <div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></div>
-                  </div>
-                </div>
-                <div class="acc-body"><div></div></div>
+                </div></div>
               </div>
 
               <!-- Deep Linking (ATIVO) -->
@@ -810,6 +1246,194 @@
                 <div class="acc-body"><div></div></div>
               </div>
 
+              <!-- ════════ MODO DE DISPARO DE EVENTOS ════════ -->
+              <div class="adv-section-ttl smart-ttl" id="smart-ttl">⚡ Modo de disparo de eventos</div>
+
+              <div class="acc smart-tracking-acc hidden" id="smart-tracking-card">
+                <div class="acc-h" id="smart-toggle">
+                  <div class="acc-box st-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>
+                  </div>
+                  <div class="acc-text">
+                    <div class="t">Modo de disparo de eventos</div>
+                    <div class="d" id="st-status-desc">Imediato (padrão Meta)</div>
+                  </div>
+                  <div class="acc-h-right">
+                    <span class="acc-status off" id="st-status-badge">Padrão</span>
+                    <div class="tg" id="st-tg"></div>
+                    <div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></div>
+                  </div>
+                </div>
+                <div class="acc-body"><div class="st-body-inner">
+
+                  <!-- 2 RADIO OPTIONS NO TOPO -->
+                  <div class="st-mode-selector">
+                    <label class="pm-opt">
+                      <input type="radio" name="st-mode" value="immediate" checked>
+                      <div class="pm-opt-body">
+                        <div class="pm-opt-ttl">Imediato <span class="pm-opt-tag">PADRÃO META</span></div>
+                        <div class="pm-opt-sub">Dispara o evento na hora do click. Otimização por quantidade.</div>
+                      </div>
+                    </label>
+                    <label class="pm-opt">
+                      <input type="radio" name="st-mode" value="smart">
+                      <div class="pm-opt-body">
+                        <div class="pm-opt-ttl">Smart Tracking <span class="pm-opt-pro">PRO</span></div>
+                        <div class="pm-opt-sub">Espera o lead qualificar na LP. Otimização por qualidade.</div>
+                      </div>
+                    </label>
+                  </div>
+
+                  <!-- FULL CONFIG (apenas se Smart Tracking selecionado) -->
+                  <div class="st-full-config" id="st-full-config" hidden>
+
+                  <div class="st-intro">
+                    Dispara eventos pro Meta CAPI/TikTok/Google apenas quando o lead se qualifica de verdade.
+                    Algoritmo otimiza por <strong>qualidade</strong>, não por quantidade de clicks.
+                    <a class="card-hdr-help" href="#" style="margin-left:6px">(help)</a>
+                  </div>
+
+                <!-- TIERS (4) -->
+                <div class="st-block" id="st-tiers-block">
+                  <div class="st-block-ttl">📊 4 Tiers de qualificação <a class="card-hdr-help" href="#">(help)</a></div>
+
+                  <div class="st-tiers">
+                    <!-- PURE -->
+                    <div class="st-tier pure">
+                      <div class="st-tier-hdr">
+                        <span class="st-tier-icon">💎</span>
+                        <span class="st-tier-name">PURE</span>
+                        <span class="st-tier-desc">Conversão de alto valor</span>
+                      </div>
+                      <div class="st-tier-body">
+                        <label class="st-check"><input type="checkbox" checked> Form completo</label>
+                        <label class="st-check"><input type="checkbox" checked> + Custom event <code>applink.pure()</code></label>
+                        <div class="st-event-row">
+                          <span class="st-event-lbl">event_name</span>
+                          <select><option>Purchase</option><option>Schedule</option><option>StartTrial</option><option>CompleteRegistration</option></select>
+                        </div>
+                        <div class="st-event-row">
+                          <span class="st-event-lbl">value</span>
+                          <span class="st-currency">R$</span>
+                          <input type="number" value="500" step="10">
+                          <select class="st-curr-sel"><option>BRL</option><option>USD</option></select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- HOT -->
+                    <div class="st-tier hot">
+                      <div class="st-tier-hdr">
+                        <span class="st-tier-icon">🔥</span>
+                        <span class="st-tier-name">HOT</span>
+                        <span class="st-tier-desc">Qualificado por form</span>
+                      </div>
+                      <div class="st-tier-body">
+                        <label class="st-check"><input type="checkbox" checked> Form fill (qualquer &lt;form&gt;)</label>
+                        <label class="st-check"><input type="checkbox"> Custom event <code>applink.qualify()</code></label>
+                        <div class="st-event-row">
+                          <span class="st-event-lbl">event_name</span>
+                          <select><option>Lead</option><option>Contact</option><option>SubmitApplication</option><option>AddPaymentInfo</option></select>
+                        </div>
+                        <div class="st-event-row">
+                          <span class="st-event-lbl">value</span>
+                          <span class="st-currency">R$</span>
+                          <input type="number" value="250" step="10">
+                          <select class="st-curr-sel"><option>BRL</option><option>USD</option></select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- WARM -->
+                    <div class="st-tier warm">
+                      <div class="st-tier-hdr">
+                        <span class="st-tier-icon">🌡</span>
+                        <span class="st-tier-name">WARM</span>
+                        <span class="st-tier-desc">Engajou com tempo ou scroll</span>
+                      </div>
+                      <div class="st-tier-body">
+                        <label class="st-check"><input type="checkbox" checked> Tempo &gt; <select class="st-inline-sel"><option>10s</option><option selected>30s</option><option>60s</option><option>120s</option></select></label>
+                        <label class="st-check"><input type="checkbox"> Scroll &gt; <select class="st-inline-sel"><option>50%</option><option selected>80%</option><option>100%</option></select></label>
+                        <div class="st-event-row">
+                          <span class="st-event-lbl">event_name</span>
+                          <select><option>ViewContent</option><option>AddToCart</option><option>AddToWishlist</option></select>
+                        </div>
+                        <div class="st-event-row">
+                          <span class="st-event-lbl">value</span>
+                          <span class="st-currency">R$</span>
+                          <input type="number" value="50" step="5">
+                          <select class="st-curr-sel"><option>BRL</option><option>USD</option></select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- COLD -->
+                    <div class="st-tier cold">
+                      <div class="st-tier-hdr">
+                        <span class="st-tier-icon">❄️</span>
+                        <span class="st-tier-name">COLD</span>
+                        <span class="st-tier-desc">Timeout sem ação</span>
+                      </div>
+                      <div class="st-tier-body">
+                        <div class="st-event-row">
+                          <span class="st-event-lbl">janela</span>
+                          <select><option>5 min</option><option>10 min</option><option selected>15 min</option><option>30 min</option><option>1 hora</option></select>
+                        </div>
+                        <div class="st-event-row">
+                          <span class="st-event-lbl">event_name</span>
+                          <select><option>PageView</option><option>AdImpression</option><option>None (não disparar)</option></select>
+                        </div>
+                        <div class="st-event-row">
+                          <span class="st-event-lbl">value</span>
+                          <span class="st-currency">R$</span>
+                          <input type="number" value="0" step="1">
+                          <select class="st-curr-sel"><option>BRL</option><option>USD</option></select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- PIXELS HERDADOS -->
+                <div class="st-block" id="st-pixels-block">
+                  <div class="st-block-ttl">📡 Pixels que recebem os eventos</div>
+                  <div class="st-pixels-inherit">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M9 12l2 2 4-4M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z"/></svg>
+                    Os eventos serão enviados pros pixels marcados em <strong>"Adicionar Pixels"</strong> acima.
+                    <div class="st-pixels-active">
+                      <span class="st-pixel-badge"><span class="st-pix-dot"></span> Meta · 8417_2031</span>
+                      <span class="st-pixel-badge"><span class="st-pix-dot"></span> TikTok · CL9F_77</span>
+                      <span class="st-pixel-badge muted">+ adicionar mais ↑</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- HOW IT WORKS -->
+                <div class="st-info">
+                  <div class="st-info-ttl">💡 Como funciona</div>
+                  <ol class="st-info-list">
+                    <li>Lead clica no AppLink → capturamos <code>fbp</code>, <code>fbc</code>, <code>click_id</code></li>
+                    <li>Redirecionamos pra sua LP (com snippet AppLink instalado)</li>
+                    <li>Aguardamos até <strong>15 min</strong> pela ação configurada</li>
+                    <li>Decidimos o tier (PURE/HOT/WARM/COLD) e disparamos o evento certo</li>
+                    <li>Cada tier vira <strong>audiência separada</strong> pra retargeting inteligente</li>
+                  </ol>
+                </div>
+
+                  </div><!-- /.st-full-config -->
+
+                  <!-- SAVE BUTTON -->
+                  <div class="st-save-row">
+                    <button class="st-save-btn" id="st-save-btn">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="14" height="14"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v14a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
+                      Salvar configuração
+                    </button>
+                  </div>
+
+                </div></div><!-- /acc-body -->
+              </div>
+              <!-- ════════ /SMART TRACKING ════════ -->
+
             </div>
           </div>
         </div>
@@ -818,11 +1442,11 @@
 
       <!-- ══ LINHA 4: CTA FULL-WIDTH ══ -->
       <div class="cta-section">
-        <button class="cta-btn">
+        <button class="cta-btn" id="btn-generate">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>
           Gerar meu link
         </button>
-        <p class="cta-sub">ou <a>Salvar rascunho</a></p>
+        <p class="cta-sub">ou <a id="btn-draft">Salvar rascunho</a></p>
       </div>
       <!-- /LINHA 4 -->
 
@@ -833,8 +1457,104 @@
 </div>
 <!-- /SHELL -->
 
+<!-- ═══ TOAST + MODAL CONTAINERS ═══ -->
+<div class="toast-stack" id="toast-stack"></div>
+<div class="modal-bd" id="modal-success">
+  <div class="modal">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h3>Link gerado com sucesso</h3>
+    <p class="lead">Seu link inteligente está ativo e pronto para distribuir. Os pixels e UTMs já estão configurados.</p>
+    <div class="link-box">
+      <input id="generated-url" type="text" readonly value="">
+      <button id="btn-copy">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copiar
+      </button>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="v" id="stat-pixels">2</div><div class="l">Pixels</div></div>
+      <div class="stat"><div class="v" id="stat-utms">3</div><div class="l">UTMs</div></div>
+      <div class="stat"><div class="v" id="stat-rules">2</div><div class="l">Regras</div></div>
+    </div>
+    <div class="actions">
+      <button class="secondary" id="modal-close">Fechar</button>
+      <a class="primary" href="03-analytics-link.html" style="text-decoration:none;display:grid;place-items:center">Ver analytics</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL: NOVO PIXEL ═══ -->
+<div class="modal-bd" id="modal-pixel">
+  <div class="modal" style="max-width:460px">
+    <div class="modal-icon-pix">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>
+    </div>
+    <h3 class="center">Adicione um novo Pixel</h3>
+    <p class="lead center">Escolha a plataforma e informe o ID para começar a rastrear conversões.</p>
+
+    <div class="fl" style="margin-bottom:14px">
+      <select id="pix-platform">
+        <option value="" disabled selected hidden></option>
+        <option value="facebook">Facebook</option>
+        <option value="linkedin">LinkedIn</option>
+        <option value="ga">Google Analytics</option>
+        <option value="ga4">Google Analytics 4</option>
+        <option value="gads">Anúncios Google</option>
+        <option value="gtm">Gerenciador de Tags do Google</option>
+        <option value="twitter">Twitter</option>
+      </select>
+      <label>Selecione a plataforma *</label>
+    </div>
+
+    <div class="fl" style="margin-bottom:14px">
+      <input id="pix-name" type="text" placeholder=" ">
+      <label>Dê um nome ao seu pixel *</label>
+    </div>
+
+    <div class="fl" style="margin-bottom:6px">
+      <input id="pix-id" type="text" placeholder=" ">
+      <label>ID do pixel *</label>
+    </div>
+
+    <a class="pix-help" id="pix-help">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+      Como encontro meu ID de pixel?
+    </a>
+
+    <div class="actions">
+      <button class="secondary" id="pix-cancel">Fechar</button>
+      <button class="primary" id="pix-create" disabled>Criar</button>
+    </div>
+  </div>
+</div>
+
 <script>
-  /* Accordion: opções avançadas */
+(function(){
+  'use strict';
+
+  // ────────────────────── TOAST ──────────────────────
+  var toastStack = document.getElementById('toast-stack');
+  function toast(msg, kind){
+    kind = kind || 'info';
+    var icons = {
+      ok:'<polyline points="20 6 9 17 4 12"/>',
+      warn:'<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/>',
+      info:'<circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/>'
+    };
+    var el = document.createElement('div');
+    el.className = 'toast ' + kind;
+    el.innerHTML = '<div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">'+icons[kind]+'</svg></div><span>'+msg+'</span>';
+    toastStack.appendChild(el);
+    requestAnimationFrame(function(){ el.classList.add('show'); });
+    setTimeout(function(){
+      el.classList.remove('show');
+      setTimeout(function(){ el.remove(); }, 400);
+    }, 2800);
+  }
+
+  // ────────────────────── ACCORDION ADVANCED ──────────────────────
   var advToggle = document.getElementById('adv-toggle');
   var advBody   = document.getElementById('adv-body');
   advToggle.addEventListener('click', function(){
@@ -842,41 +1562,1092 @@
     advBody.classList.toggle('open');
   });
 
-  /* Inner acc cards */
+  // ────────────────────── INNER ACC CARDS ──────────────────────
   document.querySelectorAll('.acc').forEach(function(acc){
     acc.querySelector('.acc-h').addEventListener('click', function(e){
       if (e.target.closest('.tg')) return;
+      if (acc.classList.contains('locked')){
+        toast('Pause o Teste A/B para abrir este roteamento', 'warn');
+        return;
+      }
       acc.classList.toggle('active');
     });
   });
 
-  /* Toggle switches */
+  // ────────────────────── MUTEX: rote. exclusivo (A/B · Geo · Device · OS) ──────────────────────
+  var conflictBanner = document.getElementById('conflict-banner');
+  var conflictActive = document.getElementById('conflict-active');
+  var ROUTING_CARDS = [
+    { id:'acc-abrouter', label:'Teste A/B',         desc:'Distribui tráfego entre múltiplos destinos por porcentagem (A/B/C…).' },
+    { id:'acc-geo',      label:'Geolocalização',    desc:'Roteia por estado e cidade do visitante (Brasil).' },
+    { id:'acc-device',   label:'Dispositivos',      desc:'Roteia por tipo de aparelho: Desktop, Smartphone ou Tablet.' },
+    { id:'acc-os',       label:'Sistema operacional', desc:'Roteia por SO: iOS, Android, Windows, macOS, Linux.' }
+  ];
+  var routingCards = ROUTING_CARDS.map(function(c){
+    return Object.assign({}, c, { el: document.getElementById(c.id) });
+  });
+  var accAb = document.getElementById('acc-abrouter');
+  var advCounter = document.getElementById('adv-counter');
+
+  function updateActiveCount(){
+    var n = 0;
+    document.querySelectorAll('#adv-body .acc .tg.on').forEach(function(){ n++; });
+    advCounter.textContent = n + ' ativo' + (n===1 ? '' : 's');
+  }
+
+  function applyMutex(){
+    // Find the active routing card (mutually exclusive among the 4)
+    var active = routingCards.find(function(c){ return c.el.querySelector('.tg').classList.contains('on'); });
+
+    routingCards.forEach(function(c){
+      var tg     = c.el.querySelector('.tg');
+      var status = c.el.querySelector('.acc-status');
+      var badge  = c.el.querySelector('.conflict-badge');
+      var desc   = c.el.querySelector('.acc-text .d');
+      var isActive = active && c.id === active.id;
+
+      if (active && !isActive){
+        c.el.classList.add('locked');
+        c.el.classList.remove('active');
+        if (tg.classList.contains('on')) tg.classList.remove('on');
+        status.textContent = 'Bloqueado';
+        status.classList.add('off');
+        if (badge) badge.style.display = '';
+        desc.textContent = 'Pause o ' + active.label + ' para ativar este roteamento.';
+      } else {
+        c.el.classList.remove('locked');
+        if (badge) badge.style.display = 'none';
+        var on = tg.classList.contains('on');
+        status.textContent = on ? 'Ativo' : 'Off';
+        status.classList.toggle('off', !on);
+        desc.textContent = c.desc;
+      }
+    });
+
+    if (active){
+      conflictBanner.style.display = '';
+      conflictActive.textContent = 'Pause o ' + active.label;
+    } else {
+      conflictBanner.style.display = 'none';
+    }
+    updateActiveCount();
+  }
+
+  // ────────────────────── TOGGLE SWITCHES ──────────────────────
   document.querySelectorAll('.tg').forEach(function(t){
     t.addEventListener('click', function(e){
       e.stopPropagation();
+      var acc = t.closest('.acc');
+      if (acc && acc.classList.contains('locked')){
+        toast('Pause o Teste A/B para ativar este modo', 'warn');
+        return;
+      }
       t.classList.toggle('on');
+      // Update local status badge
+      if (acc){
+        var on = t.classList.contains('on');
+        var status = acc.querySelector('.acc-status');
+        if (status && !acc.classList.contains('locked')){
+          status.textContent = on ? 'Ativo' : 'Off';
+          status.classList.toggle('off', !on);
+        }
+      }
+      applyMutex();
     });
   });
 
-  /* Type dropdown — cicla entre tipos (mockup) */
-  var types = [
-    { label:'Smart Link', icon:'<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>' },
-    { label:'E-mail',     icon:'<path d="M4 4h16v16H4zM4 7l8 6 8-6"/>' },
-    { label:'WhatsApp',   icon:'<path d="M21 11.5a8.4 8.4 0 0 1-12 7.6L3 21l1.9-6A8.4 8.4 0 1 1 21 11.5z"/>' },
-    { label:'vCard',      icon:'<rect x="6" y="2" width="12" height="20" rx="3"/><path d="M9 6h6"/>' },
+  // ────────────────────── TYPE DROPDOWN ──────────────────────
+  var TYPES = [
+    { id:'smart',    label:'Smart Link', meta:'URL + roteamento condicional', icon:'<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>' },
+    { id:'redirect', label:'Redirect simples', meta:'URL direto, sem roteamento', icon:'<path d="M5 12h14M12 5l7 7-7 7"/>' },
+    { id:'deep',     label:'Deep link', meta:'Abre app nativo no mobile', icon:'<rect x="6" y="2" width="12" height="20" rx="3"/><circle cx="12" cy="17" r="1"/>' },
+    { id:'email',    label:'E-mail', meta:'mailto: com assunto e corpo', icon:'<path d="M4 4h16v16H4zM4 7l8 6 8-6"/>' },
+    { id:'whatsapp', label:'WhatsApp', meta:'wa.me com mensagem pré-pronta', icon:'<path d="M21 11.5a8.4 8.4 0 0 1-12 7.6L3 21l1.9-6A8.4 8.4 0 1 1 21 11.5z"/>' },
+    { id:'vcard',    label:'vCard', meta:'Cartão de contato', icon:'<rect x="6" y="2" width="12" height="20" rx="3"/><path d="M9 6h6"/>' }
   ];
-  var ti = 0;
-  document.getElementById('type-dd').addEventListener('click', function(){
-    ti = (ti + 1) % types.length;
-    this.querySelector('.type-dd-label').textContent = types[ti].label;
-    this.querySelector('.type-dd-icon svg').innerHTML = types[ti].icon;
+  var currentType = TYPES[0];
+  var typeDD = document.getElementById('type-dd');
+  var typeMenu = document.getElementById('type-dd-menu');
+  function renderTypeMenu(){
+    typeMenu.innerHTML = TYPES.map(function(t){
+      return '<div class="dd-item'+(t.id===currentType.id?' active':'')+'" data-id="'+t.id+'">'+
+        '<div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">'+t.icon+'</svg></div>'+
+        '<div><div>'+t.label+'</div><div class="meta">'+t.meta+'</div></div>'+
+      '</div>';
+    }).join('');
+  }
+  renderTypeMenu();
+  typeDD.addEventListener('click', function(e){
+    e.stopPropagation();
+    closeAllMenus(typeMenu);
+    typeMenu.classList.toggle('open');
+  });
+  typeMenu.addEventListener('click', function(e){
+    var item = e.target.closest('.dd-item');
+    if (!item) return;
+    var t = TYPES.find(function(x){return x.id===item.dataset.id;});
+    currentType = t;
+    typeDD.querySelector('.type-dd-label').textContent = t.label;
+    typeDD.querySelector('.type-dd-icon').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">'+t.icon+'</svg>';
+    renderTypeMenu();
+    typeMenu.classList.remove('open');
   });
 
-  /* Upload zone hover feedback */
+  // ────────────────────── URL + SLUG SYNC ──────────────────────
+  var urlInput = document.getElementById('url-input');
+  var slugInput = document.getElementById('slug-input');
+  var urlWrap = document.getElementById('url-wrap');
+  function slugify(s){
+    return (s||'').toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g,'')
+      .replace(/[^a-z0-9\s-]/g,'')
+      .trim().replace(/\s+/g,'-').replace(/-+/g,'-').slice(0,32);
+  }
+  urlInput.addEventListener('input', function(){
+    urlWrap.classList.remove('err');
+  });
+
+  // Regen slug button
+  document.getElementById('btn-regen').addEventListener('click', function(){
+    var adjectives = ['rapido','smart','flow','sharp','neon','prime','spark','golden','viral','zen'];
+    var nouns = ['link','bio','reach','pulse','wave','signal','beam','launch','drop','peak'];
+    var a = adjectives[Math.floor(Math.random()*adjectives.length)];
+    var n = nouns[Math.floor(Math.random()*nouns.length)];
+    var rand = Math.random().toString(36).slice(2,5);
+    var newSlug = a+'-'+n+'-'+rand;
+    slugInput.value = newSlug;
+    slugInput.parentElement.classList.add('filled');
+    slugInput.focus();
+    toast('Slug regenerado: '+newSlug, 'ok');
+  });
+
+  slugInput.addEventListener('input', function(){
+    this.value = slugify(this.value);
+  });
+
+  // ────────────────────── UPLOAD ──────────────────────
   var uz = document.getElementById('upload-zone');
+  var uFile = document.getElementById('upload-file');
+  var uPlaceholder = document.getElementById('upload-placeholder');
+  var uClear = document.getElementById('upload-clear');
+
+  function handleFile(file){
+    if (!file) return;
+    if (!/^image\/(png|jpe?g|webp)$/i.test(file.type)){
+      toast('Formato inválido. Use PNG, JPG ou WEBP.', 'warn');
+      return;
+    }
+    if (file.size > 5*1024*1024){
+      toast('Arquivo muito grande. Máximo 5 MB.', 'warn');
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      uz.classList.add('has-image');
+      uPlaceholder.style.display = 'none';
+      var existing = uz.querySelector('img');
+      if (existing) existing.remove();
+      var img = document.createElement('img');
+      img.src = ev.target.result;
+      uz.appendChild(img);
+      toast('Imagem carregada — '+file.name, 'ok');
+    };
+    reader.readAsDataURL(file);
+  }
+
+  uz.addEventListener('click', function(e){
+    if (e.target.closest('#upload-clear')) return;
+    uFile.click();
+  });
+  uFile.addEventListener('change', function(e){
+    handleFile(e.target.files[0]);
+    e.target.value = '';
+  });
   uz.addEventListener('dragover', function(e){ e.preventDefault(); uz.style.borderColor='rgba(191,255,0,0.6)'; });
   uz.addEventListener('dragleave', function(){ uz.style.borderColor=''; });
-  uz.addEventListener('drop', function(e){ e.preventDefault(); uz.style.borderColor=''; });
+  uz.addEventListener('drop', function(e){
+    e.preventDefault();
+    uz.style.borderColor='';
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+  });
+  uClear.addEventListener('click', function(e){
+    e.stopPropagation();
+    uz.classList.remove('has-image');
+    var img = uz.querySelector('img');
+    if (img) img.remove();
+    uPlaceholder.style.display = 'flex';
+    toast('Imagem removida', 'info');
+  });
+
+  // ────────────────────── PIXEL LIBRARY + CHIPS ──────────────────────
+  var pixelChips = document.getElementById('pixel-chips');
+  var pixelSelect = document.getElementById('pixel-select');
+
+  var PIXEL_PLATFORMS = {
+    facebook: 'Meta / Facebook',
+    linkedin: 'LinkedIn',
+    ga:       'Google Analytics',
+    ga4:      'GA4',
+    gads:     'Google Ads',
+    gtm:      'Google Tag Manager',
+    twitter:  'Twitter / X'
+  };
+
+  // Pixels já cadastrados na conta do usuário (mock — em produção viria do backend)
+  var pixelLibrary = [
+    // Meta / Facebook
+    { id:'p1',  platform:'facebook', name:'Pixel Meta principal',     pixelId:'841722334455' },
+    { id:'p2',  platform:'facebook', name:'Meta — Black Friday',      pixelId:'998877665544' },
+    { id:'p3',  platform:'facebook', name:'Meta — Remarketing US',    pixelId:'123456789012' },
+    // Google Ads
+    { id:'p4',  platform:'gads',     name:'GAds — Conversões Loja',   pixelId:'AW-1234567890' },
+    { id:'p5',  platform:'gads',     name:'GAds — Lead Gen',          pixelId:'AW-9876543210' },
+    // Google Analytics 4
+    { id:'p6',  platform:'ga4',      name:'GA4 — site institucional', pixelId:'G-ABC123XYZ4' },
+    { id:'p7',  platform:'ga4',      name:'GA4 — blog conteúdo',      pixelId:'G-DEF456UVW9' },
+    { id:'p8',  platform:'ga4',      name:'GA4 — app mobile',         pixelId:'G-MOB789RST0' },
+    // Google Analytics (Universal — legado)
+    { id:'p9',  platform:'ga',       name:'UA — legado loja',         pixelId:'UA-12345678-1' },
+    // LinkedIn
+    { id:'p10', platform:'linkedin', name:'LinkedIn Insight B2B',     pixelId:'987654321' },
+    { id:'p11', platform:'linkedin', name:'LinkedIn — Carreiras',     pixelId:'456789012' },
+    // Google Tag Manager
+    { id:'p12', platform:'gtm',      name:'GTM Master',               pixelId:'GTM-A1B2C3D' },
+    { id:'p13', platform:'gtm',      name:'GTM — Landing pages',      pixelId:'GTM-X9Y8Z7W' },
+    // Twitter / X
+    { id:'p14', platform:'twitter',  name:'X — Lançamento produto',   pixelId:'o1abc' },
+    { id:'p15', platform:'twitter',  name:'X — Awareness',            pixelId:'o2def' }
+  ];
+  // Pixels já adicionados a este link por padrão
+  var defaultChipLibIds = ['p1', 'p4'];
+
+  function libById(id){ return pixelLibrary.find(function(p){ return p.id === id; }); }
+
+  function shortId(s){ s = s||''; return s.length > 8 ? s.slice(0,4)+'…'+s.slice(-2) : s; }
+
+  function addedLibIds(){
+    var set = new Set();
+    pixelChips.querySelectorAll('.pix-chip').forEach(function(c){
+      if (c.dataset.libId) set.add(c.dataset.libId);
+    });
+    return set;
+  }
+
+  function renderPixelSelect(){
+    var added = addedLibIds();
+    var available = pixelLibrary.filter(function(p){ return !added.has(p.id); });
+    var opts = '<option value="" disabled selected hidden></option>';
+    if (!available.length){
+      opts += '<option value="" disabled>Todos os pixels já adicionados</option>';
+    } else {
+      opts += available.map(function(p){
+        var label = (PIXEL_PLATFORMS[p.platform]||p.platform) + ' · ' + p.name;
+        return '<option value="'+p.id+'">'+label+'</option>';
+      }).join('');
+    }
+    pixelSelect.innerHTML = opts;
+  }
+
+  function addPixelChipFromLib(lib, opts){
+    opts = opts || {};
+    var platLabel = PIXEL_PLATFORMS[lib.platform] || lib.platform;
+    var chip = document.createElement('span');
+    chip.className = 'pix-chip';
+    chip.dataset.libId = lib.id;
+    chip.title = lib.name + ' (' + platLabel + ' · ' + lib.pixelId + ')';
+    chip.innerHTML = platLabel + ' · ' + shortId(lib.pixelId) + ' <span class="x" title="Remover">✕</span>';
+    pixelChips.appendChild(chip);
+    bindChipRemove(chip);
+    renderPixelSelect();
+    if (opts.notify !== false) toast('Pixel adicionado: ' + lib.name, 'ok');
+  }
+
+  function bindChipRemove(chip){
+    chip.querySelector('.x').addEventListener('click', function(e){
+      e.stopPropagation();
+      chip.style.transition = '.25s';
+      chip.style.transform = 'scale(0.6)';
+      chip.style.opacity = '0';
+      setTimeout(function(){
+        var lib = libById(chip.dataset.libId);
+        chip.remove();
+        renderPixelSelect();
+        toast('Pixel removido: ' + (lib ? lib.name : 'desconhecido'), 'info');
+      }, 220);
+    });
+  }
+
+  // Render initial chips from defaults
+  defaultChipLibIds.forEach(function(id){
+    var lib = libById(id);
+    if (lib) addPixelChipFromLib(lib, { notify:false });
+  });
+  renderPixelSelect();
+
+  pixelSelect.addEventListener('change', function(){
+    if (!this.value) return;
+    var lib = libById(this.value);
+    if (lib) addPixelChipFromLib(lib);
+    this.value = '';
+  });
+
+  // ────────────────────── NEW PIXEL MODAL ──────────────────────
+  var modalPixel = document.getElementById('modal-pixel');
+  var pixPlatform = document.getElementById('pix-platform');
+  var pixName     = document.getElementById('pix-name');
+  var pixId       = document.getElementById('pix-id');
+  var pixCreate   = document.getElementById('pix-create');
+
+  function pixSyncFilled(el){
+    el.closest('.fl').classList.toggle('filled', !!el.value && el.value.trim() !== '');
+  }
+  function pixValidate(){
+    var ok = !!pixPlatform.value && !!pixName.value.trim() && !!pixId.value.trim();
+    pixCreate.disabled = !ok;
+  }
+  function pixResetForm(){
+    pixPlatform.value = '';
+    pixName.value = '';
+    pixId.value = '';
+    [pixPlatform, pixName, pixId].forEach(pixSyncFilled);
+    pixValidate();
+  }
+  [pixPlatform, pixName, pixId].forEach(function(el){
+    el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', function(){
+      pixSyncFilled(el);
+      pixValidate();
+    });
+  });
+
+  function openPixelModal(){
+    pixResetForm();
+    modalPixel.classList.add('open');
+    setTimeout(function(){ pixPlatform.focus(); }, 50);
+  }
+  function closePixelModal(){
+    modalPixel.classList.remove('open');
+  }
+
+  document.getElementById('btn-new-pixel').addEventListener('click', function(e){
+    e.preventDefault();
+    openPixelModal();
+  });
+  document.getElementById('pix-cancel').addEventListener('click', closePixelModal);
+  modalPixel.addEventListener('click', function(e){ if (e.target === modalPixel) closePixelModal(); });
+  document.getElementById('pix-help').addEventListener('click', function(e){
+    e.preventDefault();
+    toast('Docs em breve — confira o painel da sua plataforma.', 'info');
+  });
+
+  pixCreate.addEventListener('click', function(){
+    if (pixCreate.disabled) return;
+    var lib = {
+      id:       'p' + (Date.now().toString(36)),
+      platform: pixPlatform.value,
+      name:     pixName.value.trim(),
+      pixelId:  pixId.value.trim()
+    };
+    pixelLibrary.push(lib);
+    addPixelChipFromLib(lib, { notify:false });
+    toast('Pixel ' + (PIXEL_PLATFORMS[lib.platform]||lib.platform) + ' "' + lib.name + '" cadastrado', 'ok');
+    closePixelModal();
+  });
+
+  // ────────────────────── UTM TEMPLATES ──────────────────────
+  var TEMPLATES = [
+    { id:'instagram-bio', label:'Instagram Bio', meta:'bio · instagram', values:{campaign:'promo_inverno', medium:'bio', source:'instagram', term:'', content:''} },
+    { id:'youtube-desc',  label:'YouTube Description', meta:'video · youtube', values:{campaign:'lancamento', medium:'video', source:'youtube', term:'', content:'descricao'} },
+    { id:'email-blast',   label:'E-mail Blast', meta:'email · newsletter', values:{campaign:'newsletter', medium:'email', source:'mailing', term:'', content:'cta_topo'} },
+    { id:'paid-fb',       label:'Meta Ads — CPC', meta:'cpc · facebook', values:{campaign:'conversao_fev', medium:'cpc', source:'facebook', term:'', content:'criativo_1'} }
+  ];
+  var tmplDD = document.getElementById('tmpl-dd');
+  var tmplMenu = document.getElementById('tmpl-dd-menu');
+
+  function renderTmplMenu(){
+    tmplMenu.innerHTML = TEMPLATES.map(function(t){
+      return '<div class="dd-item" data-id="'+t.id+'">'+
+        '<div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div>'+
+        '<div><div>'+t.label+'</div><div class="meta">'+t.meta+'</div></div>'+
+      '</div>';
+    }).join('') || '<div style="padding:14px;color:#5A5A60;font-size:13px;text-align:center">Nenhum template salvo</div>';
+  }
+  renderTmplMenu();
+
+  tmplDD.addEventListener('click', function(e){
+    e.stopPropagation();
+    closeAllMenus(tmplMenu);
+    tmplMenu.classList.toggle('open');
+  });
+  tmplMenu.addEventListener('click', function(e){
+    var item = e.target.closest('.dd-item');
+    if (!item) return;
+    var t = TEMPLATES.find(function(x){return x.id===item.dataset.id;});
+    if (!t) return;
+    ['campaign','medium','source','term','content'].forEach(function(k){
+      var el = document.getElementById('utm-'+k);
+      if (el){
+        el.value = t.values[k] || '';
+        el.parentElement.classList.toggle('filled', !!el.value);
+      }
+    });
+    tmplMenu.classList.remove('open');
+    toast('Template aplicado: '+t.label, 'ok');
+  });
+
+  document.getElementById('btn-save-template').addEventListener('click', function(){
+    var name = window.prompt('Nome para este template UTM:');
+    if (!name) return;
+    var id = slugify(name);
+    var values = {};
+    ['campaign','medium','source','term','content'].forEach(function(k){
+      values[k] = document.getElementById('utm-'+k).value;
+    });
+    var meta = (values.medium||'—')+' · '+(values.source||'—');
+    TEMPLATES.push({ id:id, label:name, meta:meta, values:values });
+    renderTmplMenu();
+    toast('Template salvo: '+name, 'ok');
+  });
+
+  // ────────────────────── CLOSE MENUS ON OUTSIDE CLICK ──────────────────────
+  function closeAllMenus(except){
+    document.querySelectorAll('.dd-menu.open').forEach(function(m){
+      if (m !== except) m.classList.remove('open');
+    });
+  }
+  document.addEventListener('click', function(){ closeAllMenus(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape'){
+      closeAllMenus();
+      document.getElementById('modal-success').classList.remove('open');
+      document.getElementById('modal-pixel').classList.remove('open');
+    }
+  });
+
+  // ────────────────────── CTA: GERAR LINK ──────────────────────
+  var modal = document.getElementById('modal-success');
+  var generatedURL = document.getElementById('generated-url');
+  var titleInput = document.getElementById('link-title');
+  var flTitle = document.getElementById('fl-title');
+
+  function validate(){
+    var ok = true;
+    if (!urlInput.value.trim()){
+      urlWrap.classList.add('err');
+      ok = false;
+    }
+    if (!titleInput.value.trim()){
+      flTitle.classList.add('err');
+      ok = false;
+    }
+    return ok;
+  }
+  urlInput.addEventListener('input', function(){ urlWrap.classList.remove('err'); });
+  titleInput.addEventListener('input', function(){ flTitle.classList.remove('err'); });
+
+  function buildShortURL(){
+    var domain = document.getElementById('domain-select').value || 'plnk.to';
+    var slug = slugInput.value.trim() || 'novo-link';
+    return 'https://' + domain + '/' + slug;
+  }
+
+  document.getElementById('btn-generate').addEventListener('click', function(){
+    if (!validate()){
+      toast('Preencha URL de destino e título', 'warn');
+      return;
+    }
+    var abOn = accAb.querySelector('.tg').classList.contains('on');
+    if (abOn){
+      var sum = variants.reduce(function(a, v){ return a + (parseInt(v.pct, 10)||0); }, 0);
+      if (sum !== 100){
+        toast('A soma das variantes do Teste A/B deve ser 100% (atual: '+sum+'%)', 'warn');
+        return;
+      }
+      var empty = variants.some(function(v){ return !(v.url||'').trim(); });
+      if (empty){
+        toast('Preencha o destino de todas as variantes', 'warn');
+        return;
+      }
+    }
+    generatedURL.value = buildShortURL();
+    document.getElementById('stat-pixels').textContent = pixelChips.querySelectorAll('.pix-chip').length;
+    var utmCount = 0;
+    ['campaign','medium','source','term','content'].forEach(function(k){
+      if ((document.getElementById('utm-'+k).value||'').trim()) utmCount++;
+    });
+    document.getElementById('stat-utms').textContent = utmCount;
+    var rulesCount = document.querySelectorAll('#adv-body .acc .tg.on').length;
+    document.getElementById('stat-rules').textContent = rulesCount;
+    modal.classList.add('open');
+  });
+
+  document.getElementById('modal-close').addEventListener('click', function(){ modal.classList.remove('open'); });
+  modal.addEventListener('click', function(e){ if (e.target === modal) modal.classList.remove('open'); });
+
+  document.getElementById('btn-copy').addEventListener('click', function(){
+    generatedURL.select();
+    var copied = false;
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(generatedURL.value);
+        copied = true;
+      } else {
+        copied = document.execCommand('copy');
+      }
+    } catch(_){}
+    toast(copied ? 'Link copiado para a área de transferência' : 'Falha ao copiar — selecione manualmente', copied ? 'ok' : 'warn');
+  });
+
+  // ────────────────────── SALVAR RASCUNHO ──────────────────────
+  document.getElementById('btn-draft').addEventListener('click', function(){
+    toast('Rascunho salvo — você pode retomar no Painel', 'ok');
+  });
+
+  // ────────────────────── HELP TOOLTIPS (cosmético) ──────────────────────
+  document.querySelectorAll('.card-hdr-help').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var title = a.closest('.card-hdr').querySelector('.card-hdr-title').textContent;
+      toast('Ajuda: '+title+' — docs em breve', 'info');
+    });
+  });
+
+  // ────────────────────── A/B/C VARIANTS ──────────────────────
+  var variants = [
+    { url:'cliente-exemplo.com/promo-inverno',   pct:60 },
+    { url:'cliente-exemplo.com/promo-inverno-b', pct:40 }
+  ];
+  var abContainer = document.getElementById('ab-variants');
+  var abSumValue  = document.getElementById('ab-sum-value');
+  var abSumHint   = document.getElementById('ab-sum-hint');
+  var LETTERS = ['A','B','C','D','E','F','G','H','I','J','K','L'];
+
+  function renderVariants(){
+    abContainer.innerHTML = variants.map(function(v, i){
+      var letter = LETTERS[i] || ('V'+(i+1));
+      var canDelete = variants.length > 2;
+      return '<div class="ab-row" data-i="'+i+'">'+
+        '<div class="ab-tag">'+letter+'</div>'+
+        '<div class="fl filled"><input type="text" class="ab-url" value="'+(v.url||'').replace(/"/g,'&quot;')+'" placeholder=" "><label>Destino '+letter+'</label></div>'+
+        '<div class="fl filled" style="position:relative"><input type="number" min="0" max="100" class="ab-pct" value="'+v.pct+'" placeholder=" " style="padding-right:30px"><label>%</label><span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#5A5A60;font-family:\'JetBrains Mono\',monospace;font-size:13px;pointer-events:none">%</span></div>'+
+        '<div class="ab-trash'+(canDelete?'':' disabled')+'" title="'+(canDelete?'Remover variante':'Mínimo de 2 variantes')+'">'+
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+    bindVariantEvents();
+    updateSum();
+  }
+
+  function bindVariantEvents(){
+    abContainer.querySelectorAll('.ab-row').forEach(function(row){
+      var i = +row.dataset.i;
+      row.querySelector('.ab-url').addEventListener('input', function(){
+        variants[i].url = this.value;
+      });
+      row.querySelector('.ab-pct').addEventListener('input', function(){
+        var v = parseInt(this.value, 10);
+        if (isNaN(v)) v = 0;
+        if (v < 0) v = 0;
+        if (v > 100) v = 100;
+        variants[i].pct = v;
+        updateSum();
+      });
+      var trash = row.querySelector('.ab-trash');
+      if (!trash.classList.contains('disabled')){
+        trash.addEventListener('click', function(){
+          var letter = LETTERS[i] || ('V'+(i+1));
+          variants.splice(i, 1);
+          renderVariants();
+          toast('Variante '+letter+' removida', 'info');
+        });
+      }
+    });
+  }
+
+  function updateSum(){
+    var sum = variants.reduce(function(a, v){ return a + (parseInt(v.pct, 10)||0); }, 0);
+    abSumValue.textContent = sum + '%';
+    var ok = sum === 100;
+    abSumValue.classList.toggle('err', !ok);
+    abSumHint.classList.toggle('err', !ok);
+    abSumHint.textContent = ok
+      ? 'Distribuição válida'
+      : (sum < 100 ? 'Faltam ' + (100 - sum) + '% para 100%' : 'Excede em ' + (sum - 100) + '% — ajuste para 100%');
+  }
+
+  document.getElementById('ab-add').addEventListener('click', function(){
+    if (variants.length >= LETTERS.length){
+      toast('Limite de '+LETTERS.length+' variantes atingido', 'warn');
+      return;
+    }
+    // Take 10% from the largest variant to seed the new one (graceful default)
+    var donorIdx = 0;
+    variants.forEach(function(v, i){ if (v.pct > variants[donorIdx].pct) donorIdx = i; });
+    var donate = Math.min(10, variants[donorIdx].pct);
+    variants[donorIdx].pct -= donate;
+    variants.push({ url:'', pct: donate });
+    renderVariants();
+    var letter = LETTERS[variants.length-1] || ('V'+variants.length);
+    toast('Variante '+letter+' adicionada — preencha o destino', 'ok');
+  });
+
+  document.getElementById('ab-balance').addEventListener('click', function(){
+    var n = variants.length;
+    var base = Math.floor(100 / n);
+    var remainder = 100 - base * n;
+    variants.forEach(function(v, i){
+      v.pct = base + (i < remainder ? 1 : 0);
+    });
+    renderVariants();
+    toast('Distribuído igualmente entre '+n+' variantes', 'ok');
+  });
+
+  renderVariants();
+
+  // ────────────────────── DEVICE / OS REDIRECTION RULES ──────────────────────
+  var DEVICE_TYPES = [
+    { id:'',        label:'' },
+    { id:'desktop', label:'Desktop / PC' },
+    { id:'phone',   label:'Smartphone' },
+    { id:'tablet',  label:'Tablet' },
+    { id:'unknown', label:'Outro / Desconhecido' }
+  ];
+  var OS_TYPES = [
+    { id:'',        label:'' },
+    { id:'ios',     label:'iOS (iPhone/iPad)' },
+    { id:'android', label:'Android' },
+    { id:'windows', label:'Windows' },
+    { id:'macos',   label:'macOS' },
+    { id:'linux',   label:'Linux' }
+  ];
+
+  function makeRulesCard(opts){
+    var rules = opts.initial.slice();
+    var container = document.getElementById(opts.containerId);
+    var addBtn = document.getElementById(opts.addBtnId);
+    var TYPES = opts.types;
+    var labelType = opts.labelType;
+
+    function selectOptions(selected, usedSet){
+      return TYPES.map(function(t){
+        var sel = (t.id === selected) ? ' selected' : '';
+        var dis = (t.id === '') ? ' disabled hidden' : '';
+        // Disable types already used in another row (one rule per type)
+        if (t.id && t.id !== selected && usedSet.has(t.id)) dis = ' disabled';
+        return '<option value="'+t.id+'"'+sel+dis+'>'+t.label+'</option>';
+      }).join('');
+    }
+
+    function render(){
+      var used = new Set(rules.map(function(r){ return r.type; }).filter(Boolean));
+      container.innerHTML = rules.map(function(r, i){
+        var hasType = !!r.type;
+        var hasUrl  = !!(r.url||'').trim();
+        return '<div class="dev-row" data-i="'+i+'">'+
+          '<div class="fl'+(hasType?' filled':'')+'">'+
+            '<div class="dev-select-wrap">'+
+              '<select class="dev-type">'+selectOptions(r.type, used)+'</select>'+
+            '</div>'+
+            '<label>'+labelType+' *</label>'+
+          '</div>'+
+          '<div class="fl'+(hasUrl?' filled':'')+'" style="position:relative">'+
+            '<div class="fl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>'+
+            '<input type="text" class="dev-url" value="'+(r.url||'').replace(/"/g,'&quot;')+'" placeholder=" " style="padding-left:44px">'+
+            '<label style="left:3rem">URL de redirecionamento *</label>'+
+          '</div>'+
+          '<div class="ab-trash" title="Remover regra">'+
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>'+
+          '</div>'+
+        '</div>';
+      }).join('');
+      bind();
+    }
+
+    function bind(){
+      container.querySelectorAll('.dev-row').forEach(function(row){
+        var i = +row.dataset.i;
+        var sel = row.querySelector('.dev-type');
+        var url = row.querySelector('.dev-url');
+        sel.addEventListener('change', function(){
+          rules[i].type = this.value;
+          render();
+        });
+        url.addEventListener('input', function(){
+          rules[i].url = this.value;
+          this.closest('.fl').classList.toggle('filled', !!this.value.trim());
+        });
+        row.querySelector('.ab-trash').addEventListener('click', function(){
+          var label = (TYPES.find(function(t){return t.id===rules[i].type;})||{}).label || 'Regra';
+          rules.splice(i, 1);
+          render();
+          toast('Regra removida: '+(label||'sem tipo'), 'info');
+        });
+      });
+    }
+
+    addBtn.addEventListener('click', function(){
+      if (rules.length >= TYPES.length - 1){
+        toast('Todos os tipos de '+labelType.toLowerCase()+' já têm regra', 'warn');
+        return;
+      }
+      rules.push({ type:'', url:'' });
+      render();
+      var newRow = container.querySelector('.dev-row:last-of-type');
+      if (newRow) newRow.querySelector('.dev-type').focus();
+    });
+
+    render();
+    return { getRules: function(){ return rules; } };
+  }
+
+  var deviceCard = makeRulesCard({
+    containerId: 'dev-rules',
+    addBtnId:    'dev-add',
+    types:       DEVICE_TYPES,
+    labelType:   'Dispositivo',
+    initial: [
+      { type:'phone',   url:'meusite.com/mobile' },
+      { type:'desktop', url:'meusite.com/' }
+    ]
+  });
+
+  var osCard = makeRulesCard({
+    containerId: 'os-rules',
+    addBtnId:    'os-add',
+    types:       OS_TYPES,
+    labelType:   'Sistema',
+    initial: [
+      { type:'ios',     url:'apps.apple.com/app/sua-app/id123456' },
+      { type:'android', url:'play.google.com/store/apps/details?id=sua.app' }
+    ]
+  });
+
+  // ────────────────────── GEOLOCATION RULES (BR states + cities) ──────────────────────
+  var BR_STATES = [
+    { uf:'AC', name:'Acre',                cities:['Rio Branco','Cruzeiro do Sul','Sena Madureira','Tarauacá','Feijó'] },
+    { uf:'AL', name:'Alagoas',             cities:['Maceió','Arapiraca','Rio Largo','Palmeira dos Índios','Penedo'] },
+    { uf:'AP', name:'Amapá',               cities:['Macapá','Santana','Laranjal do Jari','Oiapoque','Mazagão'] },
+    { uf:'AM', name:'Amazonas',            cities:['Manaus','Parintins','Itacoatiara','Manacapuru','Coari'] },
+    { uf:'BA', name:'Bahia',               cities:['Salvador','Feira de Santana','Vitória da Conquista','Camaçari','Itabuna','Juazeiro','Ilhéus','Lauro de Freitas','Jequié','Teixeira de Freitas'] },
+    { uf:'CE', name:'Ceará',               cities:['Fortaleza','Caucaia','Juazeiro do Norte','Maracanaú','Sobral','Crato','Itapipoca','Maranguape'] },
+    { uf:'DF', name:'Distrito Federal',    cities:['Brasília','Ceilândia','Taguatinga','Samambaia','Plano Piloto','Gama','Santa Maria','Recanto das Emas'] },
+    { uf:'ES', name:'Espírito Santo',      cities:['Vitória','Vila Velha','Serra','Cariacica','Cachoeiro de Itapemirim','Linhares','Guarapari','São Mateus'] },
+    { uf:'GO', name:'Goiás',               cities:['Goiânia','Aparecida de Goiânia','Anápolis','Rio Verde','Luziânia','Águas Lindas de Goiás','Valparaíso de Goiás','Trindade'] },
+    { uf:'MA', name:'Maranhão',            cities:['São Luís','Imperatriz','São José de Ribamar','Timon','Caxias','Codó','Paço do Lumiar','Açailândia'] },
+    { uf:'MT', name:'Mato Grosso',         cities:['Cuiabá','Várzea Grande','Rondonópolis','Sinop','Tangará da Serra','Cáceres','Sorriso','Lucas do Rio Verde'] },
+    { uf:'MS', name:'Mato Grosso do Sul',  cities:['Campo Grande','Dourados','Três Lagoas','Corumbá','Ponta Porã','Naviraí','Sidrolândia','Nova Andradina'] },
+    { uf:'MG', name:'Minas Gerais',        cities:['Belo Horizonte','Uberlândia','Contagem','Juiz de Fora','Betim','Montes Claros','Ribeirão das Neves','Uberaba','Governador Valadares','Ipatinga'] },
+    { uf:'PA', name:'Pará',                cities:['Belém','Ananindeua','Santarém','Marabá','Parauapebas','Castanhal','Abaetetuba','Cametá'] },
+    { uf:'PB', name:'Paraíba',             cities:['João Pessoa','Campina Grande','Santa Rita','Patos','Bayeux','Sousa','Cabedelo','Cajazeiras'] },
+    { uf:'PR', name:'Paraná',              cities:['Curitiba','Londrina','Maringá','Ponta Grossa','Cascavel','São José dos Pinhais','Foz do Iguaçu','Colombo','Guarapuava'] },
+    { uf:'PE', name:'Pernambuco',          cities:['Recife','Jaboatão dos Guararapes','Olinda','Caruaru','Petrolina','Paulista','Cabo de Santo Agostinho','Camaragibe'] },
+    { uf:'PI', name:'Piauí',               cities:['Teresina','Parnaíba','Picos','Piripiri','Floriano','Campo Maior','Barras','União'] },
+    { uf:'RJ', name:'Rio de Janeiro',      cities:['Rio de Janeiro','São Gonçalo','Duque de Caxias','Nova Iguaçu','Niterói','Belford Roxo','Campos dos Goytacazes','São João de Meriti','Petrópolis','Volta Redonda'] },
+    { uf:'RN', name:'Rio Grande do Norte', cities:['Natal','Mossoró','Parnamirim','São Gonçalo do Amarante','Macaíba','Ceará-Mirim','Caicó','Açu'] },
+    { uf:'RS', name:'Rio Grande do Sul',   cities:['Porto Alegre','Caxias do Sul','Pelotas','Canoas','Santa Maria','Gravataí','Viamão','Novo Hamburgo','São Leopoldo','Rio Grande'] },
+    { uf:'RO', name:'Rondônia',            cities:['Porto Velho','Ji-Paraná','Ariquemes','Vilhena','Cacoal','Rolim de Moura','Jaru','Guajará-Mirim'] },
+    { uf:'RR', name:'Roraima',             cities:['Boa Vista','Rorainópolis','Caracaraí','Alto Alegre','Mucajaí','Cantá'] },
+    { uf:'SC', name:'Santa Catarina',      cities:['Florianópolis','Joinville','Blumenau','São José','Chapecó','Itajaí','Criciúma','Jaraguá do Sul','Lages','Palhoça'] },
+    { uf:'SP', name:'São Paulo',           cities:['São Paulo','Guarulhos','Campinas','São Bernardo do Campo','Santo André','Osasco','São José dos Campos','Ribeirão Preto','Sorocaba','Mauá'] },
+    { uf:'SE', name:'Sergipe',             cities:['Aracaju','Nossa Senhora do Socorro','Lagarto','Itabaiana','São Cristóvão','Estância','Tobias Barreto','Itabaianinha'] },
+    { uf:'TO', name:'Tocantins',           cities:['Palmas','Araguaína','Gurupi','Porto Nacional','Paraíso do Tocantins','Colinas do Tocantins','Guaraí','Dianópolis'] }
+  ];
+  var STATE_BY_UF = {};
+  BR_STATES.forEach(function(s){ STATE_BY_UF[s.uf] = s; });
+
+  var geoRules = [
+    { uf:'SP', city:'all',         url:'meusite.com/sao-paulo' },
+    { uf:'RJ', city:'Rio de Janeiro', url:'meusite.com/rio' }
+  ];
+  var geoContainer = document.getElementById('geo-rules');
+
+  function geoStatesUsedAll(exceptIdx){
+    var s = new Set();
+    geoRules.forEach(function(r, i){
+      if (i !== exceptIdx && r.uf && r.city === 'all') s.add(r.uf);
+    });
+    return s;
+  }
+
+  function geoCitiesUsedInState(uf, exceptIdx){
+    var s = new Set();
+    geoRules.forEach(function(r, i){
+      if (i !== exceptIdx && r.uf === uf && r.city && r.city !== 'all') s.add(r.city);
+    });
+    return s;
+  }
+
+  function geoStateHasSpecificCities(uf, exceptIdx){
+    return geoRules.some(function(r, i){
+      return i !== exceptIdx && r.uf === uf && r.city && r.city !== 'all';
+    });
+  }
+
+  function renderGeoRules(){
+    geoContainer.innerHTML = geoRules.map(function(r, i){
+      var lockedStates = geoStatesUsedAll(i);
+      var hasUf   = !!r.uf;
+      var hasCity = !!r.city;
+      var hasUrl  = !!(r.url||'').trim();
+
+      var stateOptions = '<option value="" disabled hidden'+(hasUf?'':' selected')+'></option>' +
+        BR_STATES.map(function(s){
+          var sel = (s.uf === r.uf) ? ' selected' : '';
+          var dis = (s.uf !== r.uf && lockedStates.has(s.uf)) ? ' disabled' : '';
+          return '<option value="'+s.uf+'"'+sel+dis+'>'+s.uf+'</option>';
+        }).join('');
+
+      var cityOptions = '<option value="" disabled hidden'+(hasCity?'':' selected')+'></option>';
+      if (hasUf){
+        var st = STATE_BY_UF[r.uf];
+        var usedCities = geoCitiesUsedInState(r.uf, i);
+        var hasSpecific = geoStateHasSpecificCities(r.uf, i);
+        // "Todas as cidades" — disabled if there are already specific-city rules for this state
+        var allSel = (r.city === 'all') ? ' selected' : '';
+        var allDis = hasSpecific ? ' disabled' : '';
+        cityOptions += '<option value="all"'+allSel+allDis+'>Todas as cidades</option>';
+        cityOptions += st.cities.map(function(c){
+          var sel = (r.city === c) ? ' selected' : '';
+          var dis = (r.city !== c && usedCities.has(c)) ? ' disabled' : '';
+          return '<option value="'+c+'"'+sel+dis+'>'+c+'</option>';
+        }).join('');
+      }
+
+      return '<div class="geo-row" data-i="'+i+'">'+
+        '<div class="fl'+(hasUf?' filled':'')+'">'+
+          '<div class="dev-select-wrap"><select class="geo-uf">'+stateOptions+'</select></div>'+
+          '<label>Estado *</label>'+
+        '</div>'+
+        '<div class="fl'+(hasCity?' filled':'')+'">'+
+          '<div class="dev-select-wrap"><select class="geo-city"'+(hasUf?'':' disabled')+'>'+cityOptions+'</select></div>'+
+          '<label>Cidade *</label>'+
+        '</div>'+
+        '<div class="fl'+(hasUrl?' filled':'')+'" style="position:relative">'+
+          '<div class="fl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>'+
+          '<input type="text" class="geo-url" value="'+(r.url||'').replace(/"/g,'&quot;')+'" placeholder=" " style="padding-left:44px">'+
+          '<label style="left:3rem">URL de redirecionamento *</label>'+
+        '</div>'+
+        '<div class="ab-trash" title="Remover regra">'+
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+    bindGeoEvents();
+  }
+
+  function bindGeoEvents(){
+    geoContainer.querySelectorAll('.geo-row').forEach(function(row){
+      var i = +row.dataset.i;
+      var ufSel = row.querySelector('.geo-uf');
+      var citySel = row.querySelector('.geo-city');
+      var urlInp = row.querySelector('.geo-url');
+
+      ufSel.addEventListener('change', function(){
+        geoRules[i].uf = this.value;
+        geoRules[i].city = '';
+        renderGeoRules();
+        // refocus city select
+        var nr = geoContainer.querySelector('.geo-row[data-i="'+i+'"] .geo-city');
+        if (nr) nr.focus();
+      });
+      citySel.addEventListener('change', function(){
+        geoRules[i].city = this.value;
+        renderGeoRules();
+      });
+      urlInp.addEventListener('input', function(){
+        geoRules[i].url = this.value;
+        this.closest('.fl').classList.toggle('filled', !!this.value.trim());
+      });
+      row.querySelector('.ab-trash').addEventListener('click', function(){
+        var label = geoRules[i].uf
+          ? (geoRules[i].uf + (geoRules[i].city === 'all' ? ' · Todas' : (geoRules[i].city ? ' · '+geoRules[i].city : '')))
+          : 'sem estado';
+        geoRules.splice(i, 1);
+        renderGeoRules();
+        toast('Regra removida: '+label, 'info');
+      });
+    });
+  }
+
+  document.getElementById('geo-add').addEventListener('click', function(){
+    // Limit: at most one "all" per state + specific cities — but allow many rules; cap at total state count
+    if (geoRules.length >= 60){
+      toast('Limite de regras geográficas atingido', 'warn');
+      return;
+    }
+    geoRules.push({ uf:'', city:'', url:'' });
+    renderGeoRules();
+    var newRow = geoContainer.querySelector('.geo-row:last-of-type');
+    if (newRow) newRow.querySelector('.geo-uf').focus();
+  });
+
+  renderGeoRules();
+
+  // ────────────────────── FOLDER + NOTES ──────────────────────
+  var folderSel = document.getElementById('link-folder');
+  var notesArea = document.getElementById('link-notes');
+  folderSel.addEventListener('change', function(){
+    if (this.value === '__new__'){
+      var name = window.prompt('Nome da nova pasta:');
+      if (!name || !name.trim()){
+        this.value = '';
+        this.parentElement.classList.remove('filled');
+        return;
+      }
+      var slug = name.trim().toLowerCase().replace(/\s+/g,'-').slice(0,40);
+      var opt = document.createElement('option');
+      opt.value = slug;
+      opt.textContent = '📁 ' + name.trim();
+      var createOpt = this.querySelector('option[value="__new__"]');
+      this.insertBefore(opt, createOpt);
+      this.value = slug;
+      toast('Pasta criada: ' + name.trim(), 'ok');
+    }
+    this.parentElement.classList.toggle('filled', !!this.value);
+  });
+  notesArea.addEventListener('input', function(){
+    this.parentElement.classList.toggle('filled', !!this.value.trim());
+  });
+
+  // ────────────────────── TAG INPUT ──────────────────────
+  var tagWrap  = document.getElementById('tag-wrap');
+  var tagInput = document.getElementById('tag-input');
+  var tags = [];
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+  function renderTags(){
+    Array.from(tagWrap.querySelectorAll('.tag-chip')).forEach(function(c){ c.remove(); });
+    tags.forEach(function(t, i){
+      var chip = document.createElement('span');
+      chip.className = 'tag-chip';
+      chip.innerHTML = escapeHtml(t) + '<button type="button" class="x" aria-label="Remover">✕</button>';
+      chip.querySelector('.x').addEventListener('click', function(e){
+        e.stopPropagation();
+        tags.splice(i, 1);
+        renderTags();
+        toast('Etiqueta removida: ' + t, 'info');
+      });
+      tagWrap.insertBefore(chip, tagInput);
+    });
+  }
+  function addTag(raw){
+    var v = (raw||'').trim().replace(/^[#,;]+|[#,;]+$/g,'').trim();
+    if (!v) return false;
+    if (v.length > 40) v = v.slice(0, 40);
+    if (tags.some(function(t){ return t.toLowerCase() === v.toLowerCase(); })){
+      toast('Etiqueta já existe: ' + v, 'warn');
+      return false;
+    }
+    tags.push(v);
+    renderTags();
+    return true;
+  }
+  tagWrap.addEventListener('click', function(e){
+    if (e.target === tagWrap) tagInput.focus();
+  });
+  tagInput.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' || e.key === ',' || e.key === ';'){
+      e.preventDefault();
+      if (addTag(tagInput.value)) tagInput.value = '';
+    } else if (e.key === 'Backspace' && tagInput.value === '' && tags.length){
+      tags.pop();
+      renderTags();
+    }
+  });
+  tagInput.addEventListener('blur', function(){
+    if (tagInput.value.trim()){
+      if (addTag(tagInput.value)) tagInput.value = '';
+    }
+  });
+  tagInput.addEventListener('paste', function(e){
+    var txt = (e.clipboardData || window.clipboardData).getData('text');
+    if (txt && /[,;\n]/.test(txt)){
+      e.preventDefault();
+      txt.split(/[,;\n]+/).forEach(function(p){ addTag(p); });
+      tagInput.value = '';
+    }
+  });
+
+  // initial count
+  updateActiveCount();
+
+  // ─── Smart Tracking: card como accordion (toggle pelo handler global do .acc) ───
+  const stCard = document.getElementById('smart-tracking-card');
+  const stTtl = document.getElementById('smart-ttl');
+  // Click no header já é tratado pelo handler global que toggle ".active"
+
+  // ─── PIXEL MODE: aparece quando tem pelo menos 1 pixel ───
+  const pixelModeBox = document.getElementById('pixel-mode');
+  const pixChipsEl = document.getElementById('pixel-chips');
+  const pmCta = document.getElementById('pm-configure');
+
+  function syncPixelMode(){
+    const hasPixel = pixChipsEl && pixChipsEl.querySelectorAll('.pix-chip').length > 0;
+    if (pixelModeBox) pixelModeBox.classList.toggle('show', hasPixel);
+    // Sem pixel: esconde tudo do smart tracking
+    if (!hasPixel){
+      stCard?.classList.add('hidden');
+      stTtl?.classList.remove('show');
+    } else {
+      // Tem pixel: mostra accordion no fundo (colapsado)
+      stCard?.classList.remove('hidden');
+      stTtl?.classList.add('show');
+    }
+  }
+  syncPixelMode();
+  if (pixChipsEl){
+    const obs = new MutationObserver(syncPixelMode);
+    obs.observe(pixChipsEl, { childList: true });
+  }
+
+  // ─── BOTÃO ÚNICO "Configurar modo de disparo" no card Pixels ───
+  pmCta?.addEventListener('click', () => {
+    // Abre Opções avançadas se fechado
+    const advBody = document.querySelector('.adv-body');
+    if (advBody && !advBody.classList.contains('open')){
+      advBody.classList.add('open');
+      document.querySelector('.adv-card')?.classList.add('open');
+    }
+    // Expande o accordion Smart Tracking
+    stCard?.classList.add('active');
+    setTimeout(() => stCard?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  });
+
+  // ─── RADIO MODE dentro do accordion: toggle full-config visibility ───
+  const stModeRadios = document.querySelectorAll('input[name="st-mode"]');
+  const stFullConfig = document.getElementById('st-full-config');
+  const stStatusDesc = document.getElementById('st-status-desc');
+  const stStatusBadge = document.getElementById('st-status-badge');
+
+  function syncStMode(){
+    const mode = document.querySelector('input[name="st-mode"]:checked')?.value;
+    const isSmart = mode === 'smart';
+    if (stFullConfig){
+      if (isSmart) stFullConfig.removeAttribute('hidden');
+      else stFullConfig.setAttribute('hidden', '');
+    }
+    // Atualiza descrição/badge no header
+    if (stStatusDesc) stStatusDesc.textContent = isSmart ? '4 tiers · disparo após qualificação na LP' : 'Imediato (padrão Meta)';
+    if (stStatusBadge){
+      stStatusBadge.textContent = isSmart ? 'ATIVO' : 'Padrão';
+      stStatusBadge.classList.toggle('off', !isSmart);
+    }
+    stCard?.classList.toggle('is-smart', isSmart);
+  }
+  stModeRadios.forEach(r => r.addEventListener('change', syncStMode));
+  syncStMode();
+
+  // ─── SAVE BUTTON: colapsa accordion ───
+  const stSaveBtn = document.getElementById('st-save-btn');
+  stSaveBtn?.addEventListener('click', () => {
+    stCard?.classList.remove('active');
+    stCard?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+})();
 </script>
 </body>
 </html>
