@@ -160,6 +160,36 @@
   .pg-btn:disabled{opacity:0.3;cursor:not-allowed}
   .pg-btn svg{width:18px;height:18px}
 
+  /* ── FILTER PILLS COM DROPDOWN (Switchy parity) ── */
+  .filter-pill{position:relative;display:inline-flex;align-items:center;gap:8px;padding:8px 12px 8px 14px;border-radius:999px;
+    background:rgba(191,255,0,0.08);border:1px solid rgba(191,255,0,0.18);color:#BFFF00;
+    font-family:'Satoshi',sans-serif;font-size:13px;font-weight:700;cursor:pointer;user-select:none;
+    transition:.3s cubic-bezier(0.34, 1.56, 0.64, 1)}
+  .filter-pill:hover{background:rgba(191,255,0,0.13);transform:translateY(-1px)}
+  .filter-pill.active{background:rgba(191,255,0,0.18);border-color:rgba(191,255,0,0.5)}
+  .filter-pill .fp-ic{width:14px;height:14px;flex-shrink:0}
+  .filter-pill .fp-ch{width:14px;height:14px;opacity:0.65;transition:.25s ease}
+  .filter-pill.open .fp-ch{transform:rotate(180deg);opacity:1}
+  .filter-pill .fp-lbl{white-space:nowrap}
+  .filter-pill .fp-pop{position:absolute;top:calc(100% + 8px);right:0;min-width:240px;background:#141414;
+    border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:8px;
+    box-shadow:6px 6px 22px rgba(0,0,0,0.65),-2px -2px 8px rgba(255,255,255,0.02);
+    z-index:50;display:none;animation:fpIn .25s cubic-bezier(0.34, 1.56, 0.64, 1)}
+  .filter-pill.open .fp-pop{display:block}
+  @keyframes fpIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+  .fp-pop .fp-opt{padding:9px 14px;border-radius:8px;cursor:pointer;color:#E5E7EB;font-size:13px;font-weight:600;
+    transition:.2s ease;text-align:left}
+  .fp-pop .fp-opt:hover{background:rgba(191,255,0,0.08);color:#BFFF00}
+  .fp-pop .fp-opt.on{background:linear-gradient(90deg,rgba(191,255,0,0.18),rgba(191,255,0,0));color:#BFFF00;font-weight:700}
+  .fp-pop-check .fp-row{padding:0}
+  .fp-pop-check .fp-row label{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;color:#E5E7EB;font-size:13px;font-weight:600;transition:.2s ease}
+  .fp-pop-check .fp-row label:hover{background:rgba(191,255,0,0.06)}
+  .fp-pop-check .fp-row input[type="checkbox"]{appearance:none;-webkit-appearance:none;width:16px;height:16px;border:1.5px solid rgba(255,255,255,0.25);border-radius:4px;cursor:pointer;flex-shrink:0;position:relative;background:#0A0A0A;transition:.2s ease}
+  .fp-pop-check .fp-row input[type="checkbox"]:checked{background:#BFFF00;border-color:#BFFF00}
+  .fp-pop-check .fp-row input[type="checkbox"]:checked::after{content:"";position:absolute;left:4px;top:0px;width:5px;height:9px;border:solid #0A0A0A;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+  .fp-pop-check .fp-row-head{border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:4px;padding-bottom:4px}
+  .fp-pop-check .fp-row-head label{color:#94A3B8;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.12em}
+
   .filter-chip{background:#1A1A1A;border:0;color:#94A3B8;padding:8px 14px;border-radius:12px;
     font-family:'Satoshi',sans-serif;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
     box-shadow:2px 2px 6px rgba(0,0,0,0.5),-1px -1px 3px rgba(255,255,255,0.025);transition:.3s cubic-bezier(0.34,1.56,0.64,1)}
@@ -426,10 +456,77 @@
         <div class="v3table-head">
           <span class="ttl">40 links</span>
           <div class="filters">
-            <span class="filter-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Últimos 30 dias</span>
-            <span class="filter-chip">Domínio</span>
-            <span class="filter-chip">Pixels</span>
-            <span class="filter-chip" onclick="document.getElementById('bulk-import-modal').style.display='flex'" style="cursor:pointer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg> Importar</span>
+            <!-- 1. Date range -->
+            <div class="filter-pill" data-filter="date">
+              <svg class="fp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              <span class="fp-lbl" id="fp-date-lbl">Todo período</span>
+              <svg class="fp-ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+              <div class="fp-pop">
+                <div class="fp-opt on" data-val="all">Todo período</div>
+                <div class="fp-opt" data-val="today">Hoje</div>
+                <div class="fp-opt" data-val="7d">Últimos 7 dias</div>
+                <div class="fp-opt" data-val="30d">Últimos 30 dias</div>
+                <div class="fp-opt" data-val="month">Este mês</div>
+                <div class="fp-opt" data-val="lastmonth">Mês passado</div>
+                <div class="fp-opt" data-val="90d">Últimos 90 dias</div>
+                <div class="fp-opt" data-val="year">Este ano</div>
+              </div>
+            </div>
+
+            <!-- 2. Tags -->
+            <div class="filter-pill" data-filter="tags">
+              <svg class="fp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20.6 13.4L13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
+              <span class="fp-lbl" id="fp-tags-lbl">Tags</span>
+              <svg class="fp-ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+              <div class="fp-pop fp-pop-check">
+                <div class="fp-row fp-row-head"><label><input type="checkbox" id="fp-tags-all"> Todas as tags</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="Campanhas"> Campanhas</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="Podcast"> Podcast</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="Afiliados"> Afiliados</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="Atendimento"> Atendimento</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="Loja Demo"> Loja Demo</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="Captura"> Captura</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="Newsletter"> Newsletter</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="Smartpage"> Smartpage</label></div>
+              </div>
+            </div>
+
+            <!-- 3. Pixels -->
+            <div class="filter-pill" data-filter="pixels">
+              <svg class="fp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+              <span class="fp-lbl" id="fp-pixels-lbl">Pixels</span>
+              <svg class="fp-ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+              <div class="fp-pop fp-pop-check">
+                <div class="fp-row fp-row-head"><label><input type="checkbox" id="fp-pixels-all"> Todos os pixels</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="Meta"> Meta (Facebook + Instagram)</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="TikTok"> TikTok</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="Google"> Google Ads</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="LinkedIn"> LinkedIn</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="Pinterest"> Pinterest</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="none"> Sem pixel</label></div>
+              </div>
+            </div>
+
+            <!-- 4. Columns -->
+            <div class="filter-pill" data-filter="cols">
+              <svg class="fp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+              <span class="fp-lbl" id="fp-cols-lbl">6 colunas</span>
+              <svg class="fp-ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+              <div class="fp-pop fp-pop-check">
+                <div class="fp-row fp-row-head"><label><input type="checkbox" id="fp-cols-all" checked> Todas as colunas</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="2" checked> Link</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="3" checked> Cliques</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="4" checked> Pixels</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="5" checked> Link curto</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="6" checked> Criado</label></div>
+                <div class="fp-row"><label><input type="checkbox" value="7" checked> Ações</label></div>
+              </div>
+            </div>
+
+            <!-- Importar (mantido como ação separada) -->
+            <span class="filter-chip" onclick="document.getElementById('bulk-import-modal').style.display='flex'" style="cursor:pointer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg> Importar
+            </span>
           </div>
         </div>
 
@@ -1326,7 +1423,134 @@ https://affiliates.parceiro.com/cupom?ref=maria</textarea>
     });
   }
 
-  // 8. PAGINAÇÃO
+  // 8. FILTER PILLS (Switchy-parity dropdowns)
+  const filterState = { date: 'all', tags: [], pixels: [], cols: [2,3,4,5,6,7] };
+
+  // Toggle dropdown open/close
+  $$('.filter-pill').forEach(pill => {
+    pill.addEventListener('click', e => {
+      // Não fecha quando click dentro do popup
+      if (e.target.closest('.fp-pop')) return;
+      // Fecha outros pills
+      $$('.filter-pill').forEach(p => { if (p !== pill) p.classList.remove('open'); });
+      pill.classList.toggle('open');
+    });
+  });
+
+  // Close on outside click
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.filter-pill')){
+      $$('.filter-pill').forEach(p => p.classList.remove('open'));
+    }
+  });
+
+  // Date range options
+  $$('.filter-pill[data-filter="date"] .fp-opt').forEach(opt => {
+    opt.addEventListener('click', e => {
+      e.stopPropagation();
+      $$('.filter-pill[data-filter="date"] .fp-opt').forEach(o => o.classList.remove('on'));
+      opt.classList.add('on');
+      filterState.date = opt.dataset.val;
+      $('#fp-date-lbl').textContent = opt.textContent.trim();
+      $('.filter-pill[data-filter="date"]').classList.toggle('active', filterState.date !== 'all');
+      $('.filter-pill[data-filter="date"]').classList.remove('open');
+      toast('Período: ' + opt.textContent.trim());
+      applyFilters();
+    });
+  });
+
+  // Tags checkboxes
+  const tagsAll = $('#fp-tags-all');
+  const tagsBoxes = $$('.filter-pill[data-filter="tags"] input[type="checkbox"]:not(#fp-tags-all)');
+  tagsAll?.addEventListener('change', e => {
+    e.stopPropagation();
+    tagsBoxes.forEach(cb => cb.checked = e.target.checked);
+    updateTagsState();
+  });
+  tagsBoxes.forEach(cb => cb.addEventListener('change', e => { e.stopPropagation(); updateTagsState(); }));
+  function updateTagsState(){
+    filterState.tags = tagsBoxes.filter(cb => cb.checked).map(cb => cb.value);
+    const allChecked = tagsBoxes.every(cb => cb.checked);
+    if (tagsAll) tagsAll.checked = allChecked;
+    const lbl = $('#fp-tags-lbl');
+    if (filterState.tags.length === 0 || allChecked){ lbl.textContent = 'Tags'; }
+    else if (filterState.tags.length === 1){ lbl.textContent = filterState.tags[0]; }
+    else { lbl.textContent = filterState.tags.length + ' tags'; }
+    $('.filter-pill[data-filter="tags"]').classList.toggle('active', filterState.tags.length > 0 && !allChecked);
+    applyFilters();
+  }
+
+  // Pixels checkboxes
+  const pixAll = $('#fp-pixels-all');
+  const pixBoxes = $$('.filter-pill[data-filter="pixels"] input[type="checkbox"]:not(#fp-pixels-all)');
+  pixAll?.addEventListener('change', e => {
+    e.stopPropagation();
+    pixBoxes.forEach(cb => cb.checked = e.target.checked);
+    updatePixState();
+  });
+  pixBoxes.forEach(cb => cb.addEventListener('change', e => { e.stopPropagation(); updatePixState(); }));
+  function updatePixState(){
+    filterState.pixels = pixBoxes.filter(cb => cb.checked).map(cb => cb.value);
+    const allChecked = pixBoxes.every(cb => cb.checked);
+    if (pixAll) pixAll.checked = allChecked;
+    const lbl = $('#fp-pixels-lbl');
+    if (filterState.pixels.length === 0 || allChecked){ lbl.textContent = 'Pixels'; }
+    else if (filterState.pixels.length === 1){ lbl.textContent = filterState.pixels[0]; }
+    else { lbl.textContent = filterState.pixels.length + ' pixels'; }
+    $('.filter-pill[data-filter="pixels"]').classList.toggle('active', filterState.pixels.length > 0 && !allChecked);
+    applyFilters();
+  }
+
+  // Columns visibility
+  const colsAll = $('#fp-cols-all');
+  const colsBoxes = $$('.filter-pill[data-filter="cols"] input[type="checkbox"]:not(#fp-cols-all)');
+  colsAll?.addEventListener('change', e => {
+    e.stopPropagation();
+    colsBoxes.forEach(cb => cb.checked = e.target.checked);
+    updateColsState();
+  });
+  colsBoxes.forEach(cb => cb.addEventListener('change', e => { e.stopPropagation(); updateColsState(); }));
+  function updateColsState(){
+    filterState.cols = colsBoxes.filter(cb => cb.checked).map(cb => parseInt(cb.value, 10));
+    const allChecked = colsBoxes.every(cb => cb.checked);
+    if (colsAll) colsAll.checked = allChecked;
+    $('#fp-cols-lbl').textContent = filterState.cols.length + ' colunas';
+    // Hide/show columns: nth-child(N) of th + td
+    colsBoxes.forEach(cb => {
+      const n = parseInt(cb.value, 10);
+      const show = cb.checked;
+      $$('thead th:nth-child(' + n + '), tbody td:nth-child(' + n + ')').forEach(el => {
+        el.style.display = show ? '' : 'none';
+      });
+    });
+  }
+  // Estado inicial das colunas
+  updateColsState();
+
+  // Apply filters (tags + pixels) to rows
+  function applyFilters(){
+    const rows = $$('tbody tr');
+    rows.forEach(tr => {
+      const folder = tr.querySelector('td:nth-child(2) span')?.textContent.trim() || '';
+      const pixelTxt = tr.querySelector('td:nth-child(4)')?.textContent.trim() || '';
+      // Tag filter
+      const tagOk = filterState.tags.length === 0 || filterState.tags.includes(folder);
+      // Pixel filter
+      let pixOk = filterState.pixels.length === 0;
+      if (!pixOk){
+        if (filterState.pixels.includes('none') && (pixelTxt === '—' || pixelTxt === '')) pixOk = true;
+        for (const p of filterState.pixels){
+          if (p !== 'none' && pixelTxt.includes(p)){ pixOk = true; break; }
+        }
+      }
+      tr.dataset.filterMatch = (tagOk && pixOk) ? '1' : '0';
+    });
+    // Reset to page 1 and re-render via pgUpdate
+    if (typeof pgState !== 'undefined') pgState.page = 1;
+    if (typeof pgUpdate === 'function') pgUpdate();
+  }
+
+  // 9. PAGINAÇÃO
   const pgPer = $('#pg-per-sel'), pgRange = $('#pg-range');
   const pgFirst = $('#pg-first'), pgPrev = $('#pg-prev'), pgNext = $('#pg-next'), pgLast = $('#pg-last');
   const pgState = { page: 1, perPage: 20, total: 40 };
@@ -1339,14 +1563,15 @@ https://affiliates.parceiro.com/cupom?ref=maria</textarea>
     if (pgPrev) pgPrev.disabled = pgState.page === 1;
     if (pgNext) pgNext.disabled = pgState.page >= totalPages;
     if (pgLast) pgLast.disabled = pgState.page >= totalPages;
-    // Mostra apenas as rows da página atual (respeitando search filter)
+    // Mostra rows da página atual respeitando search + tag/pixel filters
     const rows = $$('tbody tr');
     const searchInput = $('.v3search input');
     const q = (searchInput?.value || '').toLowerCase();
     let visibleCount = 0;
     rows.forEach((tr) => {
       const matchSearch = !q || tr.textContent.toLowerCase().includes(q);
-      if (matchSearch){
+      const matchFilter = tr.dataset.filterMatch === undefined || tr.dataset.filterMatch === '1';
+      if (matchSearch && matchFilter){
         const inRange = visibleCount >= start - 1 && visibleCount < end;
         tr.style.display = inRange ? '' : 'none';
         visibleCount++;
@@ -1354,6 +1579,12 @@ https://affiliates.parceiro.com/cupom?ref=maria</textarea>
         tr.style.display = 'none';
       }
     });
+    // Update total visible count in label
+    const ttl = document.querySelector('.v3table-head .ttl');
+    if (ttl){
+      const matchedRows = rows.filter(tr => (tr.dataset.filterMatch === undefined || tr.dataset.filterMatch === '1') && (!q || tr.textContent.toLowerCase().includes(q))).length;
+      ttl.textContent = matchedRows + ' links' + (matchedRows !== rows.length ? ' (filtrados)' : '');
+    }
   }
   if (pgPer){
     pgPer.addEventListener('change', e => {
