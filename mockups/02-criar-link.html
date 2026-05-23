@@ -199,17 +199,22 @@
   .adv-inner{padding:0 0 0;background:#141414;border:1px solid rgba(255,255,255,0.04);border-top:0;
     border-radius:0 0 28px 28px;
     box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
-  .adv-body.open .adv-inner{padding:20px 24px 24px}
+  .adv-body.open .adv-inner{padding:20px 24px 24px;
+    display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;align-items:start}
+  @media (max-width:980px){.adv-body.open .adv-inner{grid-template-columns:1fr}}
 
   .adv-section-ttl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10px;text-transform:uppercase;
-    letter-spacing:0.3em;color:#94A3B8;margin:20px 0 12px;display:flex;align-items:center;gap:10px}
+    letter-spacing:0.3em;color:#94A3B8;margin:14px 0 6px;display:flex;align-items:center;gap:10px;
+    grid-column:1 / -1}
   .adv-section-ttl:first-child{margin-top:0}
   .adv-section-ttl::before{content:"▮";color:#BFFF00}
 
   /* ─── ACC CARDS (DENTRO DO ACCORDION) ─── */
   .acc{background:#1A1A1A;border:1px solid rgba(255,255,255,0.04);border-radius:18px;
     box-shadow:4px 4px 10px rgba(0,0,0,0.45),-3px -3px 8px rgba(255,255,255,0.02);
-    overflow:hidden;transition:.35s cubic-bezier(0.34,1.56,0.64,1);margin-bottom:8px}
+    overflow:hidden;transition:.35s cubic-bezier(0.34,1.56,0.64,1);margin-bottom:0}
+  /* Cards com form expandido ocupam 2 colunas */
+  .acc.active{grid-column:1 / -1}
   .acc.active{box-shadow:4px 4px 10px rgba(0,0,0,0.45),-3px -3px 8px rgba(255,255,255,0.02),0 0 24px rgba(191,255,0,0.12)}
   .acc-h{display:flex;align-items:center;gap:14px;padding:16px 18px;cursor:pointer}
   .acc-box{width:46px;height:46px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;
@@ -253,7 +258,7 @@
 
   /* ─── G04: MUTEX DE CONFLITO ─── */
   .conflict-banner{display:flex;align-items:flex-start;gap:12px;
-    padding:14px 18px;margin:8px 0;border-radius:14px;
+    padding:14px 18px;margin:8px 0;border-radius:14px;grid-column:1 / -1;
     background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.28);
     box-shadow:inset 2px 2px 6px rgba(0,0,0,0.4),0 0 22px rgba(239,68,68,0.1)}
   .conflict-banner svg{flex-shrink:0;color:#EF4444;margin-top:2px}
