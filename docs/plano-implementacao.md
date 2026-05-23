@@ -1,6 +1,6 @@
-# APPlink — Plano de Implementação Técnica
+# AppLink — Plano de Implementação Técnica
 
-> Plano para tirar o APPlink do papel até um MVP em produção, vendido avulso E
+> Plano para tirar o AppLink do papel até um MVP em produção, vendido avulso E
 > embarcado no AppexCRM. Documento de arquitetura e roadmap — não código.
 >
 > Pré-requisitos: protótipo de telas (✅), análise funcional (✅),
@@ -65,7 +65,7 @@ módulo do CRM em sprint dedicada após o MVP estabilizar.
                                                   └──────────────┘
 
         ┌─────────────────────────────┐    ┌─────────────────────┐
-        │ Painel APPlink (React)      │    │ AppexCRM (módulo)   │
+        │ Painel AppLink (React)      │    │ AppexCRM (módulo)   │
         │ - identidade NeonSpace      │    │ - iframe + SSO      │
         │ - tokens próprios           │    │ - tokens do CRM     │
         │ - billing próprio           │    │ - leads → funil CRM │
@@ -363,9 +363,9 @@ URL pública assinada (signed link) → renderiza um subset read-only dos dados.
 
 ### 9.1 Identidade unificada (SSO)
 
-- Usuário do AppexCRM faz login no APPlink **sem segundo cadastro**.
-- Implementação: OAuth2 client interno do CRM → APPlink troca por sessão própria.
-- `oauth_links` armazena o link entre `user_id` APPlink ↔ `crm_user_id`.
+- Usuário do AppexCRM faz login no AppLink **sem segundo cadastro**.
+- Implementação: OAuth2 client interno do CRM → AppLink troca por sessão própria.
+- `oauth_links` armazena o link entre `user_id` AppLink ↔ `crm_user_id`.
 
 ### 9.2 Theming white-label
 
@@ -378,18 +378,18 @@ URL pública assinada (signed link) → renderiza um subset read-only dos dados.
 ### 9.3 Embed
 
 - Iframe `<iframe src="https://applink.com/embed?token=..." />` dentro do CRM.
-- Token JWT assinado pelo CRM, validado pelo APPlink. Expira em N min, refresh.
+- Token JWT assinado pelo CRM, validado pelo AppLink. Expira em N min, refresh.
 - Postmessage bridge para navegação cross-frame (breadcrumbs, deeplink).
 
 ### 9.4 Fluxo de dados — lead → funil do CRM
 
 ```
 Form da Smartpage submetida
-  → APPlink salva lead em `leads`
+  → AppLink salva lead em `leads`
   → publica evento `lead.created` na fila
   → consumer chama a API do AppexCRM com o token do workspace
   → CRM cria contato + atividade no funil
-  → APPlink atualiza `leads.crm_contact_id` com o id retornado
+  → AppLink atualiza `leads.crm_contact_id` com o id retornado
 ```
 
 Idempotência por `lead.id`. Retry com backoff exponencial em falhas do CRM.
@@ -443,7 +443,7 @@ O CRM cuida do que fazer com cada evento (timeline, atribuição, etc.).
 
 - Por form (saída no painel da smartpage).
 - Por workspace (eventos globais: `link.created`, `lead.created`).
-- HMAC SHA-256 assinatura no header `X-APPlink-Signature`.
+- HMAC SHA-256 assinatura no header `X-AppLink-Signature`.
 
 ### 12.3 Zapier + Make
 
@@ -593,7 +593,7 @@ Com tráfego sério (1 M cliques/mês), o ClickHouse cresce primeiro.
 - [ ] Domínios: `applink.io` (institucional), `app.applink.io` (painel), `links.applink.io` (CNAME target), `plnk.to` (shortener padrão).
 - [ ] DPO e contrato LGPD pronto.
 - [ ] Acordo de SSO com time do AppexCRM (mesmo que módulo seja Fase 2, o contrato precisa estar no radar).
-- [ ] Naming final definido (atualmente APPlink é placeholder).
+- [ ] Naming final definido (atualmente AppLink é placeholder).
 
 ---
 
@@ -601,7 +601,7 @@ Com tráfego sério (1 M cliques/mês), o ClickHouse cresce primeiro.
 
 Estas exigem alinhamento de produto/negócio antes de partir para o código:
 
-1. **Naming final** — APPlink é codinome.
+1. **Naming final** — AppLink é codinome.
 2. **Domínio de shortener padrão** — `plnk.to` é apenas exemplo nos mockups; precisa registrar / negociar.
 3. **Métrica de cobrança** — confirmar "cliques/mês" como medidor de valor
    (vs links criados ou leads capturados). Impacta UX e schema.

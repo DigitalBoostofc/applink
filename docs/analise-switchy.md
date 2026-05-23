@@ -1,8 +1,8 @@
-# Análise do Switchy.io — Base para réplica no APPlink
+# Análise do Switchy.io — Base para réplica no AppLink
 
 > Estudo feito a partir da Central de Ajuda oficial (help.switchy.io) em 2026-05-22.
 > Objetivo: entender como o Switchy funciona para replicar funcionalidades semelhantes
-> no **APPlink** (link-in-bio + encurtador, vendido avulso e como módulo do AppexCRM).
+> no **AppLink** (link-in-bio + encurtador, vendido avulso e como módulo do AppexCRM).
 
 ---
 
@@ -210,13 +210,13 @@ Cobrança por **cliques/mês** + caps de recursos:
 
 **Estouro de limite de cliques:** aos 90% → email de aviso; ao atingir 100% → links continuam redirecionando **mas sem tracking/pixels** e não é possível criar novos links até upgrade ou renovação.
 
-Insight para o APPlink: o medidor de valor é **clique**, não link criado. Recursos premium (remover logo, cloaking, mais domínios/Smartpages/team) são os gates de upgrade.
+Insight para o AppLink: o medidor de valor é **clique**, não link criado. Recursos premium (remover logo, cloaking, mais domínios/Smartpages/team) são os gates de upgrade.
 
 ---
 
-## 6. Mapa de réplica para o APPlink
+## 6. Mapa de réplica para o AppLink
 
-Sugestão de priorização para o produto APPlink (encurtador + link-in-bio, avulso e módulo do AppexCRM):
+Sugestão de priorização para o produto AppLink (encurtador + link-in-bio, avulso e módulo do AppexCRM):
 
 ### MVP (núcleo)
 - [ ] Encurtador com slug customizado + folders + tags
@@ -250,7 +250,7 @@ Sugestão de priorização para o produto APPlink (encurtador + link-in-bio, avu
 - Eventos de clique/conversão enviados de volta ao CRM como atividades/timeline do contato.
 - Pixels + audiências conectados ao módulo de tráfego pago.
 
-> Observação: o Switchy cobra por **clique**; vale decidir cedo o medidor de valor do APPlink
+> Observação: o Switchy cobra por **clique**; vale decidir cedo o medidor de valor do AppLink
 > (clique, link, lead capturado ou contato no CRM) pois isso molda toda a arquitetura de billing.
 
 ---
@@ -318,7 +318,7 @@ para qualquer tipo. Exemplo verificado — tipo **WhatsApp**:
 ➡️ Pista de stack: o backend usa **Firebase** (Firebase Storage; bucket
 `urlshortener-f1125.appspot.com`). Provável Firestore + Firebase Storage por trás.
 
-Para o APPlink: o formulário de criação deve ser **um schema por tipo de link** —
+Para o AppLink: o formulário de criação deve ser **um schema por tipo de link** —
 um bloco de input específico (telefone+mensagem para WhatsApp, e-mail+assunto+corpo
 para Email, etc.) montado sobre uma base comum de customização/tracking.
 - **A/B Rotator**: o destino principal entra fixo a 100%; cada "Add a destination"
@@ -340,7 +340,7 @@ para Email, etc.) montado sobre uma base comum de customização/tracking.
 ou Devices, as demais seções de roteamento exibem
 *"You can't add a redirection if AB testing, Geolocation or Device redirect are activated"*.
 Ou seja, **só um modo de roteamento condicional por vez**. Importante para o design
-do motor de redirect do APPlink — define a precedência das regras.
+do motor de redirect do AppLink — define a precedência das regras.
 
 #### Criação do link — resultado
 
@@ -378,7 +378,7 @@ URL `/{conta}/stat/{dominio}/{slug}`.
 | 🎫 UTMs tags | Vazio → CTA "Want to add UTMs tags?" |
 | 🎯 Retargeting Pixels | Vazio → CTA "Want to add Retargeting pixels?" |
 
-Observações úteis para o APPlink:
+Observações úteis para o AppLink:
 - Toda métrica distingue **Visits (cliques) vs Unique (usuários únicos)** — exige
   deduplicação de visitante (cookie/fingerprint) no tracking.
 - "Unknown" aparece muito em Browser/Referer — tráfego in-app (Instagram/Facebook)
@@ -471,11 +471,11 @@ Preview ao vivo da página à direita, editável por clique em cada bloco.
 ## 8. Catálogo completo de funcionalidades (leitura de todos os ~120 artigos)
 
 > Esta seção consolida a leitura artigo a artigo de toda a Central de Ajuda.
-> Serve como **especificação funcional de referência** para replicar no APPlink.
+> Serve como **especificação funcional de referência** para replicar no AppLink.
 
 ### 8.1 Switch a link — funções
 
-| Função | Como funciona | Notas para o APPlink |
+| Função | Como funciona | Notas para o AppLink |
 |---|---|---|
 | Customizar aparência | Edita título, descrição e imagem (1200×630) do preview Open Graph | Metadata é auto-buscada da URL; usuário sobrescreve |
 | Issue de aparência | Se o preview não atualiza, usar o **debugger** da rede (Facebook/Twitter/LinkedIn) para forçar refresh do cache OG | Cache de OG é problema conhecido — prever invalidação |

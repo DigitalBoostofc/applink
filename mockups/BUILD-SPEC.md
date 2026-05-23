@@ -1,6 +1,6 @@
-# BUILD-SPEC — Mockups APPlink
+# BUILD-SPEC — Mockups AppLink
 
-Brief para construir as telas (mockups HTML estáticos) do produto APPlink:
+Brief para construir as telas (mockups HTML estáticos) do produto AppLink:
 encurtador + smart links + link-in-bio (smartpages) + analytics + pixels,
 vendido avulso e como módulo white-label do AppexCRM.
 
@@ -32,7 +32,7 @@ Spec funcional do produto: `../docs/analise-switchy.md` (o que cada função faz
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>APPlink — {Nome da tela}</title>
+<title>AppLink — {Nome da tela}</title>
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -119,9 +119,9 @@ Use número-prefixo no nome do arquivo. App-shell salvo onde indicado.
 - **16-billing.html** — Planos e cobrança. 3 cards de plano (Starter, Pro,
   Business) com preço/limites (cliques/mês, domínios, smartpages, membros);
   plano atual destacado; medidor de uso de cliques do mês; histórico de faturas.
-- **17-modulo-crm.html** — APPlink embarcado no AppexCRM. Mostrar o app dentro
+- **17-modulo-crm.html** — AppLink embarcado no AppexCRM. Mostrar o app dentro
   do shell do CRM: força `data-brand="appex"`. Topo com migalha "AppexCRM ›
-  Módulos › APPlink". Conteúdo = mini-dashboard de links + destaque de que os
+  Módulos › AppLink". Conteúdo = mini-dashboard de links + destaque de que os
   leads caem direto no CRM e a identidade é unificada (SSO). Banner explicando
   o modo módulo.
 

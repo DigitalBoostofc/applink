@@ -1,6 +1,6 @@
-# Auditoria de Acessibilidade — APPlink
+# Auditoria de Acessibilidade — AppLink
 
-> Auditoria WCAG 2.1 AA dos mockups APPlink, focada nas duas identidades
+> Auditoria WCAG 2.1 AA dos mockups AppLink, focada nas duas identidades
 > (NeonSpace e Módulo AppexCRM). Squad: **UX Designer** (a11y), **Brad Frost**
 > (componentes), **Design System Architect** (tokens), sob coordenação do
 > **Design Chief**.

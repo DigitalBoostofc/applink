@@ -1,9 +1,9 @@
-# APPlink
+# AppLink
 
 Smart links + link-in-bio (smartpages) + analytics + pixels de retargeting.
 Vendido avulso **e** como módulo white-label do **AppexCRM** — uma única estrutura de telas com duas identidades, trocadas por design tokens.
 
-> Codinome **APPlink**. Estágio atual: protótipo de telas (mockups HTML) + documentação funcional. Sem código de produto ainda.
+> Codinome **AppLink**. Estágio atual: protótipo de telas (mockups HTML) + documentação funcional. Sem código de produto ainda.
 
 ## O que tem aqui
 
@@ -25,12 +25,13 @@ docs/
 
 ## Identidades
 
-| | APPlink avulso | Módulo AppexCRM |
+| | AppLink avulso | Módulo AppexCRM |
 |---|---|---|
-| Tema | **NeonSpace** — maximalista / neobrutalista | Minimalista — herda a marca do CRM |
-| Accent | Neon lime `#BEF264` + neon pink `#F472B6` | Roxo Stripe `#635BFF` |
-| Fundo | Gradiente `#7C3AED → #DB2777 → #F59E0B` | Dark `#0C0C0F` ou light `#F6F9FC` |
-| Tipografia | Cabinet Grotesk + Satoshi | Inter |
+| Estilo | Dark-first premium · neon lime + coral + cream | Minimalista — herda a marca do CRM |
+| Accent | **Lime Neon `#BFFF00`** + Coral Pink `#FF7777` + Yellow `#FFD400` + Cream `#FFE2C0` | Roxo Stripe `#635BFF` |
+| Fundo | **Jet Black `#0D0D0D`** sólido | Dark `#0C0C0F` ou light `#F6F9FC` |
+| Tipografia | **Space Grotesk** (display) + Inter (UI) | Inter |
+| Tagline | *"Conecte. Personalize. Acompanhe. Cresça."* | — |
 
 O seletor flutuante (canto inferior direito de cada mockup) alterna identidade e modo claro/escuro ao vivo.
 

@@ -1,7 +1,7 @@
 # Naming — Produto de Smart Links + Link-in-bio
 
 > Processo de naming (brand-squad / Naming Strategist) para o produto hoje
-> chamado provisoriamente "APPlink". Vendido avulso e como módulo do AppexCRM.
+> chamado provisoriamente "AppLink". Vendido avulso e como módulo do AppexCRM.
 
 ## Estratégia de naming
 
@@ -116,7 +116,7 @@ muito bem como **assinatura/tagline** ou nome de uma feature.
 | 29 | Zixo | Abstrato | 17 | Aleatório |
 | 30 | Klivo | Abstrato | 17 | Aleatório |
 | 31 | Biolink | Descritivo | 16 | Categoria, não marca |
-| 32 | APPlink | Composto | 16 | Provisório; "App+link" genérico |
+| 32 | AppLink | Composto | 16 | Provisório; "App+link" genérico |
 
 ---
 
@@ -126,7 +126,7 @@ muito bem como **assinatura/tagline** ou nome de uma feature.
 |------|---------|
 | Elo | Palavra perfeita ("elo" = link de corrente), mas **colide com o cartão Elo**, marca fortíssima no Brasil |
 | Smartlink / Biolink | Termos de categoria — não registráveis, sem distintividade |
-| APPlink | Provisório; "App + link" é genérico e não diz nada do diferencial |
+| AppLink | Provisório; "App + link" é genérico e não diz nada do diferencial |
 | Linkr | Estética datada (era das vogais omitidas: Flickr, Tumblr) |
 | Trakto | Já existe ferramenta de design BR com esse nome |
 

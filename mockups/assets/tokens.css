@@ -1,9 +1,9 @@
 /* ============================================================
-   APPlink — Design Tokens · DUAS IDENTIDADES
-   [data-brand="applink"] -> "NeonSpace": maximalista / neobrutalista
+   AppLink — Design Tokens · DUAS IDENTIDADES
+   [data-brand="applink"] -> AppLink: dark-first premium, lime neon + coral
    [data-brand="appex"]   -> módulo white-label AppexCRM (minimalista)
    [data-mode]            -> dark | light  (afeta só o tema appex)
-   Trocar identidade = trocar tokens. As telas (DOM) não mudam.
+   Identidade baseada no moodboard "OPÇÃO 3" (2026-05-22).
    ============================================================ */
 
 :root {
@@ -16,86 +16,95 @@
 }
 
 /* ============================================================
-   IDENTIDADE 1 — APPlink avulso · "NeonSpace"
-   Maximalista/neobrutalista: gradiente, bordas pretas, sombras hard.
+   IDENTIDADE 1 — AppLink avulso
+   Dark-first premium · neon lime + coral pink + yellow pop + cream
+   Fontes: Space Grotesk (display) + Inter (UI)
    ============================================================ */
 [data-brand="applink"] {
   /* tipografia */
-  --font-display: 'Cabinet Grotesk', 'Satoshi', sans-serif;
-  --font-ui:      'Satoshi', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --font-ui:      'Inter', system-ui, -apple-system, sans-serif;
   --font-mono:    'JetBrains Mono', ui-monospace, monospace;
-  --display-style: italic;          /* headers em itálico black */
-  --display-weight: 900;
-  --display-tracking: -0.03em;
+  --display-style: normal;
+  --display-weight: 700;
+  --display-tracking: -0.025em;
 
-  /* fundo: gradiente fixo NeonSpace */
-  --canvas: linear-gradient(135deg,#7C3AED 0%,#DB2777 50%,#F59E0B 100%);
+  /* fundo: jet black sólido */
+  --canvas: #0D0D0D;
   --canvas-fixed: scroll;
-  --sidebar: #18181B;             /* zinc-900 */
-  --topbar:  #18181B;
-  --surface: #FFFFFF;             /* cards brancos */
-  --surface-2: #FAFAFA;
-  --surface-hover: #F4F4F5;
-  --surface-raised: #FFFFFF;
+  --sidebar: #0A0A0A;
+  --topbar:  #0D0D0D;
+  --surface: #161616;          /* cards */
+  --surface-2: #1A1A1A;
+  --surface-hover: #1F1F1F;
+  --surface-raised: #1A1A1A;
 
   /* glass */
-  --glass-bg: rgba(255,255,255,0.12);
-  --glass-bd: rgba(255,255,255,0.25);
-  --glass-blur: 16px;
+  --glass-bg: rgba(255,255,255,0.05);
+  --glass-bd: rgba(255,255,255,0.10);
+  --glass-blur: 14px;
 
-  /* tinta */
-  --ink-1: #18181B;
-  --ink-2: #3F3F46;
-  --ink-3: #71717A;
+  /* tinta — leitura sobre jet black */
+  --ink-1: #FAFAFA;
+  --ink-2: #A1A1A6;
+  --ink-3: #6B6B70;
   --ink-on-dark:   #FAFAFA;
-  --ink-on-dark-2: #A1A1AA;
+  --ink-on-dark-2: #A1A1A6;
 
-  /* bordas neobrutalistas */
-  --bd-c: #000000;
-  --bd-w: 4px;          /* containers */
-  --bd-w-sm: 2px;       /* itens menores */
-  --edge: #000000;
-  --edge-strong: #000000;
+  /* tinta sobre o card escuro - mesmas (cards são pretos no novo tema) */
+  /* bordas — sutis mas definidas */
+  --bd-c: #2A2A2A;
+  --bd-w: 1.5px;
+  --bd-w-sm: 1px;
+  --edge: #242424;
+  --edge-strong: #303030;
 
-  /* raios (soft-neobrutalism) */
+  /* raios — baixos, conforme moodboard */
   --r-pill: 999px;
-  --r-input: 10px;
-  --r-btn: 10px;
-  --r-card: 16px;
-  --r-lg: 20px;
+  --r-input: 8px;
+  --r-btn: 8px;
+  --r-card: 10px;
+  --r-lg: 14px;
 
-  /* sombras HARD (offset sólido) */
-  --sh-btn:       4px 4px 0 #000;
+  /* sombras — hard offset reservadas para elementos interativos / sticky notes */
+  --sh-btn:       3px 3px 0 #000;
   --sh-btn-hover: 0 0 0 #000;
-  --sh-card:      6px 6px 0 #000;
-  --sh-card-lg:   10px 10px 0 #000;
-  --sh-pop:       8px 8px 0 rgba(0,0,0,0.85);
-  --shadow-sm: var(--sh-btn);
+  --sh-card:      0 1px 0 rgba(255,255,255,0.03), 0 8px 24px rgba(0,0,0,0.6);
+  --sh-card-lg:   0 1px 0 rgba(255,255,255,0.04), 0 16px 40px rgba(0,0,0,0.7);
+  --sh-pop:       0 24px 60px rgba(0,0,0,0.75);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
   --shadow-md: var(--sh-card);
   --shadow-lg: var(--sh-card-lg);
   --shadow-xl: var(--sh-pop);
 
-  /* accent: neon lime (primária) + neon pink (secundária) */
-  --accent:        #BEF264;
-  --accent-hover:  #A3E635;
-  --accent-2:      #F472B6;
-  --on-accent:     #000000;
-  --accent-soft:   #BEF264;
-  --accent-grad:   linear-gradient(135deg,#BEF264 0%,#A3E635 100%);
-  --accent-ink:    #18181B;
+  /* paleta de marca */
+  --lime-neon:   #BFFF00;   /* primária */
+  --coral-pink:  #FF7777;
+  --yellow-pop:  #FFD400;
+  --warm-cream:  #FFE2C0;
+  --jet-black:   #0D0D0D;
 
-  /* status (sobre cards brancos) */
-  --success-soft: #DCFCE7;
-  --danger-soft:  #FEE2E2;
-  --warning-soft: #FEF9C3;
+  --accent:        var(--lime-neon);
+  --accent-hover:  #AEEC00;
+  --accent-2:      var(--coral-pink);
+  --accent-3:      var(--yellow-pop);
+  --accent-4:      var(--warm-cream);
+  --on-accent:     #0D0D0D;
+  --accent-soft:   rgba(191,255,0,0.14);
+  --accent-grad:   linear-gradient(135deg,#D6FF3A 0%,#BFFF00 100%);
+  --accent-ink:    #0D0D0D;
 
-  /* movimento: bouncy */
-  --ease: cubic-bezier(0.175,0.885,0.32,1.275);
+  /* status — sobre fundo escuro */
+  --success-soft: rgba(22,163,74,0.18);
+  --danger-soft:  rgba(239,68,68,0.18);
+  --warning-soft: rgba(245,158,11,0.18);
+
+  /* movimento */
+  --ease: cubic-bezier(0.2,0.9,0.3,1.1);
   --ease-soft: cubic-bezier(0.16,1,0.3,1);
-  /* a11y: ring duplo (zinc interno + lime externo) — visível em qualquer base */
-  --focus-ring: 0 0 0 2px #18181B, 0 0 0 5px #BEF264;
+  --focus-ring: 0 0 0 2px #0D0D0D, 0 0 0 4px #BFFF00;
 
-  --brand-name: 'APPlink';
+  --brand-name: 'AppLink';
 }
 
 /* ============================================================
@@ -137,7 +146,6 @@
   --ease: cubic-bezier(0.16,1,0.3,1);
   --ease-soft: cubic-bezier(0.16,1,0.3,1);
 
-  --display-weight: 600;
   --ink-on-dark: #F5F5F7;
   --ink-on-dark-2: #86868B;
 }

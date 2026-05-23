@@ -15,7 +15,7 @@
     localStorage.setItem('ap-brand', brand);
     localStorage.setItem('ap-mode', mode);
     document.querySelectorAll('[data-brand-name]').forEach(function (el) {
-      el.textContent = brand === 'applink' ? 'APPlink' : 'AppexCRM';
+      el.textContent = brand === 'applink' ? 'AppLink' : 'AppexCRM';
     });
     var b1 = document.getElementById('sw-applink'), b2 = document.getElementById('sw-appex');
     if (b1) { b1.className = brand === 'applink' ? 'on' : ''; b2.className = brand === 'appex' ? 'on' : ''; }
@@ -40,7 +40,7 @@ color:var(--ink-3);padding:0 4px}';
     box.className = 'theme-sw';
     box.innerHTML = '\
 <div class="cap">Identidade</div>\
-<div class="grp"><div id="sw-applink">APPlink avulso</div><div id="sw-appex">Módulo CRM</div></div>\
+<div class="grp"><div id="sw-applink">AppLink avulso</div><div id="sw-appex">Módulo CRM</div></div>\
 <div class="cap">Modo</div>\
 <div class="grp"><div id="sw-dark">Escuro</div><div id="sw-light">Claro</div></div>';
     document.body.appendChild(box);

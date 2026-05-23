@@ -1,17 +1,17 @@
-# APPlink — Mapeamento do Frontend
+# AppLink — Mapeamento do Frontend
 
-Documento vivo. Mapeia todas as telas e funcionalidades do APPlink conforme o
+Documento vivo. Mapeia todas as telas e funcionalidades do AppLink conforme o
 dono do produto apresenta as referências. Base para o plano de implementação.
 
 ## O produto
 
-**APPlink** = link-in-bio profissional (ref: selfme.bio) + encurtador inteligente
+**AppLink** = link-in-bio profissional (ref: selfme.bio) + encurtador inteligente
 de links (ref: Switchy.io), numa plataforma única.
 
 Vendido em dois modos:
-- **Avulso** — marca APPlink, página de venda própria, planos Free/Pro próprios.
+- **Avulso** — marca AppLink, página de venda própria, planos Free/Pro próprios.
 - **Módulo do AppexCRM** — roda dentro do CRM via iframe, painel **white-label**
-  (sem marca APPlink). Página pública pode manter a marca.
+  (sem marca AppLink). Página pública pode manter a marca.
 
 White-label some no painel quando rodando no CRM: logo, selo de plano,
 "Renova em", "Gerenciar assinatura", "Faturas", aba "Indicações" + banner Stripe.
@@ -59,7 +59,7 @@ O dono prefere o fluxo do selfme.bio (mais intuitivo) ao do Switchy.
 
 - **Estado inicial:** texto explicativo + campo "Domínio" (ex:
   `links.seudominio.com`) + botão "Salvar domínio". A URL padrão
-  `APPlink/usuario` continua funcionando.
+  `AppLink/usuario` continua funcionando.
 - **Após salvar:** carrega e aparece o bloco "Como ativar":
   - Passo 1: criar registro **CNAME** no provedor de DNS, com Nome (host) e
     Alvo (valor) indicados na tela.
@@ -72,7 +72,7 @@ O dono prefere o fluxo do selfme.bio (mais intuitivo) ao do Switchy.
 Programa de afiliados via Stripe. Decisão do dono: deixar por último.
 Funcionalidade só do modo avulso (some no modo CRM — ver white-label).
 
-## Melhorias do APPlink sobre o selfme.bio (requisitos do dono)
+## Melhorias do AppLink sobre o selfme.bio (requisitos do dono)
 
 1. **Preview mobile e desktop** — toggle pra ver a página nos dois formatos.
 2. **Blocos redimensionáveis** — usuário ajusta o tamanho de cada bloco.
