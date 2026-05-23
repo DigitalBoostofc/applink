@@ -619,5 +619,235 @@ https://affiliates.parceiro.com/cupom?ref=maria</textarea>
   </div>
 </div>
 
+<style>
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);
+    padding:14px 22px;border-radius:14px;background:#141414;border:1px solid rgba(255,255,255,0.08);
+    box-shadow:6px 6px 18px rgba(0,0,0,0.55),0 0 22px rgba(191,255,0,0.18);
+    color:#fff;font-family:'Satoshi',sans-serif;font-size:14px;font-weight:600;letter-spacing:0;
+    display:flex;align-items:center;gap:12px;z-index:9999;opacity:0;pointer-events:none;
+    transition:.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+  .toast .dot{width:8px;height:8px;border-radius:50%;background:#BFFF00;box-shadow:0 0 12px rgba(191,255,0,0.7)}
+  .toast.danger .dot{background:#FF7777;box-shadow:0 0 12px rgba(255,119,119,0.7)}
+  .toast.warn .dot{background:#FFD466;box-shadow:0 0 12px rgba(255,212,102,0.7)}
+  .row-menu{position:fixed;background:#141414;border:1px solid rgba(255,255,255,0.06);border-radius:14px;
+    box-shadow:6px 6px 18px rgba(0,0,0,0.65),-2px -2px 8px rgba(255,255,255,0.025);
+    padding:8px;min-width:200px;z-index:9999;display:none;font-family:'Satoshi',sans-serif}
+  .row-menu.show{display:block;animation:dropIn .25s cubic-bezier(0.34, 1.56, 0.64, 1)}
+  @keyframes dropIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+  .row-menu .mi{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;
+    color:#E5E7EB;font-size:13px;font-weight:600;transition:.2s ease}
+  .row-menu .mi:hover{background:rgba(191,255,0,0.08);color:#BFFF00}
+  .row-menu .mi.danger:hover{background:rgba(255,119,119,0.1);color:#FF7777}
+  .row-menu .mi svg{width:14px;height:14px;flex-shrink:0}
+  .row-menu .sep{height:1px;background:rgba(255,255,255,0.06);margin:4px 8px}
+  tbody tr.paused{opacity:0.55}
+  tbody tr.paused td:nth-child(2) b::after{content:" · pausado";color:#FFD466;font-weight:500;font-size:12px}
+  thead th.sortable{cursor:pointer;user-select:none;transition:.2s}
+  thead th.sortable:hover{color:#fff}
+  thead th.sortable::after{content:" ↕";opacity:0.3;font-size:10px}
+  thead th.sorting::after{content:" ↓";opacity:1;color:#BFFF00}
+  thead th.sorting.asc::after{content:" ↑"}
+  thead th.sorting{color:#BFFF00}
+</style>
+
+<div class="toast" id="toast"><span class="dot"></span><span id="toast-msg">Mensagem</span></div>
+
+<div class="row-menu" id="row-menu">
+  <div class="mi" data-action="edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>Editar link</div>
+  <div class="mi" data-action="duplicate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Duplicar</div>
+  <div class="mi" data-action="qrcode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg>Ver QR Code</div>
+  <div class="mi" data-action="share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></svg>Compartilhar</div>
+  <div class="sep"></div>
+  <div class="mi" data-action="pause"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>Pausar</div>
+  <div class="mi" data-action="folder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>Mover pra pasta</div>
+  <div class="sep"></div>
+  <div class="mi danger" data-action="delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>Excluir link</div>
+</div>
+
+<script>
+(function(){
+  const $ = (s,r=document) => r.querySelector(s);
+  const $$ = (s,r=document) => Array.from(r.querySelectorAll(s));
+  const toastEl = $('#toast'), toastMsg = $('#toast-msg'), rowMenu = $('#row-menu');
+  let toastTimer;
+  function toast(msg, type='ok'){
+    clearTimeout(toastTimer);
+    toastMsg.textContent = msg;
+    toastEl.className = 'toast show ' + (type === 'ok' ? '' : type);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2400);
+  }
+  function copy(text){
+    navigator.clipboard?.writeText(text).then(()=>toast('Copiado: '+text)).catch(()=>toast('Copiado: '+text));
+  }
+
+  // 1. ROW ACTIONS (3 icons)
+  $$('tbody tr').forEach(tr => {
+    const linkName = tr.querySelector('td:nth-child(2) b')?.textContent.trim() || 'Link';
+    const shortUrl = tr.querySelector('td.num:nth-child(5)')?.textContent.trim() || '';
+    const acts = tr.querySelectorAll('.v3acts .a');
+    if (acts.length >= 3){
+      acts[0].style.cursor='pointer'; acts[0].title='Analytics';
+      acts[0].addEventListener('click', e => { e.stopPropagation(); location.href='03-analytics-link.html'; });
+      acts[1].style.cursor='pointer'; acts[1].title='Copiar link';
+      acts[1].addEventListener('click', e => { e.stopPropagation(); copy(shortUrl); });
+      acts[2].style.cursor='pointer'; acts[2].title='Mais ações';
+      acts[2].addEventListener('click', e => {
+        e.stopPropagation();
+        const r = acts[2].getBoundingClientRect();
+        rowMenu.style.top = (r.bottom+6)+'px';
+        rowMenu.style.right = (window.innerWidth-r.right)+'px';
+        rowMenu.style.left = 'auto';
+        rowMenu.classList.add('show');
+        rowMenu.dataset.row = linkName;
+      });
+    }
+  });
+
+  // 2. DROPDOWN MENU
+  $$('#row-menu .mi').forEach(mi => {
+    mi.addEventListener('click', () => {
+      const action = mi.dataset.action, linkName = rowMenu.dataset.row || 'link';
+      rowMenu.classList.remove('show');
+      switch(action){
+        case 'edit': location.href='02-criar-link.html'; return;
+        case 'duplicate': toast('Link "'+linkName+'" duplicado'); break;
+        case 'qrcode': location.href='10-qrcode.html'; return;
+        case 'share': toast('Link compartilhado'); break;
+        case 'pause': toast('Link "'+linkName+'" pausado', 'warn'); break;
+        case 'folder': toast('Selecione a pasta de destino'); break;
+        case 'delete':
+          if (confirm('Excluir link "'+linkName+'"? Essa ação não pode ser desfeita.')) toast('Link excluído', 'danger');
+          break;
+      }
+    });
+  });
+  document.addEventListener('click', e => {
+    if (!rowMenu.contains(e.target) && !e.target.closest('.v3acts .a')) rowMenu.classList.remove('show');
+  });
+
+  // 3. CHECKBOX + BULK BAR
+  function updateBulk(){
+    const sel = $$('tbody tr.sel').length;
+    const bar = $('.bulk-bar');
+    const cnt = $('.bulk-count, .bulk-bar [class*="count"]');
+    if (bar) bar.style.display = sel > 0 ? '' : 'none';
+    if (cnt) cnt.textContent = sel;
+  }
+  $$('tbody tr').forEach(tr => {
+    const c = tr.querySelector('.v3check');
+    if (!c) return;
+    c.style.cursor='pointer';
+    c.addEventListener('click', e => { e.stopPropagation(); tr.classList.toggle('sel'); c.classList.toggle('on'); updateBulk(); });
+  });
+  const headCheck = $('thead .v3check') || $('thead th:first-child .v3check');
+  if (headCheck){
+    headCheck.style.cursor='pointer';
+    headCheck.addEventListener('click', () => {
+      const all = $$('tbody tr.sel').length === $$('tbody tr').length;
+      $$('tbody tr').forEach(tr => {
+        const ch = tr.querySelector('.v3check');
+        if (all){ tr.classList.remove('sel'); ch?.classList.remove('on'); }
+        else { tr.classList.add('sel'); ch?.classList.add('on'); }
+      });
+      headCheck.classList.toggle('on', !all);
+      updateBulk();
+    });
+  }
+
+  // 4. BULK BAR BUTTONS
+  $$('.bulk-bar .bbtn').forEach(btn => {
+    btn.style.cursor='pointer';
+    btn.addEventListener('click', () => {
+      const t = btn.textContent.trim(), n = $$('tbody tr.sel').length;
+      if (t.includes('Excluir')){
+        if (confirm('Excluir '+n+' links selecionados?')){
+          toast(n+' links excluídos', 'danger');
+          $$('tbody tr.sel').forEach(tr => tr.classList.remove('sel'));
+          $$('tbody .v3check.on').forEach(c => c.classList.remove('on'));
+          updateBulk();
+        }
+      } else if (t.includes('Pausar')){
+        $$('tbody tr.sel').forEach(tr => tr.classList.toggle('paused'));
+        toast(n+' links pausados', 'warn');
+      } else if (t.includes('Exportar')){ toast('CSV de '+n+' links gerado');
+      } else { toast(t+' · '+n+' links'); }
+    });
+  });
+
+  // 5. FOLDER + FILTER CHIPS
+  $$('.chips-row > *, [class*="chip"]').forEach(chip => {
+    if (chip.closest('.bulk-bar')) return;
+    if (chip.classList.contains('filter-chip')) return;
+    chip.style.cursor='pointer';
+    chip.addEventListener('click', () => {
+      const sibs = chip.parentElement?.children || [];
+      Array.from(sibs).forEach(s => s.classList?.remove('on'));
+      chip.classList.add('on');
+      const label = chip.textContent.trim();
+      if (/nova\s+pasta/i.test(label)){
+        const name = prompt('Nome da nova pasta:');
+        if (name) toast('Pasta "'+name+'" criada');
+        chip.classList.remove('on');
+      } else { toast('Filtrando: '+label); }
+    });
+  });
+  $$('.filter-chip').forEach(chip => {
+    chip.style.cursor='pointer';
+    chip.addEventListener('click', () => {
+      const l = chip.textContent.trim();
+      if (l.includes('Importar')){
+        const m = document.getElementById('bulk-import-modal');
+        if (m) m.style.display = '';
+        toast('Abrindo importação');
+      } else { chip.classList.toggle('on'); toast('Filtro: '+l); }
+    });
+  });
+
+  // 6. SORT HEADERS
+  ['Link','Cliques','Pixels','Link curto','Criado'].forEach(name => {
+    $$('thead th').forEach(th => {
+      if (th.textContent.trim() === name){
+        th.classList.add('sortable');
+        th.addEventListener('click', () => {
+          const wasAsc = th.classList.contains('sorting') && th.classList.contains('asc');
+          $$('thead th').forEach(t => { t.classList.remove('sorting'); t.classList.remove('asc'); });
+          th.classList.add('sorting');
+          if (!wasAsc) th.classList.add('asc');
+          toast('Ordenando por '+name+(wasAsc?' (desc)':' (asc)'));
+        });
+      }
+    });
+  });
+
+  // 7. SEARCH
+  const search = $('.v3search input');
+  if (search){
+    search.addEventListener('input', e => {
+      const q = e.target.value.toLowerCase();
+      $$('tbody tr').forEach(tr => tr.style.display = (q === '' || tr.textContent.toLowerCase().includes(q)) ? '' : 'none');
+    });
+  }
+
+  // 8. QUICK CREATE
+  const qb = $('.quick-btn'), qi = $('.quick .fl input');
+  if (qb && qi){
+    qb.addEventListener('click', () => {
+      const url = qi.value.trim();
+      if (!url){ toast('Cole uma URL primeiro', 'warn'); return; }
+      const slug = Math.random().toString(36).slice(2, 8);
+      toast('Link criado: plnk.to/'+slug);
+      qi.value = '';
+    });
+    qi.addEventListener('keydown', e => { if (e.key === 'Enter') qb.click(); });
+  }
+
+  // 9. ESC fecha menus
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') rowMenu.classList.remove('show'); });
+
+  updateBulk();
+})();
+</script>
+
 </body>
 </html>
