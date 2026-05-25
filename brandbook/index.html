@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APPlink — Brandbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700,800&f[]=satoshi@400,500,600,700,800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --jet:#0A0A0A; --sidebar:#050505; --surface:#141414; --surface2:#1A1A1A;
+  --lime:#BFFF00; --coral:#FF7777;
+  --ink1:#F5F5F7; --ink2:#94A3B8; --ink3:#5A5A60;
+  --success:#10B981; --danger:#EF4444; --warning:#F59E0B;
+  --grad:linear-gradient(135deg,#BFFF00,#FF7777);
+  --grad-h:linear-gradient(90deg,#BFFF00,#FF7777);
+  --sh-card:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);
+  --sh-in:inset 4px 4px 8px rgba(0,0,0,0.55),inset -2px -2px 6px rgba(255,255,255,0.025);
+  --ease:cubic-bezier(0.34,1.56,0.64,1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--jet);color:var(--ink1);font-family:'Satoshi',sans-serif;min-height:100vh;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* ── NAV ── */
+.bb-nav{position:fixed;top:24px;left:50%;transform:translateX(-50%);z-index:50;
+  background:rgba(20,20,20,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.06);border-radius:999px;
+  padding:6px;display:flex;gap:2px;align-items:center;
+  box-shadow:6px 6px 18px rgba(0,0,0,0.55),0 0 22px rgba(191,255,0,0.08)}
+.bb-nav a{padding:8px 14px;border-radius:999px;font-family:'Satoshi',sans-serif;font-weight:700;font-size:11px;
+  text-transform:uppercase;letter-spacing:0.12em;color:var(--ink2);transition:.25s var(--ease);white-space:nowrap}
+.bb-nav a:hover{color:#fff;background:rgba(255,255,255,0.04)}
+.bb-nav a.brand{background:var(--grad);color:var(--jet);padding:9px 14px;font-weight:800;letter-spacing:0.16em}
+
+/* ── SECTION ── */
+section{padding:96px 32px;max-width:1320px;margin:0 auto;position:relative}
+section:first-of-type{padding-top:140px}
+.eye{font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.16em;color:var(--lime);margin-bottom:14px}
+.eye::before{content:"▮ "}
+h1.bb-h1{font-family:'General Sans',sans-serif;font-weight:600;font-size:84px;line-height:0.95;letter-spacing:-0.04em;color:#fff;margin-bottom:24px}
+h1.bb-h1 em{font-style:normal;background:var(--grad-h);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2.bb-h2{font-family:'General Sans',sans-serif;font-weight:600;font-size:44px;line-height:1.05;letter-spacing:-0.03em;color:#fff;margin-bottom:18px}
+h2.bb-h2 em{font-style:normal;background:var(--grad-h);-webkit-background-clip:text;background-clip:text;color:transparent}
+h3.bb-h3{font-family:'General Sans',sans-serif;font-weight:600;font-size:22px;letter-spacing:-0.02em;color:#fff;margin-bottom:10px}
+.lead{font-family:'Satoshi',sans-serif;font-size:18px;color:var(--ink2);line-height:1.65;max-width:62ch;margin-bottom:36px}
+.body{font-family:'Satoshi',sans-serif;font-size:14.5px;color:var(--ink2);line-height:1.65}
+
+/* ── HERO ── */
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center;min-height:80vh}
+.hero-logo{display:grid;place-items:center;position:relative}
+.hero-logo::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(circle, rgba(191,255,0,0.15) 0%, transparent 60%);pointer-events:none;filter:blur(20px)}
+.hero-logo img{width:480px;max-width:100%;height:auto;position:relative;z-index:1;
+  filter:drop-shadow(0 30px 60px rgba(0,0,0,0.6)) drop-shadow(0 0 40px rgba(191,255,0,0.18))}
+.hero-meta{display:flex;flex-direction:column;gap:8px;margin-top:32px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink3);font-weight:500}
+.hero-meta .row{display:flex;gap:18px}
+.hero-meta .key{color:var(--ink3);text-transform:uppercase;letter-spacing:0.12em;font-weight:700;min-width:90px}
+.hero-meta .val{color:var(--ink1);font-weight:600}
+.tagline-box{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:24px;padding:28px 32px;margin-top:24px;
+  box-shadow:var(--sh-card)}
+.tagline-box .verbs{font-family:'General Sans',sans-serif;font-weight:700;font-size:32px;letter-spacing:-0.03em;color:#fff;line-height:1.1}
+.tagline-box .verbs span{display:inline-block}
+.tagline-box .verbs .hl{background:var(--lime);color:var(--jet);padding:1px 10px;border-radius:6px;margin:0 2px;
+  box-shadow:0 0 18px rgba(191,255,0,0.4)}
+.tagline-box .verbs .circ{padding:0 12px;position:relative;display:inline-block}
+.tagline-box .verbs .circ::before{content:"";position:absolute;inset:-4px -2px;border:2.5px solid var(--coral);border-radius:60%;transform:rotate(-3deg)}
+.tagline-box .sub{margin-top:12px;font-family:'Satoshi',sans-serif;font-size:14.5px;color:var(--ink2);line-height:1.6}
+
+/* ── ESSÊNCIA ── */
+.essence-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}
+.essence{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:20px;padding:24px;box-shadow:var(--sh-card);transition:.35s var(--ease)}
+.essence:hover{transform:translateY(-3px);border-color:rgba(191,255,0,0.2)}
+.essence .ic{width:38px;height:38px;border-radius:11px;background:rgba(191,255,0,0.1);color:var(--lime);display:grid;place-items:center;margin-bottom:14px;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.4)}
+.essence .ic svg{width:18px;height:18px}
+.essence .t{font-family:'General Sans',sans-serif;font-weight:600;font-size:16px;color:#fff;margin-bottom:6px;letter-spacing:-0.01em}
+.essence .d{font-family:'Satoshi',sans-serif;font-size:13.5px;color:var(--ink2);line-height:1.55}
+
+/* ── SÍMBOLO BREAKDOWN ── */
+.symbol-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:center}
+.symbol-canvas{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:28px;padding:48px;
+  display:grid;place-items:center;box-shadow:var(--sh-card);position:relative;min-height:420px}
+.symbol-canvas img{width:320px;height:auto;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.5))}
+.symbol-notes{display:flex;flex-direction:column;gap:20px}
+.symbol-note{display:flex;gap:18px;padding:18px 22px;background:var(--surface);border-radius:18px;border:1px solid rgba(255,255,255,0.04);box-shadow:var(--sh-card)}
+.symbol-note .num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:var(--lime);min-width:32px;background:rgba(191,255,0,0.1);height:32px;border-radius:8px;display:grid;place-items:center;flex-shrink:0}
+.symbol-note .t{font-family:'General Sans',sans-serif;font-weight:600;font-size:16px;color:#fff;letter-spacing:-0.01em;margin-bottom:6px}
+.symbol-note .d{font-family:'Satoshi',sans-serif;font-size:14px;color:var(--ink2);line-height:1.55}
+
+/* ── PALETA ── */
+.palette-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:24px}
+.swatch{border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,0.05);box-shadow:var(--sh-card);transition:.3s var(--ease)}
+.swatch:hover{transform:scale(1.02)}
+.swatch .chip{height:140px;display:flex;align-items:flex-end;padding:14px}
+.swatch .chip .nm{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.04em}
+.swatch .meta{padding:14px;background:var(--surface);font-family:'Satoshi',sans-serif;font-size:12.5px}
+.swatch .meta .tok{font-weight:800;color:#fff;font-size:13px}
+.swatch .meta .hex{font-family:'JetBrains Mono',monospace;color:var(--ink2);margin-top:3px;font-size:12px}
+.swatch .meta .use{color:var(--ink3);font-size:11.5px;margin-top:6px;line-height:1.4}
+
+/* ── TIPOGRAFIA ── */
+.type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
+.type-card{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:24px;padding:32px;box-shadow:var(--sh-card)}
+.type-card .label{font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.16em;color:var(--lime);margin-bottom:14px}
+.type-card .sample{color:#fff;line-height:0.95;margin-bottom:20px}
+.type-card .sample.display{font-family:'General Sans',sans-serif;font-weight:600;font-size:96px;letter-spacing:-0.04em}
+.type-card .sample.ui{font-family:'Satoshi',sans-serif;font-weight:700;font-size:60px;letter-spacing:-0.02em}
+.type-card .sample.mono{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:60px}
+.type-card .info{font-family:'Satoshi',sans-serif;font-size:13.5px;color:var(--ink2);line-height:1.6;margin-bottom:6px}
+.type-card .info b{color:var(--ink1);font-weight:700}
+.type-card .alpha{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink3);letter-spacing:0.06em;margin-top:14px;line-height:1.5;border-top:1px solid rgba(255,255,255,0.05);padding-top:14px}
+
+/* ── LOGO SYSTEM ── */
+.logo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}
+.logo-cell{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:20px;padding:32px;box-shadow:var(--sh-card);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:200px;position:relative;overflow:hidden}
+.logo-cell.dark{background:var(--jet)}
+.logo-cell.surface2{background:var(--surface2)}
+.logo-cell.light{background:#F5F5F7}
+.logo-cell.gradient{background:var(--grad)}
+.logo-cell.coral{background:var(--coral)}
+.logo-cell img{max-width:140px;height:auto;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.4))}
+.logo-cell .lbl{position:absolute;bottom:10px;left:14px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;opacity:0.6;color:#94A3B8}
+.logo-cell.light .lbl{color:#5A5A60}
+.logo-cell.gradient .lbl,.logo-cell.coral .lbl{color:#0A0A0A}
+
+.scale-row{display:flex;align-items:flex-end;gap:32px;padding:32px;background:var(--surface);border-radius:24px;margin-top:18px;justify-content:center;flex-wrap:wrap;box-shadow:var(--sh-card)}
+.scale-item{display:flex;flex-direction:column;align-items:center;gap:10px}
+.scale-item .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink3);font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
+
+/* ── DO / DONT ── */
+.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px}
+.dd-col{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:24px;padding:28px;box-shadow:var(--sh-card)}
+.dd-col h4{font-family:'General Sans',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.dd-col.do h4{color:#10B981}
+.dd-col.dont h4{color:#EF4444}
+.dd-col .badge{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-weight:900}
+.dd-col.do .badge{background:rgba(16,185,129,0.18);color:#10B981}
+.dd-col.dont .badge{background:rgba(239,68,68,0.18);color:#EF4444}
+.dd-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.dd-col li{display:flex;gap:10px;font-family:'Satoshi',sans-serif;font-size:14px;color:var(--ink2);line-height:1.55;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,0.05)}
+.dd-col li:last-child{border-bottom:0}
+.dd-col li::before{content:"";width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:9px}
+.dd-col.do li::before{background:#10B981}
+.dd-col.dont li::before{background:#EF4444}
+
+/* ── UI ELEMENTS ── */
+.ui-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.ui-card{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:24px;padding:28px;box-shadow:var(--sh-card)}
+.ui-card .ttl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.13em;color:var(--ink2);margin-bottom:18px}
+.ui-card .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn-demo{padding:11px 18px;border-radius:12px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:12.5px;text-transform:uppercase;letter-spacing:0.12em;border:0;cursor:pointer}
+.btn-prim{background:var(--grad-h);color:var(--jet);box-shadow:4px 4px 10px rgba(0,0,0,0.5),0 0 22px rgba(191,255,0,0.3)}
+.btn-sec{background:var(--surface2);color:var(--ink2);box-shadow:3px 3px 8px rgba(0,0,0,0.5),-1px -1px 4px rgba(255,255,255,0.025)}
+.btn-ghost{background:transparent;color:var(--lime);border:1px solid rgba(191,255,0,0.3)}
+.input-demo{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:12px 16px;color:#fff;font-family:'Satoshi',sans-serif;font-size:14px;outline:none;width:100%;box-shadow:var(--sh-in)}
+.input-demo:focus{border-color:rgba(191,255,0,0.45)}
+.chip-demo{padding:7px 13px;border-radius:999px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:11.5px;text-transform:uppercase;letter-spacing:0.1em;display:inline-flex;align-items:center;gap:6px}
+.chip-demo.lime{background:rgba(191,255,0,0.12);color:var(--lime)}
+.chip-demo.coral{background:rgba(255,119,119,0.15);color:var(--coral)}
+.chip-demo.neutral{background:rgba(148,163,184,0.12);color:var(--ink2)}
+.chip-demo.success{background:rgba(16,185,129,0.14);color:#10B981}
+.chip-demo.draft{background:rgba(245,158,11,0.14);color:#F59E0B}
+.chip-demo .dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.toggle-demo{width:48px;height:28px;background:#2D2D38;border-radius:999px;position:relative;cursor:pointer;
+  box-shadow:inset 3px 3px 6px rgba(0,0,0,0.55),inset -1px -1px 3px rgba(255,255,255,0.03)}
+.toggle-demo::after{content:"";position:absolute;width:22px;height:22px;background:#fff;border-radius:50%;top:3px;left:3px;box-shadow:1px 1px 3px rgba(0,0,0,0.4)}
+.toggle-demo.on{background:var(--grad);box-shadow:0 0 16px rgba(191,255,0,0.4)}
+.toggle-demo.on::after{left:23px}
+
+/* ── PRINCÍPIOS ── */
+.princ-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
+.princ{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:24px;padding:32px;box-shadow:var(--sh-card);position:relative}
+.princ .n{position:absolute;top:24px;right:24px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--ink3);letter-spacing:0.08em}
+.princ .t{font-family:'General Sans',sans-serif;font-weight:600;font-size:24px;letter-spacing:-0.03em;color:#fff;margin-bottom:12px}
+.princ .d{font-family:'Satoshi',sans-serif;font-size:14.5px;color:var(--ink2);line-height:1.65}
+
+/* ── VOICE ── */
+.voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+.voice-row{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:18px;padding:22px 24px;box-shadow:var(--sh-card);display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center}
+.voice-row .lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:0.14em;color:var(--ink3)}
+.voice-row .ex{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;font-weight:500}
+
+/* ── TOKENS BLOCK ── */
+.tokens-block{background:var(--surface);border-radius:24px;padding:32px;box-shadow:var(--sh-card);border:1px solid rgba(255,255,255,0.05);margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink1);line-height:1.7;overflow-x:auto;white-space:pre}
+.tokens-block .c{color:var(--ink3)}
+.tokens-block .k{color:var(--coral)}
+.tokens-block .v{color:var(--lime)}
+
+/* ── ESTRATÉGIA ── */
+.strat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
+.strat-card{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:24px;padding:32px;box-shadow:var(--sh-card);
+  display:flex;flex-direction:column;gap:14px;transition:.3s var(--ease);position:relative;overflow:hidden}
+.strat-card:hover{transform:translateY(-3px);border-color:rgba(191,255,0,0.2)}
+.strat-card::after{content:"";position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;
+  background:radial-gradient(circle,rgba(191,255,0,0.08) 0%,transparent 70%);pointer-events:none}
+.strat-badge{align-self:flex-start;background:rgba(191,255,0,0.12);color:var(--lime);
+  font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;padding:6px 12px;border-radius:8px}
+.strat-card h3{font-family:'General Sans',sans-serif;font-weight:600;font-size:22px;line-height:1.2;letter-spacing:-0.02em;color:#fff;position:relative;z-index:1}
+.strat-card .quote{font-family:'General Sans',sans-serif;font-style:italic;font-weight:500;color:var(--lime);font-size:13.5px;padding-left:12px;border-left:3px solid var(--lime);line-height:1.5;margin-top:4px}
+.strat-card p{font-family:'Satoshi',sans-serif;font-size:14px;color:var(--ink2);line-height:1.55;position:relative;z-index:1}
+.strat-card a.strat-link{color:var(--lime);font-family:'Satoshi',sans-serif;font-weight:700;font-size:12px;
+  text-transform:uppercase;letter-spacing:0.14em;margin-top:auto;border-bottom:1px dotted rgba(191,255,0,0.4);
+  padding-bottom:2px;align-self:flex-start;transition:.2s var(--ease);position:relative;z-index:1}
+.strat-card a.strat-link:hover{color:#fff;border-bottom-color:#fff}
+
+/* ── FOOT ── */
+footer.bb-foot{padding:48px 32px;border-top:1px solid rgba(255,255,255,0.05);text-align:center;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--ink3);letter-spacing:0.08em;margin-top:96px}
+footer.bb-foot a{color:var(--lime)}
+
+/* ── MOBILE ── */
+@media (max-width:1024px){
+  h1.bb-h1{font-size:56px}
+  h2.bb-h2{font-size:34px}
+  .hero{grid-template-columns:1fr}
+  .essence-grid,.logo-grid,.type-grid,.ui-grid,.princ-grid,.strat-grid{grid-template-columns:1fr 1fr}
+  .palette-grid{grid-template-columns:repeat(3,1fr)}
+  .symbol-grid,.do-dont,.voice-grid{grid-template-columns:1fr}
+  .bb-nav{padding:4px;font-size:9px}
+  .bb-nav a{padding:6px 10px;font-size:10px}
+  section{padding:60px 20px}
+}
+@media (max-width:600px){
+  .essence-grid,.logo-grid,.type-grid,.ui-grid,.princ-grid,.strat-grid{grid-template-columns:1fr}
+  .palette-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ════════ NAV ════════ -->
+<nav class="bb-nav">
+  <a class="brand">APPlink Brandbook</a>
+  <a href="#essencia">Essência</a>
+  <a href="#simbolo">Símbolo</a>
+  <a href="#paleta">Paleta</a>
+  <a href="#tipografia">Tipografia</a>
+  <a href="#logo">Logo</a>
+  <a href="#ui">UI</a>
+  <a href="#principios">Princípios</a>
+  <a href="#voz">Voz</a>
+  <a href="#estrategia">Estratégia</a>
+</nav>
+
+<!-- ════════ HERO ════════ -->
+<section id="hero">
+  <div class="hero">
+    <div>
+      <div class="eye">Brandbook · v1 · 2026</div>
+      <h1 class="bb-h1">A marca que <em>conecta</em><br>cliques em crescimento.</h1>
+      <p class="lead">Sistema de identidade visual do APPlink — plataforma de smart links, smartpages, pixels e roteamento condicional. Tudo o que está aqui já roda no produto. Este é o handoff oficial pro time.</p>
+
+      <div class="tagline-box">
+        <div class="verbs">
+          <span class="hl">Conecte. Personalize. Acompanhe.</span> <span class="circ">Cresça.</span>
+        </div>
+        <p class="sub">Quatro verbos. Um sistema. A promessa da marca em sequência de ação.</p>
+      </div>
+
+      <div class="hero-meta">
+        <div class="row"><span class="key">Categoria</span><span class="val">SaaS · Smart Links</span></div>
+        <div class="row"><span class="key">Mood</span><span class="val">Tech · Operacional · Premium</span></div>
+        <div class="row"><span class="key">Sistema</span><span class="val">Dark Neumorphism</span></div>
+        <div class="row"><span class="key">Versão</span><span class="val">v1 · 2026-05-25</span></div>
+      </div>
+    </div>
+    <div class="hero-logo">
+      <img src="../brand-refs/logos/applink-logo-transparent.png" alt="APPlink logo">
+    </div>
+  </div>
+</section>
+
+<!-- ════════ ESSÊNCIA ════════ -->
+<section id="essencia">
+  <div class="eye">01 · Essência</div>
+  <h2 class="bb-h2">Quatro pilares <em>não-negociáveis.</em></h2>
+  <p class="lead">A personalidade da marca não é tema decorativo: ela direciona cada decisão visual, de copy e de produto. Toda peça nova é validada contra esses 4.</p>
+
+  <div class="essence-grid">
+    <div class="essence">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6v6H9z"/></svg></div>
+      <div class="t">Operacional</div>
+      <div class="d">A interface parece ferramenta de trabalho, não landing page. Densidade alta, hierarquia clara, ação primária sempre visível.</div>
+    </div>
+    <div class="essence">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg></div>
+      <div class="t">Direta</div>
+      <div class="d">Verbos curtos: criar, editar, copiar, ativar. Nada de copy promocional dentro do app. Textos esclarecem, não vendem.</div>
+    </div>
+    <div class="essence">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
+      <div class="t">Tech</div>
+      <div class="d">Alto contraste, brilho controlado, números em mono. A marca conversa com profissionais que sabem ler dashboard.</div>
+    </div>
+    <div class="essence">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-9 9-5-5"/><path d="M4 19h16"/></svg></div>
+      <div class="t">Premium</div>
+      <div class="d">Sombras duplas, espaçamento generoso, microinterações com elasticidade. Cada toque deve sentir-se considerado.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ SÍMBOLO ════════ -->
+<section id="simbolo">
+  <div class="eye">02 · Símbolo</div>
+  <h2 class="bb-h2">Anatomia da <em>corrente.</em></h2>
+  <p class="lead">A logo combina dois conceitos: <b>elo</b> (link, conexão entre coisas) e <b>seta</b> (ação, redirect, crescimento). Cada elemento tem uma função semântica.</p>
+
+  <div class="symbol-grid">
+    <div class="symbol-canvas">
+      <img src="../brand-refs/logos/applink-logo-transparent.png" alt="APPlink mark anatomy">
+    </div>
+    <div class="symbol-notes">
+      <div class="symbol-note">
+        <span class="num">01</span>
+        <div>
+          <div class="t">Elo lime — Ação</div>
+          <div class="d">O elo superior preenchido com <b style="color:#BFFF00">#BFFF00</b> representa o momento em que o link gera resultado. Lime = energia, conversão, sinal verde pra performance.</div>
+        </div>
+      </div>
+      <div class="symbol-note">
+        <span class="num">02</span>
+        <div>
+          <div class="t">Elo cream — Origem</div>
+          <div class="d">O elo inferior em tom cream é o link em estado bruto — antes de ser smart, antes de ser rastreado. Representa o ponto de partida.</div>
+        </div>
+      </div>
+      <div class="symbol-note">
+        <span class="num">03</span>
+        <div>
+          <div class="t">Seta integrada</div>
+          <div class="d">O recorte do elo lime forma uma seta apontando pra cima-direita. Vetor de crescimento: redirect, atribuição, lift de conversão.</div>
+        </div>
+      </div>
+      <div class="symbol-note">
+        <span class="num">04</span>
+        <div>
+          <div class="t">Contorno preto chunky</div>
+          <div class="d">Espessura uniforme reforça o caráter operacional. O traço grosso garante legibilidade desde favicon 16px até billboard.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ PALETA ════════ -->
+<section id="paleta">
+  <div class="eye">03 · Paleta</div>
+  <h2 class="bb-h2">Cores que <em>orientam</em> ação.</h2>
+  <p class="lead">Sistema escuro com 2 acentos vivos. O dark é o palco; o lime é o foco; o coral é o tempero. Status colors (verde, vermelho, amarelo) só aparecem pra feedback funcional.</p>
+
+  <h3 class="bb-h3" style="margin-top:32px">Primárias</h3>
+  <div class="palette-grid">
+    <div class="swatch"><div class="chip" style="background:#BFFF00"><span class="nm" style="color:#0A0A0A">LIME</span></div><div class="meta"><div class="tok">Lime Neon</div><div class="hex">#BFFF00</div><div class="use">Acento principal · estados ativos · CTAs · seleção</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#FF7777"><span class="nm" style="color:#0A0A0A">CORAL</span></div><div class="meta"><div class="tok">Coral Pink</div><div class="hex">#FF7777</div><div class="use">Acento secundário · links auxiliares · alertas leves</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#0A0A0A"><span class="nm" style="color:#F5F5F7">JET</span></div><div class="meta"><div class="tok">Jet Black</div><div class="hex">#0A0A0A</div><div class="use">Fundo principal da aplicação</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#050505"><span class="nm" style="color:#F5F5F7">SIDEBAR</span></div><div class="meta"><div class="tok">Sidebar Black</div><div class="hex">#050505</div><div class="use">Sidebar · áreas de navegação</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#141414"><span class="nm" style="color:#F5F5F7">SURFACE</span></div><div class="meta"><div class="tok">Surface</div><div class="hex">#141414</div><div class="use">Cards · tabelas · modais</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#1A1A1A"><span class="nm" style="color:#F5F5F7">SURFACE 2</span></div><div class="meta"><div class="tok">Surface 2</div><div class="hex">#1A1A1A</div><div class="use">Inputs · botões secundários · pills</div></div></div>
+  </div>
+
+  <h3 class="bb-h3" style="margin-top:32px">Texto</h3>
+  <div class="palette-grid">
+    <div class="swatch"><div class="chip" style="background:#F5F5F7"><span class="nm" style="color:#0A0A0A">INK 1</span></div><div class="meta"><div class="tok">Ink 1</div><div class="hex">#F5F5F7</div><div class="use">Texto principal</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#94A3B8"><span class="nm" style="color:#0A0A0A">INK 2</span></div><div class="meta"><div class="tok">Ink 2</div><div class="hex">#94A3B8</div><div class="use">Texto secundário · subtítulos</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#5A5A60"><span class="nm" style="color:#F5F5F7">INK 3</span></div><div class="meta"><div class="tok">Ink 3</div><div class="hex">#5A5A60</div><div class="use">Hints · labels · placeholders</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#10B981"><span class="nm" style="color:#0A0A0A">SUCCESS</span></div><div class="meta"><div class="tok">Success</div><div class="hex">#10B981</div><div class="use">Crescimento · confirmação · positivo</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#EF4444"><span class="nm" style="color:#0A0A0A">DANGER</span></div><div class="meta"><div class="tok">Danger</div><div class="hex">#EF4444</div><div class="use">Erro · exclusão · alerta crítico</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#F59E0B"><span class="nm" style="color:#0A0A0A">WARNING</span></div><div class="meta"><div class="tok">Warning</div><div class="hex">#F59E0B</div><div class="use">Pendência · atenção · rascunho</div></div></div>
+  </div>
+
+  <h3 class="bb-h3" style="margin-top:32px">Gradiente da marca</h3>
+  <div style="background:var(--grad);border-radius:24px;padding:48px;display:flex;align-items:center;justify-content:space-between;margin-top:14px;color:#0A0A0A;box-shadow:var(--sh-card)">
+    <div>
+      <div style="font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;letter-spacing:0.14em;text-transform:uppercase">Gradient</div>
+      <div style="font-family:'General Sans',sans-serif;font-weight:700;font-size:36px;letter-spacing:-0.03em;margin-top:6px">Lime → Coral</div>
+    </div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:13px;text-align:right;line-height:1.6;font-weight:600">
+      linear-gradient(135deg,<br>&nbsp;&nbsp;#BFFF00 0%,<br>&nbsp;&nbsp;#FF7777 100%)
+    </div>
+  </div>
+</section>
+
+<!-- ════════ TIPOGRAFIA ════════ -->
+<section id="tipografia">
+  <div class="eye">04 · Tipografia</div>
+  <h2 class="bb-h2">Três fontes, <em>papéis distintos.</em></h2>
+  <p class="lead">Cada família tem trabalho específico: <b>General Sans</b> traz personalidade aos títulos, <b>Satoshi</b> garante legibilidade na interface, <b>JetBrains Mono</b> dá precisão técnica aos números.</p>
+
+  <div class="type-grid">
+    <div class="type-card">
+      <div class="label">Display · Títulos</div>
+      <div class="sample display">Aa</div>
+      <div class="info"><b>General Sans</b> · Fontshare</div>
+      <div class="info">Peso 600-700 · tracking <code style="font-family:'JetBrains Mono',monospace">-0.03em</code> a <code style="font-family:'JetBrains Mono',monospace">-0.02em</code></div>
+      <div class="info">H1, H2, valores de KPI, headers de cards.</div>
+      <div class="alpha">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz 0123456789</div>
+    </div>
+    <div class="type-card">
+      <div class="label">UI · Interface</div>
+      <div class="sample ui">Aa</div>
+      <div class="info"><b>Satoshi</b> · Fontshare</div>
+      <div class="info">Peso 400-800 · tracking <code style="font-family:'JetBrains Mono',monospace">0.10em</code>-<code style="font-family:'JetBrains Mono',monospace">0.14em</code> em uppercase</div>
+      <div class="info">Corpo, navegação, botões, labels, formulários.</div>
+      <div class="alpha">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz 0123456789</div>
+    </div>
+    <div class="type-card">
+      <div class="label">Mono · Dados</div>
+      <div class="sample mono">12.4k</div>
+      <div class="info"><b>JetBrains Mono</b> · Google Fonts</div>
+      <div class="info">Peso 400-700 · monoespaçada legível</div>
+      <div class="info">Métricas, números, URLs, IDs, status codes.</div>
+      <div class="alpha">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz 0123456789</div>
+    </div>
+  </div>
+
+  <h3 class="bb-h3" style="margin-top:32px">Escala em uso</h3>
+  <div class="tokens-block"><span class="c">/* Scale aplicada nos mockups */</span>
+<span class="k">h1</span> · General Sans 600 · <span class="v">40-84px</span> · letter-spacing -0.03em
+<span class="k">h2</span> · General Sans 600 · <span class="v">28-44px</span> · letter-spacing -0.02em
+<span class="k">h3</span> · General Sans 600 · <span class="v">17-22px</span> · letter-spacing -0.02em
+<span class="k">body</span> · Satoshi 500 · <span class="v">14-15px</span> · line-height 1.55
+<span class="k">label</span> · Satoshi 800 · <span class="v">11-12px</span> · UPPERCASE · letter-spacing 0.12em
+<span class="k">kpi</span> · General Sans 600 ou JetBrains Mono · <span class="v">24-44px</span></div>
+</section>
+
+<!-- ════════ LOGO SYSTEM ════════ -->
+<section id="logo">
+  <div class="eye">05 · Logo System</div>
+  <h2 class="bb-h2">Como usar <em>a marca.</em></h2>
+  <p class="lead">A marca foi desenhada pra performar de favicon 16px até billboard. Em todas as aplicações, o contorno preto é não-negociável e o lime nunca muda.</p>
+
+  <h3 class="bb-h3" style="margin-top:32px">Aplicações em fundo</h3>
+  <div class="logo-grid">
+    <div class="logo-cell dark"><img src="../brand-refs/logos/applink-logo-transparent.png" alt=""><span class="lbl">Jet · primário</span></div>
+    <div class="logo-cell surface2"><img src="../brand-refs/logos/applink-logo-transparent.png" alt=""><span class="lbl">Surface · sidebar</span></div>
+    <div class="logo-cell light"><img src="../brand-refs/logos/applink-logo-transparent.png" alt=""><span class="lbl">Light · papelaria</span></div>
+    <div class="logo-cell gradient"><img src="../brand-refs/logos/applink-logo-transparent.png" alt=""><span class="lbl">Gradient · launch</span></div>
+  </div>
+
+  <h3 class="bb-h3" style="margin-top:32px">Escala mínima</h3>
+  <div class="scale-row">
+    <div class="scale-item"><img src="../brand-refs/logos/applink-logo-transparent.png" style="height:120px;width:auto"><span class="lbl">120px · Login</span></div>
+    <div class="scale-item"><img src="../brand-refs/logos/applink-logo-transparent.png" style="height:64px;width:auto"><span class="lbl">64px · Avatar</span></div>
+    <div class="scale-item"><img src="../brand-refs/logos/applink-logo-transparent.png" style="height:42px;width:auto"><span class="lbl">42px · Sidebar</span></div>
+    <div class="scale-item"><img src="../brand-refs/logos/applink-logo-transparent.png" style="height:24px;width:auto"><span class="lbl">24px · UI</span></div>
+    <div class="scale-item"><img src="../brand-refs/logos/applink-logo-transparent.png" style="height:16px;width:auto"><span class="lbl">16px · Favicon</span></div>
+  </div>
+
+  <h3 class="bb-h3" style="margin-top:48px">Permitido vs proibido</h3>
+  <div class="do-dont">
+    <div class="dd-col do">
+      <h4><span class="badge">✓</span> Faça</h4>
+      <ul>
+        <li>Use a logo em fundos com contraste validado (preferir escuro).</li>
+        <li>Mantenha respiro mínimo de 25% da altura do mark ao redor.</li>
+        <li>Em lockup, ícone à esquerda, "APPlink" em General Sans 700 à direita.</li>
+        <li>Em apps pequenos, use só o símbolo (sem wordmark).</li>
+        <li>Quando precisar de impacto, aplique drop-shadow lime sutil.</li>
+      </ul>
+    </div>
+    <div class="dd-col dont">
+      <h4><span class="badge">✕</span> Nunca</h4>
+      <ul>
+        <li>Não troque o lime por qualquer outra cor.</li>
+        <li>Não remova ou afine o contorno preto chunky.</li>
+        <li>Não redesenhe os elos ou a seta integrada.</li>
+        <li>Não aplique gradient na própria logo (só em CTA/superfície).</li>
+        <li>Não rotacione, distorça ou aplique sombra colorida exagerada.</li>
+        <li>Não escreve "Applink", "App Link" ou "AppLINK" — só <b>APPlink</b>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ UI ELEMENTS ════════ -->
+<section id="ui">
+  <div class="eye">06 · Sistema UI</div>
+  <h2 class="bb-h2">Os blocos que <em>fazem o produto.</em></h2>
+  <p class="lead">Componentes que já estão em produção — botões, inputs, pills, toggles. Use como referência ao construir telas novas.</p>
+
+  <div class="ui-grid">
+    <div class="ui-card">
+      <div class="ttl">Botões</div>
+      <div class="row" style="flex-direction:column;align-items:stretch;gap:12px">
+        <button class="btn-demo btn-prim">Criar link</button>
+        <button class="btn-demo btn-sec">Salvar rascunho</button>
+        <button class="btn-demo btn-ghost">Cancelar</button>
+      </div>
+    </div>
+    <div class="ui-card">
+      <div class="ttl">Inputs</div>
+      <div class="row" style="flex-direction:column;align-items:stretch;gap:12px">
+        <input class="input-demo" placeholder="cliente-exemplo.com/promo" value="cliente-exemplo.com/promo">
+        <input class="input-demo" placeholder="plnk.to/slug">
+      </div>
+    </div>
+    <div class="ui-card">
+      <div class="ttl">Status pills</div>
+      <div class="row">
+        <span class="chip-demo success"><span class="dot"></span>No ar</span>
+        <span class="chip-demo draft">Rascunho</span>
+        <span class="chip-demo neutral">Arquivado</span>
+        <span class="chip-demo lime">Meta</span>
+        <span class="chip-demo coral">TikTok</span>
+      </div>
+    </div>
+    <div class="ui-card">
+      <div class="ttl">Toggles</div>
+      <div class="row" style="gap:24px">
+        <div class="toggle-demo on" title="ON"></div>
+        <div class="toggle-demo" title="OFF"></div>
+      </div>
+    </div>
+    <div class="ui-card">
+      <div class="ttl">KPI metric</div>
+      <div style="font-family:'General Sans',sans-serif;font-weight:600;font-size:36px;letter-spacing:-0.03em;color:#fff;line-height:1">12.418</div>
+      <div style="font-family:'Satoshi',sans-serif;font-weight:800;font-size:11.5px;text-transform:uppercase;letter-spacing:0.12em;color:#94A3B8;margin-top:6px">Cliques totais</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#10B981;margin-top:8px;font-weight:600">▲ +8,2% vs anterior</div>
+    </div>
+    <div class="ui-card">
+      <div class="ttl">Bordas e raios</div>
+      <div class="row" style="align-items:center;gap:16px">
+        <div style="width:54px;height:36px;background:var(--surface2);border-radius:14px;box-shadow:var(--sh-in)"></div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink2)">Input · 14px</span>
+      </div>
+      <div class="row" style="align-items:center;gap:16px;margin-top:10px">
+        <div style="width:54px;height:36px;background:var(--surface);border-radius:24px;box-shadow:var(--sh-card)"></div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink2)">Card · 24-28px</span>
+      </div>
+      <div class="row" style="align-items:center;gap:16px;margin-top:10px">
+        <div style="width:54px;height:24px;background:var(--lime);border-radius:999px"></div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink2)">Pill · 999px</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ PRINCÍPIOS ════════ -->
+<section id="principios">
+  <div class="eye">07 · Princípios de Sistema</div>
+  <h2 class="bb-h2">Como tudo <em>se comporta.</em></h2>
+  <p class="lead">Quatro regras de movimento, profundidade e ritmo que mantêm a marca coerente entre telas.</p>
+
+  <div class="princ-grid">
+    <div class="princ"><span class="n">P1</span><div class="t">Dark Neumorphism</div><div class="d">Superfícies escuras com sombra preta externa (<code style="font-family:'JetBrains Mono',monospace;color:#BFFF00">rgba(0,0,0,0.55)</code>) + highlight branco quase invisível (<code style="font-family:'JetBrains Mono',monospace;color:#BFFF00">0.025</code>). Profundidade vem da sombra, não de bordas fortes.</div></div>
+    <div class="princ"><span class="n">P2</span><div class="t">Lime orienta ação</div><div class="d">Onde houver lime, existe uma ação possível. Estados ativos, CTAs, seleção, foco. Quando o usuário precisar saber onde clicar, o sistema responde em <code style="font-family:'JetBrains Mono',monospace;color:#BFFF00">#BFFF00</code>.</div></div>
+    <div class="princ"><span class="n">P3</span><div class="t">Easing com elasticidade</div><div class="d">Todas as transições usam <code style="font-family:'JetBrains Mono',monospace;color:#BFFF00">cubic-bezier(0.34, 1.56, 0.64, 1)</code> — sente-se "vivo" sem ser cartoonish. Duração 200-350ms.</div></div>
+    <div class="princ"><span class="n">P4</span><div class="t">Mono pra precisão</div><div class="d">Sempre que o usuário lê um número, ele vê em JetBrains Mono. Cria a sensação de medição confiável — tracking, atribuição, dado bruto.</div></div>
+    <div class="princ"><span class="n">P5</span><div class="t">Ferramenta, não site</div><div class="d">A interface lembra IDE/dashboard, não landing page. Densidade alta, ação sempre acessível, copy operacional. O usuário trabalha aqui.</div></div>
+    <div class="princ"><span class="n">P6</span><div class="t">Coral é tempero</div><div class="d">Coral aparece como acento ou no gradiente — nunca cobre superfície grande. Excesso de coral quebra a hierarquia operacional.</div></div>
+  </div>
+
+  <h3 class="bb-h3" style="margin-top:32px">Tokens CSS de referência</h3>
+  <div class="tokens-block"><span class="c">/* Surface shadows */</span>
+<span class="k">--sh-card</span>: 6px 6px 16px <span class="v">rgba(0,0,0,0.55)</span>, -4px -4px 10px <span class="v">rgba(255,255,255,0.025)</span>;
+<span class="k">--sh-card-lg</span>: 12px 12px 28px <span class="v">rgba(0,0,0,0.65)</span>, -6px -6px 14px <span class="v">rgba(255,255,255,0.03)</span>;
+<span class="k">--sh-in</span>: inset 4px 4px 8px <span class="v">rgba(0,0,0,0.55)</span>, inset -2px -2px 6px <span class="v">rgba(255,255,255,0.025)</span>;
+
+<span class="c">/* Radii */</span>
+<span class="k">--r-input</span>: 14px;     <span class="c">/* Inputs · botões */</span>
+<span class="k">--r-card</span>:  24-28px;  <span class="c">/* Cards */</span>
+<span class="k">--r-modal</span>: 28-32px;  <span class="c">/* Modais · blocos grandes */</span>
+<span class="k">--r-pill</span>:  999px;    <span class="c">/* Pills · chips · status */</span>
+
+<span class="c">/* Motion */</span>
+<span class="k">--ease</span>: cubic-bezier(0.34, 1.56, 0.64, 1);
+<span class="k">--dur</span>: 200ms · 350ms · 450ms;</div>
+</section>
+
+<!-- ════════ VOICE ════════ -->
+<section id="voz">
+  <div class="eye">08 · Voz</div>
+  <h2 class="bb-h2">Como a marca <em>fala.</em></h2>
+  <p class="lead">Voz da interface: direta, curta, operacional. Verbos no imperativo, sem floreio. A marca trata o usuário como profissional que sabe o que está fazendo.</p>
+
+  <div class="voice-grid">
+    <div class="voice-row"><span class="lbl">CTA principal</span><span class="ex">Criar link</span></div>
+    <div class="voice-row"><span class="lbl">CTA secundário</span><span class="ex">Salvar rascunho</span></div>
+    <div class="voice-row"><span class="lbl">Estado vazio</span><span class="ex">Nenhum link criado ainda</span></div>
+    <div class="voice-row"><span class="lbl">Ação rápida</span><span class="ex">Copiar URL</span></div>
+    <div class="voice-row"><span class="lbl">Confirmação</span><span class="ex">Link publicado</span></div>
+    <div class="voice-row"><span class="lbl">Erro</span><span class="ex">Não foi possível salvar</span></div>
+    <div class="voice-row"><span class="lbl">Hint</span><span class="ex">Pressione Enter pra adicionar</span></div>
+    <div class="voice-row"><span class="lbl">Loading</span><span class="ex">Gerando link…</span></div>
+  </div>
+
+  <h3 class="bb-h3" style="margin-top:32px">Glossário oficial</h3>
+  <div class="tokens-block"><span class="k">link</span>      → smart link encurtado (não "URL", não "linkzinho")
+<span class="k">smartpage</span> → página link-in-bio do APPlink
+<span class="k">pixel</span>     → pixel de retargeting de plataforma (Meta, Google, etc.)
+<span class="k">audiência</span> → grupo de visitantes pixelados
+<span class="k">domínio</span>   → custom domain do usuário (plnk.to, marca.com.br)
+<span class="k">integração</span> → conexão com CRM/ferramenta externa
+<span class="k">redirect engine</span> → o motor de roteamento (28ms p95)
+<span class="k">conversão</span> → ação de valor (lead, venda) atribuída ao link</div>
+</section>
+
+<!-- ════════ ESTRATÉGIA ════════ -->
+<section id="estrategia">
+  <div class="eye">09 · Camada Estratégica</div>
+  <h2 class="bb-h2">Por trás do <em>visual.</em></h2>
+  <p class="lead">Toda decisão visual nasce de uma posição estratégica. Aqui ficam os 3 documentos que sustentam a marca por baixo do sistema visual — o "porquê" do APPlink antes do "como".</p>
+
+  <div class="strat-grid">
+    <div class="strat-card">
+      <span class="strat-badge">Manifesto</span>
+      <h3>Dado é poder. E poder não deveria custar em dólar.</h3>
+      <p class="quote">"O link deixa de ser apenas um atalho. Vira o ponto de controle da sua operação de marketing."</p>
+      <p>A voz institucional da marca em ~300 palavras. Posiciona o APPlink como infraestrutura de atribuição BR — não como encurtador. Pronto pra usar em landing, pitch deck, e-mail de boas-vindas.</p>
+      <a class="strat-link" href="../docs/manifesto.md">Ler completo →</a>
+    </div>
+
+    <div class="strat-card">
+      <span class="strat-badge">Arquétipo</span>
+      <h3>O Mago + tensão com o Governante</h3>
+      <p class="quote">"Cada clique deixa uma trilha. Agora você consegue ler."</p>
+      <p>Transforma dados invisíveis em decisões visíveis. Marcas-irmãs analógicas: <b>Segment</b>, <b>Hyros</b>, <b>Zapier</b>. A corrente + seta lime é literalmente o símbolo do arquétipo — poder latente sendo ativado.</p>
+      <a class="strat-link" href="../docs/arquetipo.md">Ler completo →</a>
+    </div>
+
+    <div class="strat-card">
+      <span class="strat-badge">Brand Story</span>
+      <h3>Lucas, 31 — gasta R$ 8k/mês em tráfego sem saber o que converte</h3>
+      <p class="quote">"APPlink não vai fazer o marketing por você. Vai fazer o tracking parar de mentir."</p>
+      <p>Narrativa StoryBrand em 6 partes: Personagem → Problema → Guia → Plano (3 passos) → Sucesso → Falha. Persona expandida cobre gestor de tráfego, agência boutique e time de growth.</p>
+      <a class="strat-link" href="../docs/brand-story.md">Ler completo →</a>
+    </div>
+  </div>
+
+  <div style="margin-top:18px;padding:18px 22px;background:rgba(191,255,0,0.05);border:1px solid rgba(191,255,0,0.15);border-radius:14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--lime);letter-spacing:0.08em;text-transform:uppercase">Strategic handoff</span>
+    <span style="font-family:'Satoshi',sans-serif;font-size:14px;color:var(--ink2);flex:1;min-width:280px">Documento consolidado com sumários + plano de integração + próximos passos.</span>
+    <a class="strat-link" href="../docs/STRATEGIC-HANDOFF.md" style="margin:0">Abrir handoff →</a>
+  </div>
+</section>
+
+<!-- ════════ CHECKLIST ════════ -->
+<section id="checklist">
+  <div class="eye">10 · Checklist de Consistência</div>
+  <h2 class="bb-h2">Antes de <em>publicar.</em></h2>
+  <p class="lead">Validação rápida pra qualquer peça nova — landing, social, slide, e-mail, asset.</p>
+
+  <div class="dd-col do" style="max-width:none">
+    <h4><span class="badge">✓</span> Esses 12 pontos passaram?</h4>
+    <ul>
+      <li>A logo é o símbolo de corrente com elo lime + elo cream + contorno preto chunky.</li>
+      <li>O nome aparece como <b>APPlink</b> (não "Applink", "App Link", "AppLINK").</li>
+      <li>Fundo principal usa <code style="font-family:'JetBrains Mono',monospace;color:#BFFF00">#0A0A0A</code> (em telas) ou superfície escura equivalente.</li>
+      <li>O lime <code style="font-family:'JetBrains Mono',monospace;color:#BFFF00">#BFFF00</code> é o acento dominante e marca a ação.</li>
+      <li>Coral <code style="font-family:'JetBrains Mono',monospace;color:#FF7777">#FF7777</code> aparece como tempero, nunca como cor dominante.</li>
+      <li>Títulos usam General Sans (peso 600-700).</li>
+      <li>Interface usa Satoshi (peso 400-800).</li>
+      <li>Números e métricas usam JetBrains Mono.</li>
+      <li>Cards têm sombra neumórfica dupla (escura + leve highlight).</li>
+      <li>Inputs têm sombra inset.</li>
+      <li>Transições usam o easing spring <code style="font-family:'JetBrains Mono',monospace;color:#BFFF00">cubic-bezier(0.34, 1.56, 0.64, 1)</code>.</li>
+      <li>A peça parece ferramenta operacional — não landing page promocional.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ════════ ARQUIVOS ════════ -->
+<section id="arquivos">
+  <div class="eye">11 · Arquivos & Tokens</div>
+  <h2 class="bb-h2">Onde está <em>cada coisa.</em></h2>
+  <p class="lead">Estrutura de arquivos pra o time encontrar e atualizar a identidade rapidamente.</p>
+
+  <div class="tokens-block"><span class="c">📂 brand-refs/</span>
+   ├── logos/
+   │   ├── <span class="v">applink-logo-transparent.png</span>     <span class="c">/* Marca definitiva 500x500 RGBA */</span>
+   │   ├── applink-logo-v1.png                  <span class="c">/* Backup versão anterior */</span>
+   │   ├── source-logo.png                      <span class="c">/* Asset bruto original */</span>
+   │   └── applink-chain.svg                    <span class="c">/* Versão vetorial */</span>
+   ├── 01-dashboard.png                          <span class="c">/* Captura referência */</span>
+   ├── 02-criar-link.png
+   ├── 03-analytics.png
+   ├── 06-smartpages.png
+   └── mobile-dashboard.png
+
+<span class="c">📂 mockups/assets/</span>
+   ├── <span class="v">tokens.css</span>                            <span class="c">/* Variáveis CSS oficiais */</span>
+   └── <span class="v">ui.css</span>                                <span class="c">/* Componentes base */</span>
+
+<span class="c">📂 docs/</span>
+   └── <span class="v">identidade-visual-applink.md</span>           <span class="c">/* Handoff técnico */</span>
+
+<span class="c">📂 brandbook/</span>
+   └── <span class="v">index.html</span>                            <span class="c">/* Este documento */</span></div>
+</section>
+
+<footer class="bb-foot">
+  APPlink Brandbook · v1 · maio 2026 · <a href="../docs/identidade-visual-applink.md">Identidade técnica</a> · <a href="./social/">Social templates</a>
+</footer>
+
+</body>
+</html>

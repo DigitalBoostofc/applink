@@ -1,0 +1,27 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Logo Check</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1A1A1A;font-family:system-ui;padding:30px;color:#fff}
+h1{font-size:18px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:1280px}
+.box{padding:32px;border-radius:18px;display:grid;place-items:center;min-height:240px;border:1px solid rgba(255,255,255,0.1)}
+.lbl{font-family:monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#94A3B8;margin-top:12px;text-align:center;display:block}
+img{max-width:100%;display:block}
+.row{display:flex;flex-direction:column;align-items:center}
+.b1{background:#0A0A0A}.b2{background:#fff}.b3{background:linear-gradient(135deg,#BFFF00,#FF7777)}.b4{background:#FF7777}
+.b5{background:#1E3A8A}.b6{background:#EFE5C8}.b7{background:#10B981}.b8{background:repeating-conic-gradient(#222 0% 25%,#333 0% 50%) 50% / 30px 30px}
+</style></head>
+<body>
+<h1>Logo com fundo removido — preview em diferentes contextos</h1>
+<div class="grid">
+  <div class="row"><div class="box b1"><img src="applink-logo-transparent.png" width="200"></div><span class="lbl">Dark · #0A0A0A</span></div>
+  <div class="row"><div class="box b2"><img src="applink-logo-transparent.png" width="200"></div><span class="lbl">White · #fff</span></div>
+  <div class="row"><div class="box b3"><img src="applink-logo-transparent.png" width="200"></div><span class="lbl">Brand gradient</span></div>
+  <div class="row"><div class="box b4"><img src="applink-logo-transparent.png" width="200"></div><span class="lbl">Coral · #FF7777</span></div>
+  <div class="row"><div class="box b5"><img src="applink-logo-transparent.png" width="200"></div><span class="lbl">Blue · LinkedIn</span></div>
+  <div class="row"><div class="box b6"><img src="applink-logo-transparent.png" width="200"></div><span class="lbl">Cream (original)</span></div>
+  <div class="row"><div class="box b7"><img src="applink-logo-transparent.png" width="200"></div><span class="lbl">Green</span></div>
+  <div class="row"><div class="box b8"><img src="applink-logo-transparent.png" width="200"></div><span class="lbl">Checker (transparência)</span></div>
+</div>
+</body></html>

@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APPlink — Social Templates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700,800&f[]=satoshi@400,500,600,700,800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#050505;color:#F5F5F7;font-family:'Satoshi',sans-serif;padding:48px 32px 80px;min-height:100vh}
+.page-hdr{max-width:1320px;margin:0 auto 48px}
+.eye{font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.16em;color:#BFFF00;margin-bottom:12px}
+.eye::before{content:"▮ "}
+.page-hdr h1{font-family:'General Sans',sans-serif;font-weight:600;font-size:56px;line-height:1;letter-spacing:-0.04em;color:#fff;margin-bottom:16px}
+.page-hdr h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.page-hdr p{font-family:'Satoshi',sans-serif;font-size:16px;color:#94A3B8;line-height:1.6;max-width:62ch}
+.export-tip{margin-top:18px;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;background:#141414;border:1px solid rgba(191,255,0,0.15);border-radius:12px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#BFFF00}
+
+/* ── SECTION ── */
+.tpl-section{max-width:1320px;margin:0 auto 64px}
+.tpl-section-hdr{display:flex;align-items:baseline;gap:18px;margin-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:14px}
+.tpl-section-hdr h2{font-family:'General Sans',sans-serif;font-weight:600;font-size:24px;letter-spacing:-0.02em;color:#fff}
+.tpl-section-hdr .dim{font-family:'JetBrains Mono',monospace;font-size:13px;color:#5A5A60;font-weight:500}
+.tpl-section-hdr .qty{margin-left:auto;font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:#5A5A60}
+
+.tpl-grid{display:flex;gap:20px;flex-wrap:wrap}
+.tpl-card{display:flex;flex-direction:column;gap:10px}
+.tpl-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;color:#5A5A60;font-weight:600;text-transform:uppercase}
+.tpl-label b{color:#fff;font-weight:700}
+
+/* ── WRAPPERS WITH SCALE-DOWN PREVIEW ── */
+/* feed 1080x1080 → 0.42 = 454 */
+.wrap-feed{width:454px;height:454px;overflow:hidden;border-radius:18px;background:#0A0A0A;box-shadow:6px 6px 16px rgba(0,0,0,0.55)}
+.wrap-feed .canvas{width:1080px;height:1080px;transform:scale(0.42);transform-origin:top left}
+/* story 1080x1920 → 0.28 = ~302 wide × 538 tall */
+.wrap-story{width:302px;height:538px;overflow:hidden;border-radius:18px;background:#0A0A0A;box-shadow:6px 6px 16px rgba(0,0,0,0.55)}
+.wrap-story .canvas{width:1080px;height:1920px;transform:scale(0.28);transform-origin:top left}
+/* carousel 1080x1350 → 0.32 = ~346 wide × 432 tall */
+.wrap-carousel{width:346px;height:432px;overflow:hidden;border-radius:18px;background:#0A0A0A;box-shadow:6px 6px 16px rgba(0,0,0,0.55)}
+.wrap-carousel .canvas{width:1080px;height:1350px;transform:scale(0.32);transform-origin:top left}
+/* linkedin 1200x627 → 0.45 = 540 × 282 */
+.wrap-linkedin{width:540px;height:282px;overflow:hidden;border-radius:18px;background:#0A0A0A;box-shadow:6px 6px 16px rgba(0,0,0,0.55)}
+.wrap-linkedin .canvas{width:1200px;height:627px;transform:scale(0.45);transform-origin:top left}
+/* twitter 1200x675 → 0.45 = 540 × 304 */
+.wrap-twitter{width:540px;height:304px;overflow:hidden;border-radius:18px;background:#0A0A0A;box-shadow:6px 6px 16px rgba(0,0,0,0.55)}
+.wrap-twitter .canvas{width:1200px;height:675px;transform:scale(0.45);transform-origin:top left}
+
+/* ════════════ TEMPLATE BASE STYLES (apply to .canvas children) ════════════ */
+.canvas{position:relative;font-family:'Satoshi',sans-serif;color:#fff}
+
+/* shared bits */
+.brand-tag{position:absolute;display:flex;align-items:center;gap:14px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:18px;color:#94A3B8;letter-spacing:0.04em}
+.brand-tag img{width:48px;height:48px;display:block}
+.brand-tag b{color:#fff;font-family:'General Sans',sans-serif;font-weight:700;font-size:24px;letter-spacing:-0.02em}
+
+.sticker-coral{position:absolute;background:#FF7777;color:#0A0A0A;
+  font-family:'General Sans',sans-serif;font-weight:700;font-size:18px;letter-spacing:0.04em;text-transform:uppercase;line-height:1.15;
+  padding:12px 18px;border-radius:8px;transform:rotate(8deg);box-shadow:6px 6px 0 rgba(0,0,0,0.85);display:inline-flex;align-items:center;gap:8px}
+
+.arrow-corner{position:absolute;width:64px;height:64px;color:#0A0A0A;transform:rotate(20deg)}
+
+/* halftone dots overlay */
+.halftone{position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size:24px 24px;opacity:0.7}
+.halftone.dark{background-image:radial-gradient(circle at 1px 1px, rgba(10,10,10,0.18) 1px, transparent 1px)}
+
+/* ═══════ FEED 01 — TAGLINE HERO ═══════ */
+.f-tagline{background:#0A0A0A}
+.f-tagline .verbs{position:absolute;top:280px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:78px;line-height:1.05;letter-spacing:-0.035em;color:#fff}
+.f-tagline .verbs .hl{background:#BFFF00;color:#0A0A0A;padding:2px 14px;border-radius:8px;box-shadow:0 0 30px rgba(191,255,0,0.5);display:inline-block;margin:6px 0}
+.f-tagline .verbs .circ{padding:0 20px;position:relative;display:inline-block}
+.f-tagline .verbs .circ::before{content:"";position:absolute;inset:-12px -8px;border:5px solid #FF7777;border-radius:60%;transform:rotate(-3deg)}
+.f-tagline .body-txt{position:absolute;top:760px;left:80px;right:80px;font-size:24px;color:#94A3B8;line-height:1.5;max-width:780px}
+
+/* ═══════ FEED 02 — KPI HIGHLIGHT ═══════ */
+.f-kpi{background:#141414}
+.f-kpi .kpi-eye{position:absolute;top:80px;left:80px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:18px;letter-spacing:0.16em;text-transform:uppercase;color:#BFFF00}
+.f-kpi .kpi-eye::before{content:"▮ ";color:#BFFF00}
+.f-kpi .kpi-num{position:absolute;top:180px;left:80px;font-family:'General Sans',sans-serif;font-weight:600;font-size:280px;line-height:0.9;letter-spacing:-0.05em;color:#fff}
+.f-kpi .kpi-num em{font-style:normal;background:linear-gradient(135deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.f-kpi .kpi-lbl{position:absolute;top:560px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:600;font-size:60px;color:#fff;letter-spacing:-0.02em;line-height:1.1}
+.f-kpi .kpi-delta{position:absolute;top:780px;left:80px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:28px;color:#10B981}
+
+/* ═══════ FEED 03 — EDUCATIONAL ═══════ */
+.f-edu{background:#0A0A0A}
+.f-edu .edu-eye{position:absolute;top:80px;left:80px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:18px;letter-spacing:0.16em;text-transform:uppercase;color:#BFFF00}
+.f-edu .edu-eye::before{content:"▮ "}
+.f-edu .edu-h1{position:absolute;top:160px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:84px;line-height:1.05;letter-spacing:-0.04em;color:#fff}
+.f-edu .edu-h1 em{font-style:normal;color:#FF7777}
+.f-edu .edu-list{position:absolute;top:520px;left:80px;right:80px;display:flex;flex-direction:column;gap:20px}
+.f-edu .edu-list .item{display:flex;align-items:flex-start;gap:18px;font-family:'Satoshi',sans-serif;font-weight:600;font-size:30px;color:#E2E8F0;line-height:1.35}
+.f-edu .edu-list .ck{width:36px;height:36px;border-radius:9px;background:rgba(191,255,0,0.14);color:#BFFF00;display:grid;place-items:center;flex-shrink:0;margin-top:6px}
+.f-edu .edu-list .ck svg{width:22px;height:22px}
+
+/* ═══════ STORY 01 — HERO LAUNCH ═══════ */
+.s-launch{background:linear-gradient(135deg,#BFFF00,#FF7777)}
+.s-launch .halftone{background-image:radial-gradient(circle at 1px 1px, rgba(10,10,10,0.16) 1px, transparent 1px)}
+.s-launch .logo-big{position:absolute;top:480px;left:50%;transform:translateX(-50%);width:360px;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.4))}
+.s-launch .verbs{position:absolute;top:920px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:64px;letter-spacing:-0.03em;color:#0A0A0A;line-height:1.05;text-align:center}
+.s-launch .verbs .hl-d{background:#0A0A0A;color:#BFFF00;padding:2px 12px;border-radius:8px;display:inline-block;margin:8px 0}
+.s-launch .swipe{position:absolute;bottom:140px;left:0;right:0;text-align:center;font-family:'Satoshi',sans-serif;font-weight:800;font-size:24px;color:#0A0A0A;letter-spacing:0.18em;text-transform:uppercase;opacity:0.75}
+
+/* ═══════ STORY 02 — FEATURE DROP ═══════ */
+.s-feature{background:#0A0A0A}
+.s-feature::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(191,255,0,0.15) 0%,transparent 60%);pointer-events:none}
+.s-feature .badge-new{position:absolute;top:160px;left:80px;background:#FF7777;color:#0A0A0A;
+  font-family:'General Sans',sans-serif;font-weight:700;font-size:22px;letter-spacing:0.08em;text-transform:uppercase;
+  padding:12px 20px;border-radius:8px;transform:rotate(-2deg);box-shadow:6px 6px 0 rgba(0,0,0,0.85)}
+.s-feature .ft-h1{position:absolute;top:280px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:96px;line-height:1.02;letter-spacing:-0.04em;color:#fff}
+.s-feature .ft-h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.s-feature .ft-sub{position:absolute;top:740px;left:80px;right:80px;font-family:'Satoshi',sans-serif;font-size:30px;color:#94A3B8;line-height:1.45}
+.s-feature .ft-features{position:absolute;top:980px;left:80px;right:80px;display:flex;flex-direction:column;gap:18px}
+.s-feature .ft-features .row{display:flex;align-items:center;gap:18px;padding:18px 24px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:18px}
+.s-feature .ft-features .row .ic{width:42px;height:42px;border-radius:11px;background:rgba(191,255,0,0.12);color:#BFFF00;display:grid;place-items:center;flex-shrink:0}
+.s-feature .ft-features .row .ic svg{width:22px;height:22px}
+.s-feature .ft-features .row .t{font-family:'Satoshi',sans-serif;font-weight:700;font-size:26px;color:#fff}
+.s-feature .cta-btn{position:absolute;bottom:200px;left:80px;right:80px;padding:30px;background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;
+  font-family:'General Sans',sans-serif;font-weight:700;font-size:34px;letter-spacing:-0.02em;text-align:center;border-radius:18px;
+  box-shadow:0 12px 30px rgba(191,255,0,0.4)}
+
+/* ═══════ CAROUSEL SLIDES (1080x1350) ═══════ */
+.c-base{background:#0A0A0A}
+.c-base .slide-num{position:absolute;top:80px;left:80px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:20px;color:#5A5A60;letter-spacing:0.1em}
+.c-base .brand-tag{bottom:80px;left:80px}
+
+/* Carousel 1 — Hook */
+.c-1{background:#0A0A0A}
+.c-1 .hook{position:absolute;top:280px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:96px;line-height:1.02;letter-spacing:-0.04em;color:#fff}
+.c-1 .hook em{font-style:normal;color:#BFFF00}
+.c-1 .swipe{position:absolute;bottom:200px;right:80px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:20px;color:#FF7777;letter-spacing:0.16em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+
+/* Carousel 2 — Problem */
+.c-2{background:#141414}
+.c-2 .prob{position:absolute;top:280px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:88px;line-height:1.05;letter-spacing:-0.04em;color:#fff}
+.c-2 .prob em{font-style:normal;color:#FF7777}
+.c-2 .prob-line{position:absolute;top:780px;left:80px;font-family:'Satoshi',sans-serif;font-weight:600;font-size:30px;color:#94A3B8;line-height:1.4}
+
+/* Carousel 3 — Solution */
+.c-3{background:#0A0A0A;position:relative;overflow:hidden}
+.c-3::before{content:"";position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(191,255,0,0.18) 0%,transparent 60%);pointer-events:none}
+.c-3 .sol-eye{position:absolute;top:200px;left:80px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:22px;letter-spacing:0.16em;text-transform:uppercase;color:#BFFF00}
+.c-3 .sol-eye::before{content:"▮ "}
+.c-3 .sol-h{position:absolute;top:280px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:96px;line-height:1.02;letter-spacing:-0.04em;color:#fff}
+.c-3 .sol-h em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.c-3 .sol-sub{position:absolute;top:780px;left:80px;right:80px;font-family:'Satoshi',sans-serif;font-size:30px;color:#94A3B8;line-height:1.5}
+
+/* Carousel 4 — Features */
+.c-4{background:#0A0A0A}
+.c-4 .ft-eye{position:absolute;top:80px;left:80px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:20px;letter-spacing:0.16em;text-transform:uppercase;color:#BFFF00}
+.c-4 .ft-eye::before{content:"▮ "}
+.c-4 .ft-h{position:absolute;top:150px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:600;font-size:64px;letter-spacing:-0.03em;color:#fff;line-height:1.05}
+.c-4 .ft-grid{position:absolute;top:380px;left:80px;right:80px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.c-4 .ft-cell{background:#141414;border:1px solid rgba(255,255,255,0.05);border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:14px;box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
+.c-4 .ft-cell .ic{width:54px;height:54px;border-radius:13px;background:rgba(191,255,0,0.12);color:#BFFF00;display:grid;place-items:center;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.4)}
+.c-4 .ft-cell .ic svg{width:28px;height:28px}
+.c-4 .ft-cell .t{font-family:'General Sans',sans-serif;font-weight:600;font-size:30px;color:#fff;letter-spacing:-0.02em}
+.c-4 .ft-cell .d{font-family:'Satoshi',sans-serif;font-size:18px;color:#94A3B8;line-height:1.4}
+
+/* Carousel 5 — CTA */
+.c-5{background:linear-gradient(135deg,#BFFF00,#FF7777)}
+.c-5 .halftone{background-image:radial-gradient(circle at 1px 1px, rgba(10,10,10,0.16) 1px, transparent 1px)}
+.c-5 .cta-eye{position:absolute;top:240px;left:80px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:22px;letter-spacing:0.16em;text-transform:uppercase;color:#0A0A0A}
+.c-5 .cta-eye::before{content:"▮ "}
+.c-5 .cta-h{position:absolute;top:320px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:120px;line-height:0.98;letter-spacing:-0.04em;color:#0A0A0A}
+.c-5 .cta-sub{position:absolute;top:760px;left:80px;right:80px;font-family:'Satoshi',sans-serif;font-weight:700;font-size:36px;color:#0A0A0A;line-height:1.4;opacity:0.85}
+.c-5 .cta-url{position:absolute;bottom:200px;left:80px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:32px;color:#0A0A0A;background:rgba(10,10,10,0.1);padding:14px 24px;border-radius:12px}
+
+/* ═══════ LINKEDIN POST 1200x627 ═══════ */
+.l-post{background:#0A0A0A}
+.l-post .left{position:absolute;top:80px;left:80px;right:520px;bottom:80px;display:flex;flex-direction:column;justify-content:space-between}
+.l-post .l-eye{font-family:'Satoshi',sans-serif;font-weight:800;font-size:14px;letter-spacing:0.16em;text-transform:uppercase;color:#BFFF00;margin-bottom:18px}
+.l-post .l-eye::before{content:"▮ "}
+.l-post .l-h{font-family:'General Sans',sans-serif;font-weight:600;font-size:56px;line-height:1.05;letter-spacing:-0.03em;color:#fff;margin-bottom:14px}
+.l-post .l-h em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.l-post .l-sub{font-family:'Satoshi',sans-serif;font-size:20px;color:#94A3B8;line-height:1.5}
+.l-post .l-bottom{display:flex;align-items:center;gap:14px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:18px;color:#94A3B8}
+.l-post .l-bottom img{width:48px;height:48px}
+.l-post .l-bottom b{color:#fff;font-family:'General Sans',sans-serif;font-weight:700;font-size:22px;letter-spacing:-0.02em}
+.l-post .right{position:absolute;top:80px;right:80px;width:380px;bottom:80px;background:#141414;border-radius:24px;padding:32px;box-shadow:6px 6px 16px rgba(0,0,0,0.55);overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.l-post .right img{width:160px;filter:drop-shadow(0 12px 28px rgba(0,0,0,0.5)) drop-shadow(0 0 24px rgba(191,255,0,0.18))}
+
+/* ═══════ TWITTER/X POST 1200x675 ═══════ */
+.x-post{background:#0A0A0A;overflow:hidden}
+.x-post::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(191,255,0,0.12) 0%,transparent 55%);pointer-events:none}
+.x-post .x-logo{position:absolute;top:80px;left:80px;width:80px}
+.x-post .x-h{position:absolute;top:200px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:72px;line-height:1.05;letter-spacing:-0.03em;color:#fff}
+.x-post .x-h em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.x-post .x-sub{position:absolute;top:460px;left:80px;right:80px;font-family:'Satoshi',sans-serif;font-weight:600;font-size:26px;color:#94A3B8;line-height:1.45}
+.x-post .x-cta{position:absolute;bottom:80px;left:80px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:24px;color:#BFFF00;letter-spacing:0.04em}
+</style>
+</head>
+<body>
+
+<div class="page-hdr">
+  <div class="eye">Brandbook · Social Templates</div>
+  <h1>Templates pra <em>redes sociais.</em></h1>
+  <p>12 layouts prontos cobrindo Instagram (feed, story, carrossel), LinkedIn e X. Cada template é renderizado no DOM nas dimensões exatas — basta tirar print, exportar como PNG ou usar como referência pra Figma. Tipografia, paleta e elementos seguem o brandbook.</p>
+  <div class="export-tip">→ Inspecione o elemento .canvas, copie o HTML/CSS e cole no Figma como código, OU use DevTools → "Capture node screenshot"</div>
+</div>
+
+<!-- ════════════════════════════════════════════════ INSTAGRAM FEED ════════════════════════════════════════════════ -->
+<div class="tpl-section">
+  <div class="tpl-section-hdr">
+    <h2>Instagram · Feed</h2>
+    <span class="dim">1080 × 1080 px · 1:1</span>
+    <span class="qty">3 templates</span>
+  </div>
+  <div class="tpl-grid">
+
+    <!-- FEED 01 — TAGLINE -->
+    <div class="tpl-card">
+      <div class="wrap-feed">
+        <div class="canvas f-tagline">
+          <div class="halftone"></div>
+          <div class="brand-tag" style="top:80px;left:80px">
+            <img src="../../brand-refs/logos/applink-logo-transparent.png" alt="">
+            <b>APPlink</b>
+          </div>
+          <div class="sticker-coral" style="top:120px;right:80px">Links que<br>geram resultados</div>
+          <div class="verbs">
+            <span class="hl">Conecte.</span><br>
+            <span class="hl">Personalize.</span><br>
+            <span class="hl">Acompanhe.</span><br>
+            <span class="circ">Cresça.</span>
+          </div>
+          <p class="body-txt">Plataforma completa de smart links, smartpages e analytics. Tudo o que sua audiência clica vira dado pra você decidir.</p>
+        </div>
+      </div>
+      <span class="tpl-label"><b>01 · Tagline Hero</b> — anúncio principal / launch</span>
+    </div>
+
+    <!-- FEED 02 — KPI -->
+    <div class="tpl-card">
+      <div class="wrap-feed">
+        <div class="canvas f-kpi">
+          <div class="halftone"></div>
+          <div class="kpi-eye">▮ Caso real · maio 2026</div>
+          <div class="kpi-num">12<em>k</em></div>
+          <div class="kpi-lbl">cliques rastreados em 30 dias por uma criadora BR — com pixel, geo e device atribuídos.</div>
+          <div class="kpi-delta">▲ +8.2% vs mês anterior</div>
+          <div class="brand-tag" style="bottom:80px;left:80px">
+            <img src="../../brand-refs/logos/applink-logo-transparent.png" alt="">
+            <b>APPlink</b>
+          </div>
+        </div>
+      </div>
+      <span class="tpl-label"><b>02 · KPI Highlight</b> — case real / prova social</span>
+    </div>
+
+    <!-- FEED 03 — EDUCATIONAL -->
+    <div class="tpl-card">
+      <div class="wrap-feed">
+        <div class="canvas f-edu">
+          <div class="halftone"></div>
+          <div class="edu-eye">▮ Dica rápida</div>
+          <h1 class="edu-h1">3 erros que <em>matam</em> seu link-in-bio</h1>
+          <div class="edu-list">
+            <div class="item"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2"><path d="M20 6L9 17l-5-5"/></svg></span>Não rastrear de onde vem o clique</div>
+            <div class="item"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2"><path d="M20 6L9 17l-5-5"/></svg></span>Mesmo link pra todo mundo (sem segmentar)</div>
+            <div class="item"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2"><path d="M20 6L9 17l-5-5"/></svg></span>Pixel? Que pixel?</div>
+          </div>
+          <div class="brand-tag" style="bottom:80px;left:80px">
+            <img src="../../brand-refs/logos/applink-logo-transparent.png" alt="">
+            <b>APPlink</b>
+          </div>
+        </div>
+      </div>
+      <span class="tpl-label"><b>03 · Educational</b> — conteúdo de valor</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════ INSTAGRAM STORY ════════════════════════════════════════════════ -->
+<div class="tpl-section">
+  <div class="tpl-section-hdr">
+    <h2>Instagram · Story</h2>
+    <span class="dim">1080 × 1920 px · 9:16</span>
+    <span class="qty">2 templates</span>
+  </div>
+  <div class="tpl-grid">
+
+    <!-- STORY 01 — LAUNCH -->
+    <div class="tpl-card">
+      <div class="wrap-story">
+        <div class="canvas s-launch">
+          <div class="halftone"></div>
+          <img class="logo-big" src="../../brand-refs/logos/applink-logo-transparent.png" alt="">
+          <div class="verbs">
+            <span class="hl-d">Conecte. Personalize.</span><br>
+            <span class="hl-d">Acompanhe.</span> Cresça.
+          </div>
+          <div class="swipe">↑ Arraste pra cima</div>
+        </div>
+      </div>
+      <span class="tpl-label"><b>01 · Launch Hero</b> — gradient + logo grande</span>
+    </div>
+
+    <!-- STORY 02 — FEATURE -->
+    <div class="tpl-card">
+      <div class="wrap-story">
+        <div class="canvas s-feature">
+          <div class="halftone"></div>
+          <div class="badge-new">NEW · Smart Tracking</div>
+          <h1 class="ft-h1">Atribuição <em>nível Hyros.</em> Agora.</h1>
+          <p class="ft-sub">Deferred event firing. Multi-pixel server-side. Tudo dentro do APPlink.</p>
+          <div class="ft-features">
+            <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></span><span class="t">28ms p95 redirect</span></div>
+            <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></span><span class="t">15+ pixels reusáveis</span></div>
+            <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></span><span class="t">Smart deferred firing</span></div>
+          </div>
+          <div class="cta-btn">↗ Ver demo agora</div>
+        </div>
+      </div>
+      <span class="tpl-label"><b>02 · Feature Drop</b> — release / novidade</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════ INSTAGRAM CAROUSEL ════════════════════════════════════════════════ -->
+<div class="tpl-section">
+  <div class="tpl-section-hdr">
+    <h2>Instagram · Carrossel</h2>
+    <span class="dim">1080 × 1350 px · 4:5</span>
+    <span class="qty">5 slides — Hook → CTA</span>
+  </div>
+  <div class="tpl-grid">
+
+    <!-- CAROUSEL 1 — HOOK -->
+    <div class="tpl-card">
+      <div class="wrap-carousel">
+        <div class="canvas c-base c-1">
+          <div class="halftone"></div>
+          <div class="slide-num">01 / 05</div>
+          <h1 class="hook">Quanto seu link-in-bio <em>realmente</em> converte?</h1>
+          <div class="swipe">Continue <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          <div class="brand-tag">
+            <img src="../../brand-refs/logos/applink-logo-transparent.png" alt="">
+            <b>APPlink</b>
+          </div>
+        </div>
+      </div>
+      <span class="tpl-label"><b>01 · Hook</b></span>
+    </div>
+
+    <!-- CAROUSEL 2 — PROBLEM -->
+    <div class="tpl-card">
+      <div class="wrap-carousel">
+        <div class="canvas c-base c-2">
+          <div class="halftone"></div>
+          <div class="slide-num">02 / 05</div>
+          <h1 class="prob">Você não sabe.<br><em>Bitly</em> não te conta.</h1>
+          <p class="prob-line">Encurtadores tradicionais entregam o número.<br>Não entregam o porquê.</p>
+          <div class="brand-tag">
+            <img src="../../brand-refs/logos/applink-logo-transparent.png" alt="">
+            <b>APPlink</b>
+          </div>
+        </div>
+      </div>
+      <span class="tpl-label"><b>02 · Problema</b></span>
+    </div>
+
+    <!-- CAROUSEL 3 — SOLUTION -->
+    <div class="tpl-card">
+      <div class="wrap-carousel">
+        <div class="canvas c-base c-3">
+          <div class="halftone"></div>
+          <div class="slide-num">03 / 05</div>
+          <div class="sol-eye">A solução</div>
+          <h1 class="sol-h">APPlink mostra <em>tudo.</em></h1>
+          <p class="sol-sub">Cliques, fonte, dispositivo, geolocalização, conversão atribuída por pixel. Em tempo real.</p>
+          <div class="brand-tag">
+            <img src="../../brand-refs/logos/applink-logo-transparent.png" alt="">
+            <b>APPlink</b>
+          </div>
+        </div>
+      </div>
+      <span class="tpl-label"><b>03 · Solução</b></span>
+    </div>
+
+    <!-- CAROUSEL 4 — FEATURES -->
+    <div class="tpl-card">
+      <div class="wrap-carousel">
+        <div class="canvas c-base c-4">
+          <div class="halftone"></div>
+          <div class="slide-num">04 / 05</div>
+          <div class="ft-eye">O que tem dentro</div>
+          <h1 class="ft-h">Quatro pilares operacionais</h1>
+          <div class="ft-grid">
+            <div class="ft-cell">
+              <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+              <div class="t">Smart Links</div>
+              <div class="d">Roteamento condicional A/B · Geo · Device · SO</div>
+            </div>
+            <div class="ft-cell">
+              <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+              <div class="t">Smartpages</div>
+              <div class="d">Link-in-bio com captura de leads</div>
+            </div>
+            <div class="ft-cell">
+              <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></div>
+              <div class="t">Pixel Library</div>
+              <div class="d">Meta, GA4, GAds, TikTok, LinkedIn reusáveis</div>
+            </div>
+            <div class="ft-cell">
+              <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></div>
+              <div class="t">Analytics</div>
+              <div class="d">Atribuição multi-touch por domínio e canal</div>
+            </div>
+          </div>
+          <div class="brand-tag">
+            <img src="../../brand-refs/logos/applink-logo-transparent.png" alt="">
+            <b>APPlink</b>
+          </div>
+        </div>
+      </div>
+      <span class="tpl-label"><b>04 · Features</b></span>
+    </div>
+
+    <!-- CAROUSEL 5 — CTA -->
+    <div class="tpl-card">
+      <div class="wrap-carousel">
+        <div class="canvas c-base c-5">
+          <div class="halftone"></div>
+          <div class="slide-num" style="color:rgba(10,10,10,0.55)">05 / 05</div>
+          <div class="cta-eye">Comece agora</div>
+          <h1 class="cta-h">7 dias<br>grátis.<br>Sem<br>cartão.</h1>
+          <p class="cta-sub">Crie smart links com tracking nível pro em menos de 60 segundos.</p>
+          <div class="cta-url">→ applink.com.br</div>
+        </div>
+      </div>
+      <span class="tpl-label"><b>05 · CTA Final</b></span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════ LINKEDIN ════════════════════════════════════════════════ -->
+<div class="tpl-section">
+  <div class="tpl-section-hdr">
+    <h2>LinkedIn · Post</h2>
+    <span class="dim">1200 × 627 px · 1.91:1</span>
+    <span class="qty">1 template</span>
+  </div>
+  <div class="tpl-grid">
+    <div class="tpl-card">
+      <div class="wrap-linkedin">
+        <div class="canvas l-post">
+          <div class="halftone"></div>
+          <div class="left">
+            <div>
+              <div class="l-eye">Launch · 2026</div>
+              <h1 class="l-h">Marketing data <em>merece ferramenta melhor.</em></h1>
+              <p class="l-sub">APPlink é a plataforma BR de smart links com tracking nível Hyros. Roteamento condicional, biblioteca de pixels, atribuição multi-touch.</p>
+            </div>
+            <div class="l-bottom">
+              <img src="../../brand-refs/logos/applink-logo-transparent.png" alt="">
+              <b>APPlink</b>
+              <span>· applink.com.br</span>
+            </div>
+          </div>
+          <div class="right">
+            <img src="../../brand-refs/logos/applink-logo-transparent.png" alt="">
+          </div>
+        </div>
+      </div>
+      <span class="tpl-label"><b>LinkedIn launch</b> — anúncio profissional / B2B</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════ TWITTER/X ════════════════════════════════════════════════ -->
+<div class="tpl-section">
+  <div class="tpl-section-hdr">
+    <h2>X (Twitter) · Post</h2>
+    <span class="dim">1200 × 675 px · 16:9</span>
+    <span class="qty">1 template</span>
+  </div>
+  <div class="tpl-grid">
+    <div class="tpl-card">
+      <div class="wrap-twitter">
+        <div class="canvas x-post">
+          <img class="x-logo" src="../../brand-refs/logos/applink-logo-transparent.png" alt="">
+          <h1 class="x-h">Smart links + <em>attribution</em> para o BR.</h1>
+          <p class="x-sub">APPlink agora em beta aberto. Encurtador → rastreio → audiência. Tudo num lugar.</p>
+          <div class="x-cta">→ applink.com.br · @applink</div>
+        </div>
+      </div>
+      <span class="tpl-label"><b>X launch</b> — anúncio direto / dev community</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 90" fill="none">
+  <defs>
+    <!-- halftone dot pattern -->
+    <pattern id="dots" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.7" fill="#0A0A0A"/>
+    </pattern>
+
+    <!-- chain-link ring (rounded rect with hole) reusable -->
+    <symbol id="chainRing" viewBox="0 0 70 50">
+      <!-- outer: rounded rect 5→65 wide, 5→45 tall, radius 22 -->
+      <!-- inner: rounded rect 16→54 wide, 16→34 tall, radius 11 -->
+      <path d="M 27 5 L 43 5 A 22 22 0 0 1 43 45 L 27 45 A 22 22 0 0 1 27 5 Z
+               M 27 16 A 11 11 0 0 0 27 34 L 43 34 A 11 11 0 0 0 43 16 Z"
+            fill-rule="evenodd"/>
+    </symbol>
+
+    <!-- clip-path for the "in-front" piece of the LEFT link's right edge -->
+    <clipPath id="leftFrontPiece">
+      <!-- bottom half of overlap zone -->
+      <rect x="55" y="48" width="22" height="22"/>
+    </clipPath>
+  </defs>
+
+  <!-- RIGHT LINK first (will be partially covered by left) -->
+  <g transform="translate(72 22)">
+    <use href="#chainRing" width="70" height="50" fill="url(#dots)" stroke="#0A0A0A" stroke-width="3.2" stroke-linejoin="round"/>
+  </g>
+
+  <!-- LEFT LINK on top -->
+  <g transform="translate(8 22)">
+    <use href="#chainRing" width="70" height="50" fill="#BFFF00" stroke="#0A0A0A" stroke-width="3.2" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Re-render small piece of RIGHT link to fake interlock — its top-left edge crosses over left link -->
+  <g clip-path="url(#leftFrontPiece)" transform="translate(72 22)">
+    <use href="#chainRing" width="70" height="50" fill="url(#dots)" stroke="#0A0A0A" stroke-width="3.2" stroke-linejoin="round"/>
+  </g>
+</svg>

@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>AppLink — Chain Link</title>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700,800&f[]=satoshi@400,500,600,700,800&f[]=clash-display@700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#1A1A1A;color:#0A0A0A;font-family:'Satoshi',sans-serif;padding:40px;min-height:100vh}
+  .hdr{margin-bottom:32px;color:#fff}
+  .eye{font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.16em;color:#BFFF00;margin-bottom:8px}
+  h1{font-family:'General Sans',sans-serif;font-weight:600;font-size:32px;letter-spacing:-0.03em;color:#fff}
+  .sub{font-size:14px;color:#94A3B8;margin-top:6px;max-width:60ch}
+
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:1280px;margin:0 auto}
+  .card{padding:0;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,0.06);
+    box-shadow:6px 6px 16px rgba(0,0,0,0.55)}
+
+  /* ── CREAM CARD (reference recreation) ── */
+  .cream{background:#EFE5C8;padding:36px 40px;position:relative}
+  .cream::before{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(circle at 1px 1px, rgba(10,10,10,0.18) 0.6px, transparent 0.6px);
+    background-size:6px 6px;
+    opacity:0.65;pointer-events:none
+  }
+  .cream-eye{position:relative;font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#0A0A0A;opacity:0.7;margin-bottom:18px}
+
+  .lockup{position:relative;display:flex;align-items:center;gap:18px;margin-bottom:18px}
+  .wm{font-family:'Clash Display','General Sans',sans-serif;font-weight:700;font-size:64px;letter-spacing:-0.04em;color:#0A0A0A;line-height:0.95}
+
+  .tag-line{position:relative;font-family:'Clash Display','General Sans',sans-serif;font-weight:700;font-size:22px;letter-spacing:-0.02em;color:#0A0A0A;margin-bottom:12px}
+  .tag-line .hl{background:#BFFF00;padding:1px 6px;border-radius:4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .tag-line .circ{display:inline-block;padding:0 10px;position:relative}
+  .tag-line .circ::before{content:"";position:absolute;inset:-4px -2px;border:2.5px solid #FF7777;border-radius:60%;transform:rotate(-3deg)}
+
+  .body-txt{position:relative;font-family:'Satoshi',sans-serif;font-size:14.5px;line-height:1.55;color:#0A0A0A;opacity:0.85;max-width:42ch}
+
+  .sticker{position:absolute;top:18px;right:24px;background:#FF7777;color:#0A0A0A;
+    font-family:'Clash Display','General Sans',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;line-height:1.15;
+    padding:8px 12px;border-radius:6px;transform:rotate(8deg);box-shadow:3px 3px 0 rgba(0,0,0,0.85);text-align:left;display:inline-flex;align-items:center;gap:6px}
+  .sticker .star{width:14px;height:14px}
+
+  .arrow{position:absolute;bottom:18px;right:30px;width:36px;height:36px;color:#0A0A0A;transform:rotate(20deg)}
+
+  /* ── DARK CARD (for app use) ── */
+  .dark{background:#0A0A0A;padding:36px 40px;color:#fff}
+  .dark .wm{color:#fff}
+  .dark-eye{font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#BFFF00;margin-bottom:18px}
+
+  /* size showcase */
+  .sizes{display:flex;gap:24px;align-items:flex-end;justify-content:flex-start;padding:24px 0 0;border-top:1px dashed rgba(0,0,0,0.18);margin-top:18px}
+  .sizes.dark-bg{border-top-color:rgba(255,255,255,0.12)}
+  .size-item{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .size-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;color:#5A5A60;font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
+
+  /* avatar showcase */
+  .avatar-row{display:flex;gap:18px;flex-wrap:wrap;padding:24px 28px;background:#141414;color:#fff}
+  .av{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .av-circle{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;overflow:hidden;border:2px solid rgba(255,255,255,0.06)}
+  .av-circle.cream-bg{background:#EFE5C8}
+  .av-circle.dark-bg{background:#0A0A0A}
+  .av-circle.lime-bg{background:linear-gradient(135deg,#BFFF00,#FF7777)}
+  .av-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;color:#94A3B8;font-weight:600;letter-spacing:0.06em;text-transform:uppercase}
+
+  .row-2{grid-column:1/-1}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="eye">▮ Brand · V9 — Chain Link / Indie Illustrated</div>
+  <h1>Réplica fiel da referência</h1>
+  <p class="sub">Chain-link em traço grosso sobre cream, fill lime no elo esquerdo + halftone (dots pretos) no elo direito. Tipografia Clash Display Bold + Satoshi. Sticker coral.</p>
+</div>
+
+<div class="grid">
+
+  <!-- ════════ CREAM RECREATION ════════ -->
+  <div class="card">
+    <div class="cream">
+      <div class="cream-eye">▮ Cream Edition · Reference Match</div>
+
+      <span class="sticker">
+        LINKS QUE<br>GERAM RESULTADOS
+        <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L14 9 L21 10 L16 15 L17 22 L12 19 L7 22 L8 15 L3 10 L10 9 Z"/></svg>
+      </span>
+
+      <div class="lockup">
+        <!-- Chain link mark -->
+        <svg width="120" height="78" viewBox="0 0 180 110" fill="none">
+          <defs>
+            <pattern id="dots-a" x="0" y="0" width="5" height="5" patternUnits="userSpaceOnUse">
+              <circle cx="2.5" cy="2.5" r="0.9" fill="#0A0A0A"/>
+            </pattern>
+            <symbol id="ring-a" viewBox="0 0 90 70">
+              <path d="M 30 4 L 60 4 A 31 31 0 0 1 60 66 L 30 66 A 31 31 0 0 1 30 4 Z
+                       M 30 16 A 19 19 0 0 0 30 54 L 60 54 A 19 19 0 0 0 60 16 Z"
+                    fill-rule="evenodd"/>
+            </symbol>
+            <clipPath id="rightOverLeft-a">
+              <rect x="95" y="55" width="40" height="32"/>
+            </clipPath>
+          </defs>
+          <!-- Right link (back) -->
+          <g transform="translate(78 20)">
+            <use href="#ring-a" width="90" height="70" fill="url(#dots-a)" stroke="#0A0A0A" stroke-width="3.8" stroke-linejoin="round"/>
+          </g>
+          <!-- Left link (in front of right) -->
+          <g transform="translate(12 20)">
+            <use href="#ring-a" width="90" height="70" fill="#BFFF00" stroke="#0A0A0A" stroke-width="3.8" stroke-linejoin="round"/>
+          </g>
+          <!-- Right link bottom edge re-rendered on top of left to fake interlock -->
+          <g clip-path="url(#rightOverLeft-a)" transform="translate(78 20)">
+            <use href="#ring-a" width="90" height="70" fill="url(#dots-a)" stroke="#0A0A0A" stroke-width="3.8" stroke-linejoin="round"/>
+          </g>
+        </svg>
+        <span class="wm">AppLink</span>
+      </div>
+
+      <div class="tag-line">
+        <span class="hl">Conecte. Personalize. Acompanhe.</span> <span class="circ">Cresça.</span>
+      </div>
+      <p class="body-txt">Plataforma completa para links rastreados, páginas link-in-bio e análises que impulsionam suas conexões.</p>
+
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 17L17 7"/><path d="M9 7H17V15"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ════════ DARK VERSION ════════ -->
+  <div class="card">
+    <div class="dark">
+      <div class="dark-eye">▮ Dark Edition · App Use</div>
+
+      <div class="lockup">
+        <svg width="120" height="78" viewBox="0 0 180 110" fill="none">
+          <defs>
+            <pattern id="dots-b" x="0" y="0" width="5" height="5" patternUnits="userSpaceOnUse">
+              <circle cx="2.5" cy="2.5" r="0.9" fill="#fff"/>
+            </pattern>
+            <symbol id="ring-b" viewBox="0 0 90 70">
+              <path d="M 30 4 L 60 4 A 31 31 0 0 1 60 66 L 30 66 A 31 31 0 0 1 30 4 Z
+                       M 30 16 A 19 19 0 0 0 30 54 L 60 54 A 19 19 0 0 0 60 16 Z"
+                    fill-rule="evenodd"/>
+            </symbol>
+            <clipPath id="rightOverLeft-b">
+              <rect x="95" y="55" width="40" height="32"/>
+            </clipPath>
+          </defs>
+          <g transform="translate(78 20)">
+            <use href="#ring-b" width="90" height="70" fill="url(#dots-b)" stroke="#fff" stroke-width="3.8" stroke-linejoin="round"/>
+          </g>
+          <g transform="translate(12 20)">
+            <use href="#ring-b" width="90" height="70" fill="#BFFF00" stroke="#fff" stroke-width="3.8" stroke-linejoin="round"/>
+          </g>
+          <g clip-path="url(#rightOverLeft-b)" transform="translate(78 20)">
+            <use href="#ring-b" width="90" height="70" fill="url(#dots-b)" stroke="#fff" stroke-width="3.8" stroke-linejoin="round"/>
+          </g>
+        </svg>
+        <span class="wm">AppLink</span>
+      </div>
+
+      <p style="font-family:'Satoshi',sans-serif;font-size:14.5px;line-height:1.55;color:#94A3B8;max-width:42ch">
+        Versão pra uso no app, header de site escuro, dark-mode em geral.
+      </p>
+
+      <div class="sizes dark-bg">
+        <!-- mark scaling -->
+        <div class="size-item">
+          <svg width="96" height="58" viewBox="0 0 180 110" fill="none">
+            <use href="#ring-b" x="78" y="20" width="90" height="70" fill="url(#dots-b)" stroke="#fff" stroke-width="3.8" stroke-linejoin="round"/>
+            <use href="#ring-b" x="12" y="20" width="90" height="70" fill="#BFFF00" stroke="#fff" stroke-width="3.8" stroke-linejoin="round"/>
+          </svg>
+          <span class="size-lbl">96px</span>
+        </div>
+        <div class="size-item">
+          <svg width="64" height="40" viewBox="0 0 180 110" fill="none">
+            <use href="#ring-b" x="78" y="20" width="90" height="70" fill="url(#dots-b)" stroke="#fff" stroke-width="4.5" stroke-linejoin="round"/>
+            <use href="#ring-b" x="12" y="20" width="90" height="70" fill="#BFFF00" stroke="#fff" stroke-width="4.5" stroke-linejoin="round"/>
+          </svg>
+          <span class="size-lbl">64px</span>
+        </div>
+        <div class="size-item">
+          <svg width="40" height="26" viewBox="0 0 180 110" fill="none">
+            <use href="#ring-b" x="78" y="20" width="90" height="70" fill="url(#dots-b)" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
+            <use href="#ring-b" x="12" y="20" width="90" height="70" fill="#BFFF00" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
+          </svg>
+          <span class="size-lbl">40px</span>
+        </div>
+        <div class="size-item">
+          <svg width="24" height="16" viewBox="0 0 180 110" fill="none">
+            <use href="#ring-b" x="78" y="20" width="90" height="70" fill="#BFFF00" stroke="#fff" stroke-width="8" stroke-linejoin="round"/>
+            <use href="#ring-b" x="12" y="20" width="90" height="70" fill="#BFFF00" stroke="#fff" stroke-width="8" stroke-linejoin="round"/>
+          </svg>
+          <span class="size-lbl">24px</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ AVATARS / SOCIAL ════════ -->
+  <div class="card row-2">
+    <div class="avatar-row">
+      <div class="av">
+        <div class="av-circle cream-bg">
+          <svg width="64" height="42" viewBox="0 0 180 110" fill="none">
+            <defs>
+              <pattern id="dots-c" x="0" y="0" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="0.9" fill="#0A0A0A"/></pattern>
+              <symbol id="ring-c" viewBox="0 0 90 70"><path d="M 30 4 L 60 4 A 31 31 0 0 1 60 66 L 30 66 A 31 31 0 0 1 30 4 Z M 30 16 A 19 19 0 0 0 30 54 L 60 54 A 19 19 0 0 0 60 16 Z" fill-rule="evenodd"/></symbol>
+            </defs>
+            <use href="#ring-c" x="78" y="20" width="90" height="70" fill="url(#dots-c)" stroke="#0A0A0A" stroke-width="4" stroke-linejoin="round"/>
+            <use href="#ring-c" x="12" y="20" width="90" height="70" fill="#BFFF00" stroke="#0A0A0A" stroke-width="4" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="av-lbl">Cream · cred</span>
+      </div>
+      <div class="av">
+        <div class="av-circle dark-bg">
+          <svg width="64" height="42" viewBox="0 0 180 110" fill="none">
+            <defs>
+              <pattern id="dots-d" x="0" y="0" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="0.9" fill="#fff"/></pattern>
+              <symbol id="ring-d" viewBox="0 0 90 70"><path d="M 30 4 L 60 4 A 31 31 0 0 1 60 66 L 30 66 A 31 31 0 0 1 30 4 Z M 30 16 A 19 19 0 0 0 30 54 L 60 54 A 19 19 0 0 0 60 16 Z" fill-rule="evenodd"/></symbol>
+            </defs>
+            <use href="#ring-d" x="78" y="20" width="90" height="70" fill="url(#dots-d)" stroke="#fff" stroke-width="4" stroke-linejoin="round"/>
+            <use href="#ring-d" x="12" y="20" width="90" height="70" fill="#BFFF00" stroke="#fff" stroke-width="4" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="av-lbl">Dark · app</span>
+      </div>
+      <div class="av">
+        <div class="av-circle lime-bg">
+          <svg width="64" height="42" viewBox="0 0 180 110" fill="none">
+            <defs>
+              <symbol id="ring-e" viewBox="0 0 90 70"><path d="M 30 4 L 60 4 A 31 31 0 0 1 60 66 L 30 66 A 31 31 0 0 1 30 4 Z M 30 16 A 19 19 0 0 0 30 54 L 60 54 A 19 19 0 0 0 60 16 Z" fill-rule="evenodd"/></symbol>
+            </defs>
+            <use href="#ring-e" x="78" y="20" width="90" height="70" fill="#0A0A0A" stroke="#0A0A0A" stroke-width="4" stroke-linejoin="round"/>
+            <use href="#ring-e" x="12" y="20" width="90" height="70" fill="#0A0A0A" stroke="#0A0A0A" stroke-width="4" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="av-lbl">Brand · gradient</span>
+      </div>
+      <div class="av">
+        <div class="av-circle" style="background:#FF7777">
+          <svg width="64" height="42" viewBox="0 0 180 110" fill="none">
+            <defs>
+              <pattern id="dots-f" x="0" y="0" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="0.9" fill="#0A0A0A"/></pattern>
+              <symbol id="ring-f" viewBox="0 0 90 70"><path d="M 30 4 L 60 4 A 31 31 0 0 1 60 66 L 30 66 A 31 31 0 0 1 30 4 Z M 30 16 A 19 19 0 0 0 30 54 L 60 54 A 19 19 0 0 0 60 16 Z" fill-rule="evenodd"/></symbol>
+            </defs>
+            <use href="#ring-f" x="78" y="20" width="90" height="70" fill="url(#dots-f)" stroke="#0A0A0A" stroke-width="4" stroke-linejoin="round"/>
+            <use href="#ring-f" x="12" y="20" width="90" height="70" fill="#0A0A0A" stroke="#0A0A0A" stroke-width="4" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="av-lbl">Coral · launch</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
