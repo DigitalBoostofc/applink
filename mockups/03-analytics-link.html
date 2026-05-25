@@ -264,6 +264,109 @@
   .dom-links .dest{font-family:'Satoshi',sans-serif;font-size:12px;color:#94A3B8;font-weight:600;margin-top:2px}
   .dom-links .num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#fff;text-align:right;font-size:15px}
   .dom-links .pct-cell{min-width:140px;width:140px}
+
+  /* ═════════════════ MULTI-TOUCH JOURNEY (Feature 4) ═════════════════ */
+  .mtj-card{background:linear-gradient(135deg,rgba(191,255,0,0.05),rgba(255,119,119,0.03));
+    border:1px solid rgba(191,255,0,0.22);border-radius:24px;padding:28px;
+    box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025),inset 0 0 40px rgba(191,255,0,0.025);
+    margin-bottom:24px}
+  .mtj-hdr{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .mtj-hdr-ic{width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+    display:grid;place-items:center;flex-shrink:0;box-shadow:inset 2px 2px 5px rgba(255,255,255,0.2),0 0 22px rgba(191,255,0,0.3)}
+  .mtj-hdr-ic svg{width:22px;height:22px}
+  .mtj-hdr-ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:18px;color:#fff;letter-spacing:-0.02em;flex:1;min-width:200px}
+  .mtj-pro-badge{background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+    font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:0.14em;
+    padding:5px 11px;border-radius:6px;box-shadow:0 0 18px rgba(191,255,0,0.3)}
+
+  /* model selector */
+  .mtj-models{display:flex;gap:6px;background:#0F0F0F;border-radius:12px;padding:5px;
+    box-shadow:inset 3px 3px 6px rgba(0,0,0,0.55);overflow-x:auto;margin-bottom:22px}
+  .mtj-model{padding:9px 14px;border-radius:9px;font-family:'Satoshi',sans-serif;font-weight:700;
+    font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:#94A3B8;cursor:pointer;white-space:nowrap;
+    transition:.25s cubic-bezier(0.34,1.56,0.64,1);background:transparent;border:0}
+  .mtj-model:hover{color:#fff}
+  .mtj-model.on{background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;
+    box-shadow:0 0 16px rgba(191,255,0,0.3),2px 2px 5px rgba(0,0,0,0.4)}
+  .mtj-model .badge-default{font-size:8.5px;background:rgba(10,10,10,0.18);color:#0A0A0A;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:800}
+
+  /* journey visual */
+  .mtj-journey{background:#0A0A0A;border:1px solid rgba(255,255,255,0.04);border-radius:18px;padding:24px 20px;margin-bottom:22px;
+    box-shadow:inset 4px 4px 8px rgba(0,0,0,0.55)}
+  .mtj-journey-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:8px}
+  .mtj-journey-lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:0.14em;color:#5A5A60}
+  .mtj-journey-lbl::before{content:"▮ ";color:#BFFF00}
+  .mtj-journey-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:#5A5A60;font-weight:600}
+  .mtj-track{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+  .mtj-step{flex:1;min-width:140px;display:flex;align-items:center;gap:10px;position:relative}
+  .mtj-step .node{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 6px;border-radius:14px;flex:1;
+    background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);
+    box-shadow:inset 2px 2px 5px rgba(0,0,0,0.4);transition:.25s cubic-bezier(0.34,1.56,0.64,1);min-height:120px;justify-content:center}
+  .mtj-step .node:hover{transform:translateY(-2px);border-color:rgba(191,255,0,0.3)}
+  .mtj-step .ic{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;
+    box-shadow:inset 2px 2px 5px rgba(0,0,0,0.4)}
+  .mtj-step .ic svg{width:18px;height:18px}
+  .mtj-step.t-ad .ic{background:rgba(75,142,248,0.15);color:#4B8EF8}
+  .mtj-step.t-social .ic{background:rgba(255,119,119,0.15);color:#FF7777}
+  .mtj-step.t-email .ic{background:rgba(255,212,0,0.15);color:#FFD400}
+  .mtj-step.t-search .ic{background:rgba(167,139,250,0.15);color:#A78BFA}
+  .mtj-step.t-direct .ic{background:rgba(0,240,255,0.15);color:#00F0FF}
+  .mtj-step.t-final .node{background:linear-gradient(135deg,rgba(191,255,0,0.18),rgba(255,119,119,0.08));border-color:rgba(191,255,0,0.4)}
+  .mtj-step.t-final .ic{background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A}
+  .mtj-step .label{font-family:'Satoshi',sans-serif;font-weight:700;font-size:11.5px;color:#E2E8F0;text-align:center;line-height:1.3}
+  .mtj-step .credit{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#BFFF00;letter-spacing:0.02em}
+  .mtj-step .credit.muted{color:#5A5A60}
+  .mtj-step .arrow{color:#5A5A60;flex-shrink:0;width:24px;display:grid;place-items:center;position:relative}
+  .mtj-step .arrow svg{width:20px;height:20px}
+  .mtj-step.t-final .arrow{display:none}
+  .mtj-step .nope{position:absolute;top:-8px;right:8px;background:#EF4444;color:#fff;font-family:'JetBrains Mono',monospace;
+    font-weight:700;font-size:9px;padding:2px 6px;border-radius:4px;letter-spacing:0.04em;display:none}
+  .mtj-step.lost .nope{display:block}
+  .mtj-step.lost .credit{color:#EF4444}
+
+  /* comparison table */
+  .mtj-tbl-wrap{background:#0A0A0A;border:1px solid rgba(255,255,255,0.04);border-radius:18px;overflow:hidden;
+    box-shadow:inset 4px 4px 8px rgba(0,0,0,0.55);margin-bottom:18px}
+  .mtj-tbl{width:100%;border-collapse:collapse}
+  .mtj-tbl th{font-family:'Satoshi',sans-serif;text-align:right;font-size:10.5px;font-weight:800;letter-spacing:0.13em;
+    text-transform:uppercase;color:#5A5A60;padding:12px 14px;background:#0F0F0F;border-bottom:1px solid rgba(255,255,255,0.05);white-space:nowrap}
+  .mtj-tbl th:first-child{text-align:left}
+  .mtj-tbl th.on{color:#BFFF00;background:rgba(191,255,0,0.05)}
+  .mtj-tbl td{padding:12px 14px;font-family:'Satoshi',sans-serif;font-size:13px;color:#E2E8F0;
+    border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600}
+  .mtj-tbl td:first-child{text-align:left;font-family:'Satoshi',sans-serif;font-weight:700;color:#fff}
+  .mtj-tbl td.on{background:rgba(191,255,0,0.05);color:#BFFF00;font-weight:700}
+  .mtj-tbl td .channel-row{display:flex;align-items:center;gap:10px}
+  .mtj-tbl td .ch-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .mtj-tbl td .ch-dot.meta{background:#4B8EF8}
+  .mtj-tbl td .ch-dot.google{background:#A78BFA}
+  .mtj-tbl td .ch-dot.email{background:#FFD400}
+  .mtj-tbl td .ch-dot.tiktok{background:#FF5C8D}
+  .mtj-tbl td .ch-dot.direct{background:#00F0FF}
+  .mtj-tbl tr:last-child td{border-bottom:0}
+  .mtj-tbl tr:hover td:not(.on){background:rgba(255,255,255,0.02)}
+
+  /* insight callout */
+  .mtj-insight{background:linear-gradient(90deg,rgba(255,119,119,0.1),rgba(191,255,0,0.05));border:1px solid rgba(255,119,119,0.3);border-radius:14px;
+    padding:18px 22px;display:flex;align-items:flex-start;gap:14px}
+  .mtj-insight .ic{width:32px;height:32px;border-radius:9px;background:rgba(255,119,119,0.2);color:#FF7777;display:grid;place-items:center;flex-shrink:0;
+    box-shadow:inset 2px 2px 5px rgba(0,0,0,0.3)}
+  .mtj-insight .ic svg{width:16px;height:16px}
+  .mtj-insight .ct{flex:1}
+  .mtj-insight .ct b{font-family:'General Sans',sans-serif;font-weight:600;font-size:14.5px;color:#fff;letter-spacing:-0.01em;display:block;margin-bottom:4px}
+  .mtj-insight .ct p{font-family:'Satoshi',sans-serif;font-size:13px;color:#94A3B8;line-height:1.5}
+  .mtj-insight .ct .hl-lime{color:#BFFF00;font-weight:700}
+  .mtj-insight .ct .hl-coral{color:#FF7777;font-weight:700}
+  .mtj-insight-cta{margin-left:auto;padding:8px 14px;background:#1A1A1A;color:#BFFF00;border:1px solid rgba(191,255,0,0.3);border-radius:10px;
+    font-family:'Satoshi',sans-serif;font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:0.12em;
+    cursor:pointer;white-space:nowrap;transition:.25s cubic-bezier(0.34,1.56,0.64,1);flex-shrink:0}
+  .mtj-insight-cta:hover{background:rgba(191,255,0,0.1);transform:translateY(-1px)}
+
+  @media (max-width:980px){
+    .mtj-step{min-width:100%}
+    .mtj-step .arrow{transform:rotate(90deg);margin:6px auto}
+    .mtj-track{flex-direction:column}
+  }
 </style>
 </head>
 <body>
@@ -475,6 +578,159 @@
         </div>
         <div class="chart-axis">
           <span>Mai 1</span><span>Mai 8</span><span>Mai 15</span><span>Mai 22</span><span>Hoje</span>
+        </div>
+      </div>
+
+      <!-- ════════ FEATURE 4 — MULTI-TOUCH JOURNEY ════════ -->
+      <div class="mtj-card">
+        <div class="mtj-hdr">
+          <div class="mtj-hdr-ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12h4l3 -7l4 14l3 -7h4"/>
+            </svg>
+          </div>
+          <span class="mtj-hdr-ttl">Jornada multi-touch · atribuição completa</span>
+          <span class="mtj-pro-badge">Smart Tracking PRO</span>
+          <a class="card-hdr-help" href="#">(help)</a>
+        </div>
+
+        <!-- model selector -->
+        <div class="mtj-models" id="mtj-models">
+          <button class="mtj-model" data-m="first">First-touch</button>
+          <button class="mtj-model on" data-m="last">Last-click <span class="badge-default">PADRÃO</span></button>
+          <button class="mtj-model" data-m="linear">Linear</button>
+          <button class="mtj-model" data-m="decay">Time-decay</button>
+          <button class="mtj-model" data-m="u">U-shaped</button>
+          <button class="mtj-model" data-m="w">W-shaped</button>
+        </div>
+
+        <!-- journey visual -->
+        <div class="mtj-journey">
+          <div class="mtj-journey-hdr">
+            <span class="mtj-journey-lbl">Jornada média do lead que converteu</span>
+            <span class="mtj-journey-meta" id="mtj-jm-meta">5 touchpoints · janela 7 dias · base 412 conversões</span>
+          </div>
+          <div class="mtj-track" id="mtj-track">
+            <div class="mtj-step t-ad">
+              <div class="node">
+                <div class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 6h-9v3H8v3H5v9H2v3h20v-3h-3v-3h-3v-3h-3V9h6V6z"/></svg></div>
+                <div class="label">Meta Ad</div>
+                <div class="credit muted" data-c="meta">0%</div>
+              </div>
+              <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+            </div>
+            <div class="mtj-step t-social">
+              <div class="node">
+                <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1.2" fill="currentColor"/></svg></div>
+                <div class="label">Instagram Story</div>
+                <div class="credit muted" data-c="ig">0%</div>
+              </div>
+              <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+            </div>
+            <div class="mtj-step t-email">
+              <div class="node">
+                <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 7l9-7"/></svg></div>
+                <div class="label">E-mail nurturing</div>
+                <div class="credit muted" data-c="email">0%</div>
+              </div>
+              <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+            </div>
+            <div class="mtj-step t-search">
+              <div class="node">
+                <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div>
+                <div class="label">Google Search</div>
+                <div class="credit muted" data-c="google">0%</div>
+              </div>
+              <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+            </div>
+            <div class="mtj-step t-final">
+              <div class="node">
+                <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="label">Conversão</div>
+                <div class="credit" data-c="final">100%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- comparison table -->
+        <div class="mtj-tbl-wrap">
+          <table class="mtj-tbl">
+            <thead>
+              <tr>
+                <th>Canal</th>
+                <th data-h="first">First</th>
+                <th data-h="last" class="on">Last</th>
+                <th data-h="linear">Linear</th>
+                <th data-h="decay">Decay</th>
+                <th data-h="u">U-shape</th>
+                <th data-h="w">W-shape</th>
+                <th>R$ atribuído</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="channel-row"><span class="ch-dot meta"></span>Meta Ads</div></td>
+                <td data-r="meta-first">62%</td>
+                <td data-r="meta-last" class="on">8%</td>
+                <td data-r="meta-linear">28%</td>
+                <td data-r="meta-decay">15%</td>
+                <td data-r="meta-u">42%</td>
+                <td data-r="meta-w">36%</td>
+                <td data-r="meta-money" class="on">R$ 982</td>
+              </tr>
+              <tr>
+                <td><div class="channel-row"><span class="ch-dot tiktok"></span>Instagram Story (orgânico)</div></td>
+                <td data-r="ig-first">12%</td>
+                <td data-r="ig-last" class="on">14%</td>
+                <td data-r="ig-linear">22%</td>
+                <td data-r="ig-decay">26%</td>
+                <td data-r="ig-u">10%</td>
+                <td data-r="ig-w">15%</td>
+                <td data-r="ig-money" class="on">R$ 1.718</td>
+              </tr>
+              <tr>
+                <td><div class="channel-row"><span class="ch-dot email"></span>E-mail nurturing</div></td>
+                <td data-r="email-first">8%</td>
+                <td data-r="email-last" class="on">22%</td>
+                <td data-r="email-linear">21%</td>
+                <td data-r="email-decay">25%</td>
+                <td data-r="email-u">14%</td>
+                <td data-r="email-w">19%</td>
+                <td data-r="email-money" class="on">R$ 2.700</td>
+              </tr>
+              <tr>
+                <td><div class="channel-row"><span class="ch-dot google"></span>Google Search</div></td>
+                <td data-r="google-first">14%</td>
+                <td data-r="google-last" class="on">48%</td>
+                <td data-r="google-linear">24%</td>
+                <td data-r="google-decay">29%</td>
+                <td data-r="google-u">28%</td>
+                <td data-r="google-w">24%</td>
+                <td data-r="google-money" class="on">R$ 5.890</td>
+              </tr>
+              <tr>
+                <td><div class="channel-row"><span class="ch-dot direct"></span>Tráfego direto</div></td>
+                <td data-r="direct-first">4%</td>
+                <td data-r="direct-last" class="on">8%</td>
+                <td data-r="direct-linear">5%</td>
+                <td data-r="direct-decay">5%</td>
+                <td data-r="direct-u">6%</td>
+                <td data-r="direct-w">6%</td>
+                <td data-r="direct-money" class="on">R$ 982</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- insight callout -->
+        <div class="mtj-insight" id="mtj-insight">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/></svg></div>
+          <div class="ct" id="mtj-insight-ct">
+            <b>Last-click <span class="hl-coral">subestima</span> seu Meta Ads em 54% do crédito real.</b>
+            <p>Com last-click, Meta pega só <b>8%</b> da venda. Mas no <b>U-shaped</b>, ela tem <b>42%</b> — porque é onde o lead começou. Mude o modelo pra ver atribuição honesta.</p>
+          </div>
+          <button class="mtj-insight-cta" id="mtj-insight-cta">Mudar pra U-shaped →</button>
         </div>
       </div>
 
@@ -926,6 +1182,94 @@
 
   // Initial render
   applyDomain(currentDomain);
+
+  // ═══════════════════ MULTI-TOUCH JOURNEY (Feature 4) ═══════════════════
+  // Modelos de atribuição: cada um redistribui 100% entre os 4 touchpoints
+  var MTJ_MODELS = {
+    first:  { meta: 62, ig: 12, email:  8, google: 14, direct:  4 },
+    last:   { meta:  8, ig: 14, email: 22, google: 48, direct:  8 },
+    linear: { meta: 28, ig: 22, email: 21, google: 24, direct:  5 },
+    decay:  { meta: 15, ig: 26, email: 25, google: 29, direct:  5 },
+    u:      { meta: 42, ig: 10, email: 14, google: 28, direct:  6 },
+    w:      { meta: 36, ig: 15, email: 19, google: 24, direct:  6 }
+  };
+  var MTJ_MONEY_BASE = 12272; // R$ total atribuído no link (todos modelos)
+  var MTJ_INSIGHTS = {
+    first:  { headline: '<b>First-touch</b> dá <span class="hl-lime">62%</span> do crédito ao Meta Ads — exagera o início.', body: 'Atribuição total no primeiro toque ignora o trabalho de nurturing. Use <b>Linear</b> ou <b>U-shaped</b> pra ver o caminho real.', cta: 'Comparar com U-shaped →', next: 'u' },
+    last:   { headline: 'Last-click <span class="hl-coral">subestima</span> seu Meta Ads em 54% do crédito real.', body: 'Com last-click, Meta pega só <b>8%</b> da venda. Mas no <b>U-shaped</b>, ela tem <b>42%</b> — porque é onde o lead começou. Mude o modelo pra ver atribuição honesta.', cta: 'Mudar pra U-shaped →', next: 'u' },
+    linear: { headline: 'Modelo <b>Linear</b> distribui crédito igualmente — bom pra entender o time todo.', body: 'Todos os touchpoints pegam parte do crédito proporcional. Útil pra avaliar contribuição agregada do funil.', cta: 'Comparar com Time-decay →', next: 'decay' },
+    decay:  { headline: '<b>Time-decay</b> favorece touchpoints próximos da conversão (+15% pro nurturing).', body: 'Modelo bom pra ciclos de venda curtos (≤7 dias). E-mail nurturing e Google Search ganham peso.', cta: 'Comparar com Linear →', next: 'linear' },
+    u:      { headline: '<b>U-shaped</b> equilibra primeiro toque (40%) + último (40%) + meio (20%).', body: 'Modelo recomendado pra growth marketing: reconhece que Meta abriu a jornada e Google fechou. Banco de credit justo.', cta: 'Comparar com W-shaped →', next: 'w' },
+    w:      { headline: '<b>W-shaped</b> credita 3 touchpoints-chave: first, lead capture e conversão.', body: 'Modelo de B2B: identifica os 3 pontos críticos do funil. Útil quando você tem etapa de qualificação (e-mail captura).', cta: 'Comparar com U-shaped →', next: 'u' }
+  };
+  // Mapping do touchpoint visual pro channel key
+  var MTJ_STEP_MAP = { meta: 'meta', ig: 'ig', email: 'email', google: 'google' };
+
+  function applyMtjModel(m){
+    var dist = MTJ_MODELS[m];
+    if (!dist) return;
+
+    // 1) Update model selector pill
+    document.querySelectorAll('#mtj-models .mtj-model').forEach(function(b){
+      b.classList.toggle('on', b.dataset.m === m);
+    });
+
+    // 2) Update journey nodes (credits + lost state)
+    Object.keys(MTJ_STEP_MAP).forEach(function(ch){
+      var node = document.querySelector('.mtj-step .credit[data-c="' + MTJ_STEP_MAP[ch] + '"]');
+      if (!node) return;
+      var pct = dist[ch];
+      node.textContent = pct + '%';
+      node.classList.toggle('muted', pct < 5);
+      var step = node.closest('.mtj-step');
+      step.classList.toggle('lost', pct === 0);
+    });
+
+    // 3) Update table — highlight selected column
+    document.querySelectorAll('.mtj-tbl th').forEach(function(th){
+      th.classList.toggle('on', th.dataset.h === m);
+    });
+    document.querySelectorAll('.mtj-tbl td[data-r]').forEach(function(td){
+      var parts = td.dataset.r.split('-');
+      var col = parts[1];
+      if (col === 'money') return;
+      td.classList.toggle('on', col === m);
+    });
+
+    // 4) Update money column (recalc R$ atribuído by current model)
+    ['meta','ig','email','google','direct'].forEach(function(ch){
+      var money = document.querySelector('.mtj-tbl td[data-r="' + ch + '-money"]');
+      if (!money) return;
+      var pct = dist[ch];
+      var val = Math.round(MTJ_MONEY_BASE * pct / 100);
+      money.textContent = 'R$ ' + val.toLocaleString('pt-BR');
+    });
+
+    // 5) Update insight
+    var ins = MTJ_INSIGHTS[m];
+    if (ins){
+      var ct = document.getElementById('mtj-insight-ct');
+      ct.innerHTML = '<b>' + ins.headline + '</b><p>' + ins.body + '</p>';
+      var cta = document.getElementById('mtj-insight-cta');
+      cta.textContent = ins.cta;
+      cta.dataset.next = ins.next;
+    }
+  }
+
+  // Wire up model selector clicks
+  document.querySelectorAll('#mtj-models .mtj-model').forEach(function(b){
+    b.addEventListener('click', function(){ applyMtjModel(b.dataset.m); });
+  });
+  // Wire up insight CTA — switches to recommended next model
+  document.getElementById('mtj-insight-cta').addEventListener('click', function(){
+    var next = this.dataset.next || 'u';
+    applyMtjModel(next);
+    // Scroll into view smoothly
+    document.querySelector('.mtj-card').scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  // Initialize with last-click (default) — but trigger to populate credits
+  applyMtjModel('last');
 })();
 </script>
 </body>
