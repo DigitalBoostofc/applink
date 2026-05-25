@@ -3,8 +3,8 @@
 > **Documento de handoff pra backend + frontend real.**
 > Consolida cada feature implementada nos mockups com: status, UX flow, data model, business rules, API endpoints, eventos, edge cases. Use como source-of-truth quando começar a implementar backend (NestJS) ou frontend real (Next.js).
 
-**Versão:** 1.0 · 2026-05-25
-**Last sync com mockups:** commit `9c8715f`
+**Versão:** 2.0 · 2026-05-25
+**Last sync com mockups:** commit `20f7d0a`+ (Features 5/6 + mockups parciais resgatados)
 **Status legenda:**
 - 🟢 **READY** — Mockup completo + spec definida, dá pra começar backend
 - 🟡 **PARCIAL** — Mockup existe mas spec precisa refinamento (questões em aberto)
@@ -19,6 +19,8 @@
 - [A2. Pixel Tracker JS](#a2)
 - [A3. Pipeline de Audiências auto-segmentadas](#a3)
 - [A4. Multi-touch Journey (6 modelos)](#a4)
+- [A5. ROI Dashboard por canal/campanha](#a5)
+- [A6. Cohort & LTV Analysis](#a6)
 
 **B — Smart Links (core):**
 - [B1. Criação de Link — fluxo principal](#b1)
@@ -369,6 +371,183 @@ function attribute(touchpoints, model) {
 - Touchpoints > 10 → mostra "..." no visual mas conta no cálculo
 - Janela expirou → touchpoint não conta na atribuição
 - Modelo W-shaped sem lead-capture identificável → cai pra U-shaped
+
+---
+
+### <a id="a5"></a>A5. ROI Dashboard · ROAS por canal/campanha
+
+**Status:** 🟢 READY
+**Mockup:** `mockups/03-analytics-link.html` → card "ROAS por canal · revenue vs ad spend"
+
+**O que faz:**
+Painel de ROI real (Return on Ad Spend) por canal/campanha. Mostra gasto vs revenue atribuído, ROAS por linha, CPA, status de saúde da campanha, alertas actionable (pausar campanha perdendo, escalar lucrativa, etc.).
+
+**UX flow:**
+1. Card destacado entre Multi-touch Journey e panels-geo
+2. Header com ícone gradient + badge "Smart Tracking PRO" + **period selector** (7d/30d/90d/YTD)
+3. **4 KPI cards:**
+   - Ad Spend (com delta vs período anterior)
+   - Revenue atribuído (com delta)
+   - ROAS médio (destaque verde — KPI principal)
+   - CPA médio (com delta down=bom)
+4. **Tabela de canais** (6 colunas + total):
+   - Canal/Campanha (com dot colorido por plataforma)
+   - Spend · Conversões · CPA · Revenue · ROAS · Status
+   - Status pills: ★ Star · ✓ Lucrativa · ⚠ Break-even · 🚨 Perdendo · ≈ Pequeno volume
+   - Cores: win=verde · loss=vermelho · total=lime highlight
+5. **Alertas actionable** (3 tipos):
+   - **Critical:** "Campanha queimando R$ X/mês" + CTA "Pausar campanha"
+   - **Win:** "Lookalike Premium escalável" + CTA "Aumentar 50%"
+   - **Warning:** "Break-even — janela curta de decisão" + CTA "Ver criativos"
+
+**Data model:**
+```sql
+CREATE TABLE ad_campaigns (
+  id              UUID PRIMARY KEY,
+  workspace_id    UUID REFERENCES workspaces(id),
+  platform        VARCHAR(20),     -- 'meta' | 'google' | 'tiktok' | 'linkedin'
+  external_id     VARCHAR(120),    -- ID da campanha na plataforma
+  name            VARCHAR(200),
+  status          VARCHAR(20),     -- 'active' | 'paused' | 'archived'
+  created_at      TIMESTAMP DEFAULT NOW()
+);
+
+-- snapshot diário pra cálculo de ROAS histórico
+CREATE TABLE campaign_metrics_daily (
+  campaign_id     UUID REFERENCES ad_campaigns(id),
+  date            DATE,
+  spend_cents     INT,
+  impressions     INT,
+  clicks          INT,
+  conversions     INT,
+  revenue_cents   INT,
+  PRIMARY KEY (campaign_id, date)
+);
+
+CREATE TABLE campaign_alerts (
+  id              UUID PRIMARY KEY,
+  workspace_id    UUID REFERENCES workspaces(id),
+  campaign_id     UUID REFERENCES ad_campaigns(id),
+  severity        VARCHAR(20),     -- 'critical' | 'warning' | 'win'
+  type            VARCHAR(40),     -- 'roas_below_threshold' | 'scale_opportunity' | etc.
+  title           VARCHAR(200),
+  body            TEXT,
+  action          JSONB,           -- {type: 'pause', confirm: true}
+  status          VARCHAR(20),     -- 'open' | 'dismissed' | 'acted'
+  created_at      TIMESTAMP DEFAULT NOW()
+);
+```
+
+**Business rules:**
+- ROAS = revenue_cents / spend_cents (cuidado com div-by-zero)
+- Status thresholds (configurável por workspace):
+  - Star: ROAS > 5×
+  - Lucrativa: ROAS ≥ break-even threshold (default 2×)
+  - Break-even: ROAS entre 1.8× e 2.2×
+  - Perdendo: ROAS < 1.5×
+  - Pequeno volume: spend < R$ 1.000 (não confiável estatisticamente)
+- Alert rules (cron a cada 6h):
+  - Critical: campanha com 30 dias rodando + ROAS < 1.5×
+  - Win: campanha com ROAS > 4× + spend > R$ 1k (escalável)
+  - Warning: ROAS entre 1.8× e 2.2× há ≥14 dias
+
+**API endpoints:**
+- `GET /workspaces/{id}/roi?period=30d` — KPIs + breakdown por canal
+- `GET /workspaces/{id}/campaigns` — lista de campanhas
+- `GET /workspaces/{id}/alerts?open=true` — alertas abertos
+- `POST /campaigns/{id}/pause` — pausar via Meta/Google API
+- `POST /campaigns/{id}/budget` — aumentar budget via API
+- `POST /alerts/{id}/dismiss` — marcar como visto
+
+**Integrações externas:**
+- Meta Marketing API (read ads_insights + write campaign budget/status)
+- Google Ads API (read + write campaigns)
+- TikTok Marketing API
+- LinkedIn Ads API
+
+**Edge cases:**
+- Workspace sem ads conectados → estado vazio com CTA "Conectar Meta/Google"
+- Revenue não atribuído (sem pixel) → fallback "Revenue 0 — instale o tracker"
+- API da plataforma indisponível → cache + warning "dados de N horas atrás"
+- Multi-currency → converter pra BRL no display (cache de cotação)
+
+---
+
+### <a id="a6"></a>A6. Cohort &amp; LTV Analysis
+
+**Status:** 🟢 READY
+**Mockup:** `mockups/03-analytics-link.html` → card "Cohort &amp; LTV"
+
+**O que faz:**
+Análise de cohorts (grupos de clientes adquiridos no mesmo mês) com matriz de retenção/LTV/recompra. Mostra LTV médio por canal de aquisição pra responder "qual canal gera cliente mais valioso ao longo do tempo?".
+
+**UX flow:**
+1. Card destacado depois do ROI Dashboard
+2. Header com ícone gradient violet→lime + badge "Smart Tracking PRO" + **mode selector** (Retenção / LTV $$ / Recompra)
+3. **Matriz cohort** 7 meses × 7 colunas M0-M6:
+   - Cada linha = cohort de aquisição (Dez 2025 → Jun 2026)
+   - Tamanho do cohort (ex: "412 leads") na primeira coluna
+   - Heatmap 6 níveis (h0-h5) gradient purple→lime
+   - M0 sempre 100% (mês de aquisição) · células vazias pros meses futuros
+   - Hover: scale 1.06 + z-index (destaque interativo)
+4. **LTV por canal de aquisição** (grid 4 cards):
+   - Meta Ads · LAL (R$ 1.247 LTV)
+   - Google Ads · Brand (R$ 2.108 LTV)
+   - Orgânico · Insta (R$ 1.690 LTV)
+   - Tráfego direto (R$ 920 LTV)
+   - Cada card: CAC + payback period
+5. **Insight callout violet** comparando canais (ex: "Google Brand gera cliente 69% mais valioso vs Meta LAL")
+
+**Data model:**
+```sql
+CREATE TABLE customer_cohorts (
+  user_id         UUID PRIMARY KEY,
+  workspace_id    UUID REFERENCES workspaces(id),
+  acquisition_month DATE,           -- primeiro dia do mês de aquisição
+  acquisition_channel VARCHAR(60),  -- 'meta_lal' | 'google_brand' | 'organic_ig' | 'direct'
+  acquisition_cost_cents INT,       -- CAC efetivo
+  total_revenue_cents INT DEFAULT 0,
+  last_purchase_at TIMESTAMP,
+  total_purchases INT DEFAULT 0
+);
+
+-- view agregada — refresh cron diário
+CREATE MATERIALIZED VIEW cohort_retention AS
+SELECT
+  workspace_id,
+  acquisition_month,
+  acquisition_channel,
+  date_trunc('month', AGE(NOW(), acquisition_month)) AS months_since,
+  COUNT(*) AS cohort_size,
+  COUNT(*) FILTER (WHERE last_purchase_at > NOW() - INTERVAL '30 days') AS active_30d,
+  SUM(total_revenue_cents) AS revenue_total
+FROM customer_cohorts
+GROUP BY 1,2,3,4;
+```
+
+**Business rules:**
+- Modo "Retenção": % do cohort que comprou de novo no mês N (M1, M2…)
+- Modo "LTV $$": revenue acumulado médio por cliente do cohort em R$
+- Modo "Recompra": % do cohort com 2+ compras no mês N
+- Heatmap levels:
+  - h0: 0% (vazio/sem dado)
+  - h1: 1-30% (purple soft)
+  - h2: 31-50% (purple)
+  - h3: 51-65% (lime soft)
+  - h4: 66-79% (lime)
+  - h5: 80-100% (lime+coral gradient)
+- LTV por canal = AVG(total_revenue_cents) / 100 dentro do canal de aquisição
+- Payback = CAC / (LTV mensal médio) em meses
+
+**API endpoints:**
+- `GET /workspaces/{id}/cohorts?mode=retention&months=7` — matriz
+- `GET /workspaces/{id}/ltv-by-channel` — breakdown por canal
+
+**Edge cases:**
+- Cohort com < 30 customers → não confiável, marcar com asterisco "*"
+- Customer sem revenue (lead frio) → entra no cohort mas não conta no LTV
+- Multi-touch: customer atribuído ao first-touch (não last) pra cohort de aquisição
+- Cancelamento/refund → subtrai do total_revenue_cents
 
 ---
 
@@ -1099,16 +1278,148 @@ CREATE TABLE smartpages (
 
 ---
 
-### <a id="e2"></a>E2. Editor + Leads capture
+### <a id="e2"></a>E2. Editor de Smartpage
 
-**Status:** 🟡 PARCIAL (editor existe mas precisa specs detalhadas)
-**Mockup:** `mockups/07-editor-smartpage.html` e `mockups/08-leads-smartpage.html`
+**Status:** 🟢 READY
+**Mockup:** `mockups/07-editor-smartpage.html`
 
-**O que falta especificar:**
-- Sistema de blocks (Hero · CTA · Form · Embed · Image · Text · Social)
-- Form fields configuration
-- Lead destinations (CRM webhook, email, sheet, Zapier)
-- A/B test em smartpage inteira
+**O que faz:**
+Editor visual de smartpages com sistema de blocks no estilo Linktree/Notion. 3 painéis: lateral esquerda (blocks library) · centro (preview mobile) · lateral direita (config do bloco selecionado).
+
+**UX flow:**
+1. **Topbar:** breadcrumb + nome smartpage + tabs (Design/Compartilhar/Analytics/Leads) + status "Salvo" + ícone "Visualizar" + botão "Publicar" lime
+2. **Sidebar esquerda — Blocks library:**
+   - Tabs: Tema / Blocos / Config
+   - Buscar bloco (search)
+   - Categorias com ~25 blocks:
+     - **Conteúdo:** Botão · Texto · Avatar · Card · Carrossel
+     - **Mídia:** Vídeo · Áudio · Música · RSS
+     - **Interativos:** Form · Contador · Q&A · Calendário · Messenger · vCard
+     - **Social & Contato:** Social icons · Mapa
+     - **Lojas:** (Shopify, WooCommerce embed)
+3. **Centro — Preview mobile (390×844):**
+   - Mockup do telefone com smartpage em tempo real
+   - Avatar circular + nome + bio + social icons + lista de botões
+   - Botão lime "Ouvir o podcast", "Baixar o ebook grátis", "Agendar mentoria"
+   - Botão coral "Cupom de parceiros"
+   - Label "PREVIEW · Bio da Maria"
+4. **Sidebar direita — Config do bloco selecionado** (ex: Botão):
+   - Conteúdo: Texto do botão · Link de destino
+   - Aparência: toggle Customizada · Estilo (Sólido/Contorno/Suave) · Ícone (Nenhum/Emoji/SVG)
+   - Comportamento: Animação (pulsar) · Agendar exibição · Abrir em nova aba
+   - Rastreamento: toggles Registrar conversão · Disparar pixel · Capturar lead ao clicar
+
+**Data model:**
+```sql
+-- já tem smartpages com config JSONB
+-- config esperada:
+{
+  "theme": {"primary": "#BFFF00", "bg": "#0A0A0A", "font": "satoshi"},
+  "blocks": [
+    {
+      "id": "uuid",
+      "type": "avatar",
+      "props": {"image_url": "...", "name": "Maria Silva", "bio": "..."}
+    },
+    {
+      "id": "uuid",
+      "type": "button",
+      "props": {
+        "text": "+ Baixar o ebook grátis",
+        "url": "plnk.to/fibras-ebook",
+        "style": "solid",
+        "color": "lime",
+        "icon": {"type": "emoji", "value": "📥"},
+        "pulse": true,
+        "open_new_tab": true,
+        "track": {"conversion": true, "pixel_fire": true, "capture_lead": false}
+      }
+    },
+    // ... outros blocks
+  ]
+}
+
+CREATE TABLE smartpage_block_types (
+  id           VARCHAR(30) PRIMARY KEY,
+  category     VARCHAR(30),
+  name         VARCHAR(60),
+  icon         VARCHAR(60),
+  default_props JSONB,
+  schema       JSONB  -- pra validar props (JSON Schema)
+);
+```
+
+**Business rules:**
+- Block types validados contra schema antes de salvar
+- Reorder de blocks via drag-drop (atualiza `order` no array)
+- Block "Form" tem subconfig: fields + lead destinations
+- Preview atualiza em tempo real (debounced 200ms)
+- Save automático a cada 5s (após mudança)
+- "Publicar" gera versão live + invalida cache CDN
+
+**API endpoints:**
+- `GET /smartpages/{id}/edit` — config completa pra editor
+- `PUT /smartpages/{id}/config` — autosave
+- `POST /smartpages/{id}/publish` — published_version = current
+- `GET /smartpage-blocks` — catálogo de tipos
+
+---
+
+### E2b. Leads da Smartpage
+
+**Status:** 🟢 READY
+**Mockup:** `mockups/08-leads-smartpage.html`
+
+**O que faz:**
+Lista de leads capturados via forms da smartpage. Filtros, exportar CSV, ver no CRM externo.
+
+**UX flow:**
+- Tabs: Analytics / Leads (active) / Analytics por bloco
+- 4 KPI cards:
+  - Leads capturados (312)
+  - Visitas (14.207)
+  - Taxa de conversão (2,2%)
+  - Sincronizados com CRM (311)
+- Banner verde: "Todos os leads do formulário caem direto no AppexCRM"
+- Tabela: Nome · Telefone · Último Lead · Origem · Smartpage · Buscar input
+- Cada linha: avatar + nome + telefone formatado · data · origem (WhatsApp/Direto/Instagram/Webform) · pill smartpage
+- Filter pills topo direita: Buscar Lead
+- Ações por linha: ver detalhes + enviar pro CRM novamente
+
+**Data model:**
+```sql
+CREATE TABLE smartpage_leads (
+  id           UUID PRIMARY KEY,
+  smartpage_id UUID REFERENCES smartpages(id),
+  workspace_id UUID REFERENCES workspaces(id),
+  block_id     UUID,                -- form block que capturou
+  fields       JSONB,               -- {name: 'Maria', email: '...', phone: '...'}
+  source       VARCHAR(40),         -- 'direct' | 'instagram' | 'whatsapp' | 'webform'
+  click_id     UUID,                -- linka ao click_journey
+  utm_data     JSONB,
+  ip_anon      INET,
+  user_agent   TEXT,
+  synced_at    TIMESTAMP,           -- quando foi pro CRM
+  synced_to    VARCHAR(40),         -- 'appexcrm' | 'hubspot' | 'rd_station' | etc.
+  created_at   TIMESTAMP DEFAULT NOW()
+);
+```
+
+**Lead destinations (configurável por workspace):**
+- AppexCRM (default — módulo plugável)
+- Hubspot
+- RD Station
+- Active Campaign
+- Mailchimp
+- Email (envia notification)
+- Webhook customizado
+- Google Sheets
+
+**API endpoints:**
+- `GET /smartpages/{id}/leads?source=X&period=30d&search=Y`
+- `GET /smartpages/{id}/leads.csv` — export
+- `POST /leads/{id}/resync` — re-enviar pro CRM
+- `POST /workspaces/{id}/lead-destinations` — configurar destinations
 
 ---
 
@@ -1146,85 +1457,377 @@ Gerenciamento da biblioteca de pixels do workspace. Listagem, criação, ediçã
 
 ## <a id="h"></a>H — Domínios
 
-**Status:** 🟡 PARCIAL
+**Status:** 🟢 READY
 **Mockup:** `mockups/13-dominios.html`
 
 **O que faz:**
-CRUD de custom domains. Verificação via DNS (CNAME ou TXT). SSL automático (Let's Encrypt).
+CRUD de custom domains com verificação DNS (CNAME) + SSL automático Let's Encrypt + propagação real-time.
+
+**UX flow:**
+- Filter pills: Seus Domínios · Configuração · Subdomínios
+- Sub-tabs por domínio: cada domínio tem card expandido com:
+  - DNS records (CNAME, A, TXT) visíveis em monoespaçada
+  - Status: "SSL Configurado" verde / "Propagando DNS" amarelo / "Erro" vermelho
+  - Detalhes do certificado: provider (Let's Encrypt), expiration, last renewal
+  - Banner Cloudflare: "Faça o registro como CNAME flexible — a propagação leva 24h"
+- Botão "+ Adicionar domínio" gradient lime→coral
+- Footer guide: "Como conectar um domínio" 3 passos (Crie CNAME · Aguarde propagação · Pronto pra usar)
 
 **Data model:**
 ```sql
 CREATE TABLE custom_domains (
-  id            UUID PRIMARY KEY,
-  workspace_id  UUID REFERENCES workspaces(id),
-  domain        VARCHAR(255) NOT NULL UNIQUE,
-  status        VARCHAR(20),   -- 'pending' | 'verified' | 'ssl_issuing' | 'live' | 'error'
+  id              UUID PRIMARY KEY,
+  workspace_id    UUID REFERENCES workspaces(id),
+  domain          VARCHAR(255) NOT NULL UNIQUE,
+  status          VARCHAR(20),   -- 'pending' | 'dns_propagating' | 'ssl_issuing' | 'live' | 'error'
+  verification_method VARCHAR(20), -- 'cname' | 'txt' | 'a_record'
   verification_token VARCHAR(80),
-  ssl_cert_id   VARCHAR(120),  -- referência ao cert provisionado
-  created_at    TIMESTAMP DEFAULT NOW()
+  cname_target    VARCHAR(255),  -- ex: 'cname.applink.io'
+  ssl_provider    VARCHAR(40),   -- 'lets_encrypt' | 'cloudflare'
+  ssl_cert_id     VARCHAR(120),
+  ssl_expires_at  TIMESTAMP,
+  ssl_renewed_at  TIMESTAMP,
+  last_dns_check  TIMESTAMP,
+  error_msg       TEXT,
+  created_at      TIMESTAMP DEFAULT NOW()
 );
 ```
+
+**Business rules:**
+- Validação DNS via cron 5min nos primeiros 2h após adição, depois 1h
+- SSL provisionado automaticamente via Let's Encrypt assim que DNS valida
+- Renew automático SSL 30 dias antes de expirar
+- Cloudflare proxied: detectar e instruir flexible mode
+
+**API endpoints:**
+- `GET /workspaces/{id}/domains` — lista
+- `POST /workspaces/{id}/domains` — adicionar
+- `POST /domains/{id}/verify` — force re-check
+- `DELETE /domains/{id}` — remover (warning sobre links que param de funcionar)
 
 ---
 
 ## <a id="i"></a>I — Integrações
 
-**Status:** 🔴 STUB (mockup é placeholder)
+**Status:** 🟢 READY
 **Mockup:** `mockups/14-integracoes.html`
 
-**A definir:**
-- Integrações nativas: Meta CAPI, Google Ads API, TikTok Events API, LinkedIn Insight, Zapier, Make
-- CRMs: AppexCRM (prioridade — módulo plugável, ver skill `criar-modulo-appexcrm`), Hubspot, Pipedrive, RD Station
-- Webhooks customizados outbound
+**O que faz:**
+Catálogo de integrações nativas + API REST + webhooks. Modal full-config por integração com triggers, mapping e auth.
+
+**UX flow:**
+- Hero "Conecte seu ecossistema"
+- 3 abas: **Automação · CRM & E-mail Marketing · API REST**
+- **Automação:**
+  - Cards: Zapier (config triggers) · Make · n8n · Webhook customizado
+  - Click no Zapier abre modal com:
+    - Triggers configuráveis (toggles): "Link clicado" · "Smartpage form enviado" · "Action: usar link" · "Incluir metadata de UTM"
+    - Webhook URL gerada (mono)
+    - Stats: "12 zaps · 8.4k execuções"
+    - Botões "Fechar" / "Salvar configuração"
+- **CRM & E-mail Marketing:**
+  - Cards: AppexCRM (Nativo) · RD Station · ActiveCampaign · Mailchimp · Hubspot
+  - Status pill: "Conectado" verde / "Conectar" lime
+  - Click "Conectar" abre modal OAuth flow
+- **API REST:**
+  - Card com endpoint base, gerar nova chave + ver documentação
+  - Code block com `apk_live_8tQz…3uVc`
+
+**Data model:**
+```sql
+CREATE TABLE integrations (
+  id              UUID PRIMARY KEY,
+  workspace_id    UUID REFERENCES workspaces(id),
+  type            VARCHAR(40),     -- 'zapier' | 'appexcrm' | 'rd_station' | 'hubspot' | etc.
+  status          VARCHAR(20),     -- 'active' | 'disconnected' | 'error'
+  config          JSONB,           -- {webhook_url, triggers, mapping, etc.}
+  oauth_token     TEXT,            -- encrypted
+  oauth_refresh   TEXT,
+  oauth_expires_at TIMESTAMP,
+  last_sync_at    TIMESTAMP,
+  events_count    INT DEFAULT 0,
+  created_at      TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE api_keys (
+  id              UUID PRIMARY KEY,
+  workspace_id    UUID REFERENCES workspaces(id),
+  key_hash        VARCHAR(80) UNIQUE,  -- só hash, mostra prefixo apenas
+  prefix          VARCHAR(20),         -- 'apk_live_8tQz'
+  scopes          TEXT[],              -- ['links:read', 'leads:write', etc.]
+  last_used_at    TIMESTAMP,
+  created_at      TIMESTAMP DEFAULT NOW(),
+  revoked_at      TIMESTAMP
+);
+```
+
+**Integrações com priority:**
+1. **AppexCRM** (nativo, prioridade alta — usar skill `criar-modulo-appexcrm`)
+2. **Zapier** (Triggers + Actions oficiais no marketplace)
+3. **Meta CAPI** (já coberto em A1/A2)
+4. **Google Ads conversion API** (ad-side)
+5. **RD Station / ActiveCampaign / Hubspot / Mailchimp** (CRM/email)
+6. **Webhooks customizados** (já especificado em [Webhooks](#wh))
+
+**API REST endpoints exemplo:**
+- `POST /api/v1/links` — criar link
+- `GET /api/v1/links/{slug}/stats` — stats
+- `POST /api/v1/leads` — push lead manual
+- Auth: Bearer token (API key)
+- Rate limit: ver seção Multi-tenancy
 
 ---
 
 ## <a id="j"></a>J — Equipe
 
-**Status:** 🟡 PARCIAL
+**Status:** 🟢 READY
 **Mockup:** `mockups/15-equipe.html`
 
-**Roles esperadas:**
-- Owner · Admin · Editor · Viewer
-- Per-workspace permissions
+**O que faz:**
+Multi-workspace + members com 4 papéis + permissões granulares por papel.
+
+**UX flow:**
+- Hero "Equipe &amp; workspaces"
+- **Workspaces cards** topo (lado a lado):
+  - Cada card: nome + papel (OWNER/ADMIN/EDITOR/VIEWER) + plano + counts (links · usuários · domínios)
+  - Botão "Acessar →" ou "Convidar membro"
+- **Membros do workspace** (tabela):
+  - Avatar + nome + papel pill + último acesso (relativo: "agora", "1h", "ontem")
+  - Ações: editar permissão · remover
+  - Botão "+ Convidar membro" topbar
+- **Permissões granulares** (matriz):
+  - 6 ações × 4 papéis (OWNER ✓✓✓ · ADMIN ✓✓ · EDITOR ✓ · VIEWER —)
+  - Ações: Criar e editar links · Ver analytics · Gerenciar domínios · Gerenciar membros · Ver cobrança
+
+**Data model:**
+```sql
+CREATE TABLE workspaces (
+  id           UUID PRIMARY KEY,
+  name         VARCHAR(120) NOT NULL,
+  plan         VARCHAR(20),    -- 'free' | 'starter' | 'pro' | 'business'
+  owner_id     UUID REFERENCES users(id),
+  created_at   TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE workspace_members (
+  workspace_id UUID REFERENCES workspaces(id),
+  user_id      UUID REFERENCES users(id),
+  role         VARCHAR(20),    -- 'owner' | 'admin' | 'editor' | 'viewer'
+  invited_at   TIMESTAMP,
+  joined_at    TIMESTAMP,
+  last_seen_at TIMESTAMP,
+  PRIMARY KEY (workspace_id, user_id)
+);
+
+CREATE TABLE workspace_invites (
+  id           UUID PRIMARY KEY,
+  workspace_id UUID REFERENCES workspaces(id),
+  email        VARCHAR(255),
+  role         VARCHAR(20),
+  invited_by   UUID REFERENCES users(id),
+  token        VARCHAR(80) UNIQUE,
+  expires_at   TIMESTAMP,
+  accepted_at  TIMESTAMP,
+  created_at   TIMESTAMP DEFAULT NOW()
+);
+```
+
+**Permissions matrix:**
+
+| Action | OWNER | ADMIN | EDITOR | VIEWER |
+|--------|-------|-------|--------|--------|
+| Criar e editar links | ✓ | ✓ | ✓ | — |
+| Ver analytics | ✓ | ✓ | ✓ | ✓ |
+| Gerenciar domínios | ✓ | ✓ | — | — |
+| Gerenciar membros | ✓ | ✓ | — | — |
+| Ver cobrança | ✓ | ✓ | — | — |
+| Excluir workspace | ✓ | — | — | — |
+
+**Business rules:**
+- Owner é único · não removível (transfer ownership pra deletar)
+- Convite por email → token único 7 dias de validade
+- User pode estar em N workspaces simultâneos
+- Cota de membros por plano (Free: 1 · Starter: 3 · Pro: 10 · Business: ilimitado)
+
+**API endpoints:**
+- `GET /workspaces` — workspaces do user logado
+- `POST /workspaces` — criar
+- `POST /workspaces/{id}/invite` — convidar member
+- `PUT /workspaces/{id}/members/{user_id}` — mudar role
+- `DELETE /workspaces/{id}/members/{user_id}` — remover
 
 ---
 
 ## <a id="k"></a>K — Billing
 
-**Status:** 🟡 PARCIAL
+**Status:** 🟢 READY
 **Mockup:** `mockups/16-billing.html`
 
-**Planos sugeridos (do commit Smart Tracking):**
-- Free: features básicas, limit baixo
-- Pro (R$ 197/mês): Smart Tracking + Pipeline Audiências
-- Business (R$ 497/mês): + Multi-touch Journey + Lookalike Premium + sem limit
+**O que faz:**
+Plano atual + uso de cota + 4 tiers comparativos + histórico de faturas + gerenciar pagamento.
 
-**Integração:** Stripe ou Pagar.me (BR-first preferred)
+**UX flow:**
+- Hero "Planos &amp; cobrança"
+- **Plano atual card** (Pro highlight lime):
+  - Nome do plano + R$ 89 /mês
+  - Próxima fatura: data + valor
+  - Cota usada: barra lime "12.480 / 50.000 cliques" (~25%)
+  - Ações: Gerenciar pagamento · Upgrade pra Business
+- **Comparativo de planos** (4 cards lado a lado):
+  - Free R$ 0 · Starter R$ 39 · Pro R$ 89 (PLANO ATIVO) · Business R$ 199 (POPULAR pill)
+  - Cada card: feature checklist · botão "Fazer downgrade/upgrade"
+- **Histórico de faturas** (tabela):
+  - Período · Plano · Valor · Status (PAGO/PENDENTE) · Botão PDF download
+
+**Data model:**
+```sql
+CREATE TABLE subscriptions (
+  id              UUID PRIMARY KEY,
+  workspace_id    UUID REFERENCES workspaces(id),
+  plan            VARCHAR(20),  -- 'free' | 'starter' | 'pro' | 'business'
+  status          VARCHAR(20),  -- 'active' | 'past_due' | 'canceled' | 'trialing'
+  current_period_start TIMESTAMP,
+  current_period_end TIMESTAMP,
+  cancel_at_period_end BOOLEAN DEFAULT FALSE,
+  stripe_subscription_id VARCHAR(80),  -- ou pagar_me_id
+  created_at      TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE invoices (
+  id              UUID PRIMARY KEY,
+  workspace_id    UUID REFERENCES workspaces(id),
+  subscription_id UUID REFERENCES subscriptions(id),
+  amount_cents    INT,
+  status          VARCHAR(20),  -- 'paid' | 'pending' | 'failed' | 'refunded'
+  period_start    DATE,
+  period_end      DATE,
+  pdf_url         TEXT,
+  paid_at         TIMESTAMP,
+  created_at      TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE plan_limits (
+  plan            VARCHAR(20) PRIMARY KEY,
+  monthly_clicks  INT,          -- -1 = ilimitado
+  links_max       INT,
+  smartpages_max  INT,
+  pixels_max      INT,
+  members_max     INT,
+  smart_tracking  BOOLEAN,
+  multi_touch     BOOLEAN,
+  lookalike_premium BOOLEAN,
+  custom_domains  INT,
+  api_access      BOOLEAN
+);
+
+-- seed:
+INSERT INTO plan_limits VALUES
+  ('free',     1000,    20,  1,   3,   1,   FALSE, FALSE, FALSE, 0, FALSE),
+  ('starter',  10000,  100,  5,  10,   3,   FALSE, FALSE, FALSE, 1, FALSE),
+  ('pro',      50000,  500, 25,  30,  10,   TRUE,  TRUE,  FALSE, 5, TRUE),
+  ('business',   -1, -1, -1, -1,  -1,   TRUE,  TRUE,  TRUE, -1, TRUE);
+```
+
+**Tabela de planos (preços BR):**
+
+| Feature | Free | Starter | Pro | Business |
+|---------|------|---------|-----|----------|
+| **Preço** | R$ 0 | R$ 39/mês | R$ 89/mês | R$ 199/mês |
+| Cliques/mês | 1k | 10k | 50k | ilimitado |
+| Links | 20 | 100 | 500 | ilimitado |
+| Smartpages | 1 | 5 | 25 | ilimitado |
+| Pixels | 3 | 10 | 30 | ilimitado |
+| Membros | 1 | 3 | 10 | ilimitado |
+| Smart Tracking | — | — | ✓ | ✓ |
+| Multi-touch | — | — | ✓ | ✓ |
+| Lookalike Premium | — | — | — | ✓ |
+| Domínios custom | 0 | 1 | 5 | ilimitado |
+| API access | — | — | ✓ | ✓ |
+| Suporte | comunidade | email | email priority | dedicado |
+
+**Integração de pagamento:**
+- Brasil: **Pagar.me** (BR-first, suporta cartão + pix + boleto)
+- Internacional opcional: Stripe
+
+**API endpoints:**
+- `GET /workspaces/{id}/subscription` — plano atual + cota
+- `POST /workspaces/{id}/subscription/upgrade` — checkout flow
+- `POST /workspaces/{id}/subscription/cancel` — cancel at period end
+- `GET /workspaces/{id}/invoices` — histórico
 
 ---
 
 ## <a id="l"></a>L — Settings
 
-**Status:** 🟡 PARCIAL
+**Status:** 🟢 READY (Perfil) · 🟡 PARCIAL (outras tabs visuais mas backend a definir)
 **Mockup:** `mockups/09-settings.html`
 
-**Tabs:**
-- Perfil · Conta · Segurança · Notificações · Privacidade LGPD · Avançado · **Tipos de link** (linka pra `02c-tipos-de-link.html`)
+**Tabs:** Perfil (active) · Conta · Segurança · Notificações · Privacidade LGPD · Avançado · **Tipos de link** (linka pra `02c-tipos-de-link.html`)
+
+**O que cada tab faz:**
+
+### L1 — Perfil 🟢
+Avatar upload + nome + email (read-only com confirmar via email pra mudar) + bio + timezone + idioma + assinatura (signature pra emails).
+
+### L2 — Conta 🟡
+- Plano atual (info + link pra Billing)
+- Workspace switch (se em múltiplos)
+- Deletar conta (com confirm)
+
+### L3 — Segurança 🟡
+- Mudar senha
+- 2FA TOTP (toggle + QR code + backup codes)
+- Active sessions list (device + IP + revogar)
+- API keys (ver/criar/revogar)
+
+### L4 — Notificações 🟡
+- Email: weekly summary · alerts críticos (ROI) · new lead · new member
+- In-app: toggle por tipo
+- Slack webhook (Pro+)
+
+### L5 — Privacidade LGPD 🟡
+- Cookie consent default (settings global)
+- Data retention policy (90 dias / 1 ano / forever)
+- Export my data (LGPD right)
+- Delete my data (com 30 dias de grace period)
+
+### L6 — Avançado 🟡
+- Custom CSS no smartpage editor (Business plan)
+- IP whitelist pro tracker JS
+- Debug mode (logs detalhados)
+- Webhooks outbound (ver Webhooks transversal)
+
+### L7 — Tipos de link 🟢
+Catálogo de 12 tipos disponíveis com docs. Link externo pra `02c-tipos-de-link.html` (página dedicada).
 
 ---
 
 ## <a id="m"></a>M — Auth
 
-**Status:** 🟡 PARCIAL (UI pronta, falta backend)
+**Status:** 🟢 READY (UI completa) · 🔴 backend pendente
 **Mockup:** `mockups/04-login.html` · `mockups/05-signup.html`
 
-**O que precisa:**
-- Email/senha (bcrypt + JWT/session)
-- OAuth: Google + Microsoft (Microsoft Graph)
-- **SSO AppexCRM** (módulo plugável — ver skill)
-- Recovery por email
-- 2FA (TOTP) — adicional
+**UX flow:**
+
+### M1 — Login (`04-login.html`)
+- Card centralizado dark
+- Logo grande topo
+- Inputs: E-mail + Senha (com toggle olho show/hide)
+- Link "Esqueci a senha" (coral)
+- Checkbox "Manter conectado"
+- Botão "ENTRAR" gradient + ícone seta
+- Divider "ou continue com"
+- 2 botões OAuth: Google · Microsoft (ícones oficiais)
+- Botão destacado lime "ENTRAR COM APPEXCRM" (SSO)
+- Footer: "Novo por aqui? Criar conta grátis"
+
+### M2 — Signup (`05-signup.html`)
+- Card maior com badge "7 dias grátis · sem cartão"
+- Inputs: Nome · E-mail · Senha (com strength meter)
+- Checkbox aceite ToS + Privacy
+- Botão "CRIAR CONTA" gradient
+- OAuth signup: Google · Microsoft · AppexCRM
+- Footer: "Já tem conta? Entrar"
 
 **Data model:**
 ```sql
@@ -1234,7 +1837,12 @@ CREATE TABLE users (
   password_hash VARCHAR(72),         -- nullable se OAuth-only
   name         VARCHAR(120),
   avatar_url   TEXT,
+  bio          TEXT,
+  timezone     VARCHAR(50) DEFAULT 'America/Sao_Paulo',
+  locale       VARCHAR(10) DEFAULT 'pt-BR',
   email_verified_at TIMESTAMP,
+  totp_secret  VARCHAR(80),           -- nullable se 2FA desligado
+  totp_backup_codes TEXT[],
   created_at   TIMESTAMP DEFAULT NOW()
 );
 
@@ -1244,7 +1852,49 @@ CREATE TABLE user_oauth (
   external_id  VARCHAR(120),
   PRIMARY KEY (user_id, provider)
 );
+
+CREATE TABLE sessions (
+  id           UUID PRIMARY KEY,
+  user_id      UUID REFERENCES users(id),
+  token_hash   VARCHAR(80) UNIQUE,
+  ip_address   INET,
+  user_agent   TEXT,
+  device_name  VARCHAR(120),   -- inferido (iPhone, Chrome on Windows)
+  last_seen_at TIMESTAMP,
+  expires_at   TIMESTAMP,
+  created_at   TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE password_resets (
+  token        VARCHAR(80) PRIMARY KEY,
+  user_id      UUID REFERENCES users(id),
+  expires_at   TIMESTAMP,
+  used_at      TIMESTAMP
+);
 ```
+
+**Auth flow:**
+
+1. **Email + senha:**
+   - `POST /auth/login` → valida bcrypt · cria session · retorna JWT/cookie
+   - Rate limit: 5 tentativas / 15min por IP+email
+2. **OAuth (Google/Microsoft):**
+   - `GET /auth/oauth/{provider}` → redirect pra provider
+   - `GET /auth/oauth/{provider}/callback?code=X` → exchange · cria user se primeira vez · login
+3. **SSO AppexCRM:**
+   - Ver skill `criar-modulo-appexcrm` — identidade via CRM
+   - Token JWT compartilhado entre AppexCRM e APPlink
+4. **2FA:**
+   - Setup: `POST /auth/2fa/setup` → retorna QR + secret + 8 backup codes
+   - Login: após password, pede TOTP code (6 dígitos)
+5. **Password recovery:**
+   - `POST /auth/forgot` → email com link `/reset?token=X`
+   - `POST /auth/reset` → nova senha + invalida token
+
+**Edge cases:**
+- Email já existe + OAuth tentativa → link automático (mesma conta)
+- 2FA backup code usado → remove da lista, gera warning de baixa
+- Session expirou → refresh silent ou redirect pra login
 
 ---
 
