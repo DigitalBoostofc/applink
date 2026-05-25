@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>AppLink — Logo Lab</title>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700,800&f[]=satoshi@400,500,600,700,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0A0A0A;color:#F5F5F7;font-family:'Satoshi',sans-serif;padding:40px 32px 80px}
+  .hdr{margin-bottom:32px;max-width:1280px;margin-left:auto;margin-right:auto}
+  .eye{font-family:'Satoshi',sans-serif;font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:0.14em;color:#BFFF00;margin-bottom:10px}
+  h1{font-family:'General Sans',sans-serif;font-weight:600;font-size:40px;letter-spacing:-0.03em;color:#fff}
+  h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{font-size:14px;color:#94A3B8;line-height:1.6;margin-top:8px;max-width:60ch}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:1280px;margin:0 auto}
+  .card{background:#141414;border:1px solid rgba(255,255,255,0.05);border-radius:24px;padding:24px;
+    box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
+  .card-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:12px;flex-wrap:wrap}
+  .card-ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:18px;color:#fff;letter-spacing:-0.01em}
+  .card-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:#BFFF00;font-weight:700;background:rgba(191,255,0,0.1);padding:4px 10px;border-radius:8px}
+  .card-d{font-family:'Satoshi',sans-serif;font-size:13px;color:#94A3B8;line-height:1.55;margin-bottom:18px}
+
+  /* logo display rows */
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+  .panel{border-radius:16px;padding:24px;display:flex;align-items:center;justify-content:center;min-height:140px;position:relative;overflow:hidden}
+  .panel.dark{background:#0A0A0A;border:1px solid rgba(255,255,255,0.05)}
+  .panel.light{background:#F5F5F7;border:1px solid rgba(0,0,0,0.04)}
+  .panel.gradient{background:linear-gradient(135deg,#BFFF00,#FF7777)}
+  .panel-lbl{position:absolute;top:8px;left:12px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;opacity:0.45}
+  .panel.dark .panel-lbl{color:#94A3B8}
+  .panel.light .panel-lbl{color:#5A5A60}
+  .panel.gradient .panel-lbl{color:#0A0A0A;opacity:0.6}
+
+  .scale-row{display:flex;align-items:center;gap:24px;justify-content:space-around;padding:14px 20px;background:#0F0F0F;border-radius:12px;border:1px solid rgba(255,255,255,0.04)}
+  .scale-row .scale-item{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .scale-row .scale-lbl{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5A5A60;font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
+
+  .lockup{display:flex;align-items:center;gap:12px}
+  .wm{font-family:'General Sans',sans-serif;font-weight:700;letter-spacing:-0.02em}
+  .wm.lg{font-size:32px}.wm.md{font-size:22px}.wm.sm{font-size:16px}
+  .wm.dark-text{color:#fff} .wm.light-text{color:#0A0A0A}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="eye">▮ Brand · Logo Lab</div>
+  <h1>Variações de <em>logo.</em></h1>
+  <p class="sub">8 direções com base na DNA visual já existente nos mockups — lime <code>#BFFF00</code> + coral <code>#FF7777</code> sobre escala preta. Cada card mostra a marca em fundo escuro (uso primário), fundo claro (papelaria/co-branding) e gradient (badge/avatar). Compare ao vivo e escolha a direção.</p>
+</div>
+
+<div class="grid">
+
+  <!-- ════════ V1: ATUAL (BASELINE) ════════ -->
+  <div class="card">
+    <div class="card-h">
+      <span class="card-ttl">Atual — 2 quadrados sobrepostos</span>
+      <span class="card-num">V1</span>
+    </div>
+    <p class="card-d">O que já está nos mockups hoje. Mark abstrato — duas peças se conectando, sugere "link". Wordmark em General Sans Bold.</p>
+    <div class="row">
+      <div class="panel dark"><span class="panel-lbl">Dark</span>
+        <div class="lockup">
+          <svg width="48" height="48" viewBox="0 0 32 32">
+            <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#BFFF00"/><stop offset="100%" stop-color="#FF7777"/></linearGradient></defs>
+            <rect x="0" y="0" width="32" height="32" rx="9" fill="url(#g1)"/>
+            <rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2" fill="none" stroke="#0A0A0A" stroke-width="3.2"/>
+            <rect x="13" y="13" width="12.5" height="12.5" rx="2" fill="none" stroke="#0A0A0A" stroke-width="3.2"/>
+          </svg>
+          <span class="wm lg dark-text">AppLink</span>
+        </div>
+      </div>
+      <div class="panel light"><span class="panel-lbl">Light</span>
+        <div class="lockup">
+          <svg width="48" height="48" viewBox="0 0 32 32">
+            <rect x="0" y="0" width="32" height="32" rx="9" fill="#0A0A0A"/>
+            <rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2" fill="none" stroke="#BFFF00" stroke-width="3.2"/>
+            <rect x="13" y="13" width="12.5" height="12.5" rx="2" fill="none" stroke="#FF7777" stroke-width="3.2"/>
+          </svg>
+          <span class="wm lg light-text">AppLink</span>
+        </div>
+      </div>
+    </div>
+    <div class="scale-row">
+      <div class="scale-item"><svg width="56" height="56" viewBox="0 0 32 32"><rect x="0" y="0" width="32" height="32" rx="9" fill="url(#g1)"/><rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2" fill="none" stroke="#0A0A0A" stroke-width="3.2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2" fill="none" stroke="#0A0A0A" stroke-width="3.2"/></svg><span class="scale-lbl">56px</span></div>
+      <div class="scale-item"><svg width="40" height="40" viewBox="0 0 32 32"><rect x="0" y="0" width="32" height="32" rx="9" fill="url(#g1)"/><rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2" fill="none" stroke="#0A0A0A" stroke-width="3.2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2" fill="none" stroke="#0A0A0A" stroke-width="3.2"/></svg><span class="scale-lbl">40px</span></div>
+      <div class="scale-item"><svg width="24" height="24" viewBox="0 0 32 32"><rect x="0" y="0" width="32" height="32" rx="9" fill="url(#g1)"/><rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2" fill="none" stroke="#0A0A0A" stroke-width="3.2"/><rect x="13" y="13" width="12.5" height="12.5" rx="2" fill="none" stroke="#0A0A0A" stroke-width="3.2"/></svg><span class="scale-lbl">24px</span></div>
+      <div class="scale-item"><svg width="16" height="16" viewBox="0 0 32 32"><rect x="0" y="0" width="32" height="32" rx="9" fill="url(#g1)"/><rect x="6.5" y="6.5" width="12.5" height="12.5" rx="2" fill="none" stroke="#0A0A0A" stroke-width="3.6"/><rect x="13" y="13" width="12.5" height="12.5" rx="2" fill="none" stroke="#0A0A0A" stroke-width="3.6"/></svg><span class="scale-lbl">16px</span></div>
+    </div>
+  </div>
+
+  <!-- ════════ V2: CHAIN LINK ════════ -->
+  <div class="card">
+    <div class="card-h">
+      <span class="card-ttl">Chain Link — elo de corrente</span>
+      <span class="card-num">V2</span>
+    </div>
+    <p class="card-d">Interpretação literal do nome "link" — dois elos ovais entrelaçados. Lime no elo da esquerda, coral no da direita. Forte recall, formato perfeito pra avatar.</p>
+    <div class="row">
+      <div class="panel dark"><span class="panel-lbl">Dark</span>
+        <div class="lockup">
+          <svg width="48" height="48" viewBox="0 0 32 32" fill="none" stroke-width="3.2" stroke-linecap="round">
+            <rect x="3.5" y="9" width="14" height="14" rx="7" stroke="#BFFF00"/>
+            <rect x="14.5" y="9" width="14" height="14" rx="7" stroke="#FF7777"/>
+          </svg>
+          <span class="wm lg dark-text">AppLink</span>
+        </div>
+      </div>
+      <div class="panel light"><span class="panel-lbl">Light</span>
+        <div class="lockup">
+          <svg width="48" height="48" viewBox="0 0 32 32" fill="none" stroke-width="3.2" stroke-linecap="round">
+            <rect x="3.5" y="9" width="14" height="14" rx="7" stroke="#0A0A0A"/>
+            <rect x="14.5" y="9" width="14" height="14" rx="7" stroke="#0A0A0A"/>
+          </svg>
+          <span class="wm lg light-text">AppLink</span>
+        </div>
+      </div>
+    </div>
+    <div class="scale-row">
+      <div class="scale-item"><svg width="56" height="56" viewBox="0 0 32 32" fill="none" stroke-width="3.2"><rect x="3.5" y="9" width="14" height="14" rx="7" stroke="#BFFF00"/><rect x="14.5" y="9" width="14" height="14" rx="7" stroke="#FF7777"/></svg><span class="scale-lbl">56px</span></div>
+      <div class="scale-item"><svg width="40" height="40" viewBox="0 0 32 32" fill="none" stroke-width="3.2"><rect x="3.5" y="9" width="14" height="14" rx="7" stroke="#BFFF00"/><rect x="14.5" y="9" width="14" height="14" rx="7" stroke="#FF7777"/></svg><span class="scale-lbl">40px</span></div>
+      <div class="scale-item"><svg width="24" height="24" viewBox="0 0 32 32" fill="none" stroke-width="3.6"><rect x="3.5" y="9" width="14" height="14" rx="7" stroke="#BFFF00"/><rect x="14.5" y="9" width="14" height="14" rx="7" stroke="#FF7777"/></svg><span class="scale-lbl">24px</span></div>
+      <div class="scale-item"><svg width="16" height="16" viewBox="0 0 32 32" fill="none" stroke-width="4.2"><rect x="3.5" y="9" width="14" height="14" rx="7" stroke="#BFFF00"/><rect x="14.5" y="9" width="14" height="14" rx="7" stroke="#FF7777"/></svg><span class="scale-lbl">16px</span></div>
+    </div>
+  </div>
+
+  <!-- ════════ V3: ARROW SQUARE ════════ -->
+  <div class="card">
+    <div class="card-h">
+      <span class="card-ttl">Square Arrow — redirect</span>
+      <span class="card-num">V3</span>
+    </div>
+    <p class="card-d">Quadrado com seta diagonal saindo. Comunica "redirecionamento" — núcleo da plataforma. Geométrico, lê bem em qualquer tamanho.</p>
+    <div class="row">
+      <div class="panel dark"><span class="panel-lbl">Dark</span>
+        <div class="lockup">
+          <svg width="48" height="48" viewBox="0 0 32 32">
+            <defs><linearGradient id="g3" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#BFFF00"/><stop offset="100%" stop-color="#FF7777"/></linearGradient></defs>
+            <rect x="3" y="3" width="20" height="20" rx="6" fill="none" stroke="url(#g3)" stroke-width="3"/>
+            <path d="M14 18 L25 7 M19 7 L25 7 L25 13" fill="none" stroke="url(#g3)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="wm lg dark-text">AppLink</span>
+        </div>
+      </div>
+      <div class="panel light"><span class="panel-lbl">Light</span>
+        <div class="lockup">
+          <svg width="48" height="48" viewBox="0 0 32 32">
+            <rect x="3" y="3" width="20" height="20" rx="6" fill="none" stroke="#0A0A0A" stroke-width="3"/>
+            <path d="M14 18 L25 7 M19 7 L25 7 L25 13" fill="none" stroke="#0A0A0A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="wm lg light-text">AppLink</span>
+        </div>
+      </div>
+    </div>
+    <div class="scale-row">
+      <div class="scale-item"><svg width="56" height="56" viewBox="0 0 32 32"><rect x="3" y="3" width="20" height="20" rx="6" fill="none" stroke="url(#g3)" stroke-width="3"/><path d="M14 18 L25 7 M19 7 L25 7 L25 13" fill="none" stroke="url(#g3)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="scale-lbl">56px</span></div>
+      <div class="scale-item"><svg width="40" height="40" viewBox="0 0 32 32"><rect x="3" y="3" width="20" height="20" rx="6" fill="none" stroke="url(#g3)" stroke-width="3"/><path d="M14 18 L25 7 M19 7 L25 7 L25 13" fill="none" stroke="url(#g3)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="scale-lbl">40px</span></div>
+      <div class="scale-item"><svg width="24" height="24" viewBox="0 0 32 32"><rect x="3" y="3" width="20" height="20" rx="6" fill="none" stroke="url(#g3)" stroke-width="3.4"/><path d="M14 18 L25 7 M19 7 L25 7 L25 13" fill="none" stroke="url(#g3)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="scale-lbl">24px</span></div>
+      <div class="scale-item"><svg width="16" height="16" viewBox="0 0 32 32"><rect x="3" y="3" width="20" height="20" rx="6" fill="none" stroke="url(#g3)" stroke-width="4"/><path d="M14 18 L25 7 M19 7 L25 7 L25 13" fill="none" stroke="url(#g3)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="scale-lbl">16px</span></div>
+    </div>
+  </div>
+
+  <!-- ════════ V4: MONOGRAM A ════════ -->
+  <div class="card">
+    <div class="card-h">
+      <span class="card-ttl">Monograma "A" — bold geométrico</span>
+      <span class="card-num">V4</span>
+    </div>
+    <p class="card-d">Bold "A" dentro de um quadrado lime/coral. Iconográfico, fácil de lembrar. Funciona muito bem como avatar no Insta/X.</p>
+    <div class="row">
+      <div class="panel dark"><span class="panel-lbl">Dark</span>
+        <div class="lockup">
+          <svg width="48" height="48" viewBox="0 0 32 32">
+            <defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#BFFF00"/><stop offset="100%" stop-color="#FF7777"/></linearGradient></defs>
+            <rect x="0" y="0" width="32" height="32" rx="9" fill="url(#g4)"/>
+            <path d="M9 24 L16 7 L23 24 M11.5 18.5 L20.5 18.5" stroke="#0A0A0A" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <span class="wm lg dark-text">AppLink</span>
+        </div>
+      </div>
+      <div class="panel light"><span class="panel-lbl">Light</span>
+        <div class="lockup">
+          <svg width="48" height="48" viewBox="0 0 32 32">
+            <rect x="0" y="0" width="32" height="32" rx="9" fill="#0A0A0A"/>
+            <path d="M9 24 L16 7 L23 24 M11.5 18.5 L20.5 18.5" stroke="url(#g4)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <span class="wm lg light-text">AppLink</span>
+        </div>
+      </div>
+    </div>
+    <div class="scale-row">
+      <div class="scale-item"><svg width="56" height="56" viewBox="0 0 32 32"><rect x="0" y="0" width="32" height="32" rx="9" fill="url(#g4)"/><path d="M9 24 L16 7 L23 24 M11.5 18.5 L20.5 18.5" stroke="#0A0A0A" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span class="scale-lbl">56px</span></div>
+      <div class="scale-item"><svg width="40" height="40" viewBox="0 0 32 32"><rect x="0" y="0" width="32" height="32" rx="9" fill="url(#g4)"/><path d="M9 24 L16 7 L23 24 M11.5 18.5 L20.5 18.5" stroke="#0A0A0A" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span class="scale-lbl">40px</span></div>
+      <div class="scale-item"><svg width="24" height="24" viewBox="0 0 32 32"><rect x="0" y="0" width="32" height="32" rx="9" fill="url(#g4)"/><path d="M9 24 L16 7 L23 24 M11.5 18.5 L20.5 18.5" stroke="#0A0A0A" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span class="scale-lbl">24px</span></div>
+      <div class="scale-item"><svg width="16" height="16" viewBox="0 0 32 32"><rect x="0" y="0" width="32" height="32" rx="9" fill="url(#g4)"/><path d="M9 24 L16 7 L23 24 M11.5 18.5 L20.5 18.5" stroke="#0A0A0A" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span class="scale-lbl">16px</span></div>
+    </div>
+  </div>
+
+  <!-- ════════ V5: NODE/NETWORK ════════ -->
+  <div class="card">
+    <div class="card-h">
+      <span class="card-ttl">Network Node — pontos conectados</span>
+      <span class="card-num">V5</span>
+    </div>
+    <p class="card-d">Três nós conectados por linhas — representa a rede de links que o produto gerencia. Lê como "atribuição/tracking" também. Boa pra slides técnicos.</p>
+    <div class="row">
+      <div class="panel dark"><span class="panel-lbl">Dark</span>
+        <div class="lockup">
+          <svg width="48" height="48" viewBox="0 0 32 32">
+            <defs><linearGradient id="g5" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#BFFF00"/><stop offset="100%" stop-color="#FF7777"/></linearGradient></defs>
+            <line x1="7" y1="9" x2="25" y2="9" stroke="url(#g5)" stroke-width="2.4" stroke-linecap="round"/>
+            <line x1="7" y1="9" x2="16" y2="24" stroke="url(#g5)" stroke-width="2.4" stroke-linecap="round"/>
+            <line x1="25" y1="9" x2="16" y2="24" stroke="url(#g5)" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="7" cy="9" r="3.5" fill="#BFFF00"/>
+            <circle cx="25" cy="9" r="3.5" fill="#FF7777"/>
+            <circle cx="16" cy="24" r="3.5" fill="url(#g5)"/>
+          </svg>
+          <span class="wm lg dark-text">AppLink</span>
+        </div>
+      </div>
+      <div class="panel light"><span class="panel-lbl">Light</span>
+        <div class="lockup">
+          <svg width="48" height="48" viewBox="0 0 32 32">
+            <line x1="7" y1="9" x2="25" y2="9" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="round"/>
+            <line x1="7" y1="9" x2="16" y2="24" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="round"/>
+            <line x1="25" y1="9" x2="16" y2="24" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="7" cy="9" r="3.5" fill="#0A0A0A"/>
+            <circle cx="25" cy="9" r="3.5" fill="#0A0A0A"/>
+            <circle cx="16" cy="24" r="3.5" fill="#0A0A0A"/>
+          </svg>
+          <span class="wm lg light-text">AppLink</span>
+        </div>
+      </div>
+    </div>
+    <div class="scale-row">
+      <div class="scale-item"><svg width="56" height="56" viewBox="0 0 32 32"><line x1="7" y1="9" x2="25" y2="9" stroke="url(#g5)" stroke-width="2.4" stroke-linecap="round"/><line x1="7" y1="9" x2="16" y2="24" stroke="url(#g5)" stroke-width="2.4" stroke-linecap="round"/><line x1="25" y1="9" x2="16" y2="24" stroke="url(#g5)" stroke-width="2.4" stroke-linecap="round"/><circle cx="7" cy="9" r="3.5" fill="#BFFF00"/><circle cx="25" cy="9" r="3.5" fill="#FF7777"/><circle cx="16" cy="24" r="3.5" fill="url(#g5)"/></svg><span class="scale-lbl">56px</span></div>
+      <div class="scale-item"><svg width="40" height="40" viewBox="0 0 32 32"><line x1="7" y1="9" x2="25" y2="9" stroke="url(#g5)" stroke-width="2.4" stroke-linecap="round"/><line x1="7" y1="9" x2="16" y2="24" stroke="url(#g5)" stroke-width="2.4" stroke-linecap="round"/><line x1="25" y1="9" x2="16" y2="24" stroke="url(#g5)" stroke-width="2.4" stroke-linecap="round"/><circle cx="7" cy="9" r="3.5" fill="#BFFF00"/><circle cx="25" cy="9" r="3.5" fill="#FF7777"/><circle cx="16" cy="24" r="3.5" fill="url(#g5)"/></svg><span class="scale-lbl">40px</span></div>
+      <div class="scale-item"><svg width="24" height="24" viewBox="0 0 32 32"><line x1="7" y1="9" x2="25" y2="9" stroke="url(#g5)" stroke-width="3" stroke-linecap="round"/><line x1="7" y1="9" x2="16" y2="24" stroke="url(#g5)" stroke-width="3" stroke-linecap="round"/><line x1="25" y1="9" x2="16" y2="24" stroke="url(#g5)" stroke-width="3" stroke-linecap="round"/><circle cx="7" cy="9" r="4" fill="#BFFF00"/><circle cx="25" cy="9" r="4" fill="#FF7777"/><circle cx="16" cy="24" r="4" fill="url(#g5)"/></svg><span class="scale-lbl">24px</span></div>
+      <div class="scale-item"><svg width="16" height="16" viewBox="0 0 32 32"><line x1="7" y1="9" x2="25" y2="9" stroke="url(#g5)" stroke-width="3.6" stroke-linecap="round"/><line x1="7" y1="9" x2="16" y2="24" stroke="url(#g5)" stroke-width="3.6" stroke-linecap="round"/><line x1="25" y1="9" x2="16" y2="24" stroke="url(#g5)" stroke-width="3.6" stroke-linecap="round"/><circle cx="7" cy="9" r="5" fill="#BFFF00"/><circle cx="25" cy="9" r="5" fill="#FF7777"/><circle cx="16" cy="24" r="5" fill="url(#g5)"/></svg><span class="scale-lbl">16px</span></div>
+    </div>
+  </div>
+
+  <!-- ════════ V6: WORDMARK COM DOT ════════ -->
+  <div class="card">
+    <div class="card-h">
+      <span class="card-ttl">Wordmark com dot — typographic</span>
+      <span class="card-num">V6</span>
+    </div>
+    <p class="card-d">Sem mark — apenas tipografia. "applink." em lowercase com ponto final gradient. Minimalista, premium. Bom pra header de site.</p>
+    <div class="row">
+      <div class="panel dark"><span class="panel-lbl">Dark</span>
+        <div style="display:flex;align-items:baseline">
+          <span style="font-family:'General Sans',sans-serif;font-weight:700;font-size:36px;color:#fff;letter-spacing:-0.04em">applink</span>
+          <span style="width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,#BFFF00,#FF7777);margin-left:3px;box-shadow:0 0 16px rgba(191,255,0,0.5)"></span>
+        </div>
+      </div>
+      <div class="panel light"><span class="panel-lbl">Light</span>
+        <div style="display:flex;align-items:baseline">
+          <span style="font-family:'General Sans',sans-serif;font-weight:700;font-size:36px;color:#0A0A0A;letter-spacing:-0.04em">applink</span>
+          <span style="width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,#BFFF00,#FF7777);margin-left:3px"></span>
+        </div>
+      </div>
+    </div>
+    <div class="scale-row">
+      <div class="scale-item"><div style="display:flex;align-items:baseline"><span style="font-family:'General Sans',sans-serif;font-weight:700;font-size:30px;color:#fff;letter-spacing:-0.04em">applink</span><span style="width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,#BFFF00,#FF7777);margin-left:2px"></span></div><span class="scale-lbl">30px</span></div>
+      <div class="scale-item"><div style="display:flex;align-items:baseline"><span style="font-family:'General Sans',sans-serif;font-weight:700;font-size:20px;color:#fff;letter-spacing:-0.04em">applink</span><span style="width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,#BFFF00,#FF7777);margin-left:2px"></span></div><span class="scale-lbl">20px</span></div>
+      <div class="scale-item"><div style="display:flex;align-items:baseline"><span style="font-family:'General Sans',sans-serif;font-weight:700;font-size:14px;color:#fff;letter-spacing:-0.04em">applink</span><span style="width:4px;height:4px;border-radius:50%;background:linear-gradient(135deg,#BFFF00,#FF7777);margin-left:1px"></span></div><span class="scale-lbl">14px</span></div>
+    </div>
+  </div>
+
+  <!-- ════════ V7: CHEVRON STACK / LIGHTNING ════════ -->
+  <div class="card">
+    <div class="card-h">
+      <span class="card-ttl">Lightning Bolt — velocidade</span>
+      <span class="card-num">V7</span>
+    </div>
+    <p class="card-d">Raio estilizado em gradient — sugere velocidade (redirect engine 28ms p95). Dinâmico, energético. Combina com a vibe "Hyros do Brasil".</p>
+    <div class="row">
+      <div class="panel dark"><span class="panel-lbl">Dark</span>
+        <div class="lockup">
+          <svg width="48" height="48" viewBox="0 0 32 32">
+            <defs><linearGradient id="g7" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#BFFF00"/><stop offset="100%" stop-color="#FF7777"/></linearGradient></defs>
+            <rect x="0" y="0" width="32" height="32" rx="9" fill="url(#g7)"/>
+            <path d="M17 3 L7 18 L14 18 L11 28 L23 12 L16 12 Z" fill="#0A0A0A"/>
+          </svg>
+          <span class="wm lg dark-text">AppLink</span>
+        </div>
+      </div>
+      <div class="panel light"><span class="panel-lbl">Light</span>
+        <div class="lockup">
+          <svg width="48" height="48" viewBox="0 0 32 32">
+            <rect x="0" y="0" width="32" height="32" rx="9" fill="#0A0A0A"/>
+            <path d="M17 3 L7 18 L14 18 L11 28 L23 12 L16 12 Z" fill="url(#g7)"/>
+          </svg>
+          <span class="wm lg light-text">AppLink</span>
+        </div>
+      </div>
+    </div>
+    <div class="scale-row">
+      <div class="scale-item"><svg width="56" height="56" viewBox="0 0 32 32"><rect x="0" y="0" width="32" height="32" rx="9" fill="url(#g7)"/><path d="M17 3 L7 18 L14 18 L11 28 L23 12 L16 12 Z" fill="#0A0A0A"/></svg><span class="scale-lbl">56px</span></div>
+      <div class="scale-item"><svg width="40" height="40" viewBox="0 0 32 32"><rect x="0" y="0" width="32" height="32" rx="9" fill="url(#g7)"/><path d="M17 3 L7 18 L14 18 L11 28 L23 12 L16 12 Z" fill="#0A0A0A"/></svg><span class="scale-lbl">40px</span></div>
+      <div class="scale-item"><svg width="24" height="24" viewBox="0 0 32 32"><rect x="0" y="0" width="32" height="32" rx="9" fill="url(#g7)"/><path d="M17 3 L7 18 L14 18 L11 28 L23 12 L16 12 Z" fill="#0A0A0A"/></svg><span class="scale-lbl">24px</span></div>
+      <div class="scale-item"><svg width="16" height="16" viewBox="0 0 32 32"><rect x="0" y="0" width="32" height="32" rx="9" fill="url(#g7)"/><path d="M17 3 L7 18 L14 18 L11 28 L23 12 L16 12 Z" fill="#0A0A0A"/></svg><span class="scale-lbl">16px</span></div>
+    </div>
+  </div>
+
+  <!-- ════════ V8: AL LIGATURE ════════ -->
+  <div class="card">
+    <div class="card-h">
+      <span class="card-ttl">Ligatura "aL" — wordmark monograma</span>
+      <span class="card-num">V8</span>
+    </div>
+    <p class="card-d">"a" lime + "L" coral ligados em um único monograma. Tipográfico mas com personalidade. Premium, lê como marca de software/SaaS.</p>
+    <div class="row">
+      <div class="panel dark"><span class="panel-lbl">Dark</span>
+        <div class="lockup">
+          <svg width="48" height="48" viewBox="0 0 60 32">
+            <text x="2" y="26" font-family="'General Sans',sans-serif" font-weight="700" font-size="32" fill="#BFFF00" letter-spacing="-2">a</text>
+            <text x="22" y="26" font-family="'General Sans',sans-serif" font-weight="700" font-size="32" fill="#FF7777" letter-spacing="-2">L</text>
+            <line x1="20" y1="14" x2="25" y2="14" stroke="#0A0A0A" stroke-width="2"/>
+          </svg>
+          <span class="wm lg dark-text">AppLink</span>
+        </div>
+      </div>
+      <div class="panel gradient"><span class="panel-lbl">Avatar</span>
+        <svg width="56" height="56" viewBox="0 0 60 32">
+          <text x="2" y="26" font-family="'General Sans',sans-serif" font-weight="700" font-size="32" fill="#0A0A0A" letter-spacing="-2">a</text>
+          <text x="22" y="26" font-family="'General Sans',sans-serif" font-weight="700" font-size="32" fill="#0A0A0A" letter-spacing="-2">L</text>
+        </svg>
+      </div>
+    </div>
+    <div class="scale-row">
+      <div class="scale-item"><svg width="80" height="42" viewBox="0 0 60 32"><text x="2" y="26" font-family="'General Sans',sans-serif" font-weight="700" font-size="32" fill="#BFFF00" letter-spacing="-2">a</text><text x="22" y="26" font-family="'General Sans',sans-serif" font-weight="700" font-size="32" fill="#FF7777" letter-spacing="-2">L</text></svg><span class="scale-lbl">80px</span></div>
+      <div class="scale-item"><svg width="56" height="30" viewBox="0 0 60 32"><text x="2" y="26" font-family="'General Sans',sans-serif" font-weight="700" font-size="32" fill="#BFFF00" letter-spacing="-2">a</text><text x="22" y="26" font-family="'General Sans',sans-serif" font-weight="700" font-size="32" fill="#FF7777" letter-spacing="-2">L</text></svg><span class="scale-lbl">56px</span></div>
+      <div class="scale-item"><svg width="32" height="17" viewBox="0 0 60 32"><text x="2" y="26" font-family="'General Sans',sans-serif" font-weight="700" font-size="32" fill="#BFFF00" letter-spacing="-2">a</text><text x="22" y="26" font-family="'General Sans',sans-serif" font-weight="700" font-size="32" fill="#FF7777" letter-spacing="-2">L</text></svg><span class="scale-lbl">32px</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- gradient defs reused -->
+<svg width="0" height="0" style="position:absolute"><defs>
+  <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#BFFF00"/><stop offset="100%" stop-color="#FF7777"/></linearGradient>
+  <linearGradient id="g3" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#BFFF00"/><stop offset="100%" stop-color="#FF7777"/></linearGradient>
+  <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#BFFF00"/><stop offset="100%" stop-color="#FF7777"/></linearGradient>
+  <linearGradient id="g5" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#BFFF00"/><stop offset="100%" stop-color="#FF7777"/></linearGradient>
+  <linearGradient id="g7" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#BFFF00"/><stop offset="100%" stop-color="#FF7777"/></linearGradient>
+</defs></svg>
+
+</body>
+</html>
