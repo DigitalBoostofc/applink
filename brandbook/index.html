@@ -190,7 +190,230 @@ h3.bb-h3{font-family:'General Sans',sans-serif;font-weight:600;font-size:22px;le
 .tokens-block .k{color:var(--coral)}
 .tokens-block .v{color:var(--lime)}
 
-/* ── ESTRATÉGIA ── */
+/* ── MANIFESTO INLINE ── */
+.manifesto-block{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:28px;padding:48px 56px;
+  box-shadow:var(--sh-card);position:relative;overflow:hidden;margin-top:24px}
+.manifesto-block::before{content:"";position:absolute;top:-100px;right:-100px;width:360px;height:360px;border-radius:50%;
+  background:radial-gradient(circle,rgba(191,255,0,0.1) 0%,transparent 70%);pointer-events:none}
+.manifesto-block .mf-lead{font-family:'General Sans',sans-serif;font-weight:600;font-size:32px;line-height:1.15;letter-spacing:-0.02em;color:#fff;margin-bottom:28px;position:relative;z-index:1}
+.manifesto-block .mf-lead em{font-style:normal;background:var(--grad-h);-webkit-background-clip:text;background-clip:text;color:transparent}
+.manifesto-block p{font-family:'Satoshi',sans-serif;font-size:16.5px;line-height:1.7;color:var(--ink2);margin-bottom:18px;max-width:62ch;position:relative;z-index:1}
+.manifesto-block p strong{color:#fff;font-weight:700}
+.manifesto-block .mf-sec-ttl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:0.16em;color:var(--lime);margin-top:32px;margin-bottom:14px;position:relative;z-index:1}
+.manifesto-block .mf-sec-ttl::before{content:"▮ "}
+.manifesto-block .mf-tagline{font-family:'General Sans',sans-serif;font-weight:700;font-size:36px;letter-spacing:-0.03em;color:#fff;margin-top:36px;line-height:1.1;position:relative;z-index:1}
+.manifesto-block .mf-tagline .hl{background:var(--lime);color:var(--jet);padding:2px 12px;border-radius:8px;box-shadow:0 0 18px rgba(191,255,0,0.4);display:inline-block;margin:4px 0}
+.manifesto-block .mf-tagline .circ{padding:0 14px;position:relative;display:inline-block}
+.manifesto-block .mf-tagline .circ::before{content:"";position:absolute;inset:-6px -2px;border:3px solid var(--coral);border-radius:60%;transform:rotate(-3deg)}
+.manifesto-block .mf-sign{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink3);margin-top:32px;letter-spacing:0.05em;position:relative;z-index:1}
+
+/* ── ARQUÉTIPO INLINE ── */
+.arch-hero{display:grid;grid-template-columns:1fr 1.2fr;gap:32px;margin-top:24px;align-items:stretch}
+.arch-main{background:var(--surface);border-radius:28px;padding:40px 44px;box-shadow:var(--sh-card);border:1px solid rgba(255,255,255,0.05);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center}
+.arch-main::before{content:"";position:absolute;bottom:-80px;left:-80px;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(191,255,0,0.12) 0%,transparent 60%);pointer-events:none}
+.arch-main .label{font-family:'Satoshi',sans-serif;font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:0.16em;color:var(--lime);margin-bottom:14px;position:relative;z-index:1}
+.arch-main .label::before{content:"▮ "}
+.arch-main .name{font-family:'General Sans',sans-serif;font-weight:700;font-size:88px;line-height:0.95;letter-spacing:-0.04em;color:#fff;margin-bottom:18px;position:relative;z-index:1}
+.arch-main .name em{font-style:normal;background:var(--grad-h);-webkit-background-clip:text;background-clip:text;color:transparent}
+.arch-main .desc{font-family:'Satoshi',sans-serif;font-size:15px;line-height:1.65;color:var(--ink2);position:relative;z-index:1}
+.arch-tension{background:var(--surface);border-radius:28px;padding:32px 36px;box-shadow:var(--sh-card);border:1px solid rgba(255,119,119,0.18);display:flex;flex-direction:column;justify-content:center}
+.arch-tension .label{font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.16em;color:var(--coral);margin-bottom:12px}
+.arch-tension .label::before{content:"⚡ "}
+.arch-tension h3{font-family:'General Sans',sans-serif;font-weight:600;font-size:28px;line-height:1.1;letter-spacing:-0.02em;color:#fff;margin-bottom:14px}
+.arch-tension p{font-family:'Satoshi',sans-serif;font-size:14.5px;line-height:1.65;color:var(--ink2)}
+
+.arch-reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.arch-reason{background:var(--surface);border-radius:20px;padding:24px;box-shadow:var(--sh-card);border:1px solid rgba(255,255,255,0.05);position:relative}
+.arch-reason .num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:var(--lime);background:rgba(191,255,0,0.1);padding:4px 10px;border-radius:8px;display:inline-block;margin-bottom:14px;letter-spacing:0.06em}
+.arch-reason h4{font-family:'General Sans',sans-serif;font-weight:600;font-size:17px;letter-spacing:-0.01em;color:#fff;margin-bottom:8px;line-height:1.3}
+.arch-reason p{font-family:'Satoshi',sans-serif;font-size:13.5px;color:var(--ink2);line-height:1.55}
+
+.arch-sisters{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.arch-sister{background:var(--surface);border-radius:20px;padding:24px;box-shadow:var(--sh-card);border:1px solid rgba(255,255,255,0.05)}
+.arch-sister .nm{font-family:'General Sans',sans-serif;font-weight:700;font-size:22px;letter-spacing:-0.02em;color:#fff;margin-bottom:8px}
+.arch-sister .role{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:0.13em;color:var(--lime);margin-bottom:14px}
+.arch-sister p{font-family:'Satoshi',sans-serif;font-size:13.5px;color:var(--ink2);line-height:1.55;margin-bottom:8px}
+.arch-sister .para{font-family:'Satoshi',sans-serif;font-style:italic;font-size:12.5px;color:var(--ink3);line-height:1.55;padding-top:10px;border-top:1px dashed rgba(255,255,255,0.06)}
+
+.arch-mani{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.arch-mani-card{background:var(--surface);border-radius:20px;padding:22px;box-shadow:var(--sh-card);border:1px solid rgba(255,255,255,0.05)}
+.arch-mani-card .ttl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:0.14em;color:var(--lime);margin-bottom:12px}
+.arch-mani-card .ttl::before{content:"▮ "}
+.arch-mani-card p{font-family:'Satoshi',sans-serif;font-size:13.5px;color:var(--ink2);line-height:1.55}
+
+.arch-quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+.arch-quote{background:var(--surface);border-radius:20px;padding:28px;box-shadow:var(--sh-card);border:1px solid rgba(191,255,0,0.12);position:relative}
+.arch-quote::before{content:"\"";position:absolute;top:8px;left:18px;font-family:'General Sans',sans-serif;font-weight:800;font-size:80px;color:var(--lime);opacity:0.25;line-height:1}
+.arch-quote .q{font-family:'General Sans',sans-serif;font-weight:600;font-size:18px;letter-spacing:-0.01em;color:#fff;line-height:1.4;position:relative;z-index:1;padding-top:14px}
+
+/* ── BRAND STORY INLINE ── */
+.story-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:24px}
+.story-step{background:var(--surface);border-radius:24px;padding:28px;box-shadow:var(--sh-card);border:1px solid rgba(255,255,255,0.05);
+  display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;grid-column:span 2}
+.story-step:nth-child(1){grid-column:span 6;background:linear-gradient(135deg,rgba(191,255,0,0.06),transparent 60%)}
+.story-step:nth-child(2),.story-step:nth-child(3),.story-step:nth-child(4){grid-column:span 2}
+.story-step:nth-child(5){grid-column:span 3}
+.story-step:nth-child(6){grid-column:span 3}
+.story-step .step-n{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:var(--lime);background:rgba(191,255,0,0.1);padding:4px 12px;border-radius:8px;align-self:flex-start;letter-spacing:0.08em}
+.story-step h4{font-family:'General Sans',sans-serif;font-weight:600;font-size:22px;letter-spacing:-0.02em;color:#fff;line-height:1.2}
+.story-step .persona-hi{font-family:'General Sans',sans-serif;font-weight:600;font-size:44px;letter-spacing:-0.03em;color:#fff;line-height:1.1;margin-bottom:4px}
+.story-step .persona-hi em{font-style:normal;color:var(--lime)}
+.story-step p{font-family:'Satoshi',sans-serif;font-size:14.5px;line-height:1.6;color:var(--ink2)}
+.story-step p strong{color:#fff;font-weight:700}
+.story-step ul{list-style:none;display:flex;flex-direction:column;gap:8px;padding-top:6px}
+.story-step ul li{font-family:'Satoshi',sans-serif;font-size:13.5px;color:var(--ink2);line-height:1.55;padding-left:20px;position:relative}
+.story-step ul li::before{content:"›";position:absolute;left:0;color:var(--lime);font-weight:800}
+.story-step.fail{border-color:rgba(239,68,68,0.18)}
+.story-step.fail .step-n{color:#EF4444;background:rgba(239,68,68,0.1)}
+.story-step.success .step-n{color:#10B981;background:rgba(16,185,129,0.12)}
+
+.story-plan{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.plan-card{background:rgba(255,255,255,0.025);border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.05)}
+.plan-card .n{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11px;color:var(--lime);letter-spacing:0.1em;margin-bottom:8px}
+.plan-card .t{font-family:'General Sans',sans-serif;font-weight:600;font-size:15px;letter-spacing:-0.01em;color:#fff;margin-bottom:6px}
+.plan-card .d{font-family:'Satoshi',sans-serif;font-size:12.5px;color:var(--ink2);line-height:1.5}
+
+.story-syn{margin-top:32px;padding:32px;background:linear-gradient(135deg,rgba(191,255,0,0.1),rgba(255,119,119,0.06));border-radius:24px;border:1px solid rgba(191,255,0,0.2);text-align:center}
+.story-syn .label{font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.16em;color:var(--lime);margin-bottom:10px}
+.story-syn .label::before{content:"▮ "}
+.story-syn .quote{font-family:'General Sans',sans-serif;font-weight:600;font-size:28px;letter-spacing:-0.02em;color:#fff;line-height:1.3;max-width:62ch;margin:0 auto}
+
+/* ── SOCIAL EMBED ── */
+.social-intro{display:flex;align-items:center;gap:14px;padding:18px 22px;background:rgba(191,255,0,0.05);border:1px solid rgba(191,255,0,0.15);border-radius:14px;margin-top:18px;margin-bottom:32px;flex-wrap:wrap}
+.social-intro .label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--lime);letter-spacing:0.1em;text-transform:uppercase}
+.social-intro .desc{font-family:'Satoshi',sans-serif;font-size:14px;color:var(--ink2);flex:1;min-width:280px}
+
+.tpl-section-hdr{display:flex;align-items:baseline;gap:18px;margin-bottom:24px;margin-top:48px;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:14px}
+.tpl-section-hdr h3{font-family:'General Sans',sans-serif;font-weight:600;font-size:22px;letter-spacing:-0.02em;color:#fff}
+.tpl-section-hdr .dim{font-family:'JetBrains Mono',monospace;font-size:13px;color:#5A5A60;font-weight:500}
+.tpl-section-hdr .qty{margin-left:auto;font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:#5A5A60}
+.tpl-grid{display:flex;gap:20px;flex-wrap:wrap}
+.tpl-card{display:flex;flex-direction:column;gap:10px}
+.tpl-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;color:#5A5A60;font-weight:600;text-transform:uppercase}
+.tpl-label b{color:#fff;font-weight:700}
+.wrap-feed{width:454px;height:454px;overflow:hidden;border-radius:18px;background:#0A0A0A;box-shadow:6px 6px 16px rgba(0,0,0,0.55)}
+.wrap-feed .canvas{width:1080px;height:1080px;transform:scale(0.42);transform-origin:top left}
+.wrap-story{width:302px;height:538px;overflow:hidden;border-radius:18px;background:#0A0A0A;box-shadow:6px 6px 16px rgba(0,0,0,0.55)}
+.wrap-story .canvas{width:1080px;height:1920px;transform:scale(0.28);transform-origin:top left}
+.wrap-carousel{width:346px;height:432px;overflow:hidden;border-radius:18px;background:#0A0A0A;box-shadow:6px 6px 16px rgba(0,0,0,0.55)}
+.wrap-carousel .canvas{width:1080px;height:1350px;transform:scale(0.32);transform-origin:top left}
+.wrap-linkedin{width:540px;height:282px;overflow:hidden;border-radius:18px;background:#0A0A0A;box-shadow:6px 6px 16px rgba(0,0,0,0.55)}
+.wrap-linkedin .canvas{width:1200px;height:627px;transform:scale(0.45);transform-origin:top left}
+.wrap-twitter{width:540px;height:304px;overflow:hidden;border-radius:18px;background:#0A0A0A;box-shadow:6px 6px 16px rgba(0,0,0,0.55)}
+.wrap-twitter .canvas{width:1200px;height:675px;transform:scale(0.45);transform-origin:top left}
+.canvas{position:relative;font-family:'Satoshi',sans-serif;color:#fff}
+.brand-tag{position:absolute;display:flex;align-items:center;gap:14px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:18px;color:#94A3B8;letter-spacing:0.04em}
+.brand-tag img{width:48px;height:48px;display:block}
+.brand-tag b{color:#fff;font-family:'General Sans',sans-serif;font-weight:700;font-size:24px;letter-spacing:-0.02em}
+.sticker-coral{position:absolute;background:#FF7777;color:#0A0A0A;font-family:'General Sans',sans-serif;font-weight:700;font-size:18px;letter-spacing:0.04em;text-transform:uppercase;line-height:1.15;padding:12px 18px;border-radius:8px;transform:rotate(8deg);box-shadow:6px 6px 0 rgba(0,0,0,0.85);display:inline-flex;align-items:center;gap:8px}
+.tpl-halftone{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 1px);background-size:24px 24px;opacity:0.7}
+.tpl-halftone.dark{background-image:radial-gradient(circle at 1px 1px, rgba(10,10,10,0.18) 1px, transparent 1px)}
+/* Feed 01 — Tagline */
+.f-tagline{background:#0A0A0A}
+.f-tagline .verbs{position:absolute;top:280px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:78px;line-height:1.05;letter-spacing:-0.035em;color:#fff}
+.f-tagline .verbs .hl{background:#BFFF00;color:#0A0A0A;padding:2px 14px;border-radius:8px;box-shadow:0 0 30px rgba(191,255,0,0.5);display:inline-block;margin:6px 0}
+.f-tagline .verbs .circ{padding:0 20px;position:relative;display:inline-block}
+.f-tagline .verbs .circ::before{content:"";position:absolute;inset:-12px -8px;border:5px solid #FF7777;border-radius:60%;transform:rotate(-3deg)}
+.f-tagline .body-txt{position:absolute;top:760px;left:80px;right:80px;font-size:24px;color:#94A3B8;line-height:1.5}
+/* Feed 02 — KPI */
+.f-kpi{background:#141414}
+.f-kpi .kpi-eye{position:absolute;top:80px;left:80px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:18px;letter-spacing:0.16em;text-transform:uppercase;color:#BFFF00}
+.f-kpi .kpi-eye::before{content:"▮ ";color:#BFFF00}
+.f-kpi .kpi-num{position:absolute;top:180px;left:80px;font-family:'General Sans',sans-serif;font-weight:600;font-size:280px;line-height:0.9;letter-spacing:-0.05em;color:#fff}
+.f-kpi .kpi-num em{font-style:normal;background:linear-gradient(135deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.f-kpi .kpi-lbl{position:absolute;top:560px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:600;font-size:60px;color:#fff;letter-spacing:-0.02em;line-height:1.1}
+.f-kpi .kpi-delta{position:absolute;top:780px;left:80px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:28px;color:#10B981}
+/* Feed 03 — Edu */
+.f-edu{background:#0A0A0A}
+.f-edu .edu-eye{position:absolute;top:80px;left:80px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:18px;letter-spacing:0.16em;text-transform:uppercase;color:#BFFF00}
+.f-edu .edu-eye::before{content:"▮ "}
+.f-edu .edu-h1{position:absolute;top:160px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:84px;line-height:1.05;letter-spacing:-0.04em;color:#fff}
+.f-edu .edu-h1 em{font-style:normal;color:#FF7777}
+.f-edu .edu-list{position:absolute;top:520px;left:80px;right:80px;display:flex;flex-direction:column;gap:20px}
+.f-edu .edu-list .item{display:flex;align-items:flex-start;gap:18px;font-family:'Satoshi',sans-serif;font-weight:600;font-size:30px;color:#E2E8F0;line-height:1.35}
+.f-edu .edu-list .ck{width:36px;height:36px;border-radius:9px;background:rgba(191,255,0,0.14);color:#BFFF00;display:grid;place-items:center;flex-shrink:0;margin-top:6px}
+.f-edu .edu-list .ck svg{width:22px;height:22px}
+/* Story 01 — Launch */
+.s-launch{background:linear-gradient(135deg,#BFFF00,#FF7777)}
+.s-launch .tpl-halftone{background-image:radial-gradient(circle at 1px 1px, rgba(10,10,10,0.16) 1px, transparent 1px)}
+.s-launch .logo-big{position:absolute;top:480px;left:50%;transform:translateX(-50%);width:360px;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.4))}
+.s-launch .verbs{position:absolute;top:920px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:64px;letter-spacing:-0.03em;color:#0A0A0A;line-height:1.05;text-align:center}
+.s-launch .verbs .hl-d{background:#0A0A0A;color:#BFFF00;padding:2px 12px;border-radius:8px;display:inline-block;margin:8px 0}
+.s-launch .swipe{position:absolute;bottom:140px;left:0;right:0;text-align:center;font-family:'Satoshi',sans-serif;font-weight:800;font-size:24px;color:#0A0A0A;letter-spacing:0.18em;text-transform:uppercase;opacity:0.75}
+/* Story 02 — Feature */
+.s-feature{background:#0A0A0A}
+.s-feature::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(191,255,0,0.15) 0%,transparent 60%);pointer-events:none}
+.s-feature .badge-new{position:absolute;top:160px;left:80px;background:#FF7777;color:#0A0A0A;font-family:'General Sans',sans-serif;font-weight:700;font-size:22px;letter-spacing:0.08em;text-transform:uppercase;padding:12px 20px;border-radius:8px;transform:rotate(-2deg);box-shadow:6px 6px 0 rgba(0,0,0,0.85)}
+.s-feature .ft-h1{position:absolute;top:280px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:96px;line-height:1.02;letter-spacing:-0.04em;color:#fff}
+.s-feature .ft-h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.s-feature .ft-sub{position:absolute;top:740px;left:80px;right:80px;font-family:'Satoshi',sans-serif;font-size:30px;color:#94A3B8;line-height:1.45}
+.s-feature .ft-features{position:absolute;top:980px;left:80px;right:80px;display:flex;flex-direction:column;gap:18px}
+.s-feature .ft-features .row{display:flex;align-items:center;gap:18px;padding:18px 24px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:18px}
+.s-feature .ft-features .row .ic{width:42px;height:42px;border-radius:11px;background:rgba(191,255,0,0.12);color:#BFFF00;display:grid;place-items:center;flex-shrink:0}
+.s-feature .ft-features .row .ic svg{width:22px;height:22px}
+.s-feature .ft-features .row .t{font-family:'Satoshi',sans-serif;font-weight:700;font-size:26px;color:#fff}
+.s-feature .cta-btn{position:absolute;bottom:200px;left:80px;right:80px;padding:30px;background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;font-family:'General Sans',sans-serif;font-weight:700;font-size:34px;letter-spacing:-0.02em;text-align:center;border-radius:18px;box-shadow:0 12px 30px rgba(191,255,0,0.4)}
+/* Carousel base */
+.c-base{background:#0A0A0A}
+.c-base .slide-num{position:absolute;top:80px;left:80px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:20px;color:#5A5A60;letter-spacing:0.1em}
+.c-base .brand-tag{bottom:80px;left:80px}
+.c-1{background:#0A0A0A}
+.c-1 .hook{position:absolute;top:280px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:96px;line-height:1.02;letter-spacing:-0.04em;color:#fff}
+.c-1 .hook em{font-style:normal;color:#BFFF00}
+.c-1 .swipe{position:absolute;bottom:200px;right:80px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:20px;color:#FF7777;letter-spacing:0.16em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.c-2{background:#141414}
+.c-2 .prob{position:absolute;top:280px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:88px;line-height:1.05;letter-spacing:-0.04em;color:#fff}
+.c-2 .prob em{font-style:normal;color:#FF7777}
+.c-2 .prob-line{position:absolute;top:780px;left:80px;font-family:'Satoshi',sans-serif;font-weight:600;font-size:30px;color:#94A3B8;line-height:1.4}
+.c-3{background:#0A0A0A;position:relative;overflow:hidden}
+.c-3::before{content:"";position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(191,255,0,0.18) 0%,transparent 60%);pointer-events:none}
+.c-3 .sol-eye{position:absolute;top:200px;left:80px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:22px;letter-spacing:0.16em;text-transform:uppercase;color:#BFFF00}
+.c-3 .sol-eye::before{content:"▮ "}
+.c-3 .sol-h{position:absolute;top:280px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:96px;line-height:1.02;letter-spacing:-0.04em;color:#fff}
+.c-3 .sol-h em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.c-3 .sol-sub{position:absolute;top:780px;left:80px;right:80px;font-family:'Satoshi',sans-serif;font-size:30px;color:#94A3B8;line-height:1.5}
+.c-4{background:#0A0A0A}
+.c-4 .ft-eye{position:absolute;top:80px;left:80px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:20px;letter-spacing:0.16em;text-transform:uppercase;color:#BFFF00}
+.c-4 .ft-eye::before{content:"▮ "}
+.c-4 .ft-h{position:absolute;top:150px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:600;font-size:64px;letter-spacing:-0.03em;color:#fff;line-height:1.05}
+.c-4 .ft-grid{position:absolute;top:380px;left:80px;right:80px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.c-4 .ft-cell{background:#141414;border:1px solid rgba(255,255,255,0.05);border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:14px;box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025)}
+.c-4 .ft-cell .ic{width:54px;height:54px;border-radius:13px;background:rgba(191,255,0,0.12);color:#BFFF00;display:grid;place-items:center;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.4)}
+.c-4 .ft-cell .ic svg{width:28px;height:28px}
+.c-4 .ft-cell .t{font-family:'General Sans',sans-serif;font-weight:600;font-size:30px;color:#fff;letter-spacing:-0.02em}
+.c-4 .ft-cell .d{font-family:'Satoshi',sans-serif;font-size:18px;color:#94A3B8;line-height:1.4}
+.c-5{background:linear-gradient(135deg,#BFFF00,#FF7777)}
+.c-5 .tpl-halftone{background-image:radial-gradient(circle at 1px 1px, rgba(10,10,10,0.16) 1px, transparent 1px)}
+.c-5 .cta-eye{position:absolute;top:240px;left:80px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:22px;letter-spacing:0.16em;text-transform:uppercase;color:#0A0A0A}
+.c-5 .cta-eye::before{content:"▮ "}
+.c-5 .cta-h{position:absolute;top:320px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:120px;line-height:0.98;letter-spacing:-0.04em;color:#0A0A0A}
+.c-5 .cta-sub{position:absolute;top:760px;left:80px;right:80px;font-family:'Satoshi',sans-serif;font-weight:700;font-size:36px;color:#0A0A0A;line-height:1.4;opacity:0.85}
+.c-5 .cta-url{position:absolute;bottom:200px;left:80px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:32px;color:#0A0A0A;background:rgba(10,10,10,0.1);padding:14px 24px;border-radius:12px}
+/* LinkedIn */
+.l-post{background:#0A0A0A}
+.l-post .left{position:absolute;top:80px;left:80px;right:520px;bottom:80px;display:flex;flex-direction:column;justify-content:space-between}
+.l-post .l-eye{font-family:'Satoshi',sans-serif;font-weight:800;font-size:14px;letter-spacing:0.16em;text-transform:uppercase;color:#BFFF00;margin-bottom:18px}
+.l-post .l-eye::before{content:"▮ "}
+.l-post .l-h{font-family:'General Sans',sans-serif;font-weight:600;font-size:56px;line-height:1.05;letter-spacing:-0.03em;color:#fff;margin-bottom:14px}
+.l-post .l-h em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.l-post .l-sub{font-family:'Satoshi',sans-serif;font-size:20px;color:#94A3B8;line-height:1.5}
+.l-post .l-bottom{display:flex;align-items:center;gap:14px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:18px;color:#94A3B8}
+.l-post .l-bottom img{width:48px;height:48px}
+.l-post .l-bottom b{color:#fff;font-family:'General Sans',sans-serif;font-weight:700;font-size:22px;letter-spacing:-0.02em}
+.l-post .right{position:absolute;top:80px;right:80px;width:380px;bottom:80px;background:#141414;border-radius:24px;padding:32px;box-shadow:6px 6px 16px rgba(0,0,0,0.55);overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.l-post .right img{width:160px;filter:drop-shadow(0 12px 28px rgba(0,0,0,0.5)) drop-shadow(0 0 24px rgba(191,255,0,0.18))}
+/* X */
+.x-post{background:#0A0A0A;overflow:hidden}
+.x-post::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(191,255,0,0.12) 0%,transparent 55%);pointer-events:none}
+.x-post .x-logo{position:absolute;top:80px;left:80px;width:80px}
+.x-post .x-h{position:absolute;top:200px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:72px;line-height:1.05;letter-spacing:-0.03em;color:#fff}
+.x-post .x-h em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.x-post .x-sub{position:absolute;top:460px;left:80px;right:80px;font-family:'Satoshi',sans-serif;font-weight:600;font-size:26px;color:#94A3B8;line-height:1.45}
+.x-post .x-cta{position:absolute;bottom:80px;left:80px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:24px;color:#BFFF00;letter-spacing:0.04em}
+
+/* ── ESTRATÉGIA (deprecated, mantido por compat) ── */
 .strat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
 .strat-card{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:24px;padding:32px;box-shadow:var(--sh-card);
   display:flex;flex-direction:column;gap:14px;transition:.3s var(--ease);position:relative;overflow:hidden}
@@ -216,16 +439,20 @@ footer.bb-foot a{color:var(--lime)}
   h1.bb-h1{font-size:56px}
   h2.bb-h2{font-size:34px}
   .hero{grid-template-columns:1fr}
-  .essence-grid,.logo-grid,.type-grid,.ui-grid,.princ-grid,.strat-grid{grid-template-columns:1fr 1fr}
+  .essence-grid,.logo-grid,.type-grid,.ui-grid,.princ-grid,.strat-grid,.arch-reasons,.arch-sisters,.arch-mani,.arch-quotes{grid-template-columns:1fr 1fr}
   .palette-grid{grid-template-columns:repeat(3,1fr)}
-  .symbol-grid,.do-dont,.voice-grid{grid-template-columns:1fr}
+  .symbol-grid,.do-dont,.voice-grid,.arch-hero{grid-template-columns:1fr}
+  .story-grid{grid-template-columns:1fr 1fr}
+  .story-step,.story-step:nth-child(1),.story-step:nth-child(5),.story-step:nth-child(6){grid-column:span 2}
   .bb-nav{padding:4px;font-size:9px}
   .bb-nav a{padding:6px 10px;font-size:10px}
   section{padding:60px 20px}
 }
 @media (max-width:600px){
-  .essence-grid,.logo-grid,.type-grid,.ui-grid,.princ-grid,.strat-grid{grid-template-columns:1fr}
+  .essence-grid,.logo-grid,.type-grid,.ui-grid,.princ-grid,.strat-grid,.arch-reasons,.arch-sisters,.arch-mani,.arch-quotes,.story-plan{grid-template-columns:1fr}
   .palette-grid{grid-template-columns:1fr 1fr}
+  .story-grid{grid-template-columns:1fr}
+  .story-step,.story-step:nth-child(1),.story-step:nth-child(5),.story-step:nth-child(6){grid-column:span 1}
 }
 </style>
 </head>
@@ -242,7 +469,10 @@ footer.bb-foot a{color:var(--lime)}
   <a href="#ui">UI</a>
   <a href="#principios">Princípios</a>
   <a href="#voz">Voz</a>
-  <a href="#estrategia">Estratégia</a>
+  <a href="#manifesto">Manifesto</a>
+  <a href="#arquetipo">Arquétipo</a>
+  <a href="#story">Story</a>
+  <a href="#social">Social</a>
 </nav>
 
 <!-- ════════ HERO ════════ -->
@@ -600,47 +830,440 @@ footer.bb-foot a{color:var(--lime)}
 </section>
 
 <!-- ════════ ESTRATÉGIA ════════ -->
-<section id="estrategia">
-  <div class="eye">09 · Camada Estratégica</div>
-  <h2 class="bb-h2">Por trás do <em>visual.</em></h2>
-  <p class="lead">Toda decisão visual nasce de uma posição estratégica. Aqui ficam os 3 documentos que sustentam a marca por baixo do sistema visual — o "porquê" do APPlink antes do "como".</p>
+<!-- ════════ 09 · MANIFESTO ════════ -->
+<section id="manifesto">
+  <div class="eye">09 · Manifesto</div>
+  <h2 class="bb-h2">A voz <em>institucional.</em></h2>
+  <p class="lead">A posição da marca em ~300 palavras. Pronto pra usar em landing, pitch deck, e-mail de boas-vindas, descrição de marketplace e bio em redes sociais. Não editar parcialmente — adaptar sim, deformar não.</p>
 
-  <div class="strat-grid">
-    <div class="strat-card">
-      <span class="strat-badge">Manifesto</span>
-      <h3>Dado é poder. E poder não deveria custar em dólar.</h3>
-      <p class="quote">"O link deixa de ser apenas um atalho. Vira o ponto de controle da sua operação de marketing."</p>
-      <p>A voz institucional da marca em ~300 palavras. Posiciona o APPlink como infraestrutura de atribuição BR — não como encurtador. Pronto pra usar em landing, pitch deck, e-mail de boas-vindas.</p>
-      <a class="strat-link" href="../docs/manifesto.md">Ler completo →</a>
+  <div class="manifesto-block">
+    <p class="mf-lead">Nós criamos o APPlink porque marketing de resultado exige <em>rastreabilidade.</em> Não achismo.</p>
+
+    <p>Toda campanha começa com uma pergunta simples: esse clique virou venda? O mercado de links cresceu resolvendo o problema errado. Ficou bonito, ficou fácil de compartilhar. Mas continuou cego. Você ainda não sabe de onde vem o cliente que converte.</p>
+
+    <p><strong>Nós existimos para fechar esse buraco.</strong></p>
+
+    <p>Não somos um encurtador. Somos a camada de inteligência entre o anúncio e o resultado. Cada link APPlink carrega roteamento condicional, pixels de rastreamento, atribuição deferred e analytics em tempo real — não porque é tecnicamente impressionante, mas porque seu crescimento depende de saber o que funciona.</p>
+
+    <div class="mf-sec-ttl">Por que isso importa agora?</div>
+    <p>O tráfego ficou caro. O iOS mudou as regras. Os dados de terceiros secaram. Quem sobrevive nesse ambiente é quem controla a própria infraestrutura de atribuição. Criadores, infoprodutores e times de growth brasileiros precisam do mesmo nível de rastreamento que as grandes plataformas usam internamente — sem precisar de um time de engenharia para isso.</p>
+
+    <p><strong>O APPlink traz essa capacidade para quem vende no Brasil.</strong></p>
+
+    <div class="mf-sec-ttl">O que muda pra quem usa?</div>
+    <p>Você para de otimizar na intuição. Passa a tomar decisões baseadas em qual fonte, dispositivo e audiência realmente converte. Seu pixel não depende mais de uma tela de confirmação de compra que às vezes carrega, às vezes não. Sua smartpage captura leads que vão direto para onde você trabalha, não para um CSV esquecido.</p>
+
+    <p>O link deixa de ser apenas um atalho. Vira o <strong>ponto de controle da sua operação de marketing.</strong></p>
+
+    <div class="mf-tagline">
+      <span class="hl">Conecte.</span> <span class="hl">Personalize.</span><br>
+      <span class="hl">Acompanhe.</span> <span class="circ">Cresça.</span>
     </div>
 
-    <div class="strat-card">
-      <span class="strat-badge">Arquétipo</span>
-      <h3>O Mago + tensão com o Governante</h3>
-      <p class="quote">"Cada clique deixa uma trilha. Agora você consegue ler."</p>
-      <p>Transforma dados invisíveis em decisões visíveis. Marcas-irmãs analógicas: <b>Segment</b>, <b>Hyros</b>, <b>Zapier</b>. A corrente + seta lime é literalmente o símbolo do arquétipo — poder latente sendo ativado.</p>
-      <a class="strat-link" href="../docs/arquetipo.md">Ler completo →</a>
-    </div>
+    <div class="mf-sign">— APPlink · Smart links com tracking de verdade.</div>
+  </div>
+</section>
 
-    <div class="strat-card">
-      <span class="strat-badge">Brand Story</span>
-      <h3>Lucas, 31 — gasta R$ 8k/mês em tráfego sem saber o que converte</h3>
-      <p class="quote">"APPlink não vai fazer o marketing por você. Vai fazer o tracking parar de mentir."</p>
-      <p>Narrativa StoryBrand em 6 partes: Personagem → Problema → Guia → Plano (3 passos) → Sucesso → Falha. Persona expandida cobre gestor de tráfego, agência boutique e time de growth.</p>
-      <a class="strat-link" href="../docs/brand-story.md">Ler completo →</a>
+<!-- ════════ 10 · ARQUÉTIPO ════════ -->
+<section id="arquetipo">
+  <div class="eye">10 · Arquétipo</div>
+  <h2 class="bb-h2">O <em>Mago</em> com tensão produtiva.</h2>
+  <p class="lead">Em Mark &amp; Pearson, todo arquétipo carrega luz e sombra. O APPlink ocupa o Mago — quem transforma dados invisíveis em decisões visíveis — em tensão saudável com o Governante (controle).</p>
+
+  <div class="arch-hero">
+    <div class="arch-main">
+      <div class="label">Arquétipo principal</div>
+      <h3 class="name">O <em>Mago</em></h3>
+      <p class="desc">O Mago de Mark &amp; Pearson <strong style="color:#fff">transforma realidade</strong>. Ele não promete resultados futuros vagos — ele entrega o mecanismo que faz a transformação acontecer. Onde outros veem complexidade técnica, o Mago vê um sistema que pode ser dominado e colocado a serviço do usuário.</p>
+    </div>
+    <div class="arch-tension">
+      <div class="label">Tensão</div>
+      <h3>Sombra do Governante</h3>
+      <p>O usuário quer <strong style="color:#fff">controle</strong> (Governante) alcançado por <strong style="color:#fff">mecanismos inteligentes</strong> (Mago). Equilíbrio: somos o Mago que devolve o controle ao usuário, não o Mago que esconde o que faz.</p>
     </div>
   </div>
 
-  <div style="margin-top:18px;padding:18px 22px;background:rgba(191,255,0,0.05);border:1px solid rgba(191,255,0,0.15);border-radius:14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-    <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--lime);letter-spacing:0.08em;text-transform:uppercase">Strategic handoff</span>
-    <span style="font-family:'Satoshi',sans-serif;font-size:14px;color:var(--ink2);flex:1;min-width:280px">Documento consolidado com sumários + plano de integração + próximos passos.</span>
-    <a class="strat-link" href="../docs/STRATEGIC-HANDOFF.md" style="margin:0">Abrir handoff →</a>
+  <h3 class="bb-h3" style="margin-top:48px">Por que Mago — 3 razões</h3>
+  <div class="arch-reasons">
+    <div class="arch-reason">
+      <span class="num">01</span>
+      <h4>Transforma dados invisíveis em decisões visíveis</h4>
+      <p>Um clique é dado bruto. Com APPlink, revela origem, dispositivo, SO, audiência de retargeting e atribuição. A "magia" é o tracking deferred — rastreamento que funciona mesmo quando o cookie morre no caminho.</p>
+    </div>
+    <div class="arch-reason">
+      <span class="num">02</span>
+      <h4>Entrega poder técnico sem exigir skill técnico</h4>
+      <p>O usuário não precisa saber que existe um motor de roteamento condicional. Ele só precisa saber que o cliente do Instagram-iPhone vai pra uma página diferente do Google-desktop. Magia funcional.</p>
+    </div>
+    <div class="arch-reason">
+      <span class="num">03</span>
+      <h4>A metáfora visual já é do Mago</h4>
+      <p>Corrente + seta lime. A corrente não é só "link" — é objeto com poder latente que conecta coisas que de outra forma não se tocam. A seta lime é o impulso que ativa esse poder.</p>
+    </div>
+  </div>
+
+  <h3 class="bb-h3" style="margin-top:48px">Marcas-irmãs do arquétipo</h3>
+  <div class="arch-sisters">
+    <div class="arch-sister">
+      <div class="nm">Segment</div>
+      <div class="role">Infra invisível de dados</div>
+      <p>Motor de dados de cliente que transforma eventos brutos em audiências, jornadas e insights. Tom técnico, direto, confiante.</p>
+      <p class="para">Paralelo APPlink: ambos transformam comportamento em ação de marketing.</p>
+    </div>
+    <div class="arch-sister">
+      <div class="nm">Hyros</div>
+      <div class="role">Atribuição que revela</div>
+      <p>Posiciona-se como "o sistema que mostra o que o Facebook esconde". Tom assertivo, orientado a resultado.</p>
+      <p class="para">Paralelo APPlink: o próprio posicionamento "Hyros do Brasil" valida esse arquétipo.</p>
+    </div>
+    <div class="arch-sister">
+      <div class="nm">Zapier</div>
+      <div class="role">Automação sem código</div>
+      <p>Conecta apps sem código. Transforma fluxos manuais em processos automáticos. Tom acessível e capacitador.</p>
+      <p class="para">Paralelo APPlink: democratiza capacidade técnica preservando complexidade embaixo.</p>
+    </div>
+  </div>
+
+  <h3 class="bb-h3" style="margin-top:48px">Como o Mago aparece em APPlink</h3>
+  <div class="arch-mani">
+    <div class="arch-mani-card">
+      <div class="ttl">Visual</div>
+      <p>O lime <code style="font-family:'JetBrains Mono',monospace;color:#BFFF00">#BFFF00</code> é a cor do Mago — energia que aparece onde antes havia escuridão. Dark neumorphism cria sensação de profundidade e mecanismo oculto: algo está acontecendo por baixo. Corrente + seta = símbolo do poder ativado.</p>
+    </div>
+    <div class="arch-mani-card">
+      <div class="ttl">Voz</div>
+      <p>Direta, sem enrolação. O Mago não explica o truque — mostra o resultado. Copy orientada a consequência: "Seu pixel dispara antes do redirect" em vez de "rastreamento avançado". Verbos precisos: rastrear, rotear, atribuir, converter.</p>
+    </div>
+    <div class="arch-mani-card">
+      <div class="ttl">Produto</div>
+      <p>Roteamento condicional é literalmente Mago — mesmo link, destinos diferentes. Smart tracking deferred é Mago — atribuição que funciona onde outros falham. Biblioteca de pixels é Mago — configure uma vez, aplique em todos.</p>
+    </div>
+  </div>
+
+  <h3 class="bb-h3" style="margin-top:48px">Frases-modelo de copy</h3>
+  <div class="arch-quotes">
+    <div class="arch-quote"><p class="q">O mesmo link. Destinos diferentes. Atribuição perfeita.</p></div>
+    <div class="arch-quote"><p class="q">Seu pixel dispara antes do redirect. Sempre.</p></div>
+    <div class="arch-quote"><p class="q">Cada clique deixa uma trilha. Agora você consegue ler.</p></div>
+  </div>
+</section>
+
+<!-- ════════ 11 · BRAND STORY ════════ -->
+<section id="story">
+  <div class="eye">11 · Brand Story</div>
+  <h2 class="bb-h2">A jornada do <em>usuário-herói.</em></h2>
+  <p class="lead">Estrutura StoryBrand de Donald Miller em 6 partes. O personagem é o herói; APPlink é o guia que entrega o plano. Use essa narrativa em vendas, onboarding, pitch e copy de landing.</p>
+
+  <div class="story-grid">
+
+    <div class="story-step">
+      <span class="step-n">01 · Personagem</span>
+      <h4>Lucas, 31. Infoprodutor com lançamentos mensais.</h4>
+      <div class="persona-hi">R$ 8k/mês em <em>tráfego pago</em></div>
+      <p>Ele não é iniciante. Já fez cursos de tráfego, entende de pixel, tem conta no Meta Ads e Google. Fatura entre R$ 30k e R$ 120k por mês dependendo do lançamento. O problema dele não é falta de conhecimento. É falta de clareza sobre o que está funcionando.</p>
+      <p><strong>Lucas também é:</strong> gestora de tráfego com 12 clientes · agência de funis pra lançadores · time de growth testando 5 criativos por semana.</p>
+    </div>
+
+    <div class="story-step">
+      <span class="step-n">02 · Problema</span>
+      <h4>3 camadas de dor</h4>
+      <ul>
+        <li><strong>Externo:</strong> pixel do Meta perde metade das conversões pós-iOS · encurtador genérico encurta e só · UTM e pixel na mão consomem o tempo dele</li>
+        <li><strong>Interno:</strong> insegurança de escala — sabe que deixa dinheiro na mesa, mas não onde · otimiza no chute</li>
+        <li><strong>Filosófico:</strong> marketing digital deveria ser mensurável por padrão. Criadores merecem a mesma infra de tracking que e-commerce multinacional</li>
+      </ul>
+    </div>
+
+    <div class="story-step">
+      <span class="step-n">03 · Guia</span>
+      <h4>APPlink entra como guia, não herói</h4>
+      <p><strong>Empatia:</strong> sabemos que montar stack de tracking é trabalho que não termina. Sempre tem pixel que não dispara, UTM sobrescrita, conversão sumida no funil. Construímos APPlink a partir desse problema real.</p>
+      <p><strong>Autoridade:</strong> roteamento condicional A/B + geo + device + SO. Tracking deferred — pixel dispara antes do redirect. Biblioteca de pixels reutilizáveis Meta/Google/TikTok num único ponto.</p>
+    </div>
+
+    <div class="story-step">
+      <span class="step-n">04 · Plano</span>
+      <h4>3 passos pra usar APPlink</h4>
+      <div class="story-plan">
+        <div class="plan-card">
+          <div class="n">PASSO 01</div>
+          <div class="t">Crie o link</div>
+          <div class="d">Cole URL, configure preview social, escolha domínio. 60 segundos pra ter link rastreável pronto.</div>
+        </div>
+        <div class="plan-card">
+          <div class="n">PASSO 02</div>
+          <div class="t">Configure roteamento e pixels</div>
+          <div class="d">Pixels da biblioteca, regras condicionais (A/B, geo, device). Cada regra é uma linha. Sem código.</div>
+        </div>
+        <div class="plan-card">
+          <div class="n">PASSO 03</div>
+          <div class="t">Leia os dados e decida</div>
+          <div class="d">Dashboard mostra cliques, únicos, origem, dispositivo, país em tempo real. Atribuição conecta clique ao pixel.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="story-step success">
+      <span class="step-n">05 · Sucesso</span>
+      <h4>Como fica a vida do Lucas depois</h4>
+      <p>Ele abre o dashboard segunda de manhã antes de escalar orçamento. Em dois minutos, vê que <strong>78% das conversões vieram de mobile iOS via Instagram.</strong> Sabe que o pixel deferred capturou esse dado mesmo com as limitações do Safari.</p>
+      <p>Cria link novo pra próxima campanha, aplica pixel Meta + TikTok em 3 cliques (já na biblioteca), ativa A/B entre 2 páginas de vendas. <strong>Link no ar antes do café esfriar.</strong></p>
+      <p>No fim do lançamento, tem atribuição por canal/dispositivo/fonte. Dados que cabem num relatório pra cliente — ou numa decisão de onde dobrar orçamento.</p>
+      <p><strong>Ele para de achar. Começa a saber.</strong></p>
+    </div>
+
+    <div class="story-step fail">
+      <span class="step-n">06 · Falha</span>
+      <h4>O custo de não usar</h4>
+      <p>Sem APPlink, Lucas continua no ciclo:</p>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink3);background:rgba(255,255,255,0.025);padding:14px 18px;border-radius:10px;line-height:1.65">gasta em tráfego → não sabe o que converteu → otimiza genérico → paga mais caro por resultado incerto → escala devagar com risco alto</p>
+      <p>Cada lançamento que vai bem é sorte que ele não consegue repetir. Cada lançamento que vai mal é prejuízo sem diagnóstico.</p>
+      <p>O custo não é só financeiro. É operação que não escala porque a fundação de dados não sustenta decisões.</p>
+    </div>
+
+  </div>
+
+  <div class="story-syn">
+    <div class="label">Frase-síntese da brand story</div>
+    <div class="quote">"APPlink não vai fazer o marketing por você.<br>Vai fazer o tracking parar de mentir."</div>
+  </div>
+</section>
+
+<!-- ════════ 12 · SOCIAL TEMPLATES ════════ -->
+<section id="social">
+  <div class="eye">12 · Social Templates</div>
+  <h2 class="bb-h2">12 layouts <em>prontos.</em></h2>
+  <p class="lead">Cobertura completa pra Instagram (feed, story, carrossel), LinkedIn e X. Renderizados no DOM real em dimensões exatas — basta inspecionar e exportar como PNG via DevTools "Capture node screenshot".</p>
+
+  <div class="social-intro">
+    <span class="label">Export</span>
+    <span class="desc">Inspecione qualquer <code style="font-family:'JetBrains Mono',monospace;color:#BFFF00">.canvas</code> → DevTools → ⋮ → "Capture node screenshot" para baixar PNG em resolução nativa.</span>
+  </div>
+
+  <!-- IG FEED -->
+  <div class="tpl-section-hdr">
+    <h3>Instagram · Feed</h3>
+    <span class="dim">1080 × 1080 px · 1:1</span>
+    <span class="qty">3 templates</span>
+  </div>
+  <div class="tpl-grid">
+    <div class="tpl-card">
+      <div class="wrap-feed"><div class="canvas f-tagline">
+        <div class="tpl-halftone"></div>
+        <div class="brand-tag" style="top:80px;left:80px">
+          <img src="../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b>
+        </div>
+        <div class="sticker-coral" style="top:120px;right:80px">Links que<br>geram resultados</div>
+        <div class="verbs">
+          <span class="hl">Conecte.</span><br><span class="hl">Personalize.</span><br><span class="hl">Acompanhe.</span><br><span class="circ">Cresça.</span>
+        </div>
+        <p class="body-txt">Plataforma completa de smart links, smartpages e analytics. Tudo o que sua audiência clica vira dado pra você decidir.</p>
+      </div></div>
+      <span class="tpl-label"><b>01 · Tagline Hero</b> — anúncio principal / launch</span>
+    </div>
+
+    <div class="tpl-card">
+      <div class="wrap-feed"><div class="canvas f-kpi">
+        <div class="tpl-halftone"></div>
+        <div class="kpi-eye">Caso real · maio 2026</div>
+        <div class="kpi-num">12<em>k</em></div>
+        <div class="kpi-lbl">cliques rastreados em 30 dias por uma criadora BR — com pixel, geo e device atribuídos.</div>
+        <div class="kpi-delta">▲ +8.2% vs mês anterior</div>
+        <div class="brand-tag" style="bottom:80px;left:80px">
+          <img src="../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b>
+        </div>
+      </div></div>
+      <span class="tpl-label"><b>02 · KPI Highlight</b> — case real / prova social</span>
+    </div>
+
+    <div class="tpl-card">
+      <div class="wrap-feed"><div class="canvas f-edu">
+        <div class="tpl-halftone"></div>
+        <div class="edu-eye">Dica rápida</div>
+        <h1 class="edu-h1">3 erros que <em>matam</em> seu link-in-bio</h1>
+        <div class="edu-list">
+          <div class="item"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2"><path d="M20 6L9 17l-5-5"/></svg></span>Não rastrear de onde vem o clique</div>
+          <div class="item"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2"><path d="M20 6L9 17l-5-5"/></svg></span>Mesmo link pra todo mundo (sem segmentar)</div>
+          <div class="item"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2"><path d="M20 6L9 17l-5-5"/></svg></span>Pixel? Que pixel?</div>
+        </div>
+        <div class="brand-tag" style="bottom:80px;left:80px">
+          <img src="../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b>
+        </div>
+      </div></div>
+      <span class="tpl-label"><b>03 · Educational</b> — conteúdo de valor</span>
+    </div>
+  </div>
+
+  <!-- IG STORY -->
+  <div class="tpl-section-hdr">
+    <h3>Instagram · Story</h3>
+    <span class="dim">1080 × 1920 px · 9:16</span>
+    <span class="qty">2 templates</span>
+  </div>
+  <div class="tpl-grid">
+    <div class="tpl-card">
+      <div class="wrap-story"><div class="canvas s-launch">
+        <div class="tpl-halftone"></div>
+        <img class="logo-big" src="../brand-refs/logos/applink-logo-transparent.png" alt="">
+        <div class="verbs">
+          <span class="hl-d">Conecte. Personalize.</span><br>
+          <span class="hl-d">Acompanhe.</span> Cresça.
+        </div>
+        <div class="swipe">↑ Arraste pra cima</div>
+      </div></div>
+      <span class="tpl-label"><b>01 · Launch Hero</b> — gradient + logo grande</span>
+    </div>
+
+    <div class="tpl-card">
+      <div class="wrap-story"><div class="canvas s-feature">
+        <div class="tpl-halftone"></div>
+        <div class="badge-new">NEW · Smart Tracking</div>
+        <h1 class="ft-h1">Atribuição <em>nível Hyros.</em> Agora.</h1>
+        <p class="ft-sub">Deferred event firing. Multi-pixel server-side. Tudo dentro do APPlink.</p>
+        <div class="ft-features">
+          <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></span><span class="t">28ms p95 redirect</span></div>
+          <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></span><span class="t">15+ pixels reusáveis</span></div>
+          <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></span><span class="t">Smart deferred firing</span></div>
+        </div>
+        <div class="cta-btn">↗ Ver demo agora</div>
+      </div></div>
+      <span class="tpl-label"><b>02 · Feature Drop</b> — release / novidade</span>
+    </div>
+  </div>
+
+  <!-- IG CAROUSEL -->
+  <div class="tpl-section-hdr">
+    <h3>Instagram · Carrossel</h3>
+    <span class="dim">1080 × 1350 px · 4:5</span>
+    <span class="qty">5 slides · Hook → CTA</span>
+  </div>
+  <div class="tpl-grid">
+    <div class="tpl-card">
+      <div class="wrap-carousel"><div class="canvas c-base c-1">
+        <div class="tpl-halftone"></div>
+        <div class="slide-num">01 / 05</div>
+        <h1 class="hook">Quanto seu link-in-bio <em>realmente</em> converte?</h1>
+        <div class="swipe">Continue <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <div class="brand-tag"><img src="../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div>
+      </div></div>
+      <span class="tpl-label"><b>01 · Hook</b></span>
+    </div>
+    <div class="tpl-card">
+      <div class="wrap-carousel"><div class="canvas c-base c-2">
+        <div class="tpl-halftone"></div>
+        <div class="slide-num">02 / 05</div>
+        <h1 class="prob">Você não sabe.<br><em>Bitly</em> não te conta.</h1>
+        <p class="prob-line">Encurtadores tradicionais entregam o número.<br>Não entregam o porquê.</p>
+        <div class="brand-tag"><img src="../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div>
+      </div></div>
+      <span class="tpl-label"><b>02 · Problema</b></span>
+    </div>
+    <div class="tpl-card">
+      <div class="wrap-carousel"><div class="canvas c-base c-3">
+        <div class="tpl-halftone"></div>
+        <div class="slide-num">03 / 05</div>
+        <div class="sol-eye">A solução</div>
+        <h1 class="sol-h">APPlink mostra <em>tudo.</em></h1>
+        <p class="sol-sub">Cliques, fonte, dispositivo, geolocalização, conversão atribuída por pixel. Em tempo real.</p>
+        <div class="brand-tag"><img src="../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div>
+      </div></div>
+      <span class="tpl-label"><b>03 · Solução</b></span>
+    </div>
+    <div class="tpl-card">
+      <div class="wrap-carousel"><div class="canvas c-base c-4">
+        <div class="tpl-halftone"></div>
+        <div class="slide-num">04 / 05</div>
+        <div class="ft-eye">O que tem dentro</div>
+        <h1 class="ft-h">Quatro pilares operacionais</h1>
+        <div class="ft-grid">
+          <div class="ft-cell">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+            <div class="t">Smart Links</div>
+            <div class="d">Roteamento condicional A/B · Geo · Device · SO</div>
+          </div>
+          <div class="ft-cell">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+            <div class="t">Smartpages</div>
+            <div class="d">Link-in-bio com captura de leads</div>
+          </div>
+          <div class="ft-cell">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></div>
+            <div class="t">Pixel Library</div>
+            <div class="d">Meta, GA4, GAds, TikTok, LinkedIn reusáveis</div>
+          </div>
+          <div class="ft-cell">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 3 5-6"/></svg></div>
+            <div class="t">Analytics</div>
+            <div class="d">Atribuição multi-touch por domínio e canal</div>
+          </div>
+        </div>
+        <div class="brand-tag"><img src="../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div>
+      </div></div>
+      <span class="tpl-label"><b>04 · Features</b></span>
+    </div>
+    <div class="tpl-card">
+      <div class="wrap-carousel"><div class="canvas c-base c-5">
+        <div class="tpl-halftone"></div>
+        <div class="slide-num" style="color:rgba(10,10,10,0.55)">05 / 05</div>
+        <div class="cta-eye">Comece agora</div>
+        <h1 class="cta-h">7 dias<br>grátis.<br>Sem<br>cartão.</h1>
+        <p class="cta-sub">Crie smart links com tracking nível pro em menos de 60 segundos.</p>
+        <div class="cta-url">→ applink.com.br</div>
+      </div></div>
+      <span class="tpl-label"><b>05 · CTA Final</b></span>
+    </div>
+  </div>
+
+  <!-- LINKEDIN -->
+  <div class="tpl-section-hdr">
+    <h3>LinkedIn · Post</h3>
+    <span class="dim">1200 × 627 px · 1.91:1</span>
+    <span class="qty">1 template</span>
+  </div>
+  <div class="tpl-grid">
+    <div class="tpl-card">
+      <div class="wrap-linkedin"><div class="canvas l-post">
+        <div class="tpl-halftone"></div>
+        <div class="left">
+          <div>
+            <div class="l-eye">Launch · 2026</div>
+            <h1 class="l-h">Marketing data <em>merece ferramenta melhor.</em></h1>
+            <p class="l-sub">APPlink é a plataforma BR de smart links com tracking nível Hyros. Roteamento condicional, biblioteca de pixels, atribuição multi-touch.</p>
+          </div>
+          <div class="l-bottom">
+            <img src="../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b><span>· applink.com.br</span>
+          </div>
+        </div>
+        <div class="right">
+          <img src="../brand-refs/logos/applink-logo-transparent.png" alt="">
+        </div>
+      </div></div>
+      <span class="tpl-label"><b>LinkedIn launch</b> — anúncio profissional / B2B</span>
+    </div>
+  </div>
+
+  <!-- X / TWITTER -->
+  <div class="tpl-section-hdr">
+    <h3>X (Twitter) · Post</h3>
+    <span class="dim">1200 × 675 px · 16:9</span>
+    <span class="qty">1 template</span>
+  </div>
+  <div class="tpl-grid">
+    <div class="tpl-card">
+      <div class="wrap-twitter"><div class="canvas x-post">
+        <img class="x-logo" src="../brand-refs/logos/applink-logo-transparent.png" alt="">
+        <h1 class="x-h">Smart links + <em>attribution</em> para o BR.</h1>
+        <p class="x-sub">APPlink agora em beta aberto. Encurtador → rastreio → audiência. Tudo num lugar.</p>
+        <div class="x-cta">→ applink.com.br · @applink</div>
+      </div></div>
+      <span class="tpl-label"><b>X launch</b> — anúncio direto / dev community</span>
+    </div>
   </div>
 </section>
 
 <!-- ════════ CHECKLIST ════════ -->
 <section id="checklist">
-  <div class="eye">10 · Checklist de Consistência</div>
+  <div class="eye">13 · Checklist de Consistência</div>
   <h2 class="bb-h2">Antes de <em>publicar.</em></h2>
   <p class="lead">Validação rápida pra qualquer peça nova — landing, social, slide, e-mail, asset.</p>
 
@@ -665,7 +1288,7 @@ footer.bb-foot a{color:var(--lime)}
 
 <!-- ════════ ARQUIVOS ════════ -->
 <section id="arquivos">
-  <div class="eye">11 · Arquivos & Tokens</div>
+  <div class="eye">14 · Arquivos & Tokens</div>
   <h2 class="bb-h2">Onde está <em>cada coisa.</em></h2>
   <p class="lead">Estrutura de arquivos pra o time encontrar e atualizar a identidade rapidamente.</p>
 
@@ -693,7 +1316,7 @@ footer.bb-foot a{color:var(--lime)}
 </section>
 
 <footer class="bb-foot">
-  APPlink Brandbook · v1 · maio 2026 · <a href="../docs/identidade-visual-applink.md">Identidade técnica</a> · <a href="./social/">Social templates</a>
+  APPlink Brandbook · v2 · maio 2026 · documento self-contained · 14 seções
 </footer>
 
 </body>
