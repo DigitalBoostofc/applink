@@ -367,6 +367,129 @@
     .mtj-step .arrow{transform:rotate(90deg);margin:6px auto}
     .mtj-track{flex-direction:column}
   }
+
+  /* ═════════════════ ROI DASHBOARD (Feature 5) ═════════════════ */
+  .roi-card{background:linear-gradient(135deg,rgba(255,119,119,0.04),rgba(191,255,0,0.03));
+    border:1px solid rgba(255,119,119,0.18);border-radius:24px;padding:28px;
+    box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);margin-bottom:24px}
+  .roi-hdr{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .roi-hdr-ic{width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,#FF7777,#BFFF00);color:#0A0A0A;
+    display:grid;place-items:center;flex-shrink:0;box-shadow:inset 2px 2px 5px rgba(255,255,255,0.2),0 0 22px rgba(255,119,119,0.3)}
+  .roi-hdr-ic svg{width:22px;height:22px}
+  .roi-hdr-ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:18px;color:#fff;letter-spacing:-0.02em;flex:1;min-width:200px}
+  .roi-period{display:flex;gap:4px;background:#0F0F0F;border-radius:10px;padding:4px;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.5)}
+  .roi-period .seg{padding:6px 12px;border-radius:7px;font-family:'Satoshi',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#94A3B8;cursor:pointer;border:0;background:transparent;transition:.25s var(--ease,cubic-bezier(0.34,1.56,0.64,1))}
+  .roi-period .seg.on{background:linear-gradient(135deg,#BFFF00,#FF7777);color:#0A0A0A;box-shadow:2px 2px 5px rgba(0,0,0,0.4)}
+
+  .roi-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+  .roi-kpi{background:#0A0A0A;border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:18px 20px;position:relative;
+    box-shadow:inset 4px 4px 8px rgba(0,0,0,0.45)}
+  .roi-kpi .lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#5A5A60;margin-bottom:8px}
+  .roi-kpi .val{font-family:'General Sans',sans-serif;font-weight:600;font-size:28px;letter-spacing:-0.03em;color:#fff;line-height:1}
+  .roi-kpi .val em{font-style:normal;font-size:16px;color:#94A3B8;margin-left:4px}
+  .roi-kpi .dlt{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;margin-top:6px;letter-spacing:0.02em}
+  .roi-kpi .dlt.up{color:#10B981}
+  .roi-kpi .dlt.down{color:#EF4444}
+  .roi-kpi.hl{background:linear-gradient(135deg,rgba(16,185,129,0.08),transparent 60%);border-color:rgba(16,185,129,0.3)}
+  .roi-kpi.hl .val{color:#10B981}
+
+  .roi-tbl-wrap{background:#0A0A0A;border:1px solid rgba(255,255,255,0.04);border-radius:18px;overflow:hidden;
+    box-shadow:inset 4px 4px 8px rgba(0,0,0,0.5);margin-bottom:18px}
+  .roi-tbl{width:100%;border-collapse:collapse}
+  .roi-tbl th{font-family:'Satoshi',sans-serif;text-align:right;font-size:10.5px;font-weight:800;letter-spacing:0.13em;
+    text-transform:uppercase;color:#5A5A60;padding:14px;background:#0F0F0F;border-bottom:1px solid rgba(255,255,255,0.05);white-space:nowrap}
+  .roi-tbl th:first-child{text-align:left}
+  .roi-tbl td{padding:14px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#E2E8F0;
+    border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;font-weight:600}
+  .roi-tbl td:first-child{text-align:left;font-family:'Satoshi',sans-serif;font-weight:700;color:#fff}
+  .roi-tbl td .channel-row{display:flex;align-items:center;gap:10px}
+  .roi-tbl td .ch-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .roi-tbl tr:last-child td{border-bottom:0}
+  .roi-tbl tr:hover td{background:rgba(255,255,255,0.02)}
+  .roi-tbl tr.total td{background:rgba(191,255,0,0.04);border-top:2px solid rgba(191,255,0,0.25);font-weight:800;color:#fff}
+  .roi-tbl td.win{color:#10B981}
+  .roi-tbl td.loss{color:#EF4444}
+  .roi-status{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:10.5px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;font-family:'Satoshi',sans-serif}
+  .roi-status.profitable{background:rgba(16,185,129,0.15);color:#10B981}
+  .roi-status.warning{background:rgba(245,158,11,0.15);color:#F59E0B}
+  .roi-status.critical{background:rgba(239,68,68,0.15);color:#EF4444}
+  .roi-status.neutral{background:rgba(148,163,184,0.12);color:#94A3B8}
+
+  .roi-alerts{display:flex;flex-direction:column;gap:10px}
+  .roi-alert{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;border-radius:14px;border:1px solid;flex-wrap:wrap}
+  .roi-alert.crit{background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.3)}
+  .roi-alert.warn{background:rgba(245,158,11,0.06);border-color:rgba(245,158,11,0.3)}
+  .roi-alert.win{background:rgba(16,185,129,0.06);border-color:rgba(16,185,129,0.3)}
+  .roi-alert .ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex-shrink:0;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.3)}
+  .roi-alert.crit .ic{background:rgba(239,68,68,0.2);color:#EF4444}
+  .roi-alert.warn .ic{background:rgba(245,158,11,0.2);color:#F59E0B}
+  .roi-alert.win .ic{background:rgba(16,185,129,0.2);color:#10B981}
+  .roi-alert .ic svg{width:16px;height:16px}
+  .roi-alert .ct{flex:1;min-width:280px}
+  .roi-alert .ct b{font-family:'General Sans',sans-serif;font-weight:600;font-size:14.5px;color:#fff;display:block;margin-bottom:3px}
+  .roi-alert .ct p{font-family:'Satoshi',sans-serif;font-size:13px;color:#94A3B8;line-height:1.5}
+  .roi-alert .act{padding:7px 13px;background:#141414;border:1px solid rgba(255,255,255,0.1);border-radius:9px;
+    font-family:'Satoshi',sans-serif;font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:0.12em;color:#E2E8F0;cursor:pointer;white-space:nowrap;transition:.25s}
+  .roi-alert .act:hover{border-color:rgba(191,255,0,0.3);color:#BFFF00}
+
+  /* ═════════════════ COHORT & LTV (Feature 6) ═════════════════ */
+  .cohort-card{background:linear-gradient(135deg,rgba(167,139,250,0.04),rgba(191,255,0,0.03));
+    border:1px solid rgba(167,139,250,0.22);border-radius:24px;padding:28px;
+    box-shadow:6px 6px 16px rgba(0,0,0,0.55),-4px -4px 10px rgba(255,255,255,0.025);margin-bottom:24px}
+  .cohort-hdr{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .cohort-hdr-ic{width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,#A78BFA,#BFFF00);color:#0A0A0A;
+    display:grid;place-items:center;flex-shrink:0;box-shadow:inset 2px 2px 5px rgba(255,255,255,0.2),0 0 22px rgba(167,139,250,0.3)}
+  .cohort-hdr-ic svg{width:22px;height:22px}
+  .cohort-hdr-ttl{font-family:'General Sans',sans-serif;font-weight:600;font-size:18px;color:#fff;letter-spacing:-0.02em;flex:1;min-width:200px}
+  .cohort-mode{display:flex;gap:4px;background:#0F0F0F;border-radius:10px;padding:4px;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.5)}
+  .cohort-mode .seg{padding:6px 12px;border-radius:7px;font-family:'Satoshi',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#94A3B8;cursor:pointer;border:0;background:transparent;transition:.25s var(--ease,cubic-bezier(0.34,1.56,0.64,1))}
+  .cohort-mode .seg.on{background:linear-gradient(135deg,#A78BFA,#BFFF00);color:#0A0A0A;box-shadow:2px 2px 5px rgba(0,0,0,0.4)}
+
+  /* matriz de cohort */
+  .cohort-matrix{background:#0A0A0A;border:1px solid rgba(255,255,255,0.04);border-radius:18px;padding:20px;overflow-x:auto;
+    box-shadow:inset 4px 4px 8px rgba(0,0,0,0.5);margin-bottom:18px}
+  .cohort-matrix table{width:100%;border-collapse:separate;border-spacing:3px}
+  .cohort-matrix th{font-family:'Satoshi',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:0.13em;text-transform:uppercase;color:#5A5A60;padding:8px 10px;white-space:nowrap}
+  .cohort-matrix th:first-child{text-align:left}
+  .cohort-matrix td.label{font-family:'Satoshi',sans-serif;font-weight:700;font-size:12px;color:#fff;padding:8px 10px;white-space:nowrap}
+  .cohort-matrix td.label .sz{font-family:'JetBrains Mono',monospace;font-size:11px;color:#5A5A60;font-weight:500;margin-left:6px}
+  .cohort-matrix td.cell{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px;text-align:center;padding:10px 8px;border-radius:6px;min-width:48px;transition:.2s;cursor:default}
+  .cohort-matrix td.cell:hover{transform:scale(1.06);z-index:2}
+  /* heatmap intensity classes — purple to lime */
+  .cohort-matrix td.h0{background:rgba(255,255,255,0.02);color:#3A3A40}
+  .cohort-matrix td.h1{background:rgba(167,139,250,0.1);color:#A78BFA}
+  .cohort-matrix td.h2{background:rgba(167,139,250,0.18);color:#A78BFA}
+  .cohort-matrix td.h3{background:rgba(191,255,0,0.14);color:#BFFF00}
+  .cohort-matrix td.h4{background:rgba(191,255,0,0.24);color:#BFFF00}
+  .cohort-matrix td.h5{background:linear-gradient(135deg,rgba(191,255,0,0.35),rgba(255,119,119,0.2));color:#fff;font-weight:800}
+  .cohort-matrix td.empty{background:transparent}
+
+  /* LTV por canal */
+  .ltv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+  .ltv-cell{background:#0A0A0A;border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:18px 20px;position:relative;overflow:hidden}
+  .ltv-cell::before{content:"";position:absolute;top:0;left:0;width:4px;height:100%;background:currentColor;opacity:0.6}
+  .ltv-cell .nm{font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;letter-spacing:0.13em;text-transform:uppercase;color:#94A3B8;margin-bottom:10px}
+  .ltv-cell .val{font-family:'General Sans',sans-serif;font-weight:600;font-size:32px;letter-spacing:-0.03em;color:#fff;line-height:1}
+  .ltv-cell .val em{font-style:normal;font-size:18px;color:#5A5A60;margin-left:2px}
+  .ltv-cell .meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:#5A5A60;margin-top:6px;font-weight:500}
+  .ltv-cell.meta-c{color:#4B8EF8}
+  .ltv-cell.google-c{color:#A78BFA}
+  .ltv-cell.organic-c{color:#10B981}
+  .ltv-cell.direct-c{color:#00F0FF}
+
+  .cohort-insight{display:flex;align-items:flex-start;gap:14px;padding:18px 22px;background:linear-gradient(90deg,rgba(167,139,250,0.08),rgba(191,255,0,0.04));
+    border:1px solid rgba(167,139,250,0.25);border-radius:14px}
+  .cohort-insight .ic{width:32px;height:32px;border-radius:9px;background:rgba(167,139,250,0.2);color:#A78BFA;display:grid;place-items:center;flex-shrink:0;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.3)}
+  .cohort-insight .ic svg{width:16px;height:16px}
+  .cohort-insight .ct{flex:1}
+  .cohort-insight .ct b{font-family:'General Sans',sans-serif;font-weight:600;font-size:14.5px;color:#fff;display:block;margin-bottom:4px}
+  .cohort-insight .ct p{font-family:'Satoshi',sans-serif;font-size:13px;color:#94A3B8;line-height:1.5}
+  .cohort-insight .ct b span.hl-lime{color:#BFFF00}
+  .cohort-insight .ct b span.hl-violet{color:#A78BFA}
+
+  @media (max-width:980px){
+    .roi-kpis,.ltv-grid{grid-template-columns:1fr 1fr}
+  }
 </style>
 </head>
 <body>
@@ -731,6 +854,253 @@
             <p>Com last-click, Meta pega só <b>8%</b> da venda. Mas no <b>U-shaped</b>, ela tem <b>42%</b> — porque é onde o lead começou. Mude o modelo pra ver atribuição honesta.</p>
           </div>
           <button class="mtj-insight-cta" id="mtj-insight-cta">Mudar pra U-shaped →</button>
+        </div>
+      </div>
+
+      <!-- ════════ FEATURE 5 — ROI DASHBOARD ════════ -->
+      <div class="roi-card">
+        <div class="roi-hdr">
+          <div class="roi-hdr-ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <span class="roi-hdr-ttl">ROAS por canal · revenue vs ad spend</span>
+          <span class="mtj-pro-badge" style="background:linear-gradient(135deg,#FF7777,#BFFF00)">Smart Tracking PRO</span>
+          <div class="roi-period" id="roi-period">
+            <button class="seg" data-p="7d">7d</button>
+            <button class="seg on" data-p="30d">30d</button>
+            <button class="seg" data-p="90d">90d</button>
+            <button class="seg" data-p="ytd">YTD</button>
+          </div>
+        </div>
+
+        <div class="roi-kpis">
+          <div class="roi-kpi">
+            <div class="lbl">Ad Spend</div>
+            <div class="val" id="roi-spend">R$ 18.420</div>
+            <div class="dlt up">▲ +12% vs período anterior</div>
+          </div>
+          <div class="roi-kpi">
+            <div class="lbl">Revenue atribuído</div>
+            <div class="val" id="roi-revenue">R$ 67.840</div>
+            <div class="dlt up">▲ +28%</div>
+          </div>
+          <div class="roi-kpi hl">
+            <div class="lbl">ROAS médio</div>
+            <div class="val" id="roi-roas">3.68<em>×</em></div>
+            <div class="dlt up">▲ +14% margem</div>
+          </div>
+          <div class="roi-kpi">
+            <div class="lbl">CPA médio</div>
+            <div class="val" id="roi-cpa">R$ 44,72</div>
+            <div class="dlt down">▼ -8% vs anterior</div>
+          </div>
+        </div>
+
+        <div class="roi-tbl-wrap">
+          <table class="roi-tbl">
+            <thead>
+              <tr>
+                <th>Canal / Campanha</th>
+                <th>Spend</th>
+                <th>Conversões</th>
+                <th>CPA</th>
+                <th>Revenue</th>
+                <th>ROAS</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="channel-row"><span class="ch-dot" style="background:#A78BFA"></span>Google Ads · Search Brand</div></td>
+                <td>R$ 2.180</td>
+                <td>187</td>
+                <td>R$ 11,66</td>
+                <td class="win">R$ 19.420</td>
+                <td class="win">8.91×</td>
+                <td><span class="roi-status profitable">★ Star</span></td>
+              </tr>
+              <tr>
+                <td><div class="channel-row"><span class="ch-dot" style="background:#4B8EF8"></span>Meta Ads · Lookalike Premium</div></td>
+                <td>R$ 6.840</td>
+                <td>312</td>
+                <td>R$ 21,92</td>
+                <td class="win">R$ 28.560</td>
+                <td class="win">4.18×</td>
+                <td><span class="roi-status profitable">✓ Lucrativa</span></td>
+              </tr>
+              <tr>
+                <td><div class="channel-row"><span class="ch-dot" style="background:#FF5C8D"></span>TikTok Ads · Awareness Q2</div></td>
+                <td>R$ 3.420</td>
+                <td>98</td>
+                <td>R$ 34,90</td>
+                <td>R$ 8.420</td>
+                <td>2.46×</td>
+                <td><span class="roi-status profitable">✓ Lucrativa</span></td>
+              </tr>
+              <tr>
+                <td><div class="channel-row"><span class="ch-dot" style="background:#A78BFA"></span>Google Ads · Display Remarketing</div></td>
+                <td>R$ 1.920</td>
+                <td>54</td>
+                <td>R$ 35,56</td>
+                <td>R$ 3.840</td>
+                <td>2.00×</td>
+                <td><span class="roi-status warning">⚠ Break-even</span></td>
+              </tr>
+              <tr>
+                <td><div class="channel-row"><span class="ch-dot" style="background:#4B8EF8"></span>Meta Ads · Cold (Interesses)</div></td>
+                <td>R$ 3.180</td>
+                <td>42</td>
+                <td class="loss">R$ 75,71</td>
+                <td class="loss">R$ 4.200</td>
+                <td class="loss">1.32×</td>
+                <td><span class="roi-status critical">🚨 Perdendo</span></td>
+              </tr>
+              <tr>
+                <td><div class="channel-row"><span class="ch-dot" style="background:#0077B5"></span>LinkedIn Ads · B2B</div></td>
+                <td>R$ 880</td>
+                <td>12</td>
+                <td class="loss">R$ 73,33</td>
+                <td>R$ 3.400</td>
+                <td>3.86×</td>
+                <td><span class="roi-status neutral">≈ Pequeno volume</span></td>
+              </tr>
+              <tr class="total">
+                <td>TOTAL · 30 dias</td>
+                <td>R$ 18.420</td>
+                <td>705</td>
+                <td>R$ 26,13</td>
+                <td>R$ 67.840</td>
+                <td>3.68×</td>
+                <td><span class="roi-status profitable">▲ Lucrativo</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="roi-alerts">
+          <div class="roi-alert crit">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/></svg></div>
+            <div class="ct">
+              <b>Meta Ads Cold está queimando R$ 765/mês</b>
+              <p>Campanha "Cold (Interesses)" rodando há 30 dias com ROAS 1.32× (abaixo do break-even 2×). Considere pausar ou trocar criativo. R$ 3.180 gastos pra retornar só R$ 4.200.</p>
+            </div>
+            <button class="act">Pausar campanha →</button>
+          </div>
+          <div class="roi-alert win">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="ct">
+              <b>Lookalike Premium do PURE está performando 4.18× — escale orçamento</b>
+              <p>Audiência criada via Smart Tracking gera CPA R$21,92 (vs média R$26). Aumentar 50% no orçamento traria ~156 conversões adicionais sem deteriorar CPA.</p>
+            </div>
+            <button class="act">Aumentar 50% →</button>
+          </div>
+          <div class="roi-alert warn">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg></div>
+            <div class="ct">
+              <b>Display Remarketing em break-even — janela curta de decisão</b>
+              <p>ROAS 2.00× é exatamente o break-even. Próximos 14 dias decidem: criativo novo, ajustar bid, ou pausar.</p>
+            </div>
+            <button class="act">Ver criativos →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ FEATURE 6 — COHORT & LTV ANALYSIS ════════ -->
+      <div class="cohort-card">
+        <div class="cohort-hdr">
+          <div class="cohort-hdr-ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+            </svg>
+          </div>
+          <span class="cohort-hdr-ttl">Cohort &amp; LTV · qual canal gera cliente mais valioso</span>
+          <span class="mtj-pro-badge" style="background:linear-gradient(135deg,#A78BFA,#BFFF00)">Smart Tracking PRO</span>
+          <div class="cohort-mode" id="cohort-mode">
+            <button class="seg on" data-m="retention">Retenção</button>
+            <button class="seg" data-m="ltv">LTV $$</button>
+            <button class="seg" data-m="repeat">Recompra</button>
+          </div>
+        </div>
+
+        <div class="cohort-matrix">
+          <table>
+            <thead>
+              <tr>
+                <th>Cohort (mês de aquisição)</th>
+                <th>M0</th>
+                <th>M1</th>
+                <th>M2</th>
+                <th>M3</th>
+                <th>M4</th>
+                <th>M5</th>
+                <th>M6</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="label">Dez 2025<span class="sz">412 leads</span></td>
+                <td class="cell h5">100%</td><td class="cell h4">68%</td><td class="cell h3">52%</td><td class="cell h3">48%</td><td class="cell h3">45%</td><td class="cell h2">42%</td><td class="cell h2">40%</td>
+              </tr>
+              <tr>
+                <td class="label">Jan 2026<span class="sz">587 leads</span></td>
+                <td class="cell h5">100%</td><td class="cell h4">72%</td><td class="cell h4">58%</td><td class="cell h3">51%</td><td class="cell h3">47%</td><td class="cell h2">43%</td><td class="cell empty"></td>
+              </tr>
+              <tr>
+                <td class="label">Fev 2026<span class="sz">704 leads</span></td>
+                <td class="cell h5">100%</td><td class="cell h5">78%</td><td class="cell h4">64%</td><td class="cell h4">56%</td><td class="cell h3">52%</td><td class="cell empty"></td><td class="cell empty"></td>
+              </tr>
+              <tr>
+                <td class="label">Mar 2026<span class="sz">892 leads</span></td>
+                <td class="cell h5">100%</td><td class="cell h5">81%</td><td class="cell h4">67%</td><td class="cell h4">60%</td><td class="cell empty"></td><td class="cell empty"></td><td class="cell empty"></td>
+              </tr>
+              <tr>
+                <td class="label">Abr 2026<span class="sz">1.045 leads</span></td>
+                <td class="cell h5">100%</td><td class="cell h5">84%</td><td class="cell h5">72%</td><td class="cell empty"></td><td class="cell empty"></td><td class="cell empty"></td><td class="cell empty"></td>
+              </tr>
+              <tr>
+                <td class="label">Mai 2026<span class="sz">1.218 leads</span></td>
+                <td class="cell h5">100%</td><td class="cell h5">87%</td><td class="cell empty"></td><td class="cell empty"></td><td class="cell empty"></td><td class="cell empty"></td><td class="cell empty"></td>
+              </tr>
+              <tr>
+                <td class="label">Jun 2026<span class="sz">+412 atual</span></td>
+                <td class="cell h5">100%</td><td class="cell empty"></td><td class="cell empty"></td><td class="cell empty"></td><td class="cell empty"></td><td class="cell empty"></td><td class="cell empty"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="font-family:'Satoshi',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:#5A5A60;margin-bottom:14px">▮ LTV médio por canal de aquisição</h3>
+        <div class="ltv-grid">
+          <div class="ltv-cell meta-c">
+            <div class="nm">Meta Ads · LAL</div>
+            <div class="val">R$ 1.247<em>,00</em></div>
+            <div class="meta">CAC R$ 21 · payback 1.8 meses</div>
+          </div>
+          <div class="ltv-cell google-c">
+            <div class="nm">Google Ads · Brand</div>
+            <div class="val">R$ 2.108<em>,00</em></div>
+            <div class="meta">CAC R$ 12 · payback 0.9 meses</div>
+          </div>
+          <div class="ltv-cell organic-c">
+            <div class="nm">Orgânico · Insta</div>
+            <div class="val">R$ 1.690<em>,00</em></div>
+            <div class="meta">CAC R$ 0 · payback imediato</div>
+          </div>
+          <div class="ltv-cell direct-c">
+            <div class="nm">Tráfego direto</div>
+            <div class="val">R$ 920<em>,00</em></div>
+            <div class="meta">CAC R$ 0 · loyalty alta</div>
+          </div>
+        </div>
+
+        <div class="cohort-insight">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+          <div class="ct">
+            <b><span class="hl-violet">Google Ads Brand</span> gera cliente <span class="hl-lime">69% mais valioso</span> em LTV vs Meta LAL.</b>
+            <p>R$ 2.108 vs R$ 1.247 de LTV médio. CAC menor (R$12 vs R$21) e payback mais rápido (0.9 vs 1.8 meses). Cohorts recentes (Mar+) mantêm 84%+ na M1 — tendência crescente. Considere dobrar orçamento em Brand antes de escalar cold acquisition.</p>
+          </div>
         </div>
       </div>
 
@@ -1270,6 +1640,49 @@
 
   // Initialize with last-click (default) — but trigger to populate credits
   applyMtjModel('last');
+
+  // ═══════════════════ ROI DASHBOARD (Feature 5) ═══════════════════
+  // Period selector — atualiza valores conforme janela escolhida
+  var ROI_DATA = {
+    '7d':  { spend: 4205, revenue: 16940, roas: '4.03×', cpa: 'R$ 25,11' },
+    '30d': { spend:18420, revenue: 67840, roas: '3.68×', cpa: 'R$ 26,13' },
+    '90d': { spend:54870, revenue:178420, roas: '3.25×', cpa: 'R$ 28,90' },
+    'ytd': { spend:142680,revenue:412580, roas: '2.89×', cpa: 'R$ 32,40' }
+  };
+  function fmtMoney(v){ return 'R$ ' + v.toLocaleString('pt-BR'); }
+  document.querySelectorAll('#roi-period .seg').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('#roi-period .seg').forEach(function(s){ s.classList.remove('on'); });
+      b.classList.add('on');
+      var d = ROI_DATA[b.dataset.p];
+      if (!d) return;
+      document.getElementById('roi-spend').textContent = fmtMoney(d.spend);
+      document.getElementById('roi-revenue').textContent = fmtMoney(d.revenue);
+      document.getElementById('roi-roas').innerHTML = d.roas.replace('×', '<em>×</em>');
+      document.getElementById('roi-cpa').textContent = d.cpa;
+    });
+  });
+
+  // Alert "Pausar campanha" — simula ação
+  document.querySelectorAll('.roi-alert .act').forEach(function(b){
+    b.addEventListener('click', function(){
+      var orig = b.textContent;
+      b.textContent = '✓ Confirmado';
+      b.style.color = '#10B981';
+      b.style.borderColor = 'rgba(16,185,129,0.4)';
+      setTimeout(function(){ b.textContent = orig; b.style.color = ''; b.style.borderColor = ''; }, 2200);
+    });
+  });
+
+  // ═══════════════════ COHORT & LTV (Feature 6) ═══════════════════
+  // Mode selector — não recalcula dados (mockup) só visual feedback
+  document.querySelectorAll('#cohort-mode .seg').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('#cohort-mode .seg').forEach(function(s){ s.classList.remove('on'); });
+      b.classList.add('on');
+      // (Em produção, seria fetch novo dataset por modo)
+    });
+  });
 })();
 </script>
 </body>
