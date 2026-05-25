@@ -118,6 +118,109 @@ h1.bb-h1 em{font-style:normal;background:var(--grad-h);-webkit-background-clip:t
 
 footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid rgba(255,255,255,0.05);text-align:center;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--ink3);letter-spacing:0.06em}
 
+/* ── ART PREVIEW (rendered actual designs) ── */
+.post-card{grid-template-columns:120px 1fr;gap:24px;align-items:start}
+.post-card .art{grid-column:1/-1;margin-top:18px;padding-top:18px;border-top:1px dashed rgba(255,255,255,0.06)}
+.post-card .art-h{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.post-card .art-h .lbl{font-family:'Satoshi',sans-serif;font-weight:800;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink3)}
+.post-card .art-h .lbl::before{content:"▮ ";color:var(--lime)}
+.post-card .art-h .dim{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink3);font-weight:600;letter-spacing:0.04em}
+.art-row{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start}
+.art-row.scroll{flex-wrap:nowrap;overflow-x:auto;padding-bottom:8px}
+.art-row.scroll::-webkit-scrollbar{height:6px}
+.art-row.scroll::-webkit-scrollbar-thumb{background:rgba(191,255,0,0.2);border-radius:3px}
+
+/* art wrappers (scaled-down preview) */
+.aw-feed{width:360px;height:360px;overflow:hidden;border-radius:14px;background:#0A0A0A;box-shadow:6px 6px 16px rgba(0,0,0,0.55);flex-shrink:0}
+.aw-feed .canvas{width:1080px;height:1080px;transform:scale(0.333);transform-origin:top left}
+.aw-story{width:240px;height:426px;overflow:hidden;border-radius:14px;background:#0A0A0A;box-shadow:6px 6px 16px rgba(0,0,0,0.55);flex-shrink:0}
+.aw-story .canvas{width:1080px;height:1920px;transform:scale(0.222);transform-origin:top left}
+.aw-carousel{width:264px;height:330px;overflow:hidden;border-radius:14px;background:#0A0A0A;box-shadow:6px 6px 16px rgba(0,0,0,0.55);flex-shrink:0;position:relative}
+.aw-carousel .canvas{width:1080px;height:1350px;transform:scale(0.244);transform-origin:top left}
+.aw-carousel .slide-badge{position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.7);color:#fff;padding:3px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.05em;z-index:5;backdrop-filter:blur(4px)}
+.aw-linkedin{width:480px;height:251px;overflow:hidden;border-radius:14px;background:#0A0A0A;box-shadow:6px 6px 16px rgba(0,0,0,0.55);flex-shrink:0}
+.aw-linkedin .canvas{width:1200px;height:627px;transform:scale(0.4);transform-origin:top left}
+.aw-x{width:480px;height:270px;overflow:hidden;border-radius:14px;background:#0A0A0A;box-shadow:6px 6px 16px rgba(0,0,0,0.55);flex-shrink:0}
+.aw-x .canvas{width:1200px;height:675px;transform:scale(0.4);transform-origin:top left}
+
+/* canvas base */
+.canvas{position:relative;font-family:'Satoshi',sans-serif;color:#fff;width:100%;height:100%}
+.tpl-halftone{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 1px);background-size:24px 24px;opacity:0.7}
+.tpl-halftone.dark{background-image:radial-gradient(circle at 1px 1px, rgba(10,10,10,0.18) 1px, transparent 1px)}
+.brand-tag{position:absolute;display:flex;align-items:center;gap:14px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:18px;color:#94A3B8;letter-spacing:0.04em}
+.brand-tag img{width:48px;height:48px;display:block}
+.brand-tag b{color:#fff;font-family:'General Sans',sans-serif;font-weight:700;font-size:24px;letter-spacing:-0.02em}
+.sticker-coral{position:absolute;background:#FF7777;color:#0A0A0A;font-family:'General Sans',sans-serif;font-weight:700;font-size:16px;letter-spacing:0.04em;text-transform:uppercase;line-height:1.15;padding:10px 16px;border-radius:8px;transform:rotate(8deg);box-shadow:6px 6px 0 rgba(0,0,0,0.85);display:inline-flex;align-items:center;gap:8px}
+
+/* ── ART STYLES (compactos, reaproveitam padrão social) ── */
+.A-jet{background:#0A0A0A}
+.A-surface{background:#141414}
+.A-gradient{background:linear-gradient(135deg,#BFFF00,#FF7777)}
+.A-gradient .tpl-halftone{background-image:radial-gradient(circle at 1px 1px, rgba(10,10,10,0.16) 1px, transparent 1px)}
+.A-coral{background:linear-gradient(135deg,#FF7777,#9D174D)}
+
+/* Feed text patterns */
+.fT-hook{position:absolute;left:80px;right:80px;top:240px;font-family:'General Sans',sans-serif;font-weight:700;font-size:84px;line-height:1.04;letter-spacing:-0.035em;color:#fff}
+.fT-hook em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fT-hook .hl{background:#BFFF00;color:#0A0A0A;padding:2px 14px;border-radius:8px;box-shadow:0 0 30px rgba(191,255,0,0.5);display:inline-block;margin:6px 0}
+.fT-hook .circ{padding:0 18px;position:relative;display:inline-block}
+.fT-hook .circ::before{content:"";position:absolute;inset:-10px -6px;border:5px solid #FF7777;border-radius:60%;transform:rotate(-3deg)}
+.fT-eye{position:absolute;top:80px;left:80px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:20px;letter-spacing:0.16em;text-transform:uppercase;color:#BFFF00}
+.fT-eye::before{content:"▮ "}
+.fT-body{position:absolute;left:80px;right:80px;top:760px;font-family:'Satoshi',sans-serif;font-size:26px;color:#94A3B8;line-height:1.5}
+.fT-num{position:absolute;left:80px;top:180px;font-family:'General Sans',sans-serif;font-weight:600;font-size:300px;line-height:0.9;letter-spacing:-0.05em;color:#fff}
+.fT-num em{font-style:normal;background:linear-gradient(135deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fT-numlbl{position:absolute;top:580px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:600;font-size:54px;color:#fff;letter-spacing:-0.02em;line-height:1.1}
+.fT-numdelta{position:absolute;top:780px;left:80px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:30px;color:#10B981}
+
+/* Story text patterns */
+.sT-hero{position:absolute;left:0;right:0;top:380px;text-align:center;font-family:'General Sans',sans-serif;font-weight:700;font-size:96px;color:#0A0A0A;letter-spacing:-0.03em;line-height:1.02;padding:0 80px}
+.sT-hero .hl-d{background:#0A0A0A;color:#BFFF00;padding:4px 16px;border-radius:8px;display:inline-block;margin:6px 0}
+.sT-eye{position:absolute;top:140px;left:80px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:24px;letter-spacing:0.16em;text-transform:uppercase}
+.sT-h1{position:absolute;left:80px;right:80px;top:280px;font-family:'General Sans',sans-serif;font-weight:700;font-size:100px;line-height:1.02;letter-spacing:-0.04em;color:#fff}
+.sT-h1 em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sT-sub{position:absolute;left:80px;right:80px;top:840px;font-family:'Satoshi',sans-serif;font-size:32px;color:#94A3B8;line-height:1.45}
+.sT-cta{position:absolute;bottom:200px;left:80px;right:80px;padding:34px;background:linear-gradient(90deg,#BFFF00,#FF7777);color:#0A0A0A;font-family:'General Sans',sans-serif;font-weight:700;font-size:38px;letter-spacing:-0.02em;text-align:center;border-radius:20px;box-shadow:0 12px 30px rgba(191,255,0,0.4)}
+.sT-swipe{position:absolute;bottom:140px;left:0;right:0;text-align:center;font-family:'Satoshi',sans-serif;font-weight:800;font-size:28px;letter-spacing:0.18em;text-transform:uppercase;color:#0A0A0A;opacity:0.78}
+.sT-badge{position:absolute;top:160px;left:80px;background:#FF7777;color:#0A0A0A;font-family:'General Sans',sans-serif;font-weight:700;font-size:24px;letter-spacing:0.08em;text-transform:uppercase;padding:14px 22px;border-radius:8px;transform:rotate(-2deg);box-shadow:6px 6px 0 rgba(0,0,0,0.85)}
+.sT-logo{position:absolute;top:380px;left:50%;transform:translateX(-50%);width:380px;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.4))}
+
+/* Carousel slide patterns */
+.cT-num{position:absolute;top:80px;left:80px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:22px;color:#5A5A60;letter-spacing:0.1em}
+.cT-eye{position:absolute;top:200px;left:80px;font-family:'Satoshi',sans-serif;font-weight:800;font-size:22px;letter-spacing:0.16em;text-transform:uppercase;color:#BFFF00}
+.cT-eye::before{content:"▮ "}
+.cT-h{position:absolute;top:280px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:96px;line-height:1.02;letter-spacing:-0.04em;color:#fff}
+.cT-h em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cT-h .lime-w{color:#BFFF00}
+.cT-h .coral-w{color:#FF7777}
+.cT-sub{position:absolute;top:780px;left:80px;right:80px;font-family:'Satoshi',sans-serif;font-size:32px;color:#94A3B8;line-height:1.45}
+.cT-tag{position:absolute;bottom:80px;left:80px;display:flex;align-items:center;gap:14px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:18px;color:#94A3B8;letter-spacing:0.04em}
+.cT-tag img{width:48px;height:48px;display:block}
+.cT-tag b{color:#fff;font-family:'General Sans',sans-serif;font-weight:700;font-size:24px;letter-spacing:-0.02em}
+
+/* LinkedIn patterns */
+.lT{background:#0A0A0A}
+.lT .left{position:absolute;top:80px;left:80px;right:520px;bottom:80px;display:flex;flex-direction:column;justify-content:space-between}
+.lT .l-eye{font-family:'Satoshi',sans-serif;font-weight:800;font-size:14px;letter-spacing:0.16em;text-transform:uppercase;color:#BFFF00;margin-bottom:18px}
+.lT .l-eye::before{content:"▮ "}
+.lT .l-h{font-family:'General Sans',sans-serif;font-weight:600;font-size:54px;line-height:1.04;letter-spacing:-0.03em;color:#fff;margin-bottom:14px}
+.lT .l-h em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lT .l-sub{font-family:'Satoshi',sans-serif;font-size:20px;color:#94A3B8;line-height:1.5}
+.lT .l-bottom{display:flex;align-items:center;gap:14px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:18px;color:#94A3B8}
+.lT .l-bottom img{width:48px;height:48px}
+.lT .l-bottom b{color:#fff;font-family:'General Sans',sans-serif;font-weight:700;font-size:22px;letter-spacing:-0.02em}
+.lT .right{position:absolute;top:80px;right:80px;width:380px;bottom:80px;background:#141414;border-radius:24px;padding:32px;box-shadow:6px 6px 16px rgba(0,0,0,0.55);overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.lT .right img{width:160px;filter:drop-shadow(0 12px 28px rgba(0,0,0,0.5)) drop-shadow(0 0 24px rgba(191,255,0,0.18))}
+
+/* X patterns */
+.xT{background:#0A0A0A;overflow:hidden}
+.xT::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(191,255,0,0.12) 0%,transparent 55%);pointer-events:none}
+.xT .x-logo{position:absolute;top:80px;left:80px;width:80px}
+.xT .x-h{position:absolute;top:200px;left:80px;right:80px;font-family:'General Sans',sans-serif;font-weight:700;font-size:64px;line-height:1.05;letter-spacing:-0.03em;color:#fff}
+.xT .x-h em{font-style:normal;background:linear-gradient(90deg,#BFFF00,#FF7777);-webkit-background-clip:text;background-clip:text;color:transparent}
+.xT .x-sub{position:absolute;top:440px;left:80px;right:80px;font-family:'Satoshi',sans-serif;font-weight:600;font-size:26px;color:#94A3B8;line-height:1.45}
+.xT .x-cta{position:absolute;bottom:80px;left:80px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:22px;color:#BFFF00;letter-spacing:0.04em}
+
 @media (max-width:1024px){
   h1.bb-h1{font-size:48px}
   .overview{grid-template-columns:1fr 1fr}
@@ -289,6 +392,16 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> Compartilhe quem precisa ver. <br>Visual: aplicar template carrossel "Hook" do brandbook social.</div>
       <div class="tags">#linkinbio #marketingdigital #atribuicao #trackingdigital · @marketeiros-bra</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">Carrossel IG · 5 slides · 1080×1350</span></div>
+        <div class="art-row scroll">
+          <div class="aw-carousel"><span class="slide-badge">01/05</span><div class="canvas A-jet"><div class="tpl-halftone"></div><span class="cT-num">01 / 05</span><h1 class="cT-h">5 sinais que seu encurtador <em>te engana.</em></h1><div class="cT-tag"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">02/05</span><div class="canvas A-surface"><div class="tpl-halftone"></div><span class="cT-num">02 / 05</span><div class="cT-eye">Sinal 01</div><h1 class="cT-h" style="top:340px;font-size:88px">Só mostra <em>clique total.</em></h1><p class="cT-sub">Cliques sem origem, sem device, sem fonte. É contagem. Não é dado.</p><div class="cT-tag"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">03/05</span><div class="canvas A-jet"><div class="tpl-halftone"></div><span class="cT-num">03 / 05</span><div class="cT-eye">Sinal 03</div><h1 class="cT-h" style="top:340px;font-size:84px">Pixel <em>não dispara</em> confiável pós-iOS.</h1><p class="cT-sub">Safari ITP bloqueia cookie de terceiro. 30-50% das conversões somem.</p><div class="cT-tag"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">04/05</span><div class="canvas A-surface"><div class="tpl-halftone"></div><span class="cT-num">04 / 05</span><div class="cT-eye">Sinal 05</div><h1 class="cT-h" style="top:340px;font-size:84px">Zero <em>roteamento</em> condicional.</h1><p class="cT-sub">iPhone, Android, Desktop, SP, RJ — todo mundo vai pro mesmo lugar.</p><div class="cT-tag"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">05/05</span><div class="canvas A-gradient"><div class="tpl-halftone"></div><span class="cT-num" style="color:rgba(10,10,10,0.55)">05 / 05</span><div class="cT-eye" style="color:#0A0A0A">Veredicto</div><h1 class="cT-h" style="top:340px;color:#0A0A0A;font-size:96px">Se 3+ se aplicam,<br>seu link <span style="background:#0A0A0A;color:#BFFF00;padding:0 12px;border-radius:8px">mente</span> pra você.</h1></div></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -305,6 +418,15 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> Concorda? Salve e mostra na próxima reunião de marketing. <br>Visual: usar template "Quote / KPI Highlight".</div>
       <div class="tags">#hottake #marketing #bitly #linkinbio</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">IG Feed · Quote · 1080×1080</span></div>
+        <div class="aw-feed"><div class="canvas A-jet"><div class="tpl-halftone"></div>
+          <div class="fT-eye">Hot take · jun 2026</div>
+          <h1 class="fT-hook">Bitly é o <em>WordArt</em><br>do marketing.</h1>
+          <p class="fT-body">Encurta? Sim. Mas você precisa de infraestrutura, não enfeite. O link é o início do funil — não a estética do bio.</p>
+          <div class="brand-tag" style="bottom:80px;left:80px"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -321,6 +443,15 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Reply: como você está medindo hoje?" — gerar discussão.<br>Visual: texto puro, sem imagem (X funciona assim).</div>
       <div class="tags">#ios17 #tracking #pixel #ads</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">X (Twitter) · 1200×675</span></div>
+        <div class="aw-x"><div class="canvas xT">
+          <img class="x-logo" src="../../brand-refs/logos/applink-logo-transparent.png" alt="">
+          <h1 class="x-h">iOS quebrou seu pixel.<br><em>Ninguém te avisou.</em></h1>
+          <p class="x-sub">Safari bloqueou cookie de terceiro. Tracking convencional perde 30-50% das conversões. Você ainda otimiza com "qual fonte gerou venda?". A resposta está errada por design.</p>
+          <div class="x-cta">→ applink.com.br · @applink</div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -342,6 +473,16 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> Swipe up no último frame → landing.<br>Visual: template "Story Feature Drop" adaptado.</div>
       <div class="tags">#quiz #storyinterativo · tagar @applink</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">IG Story · Quiz · 1080×1920 (frame 04 de 5)</span></div>
+        <div class="aw-story"><div class="canvas A-jet">
+          <div class="tpl-halftone"></div>
+          <div class="sT-eye" style="color:#FF7777">Pergunta 04 · veredicto</div>
+          <h1 class="sT-h1">Se respondeu <em>"não"</em><br>em alguma...</h1>
+          <p class="sT-sub">Seu tracking tem buraco. Os dados que você decide em cima estão incompletos por design.</p>
+          <div class="sT-cta">→ Veja como medir certo</div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -362,6 +503,21 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Comente 'Hyros' que mando comparativo." (gera lista qualificada)<br>Visual: template LinkedIn launch.</div>
       <div class="tags">#hyros #atribuicao #marketingbra #saas</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">LinkedIn · 1200×627</span></div>
+        <div class="aw-linkedin"><div class="canvas lT">
+          <div class="tpl-halftone"></div>
+          <div class="left">
+            <div>
+              <div class="l-eye">Análise · jun 2026</div>
+              <h1 class="l-h">Por que profissionais BR pagam <em>em dólar</em> pra Hyros.</h1>
+              <p class="l-sub">Atribuição multi-touch, deferred firing, server-side pixel. Mesma stack técnica, agora com câmbio em real.</p>
+            </div>
+            <div class="l-bottom"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b><span>· applink.com.br</span></div>
+          </div>
+          <div class="right"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""></div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -378,6 +534,15 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Marca um amigo que precisa parar de comemorar clique vazio."<br>Visual: quote template no estilo cream/halftone do brandbook.</div>
       <div class="tags">#weekendthoughts #marketing #metricasreais</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">IG Feed · Quote · 1080×1080</span></div>
+        <div class="aw-feed"><div class="canvas A-jet"><div class="tpl-halftone"></div>
+          <div class="fT-eye">Reflexão · sábado</div>
+          <h1 class="fT-hook" style="top:300px">Métrica vaidosa<br>é <em>desinformação.</em></h1>
+          <p class="fT-body">Não importa quantos cliques. Importa qual clique converteu. Encurtador conta o primeiro. APPlink conta o segundo.</p>
+          <div class="brand-tag" style="bottom:80px;left:80px"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -394,6 +559,15 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Próxima semana: como tracking moderno funciona de verdade."<br>Visual: stories curtos, transições rápidas.</div>
       <div class="tags">#recap #weeklywrap</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">IG Story · Recap · 1080×1920</span></div>
+        <div class="aw-story"><div class="canvas A-jet"><div class="tpl-halftone"></div>
+          <div class="sT-eye" style="color:#BFFF00">Semana 01 · jun</div>
+          <h1 class="sT-h1">5 hot takes<br>que <em>doem.</em></h1>
+          <p class="sT-sub">Recap dos 4 melhores posts da semana + teaser: próxima semana é educação técnica.</p>
+          <div class="sT-cta">↑ Arraste pra ver todos</div>
+        </div></div>
+      </div>
     </div>
   </div>
 </div>
@@ -426,6 +600,16 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> Salve esse carrossel — você vai voltar pra ele.<br>Visual: template "Features" do brandbook adaptado.</div>
       <div class="tags">#cookieless #serverside #atribuicao #educacao</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">Carrossel IG · 7 slides · 1080×1350</span></div>
+        <div class="art-row scroll">
+          <div class="aw-carousel"><span class="slide-badge">01/07</span><div class="canvas A-jet"><div class="tpl-halftone"></div><span class="cT-num">01 / 07</span><h1 class="cT-h">O <em>cookie morreu.</em><br>O que substitui?</h1><div class="cT-tag"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">02/07</span><div class="canvas A-surface"><div class="tpl-halftone"></div><span class="cT-num">02 / 07</span><div class="cT-eye">O que rolou</div><h1 class="cT-h" style="top:340px;font-size:84px">iOS 17 + Chrome <em>mataram</em> cookie 3rd party.</h1><p class="cT-sub">Perda de 30-50% na atribuição. Você só notou se mede direito.</p><div class="cT-tag"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">03/07</span><div class="canvas A-jet"><div class="tpl-halftone"></div><span class="cT-num">03 / 07</span><div class="cT-eye">Substituta 01</div><h1 class="cT-h" style="top:340px;font-size:88px"><span class="lime-w">Pixel</span><br>server-side.</h1><p class="cT-sub">Evento dispara do seu servidor, não do navegador. Sem cookie. Sem ITP.</p><div class="cT-tag"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">04/07</span><div class="canvas A-jet"><div class="tpl-halftone"></div><span class="cT-num">04 / 07</span><div class="cT-eye">Substituta 02</div><h1 class="cT-h" style="top:340px;font-size:88px"><span class="lime-w">First-party</span><br>data.</h1><p class="cT-sub">Dado que VOCÊ coleta no seu funil — não o que a plataforma compartilha.</p><div class="cT-tag"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">07/07</span><div class="canvas A-gradient"><div class="tpl-halftone"></div><span class="cT-num" style="color:rgba(10,10,10,0.55)">07 / 07</span><h1 class="cT-h" style="top:240px;color:#0A0A0A;font-size:100px">APPlink<br><span style="background:#0A0A0A;color:#BFFF00;padding:0 12px;border-radius:8px">combina</span><br>as 4.</h1><p class="cT-sub" style="color:#0A0A0A;opacity:0.8">Servidor + first-party + deferred + fingerprint. Em 1 link.</p></div></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -442,6 +626,28 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Diz aí: você fazia ideia que o pixel disparava só na LP?"<br>Visual: design técnico, JetBrains Mono nos labels.</div>
       <div class="tags">#pixeldeferred #metaads #serverside</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">IG Feed · Infográfico · 1080×1080</span></div>
+        <div class="aw-feed"><div class="canvas A-surface"><div class="tpl-halftone"></div>
+          <div class="fT-eye">Infográfico técnico</div>
+          <h1 class="fT-hook" style="top:200px;font-size:64px">Pixel deferred<br>em <em>1 imagem.</em></h1>
+          <div style="position:absolute;top:540px;left:80px;right:80px;display:flex;flex-direction:column;gap:18px">
+            <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:rgba(191,255,0,0.1);border:1px solid rgba(191,255,0,0.25);border-radius:14px">
+              <span style="font-family:'JetBrains Mono',monospace;color:#BFFF00;font-weight:700;font-size:24px">01</span>
+              <span style="font-family:'Satoshi',sans-serif;font-weight:600;font-size:26px;color:#fff">Clique → APPlink intercepta</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:rgba(191,255,0,0.1);border:1px solid rgba(191,255,0,0.25);border-radius:14px">
+              <span style="font-family:'JetBrains Mono',monospace;color:#BFFF00;font-weight:700;font-size:24px">02</span>
+              <span style="font-family:'Satoshi',sans-serif;font-weight:600;font-size:26px;color:#fff">Dispara pixel <span style="color:#BFFF00">server-side</span></span>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:rgba(191,255,0,0.1);border:1px solid rgba(191,255,0,0.25);border-radius:14px">
+              <span style="font-family:'JetBrains Mono',monospace;color:#BFFF00;font-weight:700;font-size:24px">03</span>
+              <span style="font-family:'Satoshi',sans-serif;font-weight:600;font-size:26px;color:#fff">Redirect pro destino</span>
+            </div>
+          </div>
+          <div class="brand-tag" style="bottom:60px;left:80px"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -466,6 +672,15 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> Reply pra discussão. Pode gerar leads quentes.<br>Visual: thread só com texto e 1 imagem do diagrama no T4.</div>
       <div class="tags">#multitouch #atribuicao #educacao</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">X · Capa da thread · 1200×675</span></div>
+        <div class="aw-x"><div class="canvas xT">
+          <img class="x-logo" src="../../brand-refs/logos/applink-logo-transparent.png" alt="">
+          <h1 class="x-h">Atribuição multi-touch<br><em>explicada pra quem nunca ouviu.</em></h1>
+          <p class="x-sub">Você não converte na primeira vez. Vê 3-7x antes de comprar. Last-click mente — e tem como medir certo. Thread 🧵</p>
+          <div class="x-cta">→ 8 tweets · começa aqui ↓</div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -488,6 +703,16 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Comenta 'demo' que mando o link grátis."<br>Visual: screen-recording real do mockup 02-criar-link.</div>
       <div class="tags">#tutorial #smartlink #reels</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">IG Reel · Capa · 1080×1920</span></div>
+        <div class="aw-story"><div class="canvas A-jet">
+          <div class="tpl-halftone"></div>
+          <div class="sT-badge" style="background:#BFFF00;color:#0A0A0A">▶ TUTORIAL · 60s</div>
+          <h1 class="sT-h1">Smart link<br>do zero ao on-line<br>em <em>60s.</em></h1>
+          <p class="sT-sub">Cole URL → escolha domínio → pixel → regra A/B → save. Tracking pronto antes do café esfriar.</p>
+          <div class="sT-cta">→ Toque pra ver o tutorial</div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -510,6 +735,21 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Como você nomeia suas UTMs? Compartilho um framework no DM."<br>Visual: imagem do link decomposto com setas/labels.</div>
       <div class="tags">#linkedinarticle #utm #analytics</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">LinkedIn · 1200×627</span></div>
+        <div class="aw-linkedin"><div class="canvas lT">
+          <div class="tpl-halftone"></div>
+          <div class="left">
+            <div>
+              <div class="l-eye">Análise técnica</div>
+              <h1 class="l-h">Anatomia de um link <em>rastreável.</em></h1>
+              <p class="l-sub">Domínio · slug · UTMs · pixel · roteamento. Um link bom não é encurtado — é instrumentado.</p>
+            </div>
+            <div class="l-bottom"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b><span>· applink.com.br</span></div>
+          </div>
+          <div class="right" style="background:#0A0A0A;align-items:flex-start;justify-content:flex-start;padding:24px"><div style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#BFFF00;line-height:1.7;width:100%">plnk.to/<br>promo-inverno<br>?utm_source=ig<br>&amp;utm_medium=story<br>&amp;utm_campaign=jun</div></div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -527,6 +767,17 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Salve esse stories nos destaques pra consultar depois."<br>Visual: stories texto+stickers, sem produção pesada.</div>
       <div class="tags">#qanda #livesession</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">IG Story · Q&amp;A · 1080×1920</span></div>
+        <div class="aw-story"><div class="canvas A-jet">
+          <div class="tpl-halftone"></div>
+          <div class="sT-eye" style="color:#BFFF00">Sábado · ao vivo</div>
+          <h1 class="sT-h1">Pergunte<br>pro <em>APPlink.</em></h1>
+          <p class="sT-sub">Manda sua dúvida de tracking, pixel, atribuição, encurtador — respondo aqui ao vivo.</p>
+          <div style="position:absolute;bottom:280px;left:80px;right:80px;padding:24px;background:rgba(255,255,255,0.06);border:2px solid rgba(191,255,0,0.4);border-radius:18px;font-family:'Satoshi',sans-serif;color:#94A3B8;font-size:30px">Digite sua pergunta...</div>
+          <div class="sT-cta">↑ Responde no DM ou story sticker</div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -543,6 +794,15 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> Story link sticker direto pra landing /casos<br>Visual: stories rápidos.</div>
       <div class="tags">#weeklywrap #educacao</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">IG Story · Recap · 1080×1920</span></div>
+        <div class="aw-story"><div class="canvas A-gradient"><div class="tpl-halftone"></div>
+          <div class="sT-eye" style="color:#0A0A0A">Semana 02 · recap</div>
+          <h1 class="sT-h1" style="color:#0A0A0A">Técnica<br>em <span style="background:#0A0A0A;color:#BFFF00;padding:0 12px;border-radius:8px">5 frames.</span></h1>
+          <p class="sT-sub" style="color:#0A0A0A;opacity:0.85">Cookie morreu, pixel deferred, multi-touch, link rastreável. Tudo nessa semana.</p>
+          <div class="sT-swipe">↑ Próxima: casos reais</div>
+        </div></div>
+      </div>
     </div>
   </div>
 </div>
@@ -574,6 +834,15 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Quer ser o próximo case? Comenta 'case' aqui."<br>Visual: template "KPI Highlight" + grid de números.</div>
       <div class="tags">#casereal #criadora #atribuicao</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">Carrossel IG · 6 slides · Case real · 1080×1350</span></div>
+        <div class="art-row scroll">
+          <div class="aw-carousel"><span class="slide-badge">01/06</span><div class="canvas A-jet"><div class="tpl-halftone"></div><span class="cT-num">01 / 06</span><div class="cT-eye">Case real · maio 2026</div><h1 class="cT-h" style="top:340px;font-size:88px">14k cliques.<br><em>30 dias.</em></h1><p class="cT-sub">Como uma criadora SP rastreou cada um — com pixel, geo e device atribuídos.</p><div class="cT-tag"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">02/06</span><div class="canvas A-surface"><div class="tpl-halftone"></div><span class="cT-num">02 / 06</span><div class="cT-eye">Stack antiga</div><h1 class="cT-h" style="top:340px;font-size:80px">Bitly<br>+ <em>planilha</em><br>+ achismo.</h1><p class="cT-sub">280k seguidores, R$6k/mês em ads, dados quebrados.</p><div class="cT-tag"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">04/06</span><div class="canvas A-jet"><div class="tpl-halftone"></div><span class="cT-num">04 / 06</span><div class="cT-eye">Resultado</div><h1 class="fT-num" style="top:280px;font-size:200px">14<em>k</em></h1><div class="fT-numlbl" style="top:540px">cliques rastreados · 78% mobile iOS · 12% Android</div><div class="fT-numdelta" style="top:760px">▲ atribuição 94% precisa</div><div class="cT-tag"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">06/06</span><div class="canvas A-gradient"><div class="tpl-halftone"></div><span class="cT-num" style="color:rgba(10,10,10,0.55)">06 / 06</span><h1 class="cT-h" style="top:280px;color:#0A0A0A;font-size:90px">"Parei de achar.<br><span style="background:#0A0A0A;color:#BFFF00;padding:0 12px;border-radius:8px">Comecei a saber.</span>"</h1><p class="cT-sub" style="color:#0A0A0A;opacity:0.85">— Criadora APPlink · 280k Insta · São Paulo</p></div></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -590,6 +859,16 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Salva esse número pra mostrar no próximo briefing."<br>Visual: template "KPI Highlight" do brandbook.</div>
       <div class="tags">#mobilefirst #iossafari #dados</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">IG Feed · KPI · 1080×1080</span></div>
+        <div class="aw-feed"><div class="canvas A-surface"><div class="tpl-halftone"></div>
+          <div class="fT-eye">Dado · jun 2026</div>
+          <div class="fT-num">78<em>%</em></div>
+          <div class="fT-numlbl">dos visitantes vêm de mobile iOS — e Safari ITP bloqueia metade do tracking.</div>
+          <div class="fT-numdelta">▲ você precisa de pixel server-side</div>
+          <div class="brand-tag" style="bottom:60px;left:80px"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -606,6 +885,15 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> Link pro case completo no LinkedIn.<br>Visual: quote design, no estilo dos cards de testimonial.</div>
       <div class="tags">#testimonial #social-proof</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">X · Testimonial · 1200×675</span></div>
+        <div class="aw-x"><div class="canvas xT">
+          <img class="x-logo" src="../../brand-refs/logos/applink-logo-transparent.png" alt="">
+          <h1 class="x-h">"Parei de achar.<br><em>Comecei a saber.</em>"</h1>
+          <p class="x-sub">— Lucas R., infoprodutor (R$80k/mês em lançamentos). Migrou de Bitly Pro pra APPlink. 1 dia de setup. 30 dias depois, decide com dado, não intuição.</p>
+          <div class="x-cta">→ Case completo · LinkedIn</div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -627,6 +915,16 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Salve esse reel — você vai precisar."<br>Visual: screen-rec do mockup 02-criar-link com seções do Avançado.</div>
       <div class="tags">#abtest #tutorial #smartlink</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">IG Reel · Capa · 1080×1920</span></div>
+        <div class="aw-story"><div class="canvas A-jet">
+          <div class="tpl-halftone"></div>
+          <div class="sT-badge" style="background:#BFFF00;color:#0A0A0A">▶ TUTORIAL · 2min</div>
+          <h1 class="sT-h1">Configurar <em>A/B test</em><br>em <span style="background:#FF7777;color:#0A0A0A;padding:0 12px;border-radius:8px">2 minutos.</span></h1>
+          <p class="sT-sub">Variante A 60%, variante B 40%. Pixel em cada. Em 1h você sabe qual converte.</p>
+          <div class="sT-cta">→ Toque pra ver tutorial</div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -649,6 +947,21 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Qual estratégia você está usando? Comente 'tracking' que mando análise customizada."<br>Visual: gráfico de queda de atribuição 2020→2026.</div>
       <div class="tags">#ios17 #atribuicao #mercadobra</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">LinkedIn · 1200×627</span></div>
+        <div class="aw-linkedin"><div class="canvas lT">
+          <div class="tpl-halftone"></div>
+          <div class="left">
+            <div>
+              <div class="l-eye">Análise de mercado</div>
+              <h1 class="l-h">iOS 17, Safari ITP &amp; o <em>futuro</em> da atribuição no Brasil.</h1>
+              <p class="l-sub">O que mudou desde 2017, queda de fidelidade de atribuição, e o gap brasileiro que ferramentas USD não preenchem.</p>
+            </div>
+            <div class="l-bottom"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b><span>· 5 min de leitura</span></div>
+          </div>
+          <div class="right" style="background:#0A0A0A;align-items:flex-start;justify-content:center;padding:24px"><svg width="280" height="160" viewBox="0 0 280 160" fill="none"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#10B981"/><stop offset="1" stop-color="#EF4444"/></linearGradient></defs><polyline points="20,30 60,40 100,55 140,75 180,95 220,115 260,135" stroke="url(#g)" stroke-width="3" fill="none"/><text x="20" y="155" font-family="JetBrains Mono" font-size="9" fill="#5A5A60">2020</text><text x="240" y="155" font-family="JetBrains Mono" font-size="9" fill="#5A5A60">2026</text><text x="20" y="22" font-family="JetBrains Mono" font-size="10" fill="#fff">Fidelidade de atribuição</text></svg></div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -670,6 +983,17 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> Story link "Quer ver mais? DM 'dev'"<br>Visual: stories autênticos, vibe terminal/dev.</div>
       <div class="tags">#bts #buildinpublic</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">IG Story · BTS · 1080×1920</span></div>
+        <div class="aw-story"><div class="canvas A-jet">
+          <div class="tpl-halftone"></div>
+          <div class="sT-eye" style="color:#BFFF00;font-size:20px">Behind the scenes</div>
+          <h1 class="sT-h1" style="top:240px;font-size:84px">28<em>ms</em><br>p95 redirect.<br><span style="background:#BFFF00;color:#0A0A0A;padding:0 12px;border-radius:8px">global.</span></h1>
+          <div style="position:absolute;top:780px;left:80px;right:80px;background:#0F0F0F;border:1px solid rgba(191,255,0,0.2);border-radius:14px;padding:24px;font-family:'JetBrains Mono',monospace;color:#BFFF00;font-size:24px;line-height:1.6">$ applink stats<br><span style="color:#94A3B8">p50: 12ms</span><br><span style="color:#94A3B8">p95: 28ms</span><br><span style="color:#94A3B8">uptime: 99.99%</span></div>
+          <p class="sT-sub" style="top:1320px">Construído por gente que vendia online antes.</p>
+          <div class="sT-cta">→ DM 'dev' pra ver mais</div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -686,6 +1010,15 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> Story link pra /casos<br>Visual: stories simples.</div>
       <div class="tags">#weeklywrap #cases</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">IG Story · Recap · 1080×1920</span></div>
+        <div class="aw-story"><div class="canvas A-jet"><div class="tpl-halftone"></div>
+          <div class="sT-eye" style="color:#FF7777">Semana 03 · provas reais</div>
+          <h1 class="sT-h1">Casos<br>de <em>quem</em><br>migrou.</h1>
+          <p class="sT-sub">14k cliques. Quote real. iOS 17. 28ms. Tudo aqui em 5 frames.</p>
+          <div class="sT-cta">↑ Próxima: APPlink vs concorrentes</div>
+        </div></div>
+      </div>
     </div>
   </div>
 </div>
@@ -715,6 +1048,15 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Já usa Linktree? Conta no comentário sua maior dor."<br>Visual: tabela comparativa em template "Features".</div>
       <div class="tags">#vs #linktree #comparacao</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">Carrossel IG · 8 slides · vs Linktree · 1080×1350</span></div>
+        <div class="art-row scroll">
+          <div class="aw-carousel"><span class="slide-badge">01/08</span><div class="canvas A-jet"><div class="tpl-halftone"></div><span class="cT-num">01 / 08</span><h1 class="cT-h" style="font-size:88px">APPlink <em>vs</em><br><span class="coral-w">Linktree.</span></h1><p class="cT-sub">Comparação honesta. Sem inimigo — resolvemos problema diferente.</p><div class="cT-tag"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">02/08</span><div class="canvas A-surface"><div class="tpl-halftone"></div><span class="cT-num">02 / 08</span><h1 class="cT-h" style="top:280px;font-size:80px"><span class="coral-w">Linktree</span><br>= vitrine bonita.</h1><h1 class="cT-h" style="top:680px;font-size:80px"><span class="lime-w">APPlink</span><br>= infra de tracking.</h1><div class="cT-tag"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">04/08</span><div class="canvas A-jet"><div class="tpl-halftone"></div><span class="cT-num">04 / 08</span><div class="cT-eye">Comparação · ponto 03</div><h1 class="cT-h" style="top:340px;font-size:74px">Pixels<br>reusáveis</h1><div style="position:absolute;top:720px;left:80px;right:80px;display:flex;gap:24px"><div style="flex:1;padding:24px;background:rgba(255,119,119,0.1);border:1px solid rgba(255,119,119,0.25);border-radius:14px"><div style="font-family:'JetBrains Mono',monospace;color:#FF7777;font-size:60px;font-weight:700">✗</div><div style="font-family:'Satoshi',sans-serif;color:#fff;font-weight:700;font-size:22px;margin-top:6px">Linktree</div></div><div style="flex:1;padding:24px;background:rgba(191,255,0,0.1);border:1px solid rgba(191,255,0,0.25);border-radius:14px"><div style="font-family:'JetBrains Mono',monospace;color:#BFFF00;font-size:60px;font-weight:700">✓</div><div style="font-family:'Satoshi',sans-serif;color:#fff;font-weight:700;font-size:22px;margin-top:6px">APPlink</div></div></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">08/08</span><div class="canvas A-gradient"><div class="tpl-halftone"></div><span class="cT-num" style="color:rgba(10,10,10,0.55)">08 / 08</span><h1 class="cT-h" style="top:340px;color:#0A0A0A;font-size:88px">Use<br>os <em>dois.</em></h1><p class="cT-sub" style="color:#0A0A0A;opacity:0.85">Linktree pra estética. APPlink pra performance. Cada um resolve o seu.</p></div></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -731,6 +1073,20 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Quer ver demo? DM 'roteamento'."<br>Visual: grid 2x2 dos modos com ícones lime.</div>
       <div class="tags">#roteamentocondicional #smartlinks</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">IG Feed · Features · 1080×1080</span></div>
+        <div class="aw-feed"><div class="canvas A-jet"><div class="tpl-halftone"></div>
+          <div class="fT-eye">Diferencial · Mago</div>
+          <h1 class="fT-hook" style="top:180px;font-size:64px">Roteamento <em>condicional.</em></h1>
+          <div style="position:absolute;top:480px;left:80px;right:80px;display:grid;grid-template-columns:1fr 1fr;gap:18px">
+            <div style="padding:24px;background:rgba(191,255,0,0.08);border:1px solid rgba(191,255,0,0.25);border-radius:18px"><div style="font-family:'JetBrains Mono',monospace;color:#BFFF00;font-size:14px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase">▮ A/B</div><div style="font-family:'General Sans',sans-serif;color:#fff;font-size:28px;font-weight:600;margin-top:8px;letter-spacing:-0.02em">Teste<br>por %</div></div>
+            <div style="padding:24px;background:rgba(255,119,119,0.08);border:1px solid rgba(255,119,119,0.25);border-radius:18px"><div style="font-family:'JetBrains Mono',monospace;color:#FF7777;font-size:14px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase">▮ GEO</div><div style="font-family:'General Sans',sans-serif;color:#fff;font-size:28px;font-weight:600;margin-top:8px;letter-spacing:-0.02em">SP, RJ,<br>BR, US</div></div>
+            <div style="padding:24px;background:rgba(0,240,255,0.08);border:1px solid rgba(0,240,255,0.25);border-radius:18px"><div style="font-family:'JetBrains Mono',monospace;color:#00F0FF;font-size:14px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase">▮ DEVICE</div><div style="font-family:'General Sans',sans-serif;color:#fff;font-size:28px;font-weight:600;margin-top:8px;letter-spacing:-0.02em">Phone,<br>Desktop</div></div>
+            <div style="padding:24px;background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.25);border-radius:18px"><div style="font-family:'JetBrains Mono',monospace;color:#A78BFA;font-size:14px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase">▮ SO</div><div style="font-family:'General Sans',sans-serif;color:#fff;font-size:28px;font-weight:600;margin-top:8px;letter-spacing:-0.02em">iOS,<br>Android</div></div>
+          </div>
+          <div class="brand-tag" style="bottom:60px;left:80px"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -754,6 +1110,15 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Already use Hyros? Reply how much you pay/month — sample real."<br>Visual: texto puro com bullets.</div>
       <div class="tags">#hyros #saasbra #atribuicao</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">X · 1200×675</span></div>
+        <div class="aw-x"><div class="canvas xT">
+          <img class="x-logo" src="../../brand-refs/logos/applink-logo-transparent.png" alt="">
+          <h1 class="x-h">"Hyros do Brasil"<br><em>na prática.</em></h1>
+          <p class="x-sub">Multi-touch attribution ✓ · Deferred firing ✓ · Server-side pixel ✓ · Análise por device/SO ✓ · Pricing em real ✓<br>Mesma stack. Câmbio diferente.</p>
+          <div class="x-cta">→ applink.com.br</div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -775,6 +1140,19 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> Swipe up — "Configurar grátis"<br>Visual: screen-rec do mockup + transições.</div>
       <div class="tags">#demo #roteamento</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">IG Story · Demo · 1080×1920</span></div>
+        <div class="aw-story"><div class="canvas A-jet">
+          <div class="tpl-halftone"></div>
+          <div class="sT-eye" style="color:#BFFF00">▶ Demo · live</div>
+          <h1 class="sT-h1">Mesmo link.<br><em>Cliques</em><br>diferentes.</h1>
+          <div style="position:absolute;top:820px;left:80px;right:80px;display:flex;flex-direction:column;gap:14px">
+            <div style="padding:24px 28px;background:rgba(191,255,0,0.1);border:1px solid rgba(191,255,0,0.25);border-radius:18px;display:flex;align-items:center;gap:14px"><span style="font-family:'JetBrains Mono',monospace;color:#BFFF00;font-size:26px">iOS</span><span style="color:#94A3B8;font-size:24px">→</span><span style="font-family:'Satoshi',sans-serif;color:#fff;font-weight:700;font-size:26px">App Store</span></div>
+            <div style="padding:24px 28px;background:rgba(255,119,119,0.1);border:1px solid rgba(255,119,119,0.25);border-radius:18px;display:flex;align-items:center;gap:14px"><span style="font-family:'JetBrains Mono',monospace;color:#FF7777;font-size:26px">Android</span><span style="color:#94A3B8;font-size:24px">→</span><span style="font-family:'Satoshi',sans-serif;color:#fff;font-weight:700;font-size:26px">Play Store</span></div>
+          </div>
+          <div class="sT-cta">→ Configurar grátis</div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -801,6 +1179,21 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Em dúvida se faz sentido? Comente sua situação que respondo na real."<br>Visual: template LinkedIn launch adaptado.</div>
       <div class="tags">#bitly #migracao #saas #comparacao</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">LinkedIn · 1200×627</span></div>
+        <div class="aw-linkedin"><div class="canvas lT">
+          <div class="tpl-halftone"></div>
+          <div class="left">
+            <div>
+              <div class="l-eye">Análise honesta</div>
+              <h1 class="l-h">Quando migrar de <em>Bitly Premium</em> pra APPlink (e quando NÃO).</h1>
+              <p class="l-sub">Não é pra todo mundo. Faça sentido se você gasta R$200+/mês em Bitly, roda 50+ campanhas/mês e quer roteamento condicional.</p>
+            </div>
+            <div class="l-bottom"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b><span>· 4 min de leitura</span></div>
+          </div>
+          <div class="right" style="background:#0A0A0A;align-items:flex-start;padding:24px;justify-content:center"><div style="display:flex;flex-direction:column;gap:14px;width:100%"><div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;color:#10B981;font-size:24px;font-weight:700">✓</span><span style="font-family:'Satoshi',sans-serif;color:#fff;font-size:18px">R$200+/mês em Bitly</span></div><div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;color:#10B981;font-size:24px;font-weight:700">✓</span><span style="font-family:'Satoshi',sans-serif;color:#fff;font-size:18px">50+ campanhas/mês</span></div><div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;color:#10B981;font-size:24px;font-weight:700">✓</span><span style="font-family:'Satoshi',sans-serif;color:#fff;font-size:18px">Pixel deferred</span></div><div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;color:#EF4444;font-size:24px;font-weight:700">✗</span><span style="font-family:'Satoshi',sans-serif;color:#94A3B8;font-size:18px">&lt;10 links/mês</span></div></div></div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -817,6 +1210,19 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Quer dobrar a tua também? Comenta 'demo'."<br>Visual: layout testimonial limpo, lime nos números.</div>
       <div class="tags">#testimonial #lancamento #conversao</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">IG Feed · Testimonial · 1080×1080</span></div>
+        <div class="aw-feed"><div class="canvas A-jet"><div class="tpl-halftone"></div>
+          <div class="fT-eye">Caso real · jun 2026</div>
+          <h1 class="fT-hook" style="top:200px;font-size:60px">"Em 30 dias,<br>dobrei <em>conversão</em><br>do meu lançamento."</h1>
+          <div style="position:absolute;top:640px;left:80px;right:80px;display:flex;gap:24px">
+            <div style="flex:1;padding:24px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:14px"><div style="font-family:'JetBrains Mono',monospace;color:#EF4444;font-size:14px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase">▮ ANTES</div><div style="font-family:'General Sans',sans-serif;color:#fff;font-size:54px;font-weight:600;margin-top:8px;letter-spacing:-0.02em">1.8<span style="color:#94A3B8;font-size:30px">%</span></div></div>
+            <div style="flex:1;padding:24px;background:rgba(191,255,0,0.08);border:1px solid rgba(191,255,0,0.25);border-radius:14px"><div style="font-family:'JetBrains Mono',monospace;color:#BFFF00;font-size:14px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase">▮ DEPOIS</div><div style="font-family:'General Sans',sans-serif;color:#fff;font-size:54px;font-weight:600;margin-top:8px;letter-spacing:-0.02em">3.6<span style="color:#BFFF00;font-size:30px">%</span></div></div>
+          </div>
+          <div style="position:absolute;top:880px;left:80px;right:80px;font-family:'Satoshi',sans-serif;font-size:18px;color:#94A3B8;font-style:italic">— Infoproduto fitness · 45k audiência · mesmo orçamento</div>
+          <div class="brand-tag" style="bottom:60px;left:80px"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -833,6 +1239,15 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> Story link pra landing<br>Visual: stories rápidos.</div>
       <div class="tags">#weeklywrap</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">IG Story · Recap · 1080×1920</span></div>
+        <div class="aw-story"><div class="canvas A-surface"><div class="tpl-halftone"></div>
+          <div class="sT-eye" style="color:#BFFF00">Semana 04 · comparações</div>
+          <h1 class="sT-h1"><em>APPlink vs</em><br>Linktree.<br>Bitly.<br>Hyros.</h1>
+          <p class="sT-sub">Comparações honestas. Sem inimigo. Cada ferramenta resolve um problema.</p>
+          <div class="sT-cta">↑ Próxima semana: fim de mês</div>
+        </div></div>
+      </div>
     </div>
   </div>
 </div>
@@ -864,6 +1279,16 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Salve esse carrossel e mostre na sua próxima reunião."<br>Visual: template "KPI" repetido em variações.</div>
       <div class="tags">#dadosreais #mesfechado #atribuicao</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">Carrossel IG · 6 slides · Fechamento · 1080×1350</span></div>
+        <div class="art-row scroll">
+          <div class="aw-carousel"><span class="slide-badge">01/06</span><div class="canvas A-jet"><div class="tpl-halftone"></div><span class="cT-num">01 / 06</span><h1 class="cT-h" style="font-size:88px">Junho<br>em <em>números.</em></h1><p class="cT-sub">30 dias. Dados reais. Sem maquiar.</p><div class="cT-tag"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">02/06</span><div class="canvas A-surface"><div class="tpl-halftone"></div><span class="cT-num">02 / 06</span><div class="fT-num" style="top:260px;font-size:240px">12<em>k</em></div><div class="fT-numlbl" style="top:680px">cliques rastreados (cliente médio)</div><div class="cT-tag"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">04/06</span><div class="canvas A-jet"><div class="tpl-halftone"></div><span class="cT-num">04 / 06</span><div class="fT-num" style="top:260px;font-size:200px">R$1.<em>20</em></div><div class="fT-numlbl" style="top:620px">custo por clique pixelado<br><span style="color:#FF7777;font-size:30px">vs R$3.40 sem deferred</span></div><div class="cT-tag"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">05/06</span><div class="canvas A-jet"><div class="tpl-halftone"></div><span class="cT-num">05 / 06</span><div class="fT-num" style="top:260px;font-size:220px">94<em>%</em></div><div class="fT-numlbl" style="top:650px">das conversões atribuídas<br><span style="color:#10B981;font-size:28px">▲ vs 60% encurtador genérico</span></div><div class="cT-tag"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b></div></div></div>
+          <div class="aw-carousel"><span class="slide-badge">06/06</span><div class="canvas A-gradient"><div class="tpl-halftone"></div><span class="cT-num" style="color:rgba(10,10,10,0.55)">06 / 06</span><h1 class="cT-h" style="top:280px;color:#0A0A0A;font-size:90px">Você pode<br>ser o <span style="background:#0A0A0A;color:#BFFF00;padding:0 12px;border-radius:8px">próximo.</span></h1><p class="cT-sub" style="color:#0A0A0A;opacity:0.85">Link na bio · 7 dias grátis · sem cartão</p></div></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -881,6 +1306,29 @@ footer{max-width:1320px;margin:48px auto 0;padding-top:32px;border-top:1px solid
       </div>
       <div class="cta"><b>CTA:</b> "Comece grátis agora — applink.com.br"<br>Visual: template "Carrossel CTA Final" + template LinkedIn launch.</div>
       <div class="tags">#ultimachance #teste #fimdemes</div>
+      <div class="art">
+        <div class="art-h"><span class="lbl">Arte renderizada</span><span class="dim">Dual · IG Feed 1080×1080 + LinkedIn 1200×627</span></div>
+        <div class="art-row">
+          <div class="aw-feed"><div class="canvas A-gradient"><div class="tpl-halftone"></div>
+            <div class="fT-eye" style="color:#0A0A0A">Última chance · fim de jun</div>
+            <h1 class="fT-hook" style="top:240px;color:#0A0A0A;font-size:104px">7 dias<br>grátis.<br>Sem<br>cartão.</h1>
+            <p class="fT-body" style="color:#0A0A0A;opacity:0.85;font-weight:700;top:840px">Crie smart links com tracking nível pro em menos de 60 segundos.</p>
+            <div style="position:absolute;bottom:80px;left:80px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:30px;color:#0A0A0A;background:rgba(10,10,10,0.1);padding:14px 24px;border-radius:12px">→ applink.com.br</div>
+          </div></div>
+          <div class="aw-linkedin"><div class="canvas lT">
+            <div class="tpl-halftone"></div>
+            <div class="left">
+              <div>
+                <div class="l-eye" style="color:#FF7777">Última chance · 30 jun</div>
+                <h1 class="l-h">Se adiou o teste em junho, <em>hoje é o último dia.</em></h1>
+                <p class="l-sub">7 dias grátis, sem cartão. Setup em 60s. Migração de Bitly em 10 minutos. Link no comentário ↓</p>
+              </div>
+              <div class="l-bottom"><img src="../../brand-refs/logos/applink-logo-transparent.png" alt=""><b>APPlink</b><span>· applink.com.br</span></div>
+            </div>
+            <div class="right" style="background:linear-gradient(135deg,#BFFF00,#FF7777)"><div style="font-family:'General Sans',sans-serif;color:#0A0A0A;font-weight:700;font-size:88px;letter-spacing:-0.03em;line-height:0.95;text-align:center">7<br>dias.</div></div>
+          </div></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
